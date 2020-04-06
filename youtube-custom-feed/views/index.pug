@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+  button(type='button' onclick='authenticate().then(loadClient)') authorize and load
+  button(type='button' onclick='execute()') execute
+  div#videos
