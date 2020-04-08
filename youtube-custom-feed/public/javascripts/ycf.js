@@ -24,7 +24,7 @@ function execute() {
   if (ycf.channels.length == 0) {
     console.error("No custom channel, check file 'youtube-custom-feed/parameters.js'.");
   } else {
-    insertDataFromChannel(ycf.channels[0].id);
+    ycf.channels.forEach(channel => insertDataFromChannel(channel.id));
   }
 }
 
@@ -56,7 +56,7 @@ function insertDataFromUploadedPlaylist(uploadPlaylistId) {
       if (videoItems.length == 0) {
         console.error(`No video found on playlist '${uploadPlaylistId}'.`);
       } else {
-        insertDataFromVideoId(videoItems[0].contentDetails.videoId);
+        videoItems.forEach(video => insertDataFromVideoId(video.contentDetails.videoId));
       }
     }, function (err) {
       console.error("Execute error", err);
