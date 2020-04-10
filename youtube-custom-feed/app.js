@@ -1,11 +1,13 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const lowdb = require('lowdb');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const FileSync = require('lowdb/adapters/FileSync');
 
 var app = express();
 
@@ -39,3 +41,8 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+// database
+const adapter = new FileSync('db.json');
+const db = lowdb(adapter);
+db.defaults({ videos: [] }).write();
