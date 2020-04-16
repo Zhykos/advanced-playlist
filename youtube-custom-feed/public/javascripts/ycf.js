@@ -86,7 +86,9 @@ function insertDataFromVideoId(videoId) {
           videoThumbnailSrc: video.snippet.thumbnails.default.url,
           videoTitle: video.snippet.title,
           channelTitle: video.snippet.channelTitle,
-          videoPlayer: video.player.embedHtml
+          videoPlayer: video.player.embedHtml,
+          channelId: video.snippet.channelId,
+          publishDate: video.snippet.publishedAt
         };
         $.post("/addVideoInDatabase", videoData,
           function (data) {
