@@ -24,15 +24,19 @@ app.use('/', indexRouter);
 
 app.post('/addVideoInDatabase',
   function (req, res) {
-    db.get('videos').push(req.body).write()
+    if (!db.has('videos').value() || !db.get('videos').find({ videoId: req.body.videoId }).value()) {
+      db.get('videos').push(req.body).write();
+    }
     res.end();
-  });
+  }
+);
 
 // catch 404 and forward to error handler
 app.use(
   function (req, res, next) {
     next(createError(404));
-  });
+  }
+);
 
 // error handler
 app.use(
@@ -44,7 +48,8 @@ app.use(
     // render the error page
     res.status(err.status || 500);
     res.render('error');
-  });
+  }
+);
 
 module.exports = app;
 
