@@ -7,7 +7,8 @@ function authenticate() {
       },
       function (err) {
         console.error("Error signing in", err);
-      });
+      }
+    );
 }
 
 function loadClient() {
@@ -19,7 +20,8 @@ function loadClient() {
       },
       function (err) {
         console.error("Error loading GAPI client for API", err);
-      });
+      }
+    );
 }
 
 function execute() {
@@ -45,7 +47,8 @@ function insertDataFromChannel(channelId) {
     },
     function (err) {
       console.error("Execute error", err);
-    });
+    }
+  );
 }
 
 function insertDataFromUploadedPlaylist(uploadPlaylistId) {
@@ -64,7 +67,8 @@ function insertDataFromUploadedPlaylist(uploadPlaylistId) {
     },
     function (err) {
       console.error("Execute error", err);
-    });
+    }
+  );
 }
 
 function insertDataFromVideoId(videoId) {
@@ -93,12 +97,14 @@ function insertDataFromVideoId(videoId) {
         $.post("/addVideoInDatabase", videoData,
           function (data) {
             console.log("ok");
-          });
+          }
+        );
       }
     },
     function (err) {
       console.error("Execute error", err);
-    });
+    }
+  );
 }
 
 function generateHTMLFrom(googleAPIResponse) {
@@ -109,6 +115,8 @@ function generateHTMLFrom(googleAPIResponse) {
   return `<img src='${videoThumbnailSrc}' /> ${videoTitle} ${channelTitle} ${videoPlayer}`;
 }
 
-gapi.load("client:auth2", function () {
-  gapi.auth2.init({ client_id: ycf.clientId });
-});
+gapi.load("client:auth2",
+  function () {
+    gapi.auth2.init({ client_id: ycf.clientId });
+  }
+);
