@@ -6,7 +6,6 @@ const logger = require('morgan');
 const lowdb = require('lowdb');
 const bodyParser = require("body-parser");
 
-const indexRouter = require('./routes/index');
 const FileSync = require('lowdb/adapters/FileSync');
 
 const app = express();
@@ -20,7 +19,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.get('/',
+  function (req, res) {
+    res.render('index', { title: 'Express', videos: db.get('videos').value() });
+  }
+);
 
 app.post('/addVideoInDatabase',
   function (req, res) {
