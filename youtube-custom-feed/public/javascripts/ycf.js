@@ -92,7 +92,8 @@ function insertDataFromVideoId(videoId) {
           channelTitle: video.snippet.channelTitle,
           videoPlayer: video.player.embedHtml,
           channelId: video.snippet.channelId,
-          publishDate: video.snippet.publishedAt
+          publishDate: video.snippet.publishedAt,
+          visible: true
         };
         $.post("/addVideoInDatabase", videoData,
           function (data) {
