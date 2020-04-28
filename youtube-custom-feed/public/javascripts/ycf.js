@@ -108,6 +108,7 @@ function insertDataFromVideoId(videoId) {
   );
 }
 
+/*
 function generateHTMLFrom(googleAPIResponse) {
   const videoThumbnailSrc = googleAPIResponse.result.items[0].snippet.thumbnails.default.url;
   const videoTitle = googleAPIResponse.result.items[0].snippet.title;
@@ -115,9 +116,16 @@ function generateHTMLFrom(googleAPIResponse) {
   const videoPlayer = googleAPIResponse.result.items[0].player.embedHtml;
   return `<img src='${videoThumbnailSrc}' /> ${videoTitle} ${channelTitle} ${videoPlayer}`;
 }
+*/
 
 gapi.load("client:auth2",
   function () {
     gapi.auth2.init({ client_id: ycf.clientId });
   }
 );
+
+function displayIframeVideoPlayer(videoId) {
+  const iframe = `<iframe width="480" height="270" src="//www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  $("#iframe").html(iframe);
+  $("#popup").fadeIn('slow');
+}
