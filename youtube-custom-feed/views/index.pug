@@ -9,22 +9,21 @@ html
     script(src='/javascripts/ycf.js')
   body
 
-    mixin textIcon(text, image, iframe)
-      a(href='#' onclick='displayIframeVideoPlayer("' + iframe + '")').text-icon
+    mixin textIcon(text, image, videoId)
+      a(href='#' onclick='displayIframeVideoPlayer("' + videoId + '")').text-icon
         figure
           img(src=image, alt=text + ' icon').icon
           figcaption.text=text
 
     block content
-      h1= title
-      p Welcome to #{title}
+      h1 My Custom YouTube Feed
       button(type='button' onclick='authenticate().then(loadClient)') authorize and load
       button(type='button' onclick='execute()') execute
       div#wrapper
         div(display=none)#popup
           div#iframe
-          a(href='#' onclick='$("#popup").fadeOut("slow");')#close Close video
+          a(href='#' onclick='$("#popup").fadeOut("slow")')#close Close video
       each val in videos
         +textIcon(val.videoTitle, val.videoThumbnailSrc, val.videoId)
       else
-        span No video
+        span No video in database
