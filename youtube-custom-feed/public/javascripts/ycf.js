@@ -90,7 +90,7 @@ function insertDataFromVideoId(videoId) {
           videoThumbnailSrc: video.snippet.thumbnails.default.url,
           videoTitle: video.snippet.title,
           channelTitle: video.snippet.channelTitle,
-          videoPlayer: video.player.embedHtml,
+          videoDuration: video.contentDetails.duration,
           channelId: video.snippet.channelId,
           publishDate: video.snippet.publishedAt,
           visible: true
