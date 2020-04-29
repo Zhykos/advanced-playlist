@@ -34,6 +34,15 @@ app.post('/addVideoInDatabase',
   }
 );
 
+app.post('/mask',
+  function (req, res) {
+    if (db.has('videos').value() && db.get('videos').find({ videoId: req.body.videoId }).value()) {
+      db.get('videos').find({ videoId: req.body.videoId }).assign({ visible: false }).write()
+    }
+    res.end();
+  }
+);
+
 // catch 404 and forward to error handler
 app.use(
   function (req, res, next) {

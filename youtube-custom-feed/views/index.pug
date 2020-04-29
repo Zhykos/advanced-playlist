@@ -10,10 +10,14 @@ html
   body
 
     mixin textIcon(text, image, videoId)
-      a(href='#' onclick='displayIframeVideoPlayer("' + videoId + '")').text-icon
-        figure
-          img(src=image, alt=text + ' icon').icon
-          figcaption.text=text
+      figure
+        img(src=image).videoThumbnail
+        figcaption.text=text
+      figure
+        img(src="images/play.png" title="Open this video" onclick='displayIframeVideoPlayer("' + videoId + '")')
+        img(src="images/play-hide.png" title="Open this video then mask it" onclick='displayIframeVideoPlayerThenMask("' + videoId + '")')
+        img(src="images/hide.png" title="Mask this video" onclick='maskVideo("' + videoId + '")')
+        img(src="images/open-youtube.png" title="Open this video on YouTube" onclick='openOnYoutube("' + videoId + '")')
 
     block content
       h1 My YouTube Custom Feed

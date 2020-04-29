@@ -129,3 +129,21 @@ function displayIframeVideoPlayer(videoId) {
   $("#iframe").html(iframe);
   $("#popup").fadeIn('slow');
 }
+
+function maskVideo(videoId) {
+  $.post("/mask", { videoId: videoId },
+    function (data) {
+      console.log("ok");
+    }
+  );
+}
+
+function displayIframeVideoPlayerThenMask(videoId) {
+  displayIframeVideoPlayer(videoId);
+  maskVideo(videoId);
+}
+
+function openOnYoutube(videoId) {
+  const win = window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+  win.focus();
+}
