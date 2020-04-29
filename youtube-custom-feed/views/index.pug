@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title= title
+    title YouTube Custom Feed
     link(rel='stylesheet' href='/stylesheets/style.css')
     script(src='https://apis.google.com/js/api.js')
     script(src='https://code.jquery.com/jquery-3.4.1.min.js')
@@ -16,7 +16,7 @@ html
           figcaption.text=text
 
     block content
-      h1 My Custom YouTube Feed
+      h1 My YouTube Custom Feed
       button(type='button' onclick='authenticate().then(loadClient)') authorize and load
       button(type='button' onclick='execute()') execute
       div#wrapper
