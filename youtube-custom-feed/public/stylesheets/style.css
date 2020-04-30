@@ -10,3 +10,12 @@ a {
 #popup {
   display: none;
 }
+
+.hiddenImage {
+    filter: grayscale(1);
+}
+
+.hiddenText {
+    color: gray;
+    font-size: 80%;
+}

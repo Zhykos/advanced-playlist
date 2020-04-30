@@ -9,14 +9,22 @@ html
     script(src='/javascripts/ycf.js')
   body
 
-    mixin textIcon(text, image, videoId)
-      figure
-        img(src=image).videoThumbnail
-        figcaption.text=text
-      figure
+    mixin displayVideo(text, image, videoId, channelTitle, visible)
+      div
+        if visible
+          img(src=image)
+          div= text
+          div= channelTitle
+        else
+          img(src=image).hiddenImage
+          div.hiddenText= text
+          div.hiddenText= channelTitle
         img(src="images/play.png" title="Open this video" onclick='displayIframeVideoPlayer("' + videoId + '")')
         img(src="images/play-hide.png" title="Open this video then mask it" onclick='displayIframeVideoPlayerThenMask("' + videoId + '")')
-        img(src="images/hide.png" title="Mask this video" onclick='maskVideo("' + videoId + '")')
+        if visible
+          img(src="images/hide.png" title="Mask this video" onclick='maskVideo("' + videoId + '")')
+        else
+          img(src="images/visible.png" title="Set visible this video" onclick='visibleVideo("' + videoId + '")')
         img(src="images/open-youtube.png" title="Open this video on YouTube" onclick='openOnYoutube("' + videoId + '")')
 
     block content
@@ -28,6 +36,6 @@ html
           div#iframe
           a(href='#' onclick='$("#popup").fadeOut("slow")')#close Close video
       each val in videos
-        +textIcon(val.videoTitle, val.videoThumbnailSrc, val.videoId)
+        +displayVideo(val.videoTitle, val.videoThumbnailSrc, val.videoId, val.channelTitle, val.visible)
       else
         span No video in database

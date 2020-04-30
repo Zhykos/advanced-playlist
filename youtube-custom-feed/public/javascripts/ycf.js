@@ -138,6 +138,14 @@ function maskVideo(videoId) {
   );
 }
 
+function visibleVideo(videoId) {
+    $.post("/visible", { videoId: videoId },
+        function(data) {
+            console.log("ok");
+        }
+    );
+}
+
 function displayIframeVideoPlayerThenMask(videoId) {
   displayIframeVideoPlayer(videoId);
   maskVideo(videoId);

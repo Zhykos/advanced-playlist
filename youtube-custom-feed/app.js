@@ -35,13 +35,23 @@ app.post('/addVideoInDatabase',
 );
 
 app.post('/mask',
-  function (req, res) {
+    function(req, res) {
+        setVisibility(req, res, false);
+    }
+);
+
+app.post('/visible',
+    function(req, res) {
+        setVisibility(req, res, true);
+    }
+);
+
+function setVisibility(req, res, visible) {
     if (db.has('videos').value() && db.get('videos').find({ videoId: req.body.videoId }).value()) {
-      db.get('videos').find({ videoId: req.body.videoId }).assign({ visible: false }).write()
+        db.get('videos').find({ videoId: req.body.videoId }).assign({ visible: visible }).write()
     }
     res.end();
-  }
-);
+}
 
 // catch 404 and forward to error handler
 app.use(
