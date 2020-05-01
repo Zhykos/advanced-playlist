@@ -12,19 +12,19 @@ html
     mixin displayVideo(text, image, videoId, channelTitle, visible)
       div
         if visible
-          img(src=image)
-          div= text
-          div= channelTitle
+          img(src=image, id="img_" + videoId)
+          div(id="title_" + videoId)= text
+          div(id="channel_" + videoId)= channelTitle
         else
-          img(src=image).hiddenImage
-          div.hiddenText= text
-          div.hiddenText= channelTitle
+          img.hiddenImage(src=image, id="img_" + videoId)
+          div.hiddenText(id="title_" + videoId)= text
+          div.hiddenText(id="channel_" + videoId)= channelTitle
         img(src="images/play.png" title="Open this video" onclick='displayIframeVideoPlayer("' + videoId + '")')
         img(src="images/play-hide.png" title="Open this video then mask it" onclick='displayIframeVideoPlayerThenMask("' + videoId + '")')
         if visible
-          img(src="images/hide.png" title="Mask this video" onclick='maskVideo("' + videoId + '")')
+          img(src="images/hide.png" title="Hide this video" onclick='swapVisibility("' + videoId + '")', id="swap_" + videoId)
         else
-          img(src="images/visible.png" title="Set visible this video" onclick='visibleVideo("' + videoId + '")')
+          img(src="images/visible.png" title="Set this video as visible" onclick='swapVisibility("' + videoId + '")', id="swap_" + videoId)
         img(src="images/open-youtube.png" title="Open this video on YouTube" onclick='openOnYoutube("' + videoId + '")')
 
     block content

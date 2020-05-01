@@ -108,16 +108,6 @@ function insertDataFromVideoId(videoId) {
   );
 }
 
-/*
-function generateHTMLFrom(googleAPIResponse) {
-  const videoThumbnailSrc = googleAPIResponse.result.items[0].snippet.thumbnails.default.url;
-  const videoTitle = googleAPIResponse.result.items[0].snippet.title;
-  const channelTitle = googleAPIResponse.result.items[0].snippet.channelTitle;
-  const videoPlayer = googleAPIResponse.result.items[0].player.embedHtml;
-  return `<img src='${videoThumbnailSrc}' /> ${videoTitle} ${channelTitle} ${videoPlayer}`;
-}
-*/
-
 gapi.load("client:auth2",
   function () {
     gapi.auth2.init({ client_id: ycf.clientId });
@@ -130,19 +120,30 @@ function displayIframeVideoPlayer(videoId) {
   $("#popup").fadeIn('slow');
 }
 
-function maskVideo(videoId) {
-  $.post("/mask", { videoId: videoId },
-    function (data) {
-      console.log("ok");
-    }
-  );
-}
-
-function visibleVideo(videoId) {
-    $.post("/visible", { videoId: videoId },
-        function(data) {
-            console.log("ok");
+function swapVisibility(videoId) {
+  $.post("/swapVisibility", { videoId: videoId })
+    .done(
+      function (data) {
+        if ($("#img_" + videoId).hasClass("hiddenImage")) {
+          $("#img_" + videoId).removeClass("hiddenImage");
+          $("#title_" + videoId).removeClass("hiddenText");
+          $("#channel_" + videoId).removeClass("hiddenText");
+          $("#swap_" + videoId).attr("src", "images/hide.png");
+          $("#swap_" + videoId).attr("title", "Hide this video");
+        } else {
+          $("#img_" + videoId).addClass("hiddenImage");
+          $("#title_" + videoId).addClass("hiddenText");
+          $("#channel_" + videoId).addClass("hiddenText");
+          $("#swap_" + videoId).attr("src", "images/visible.png");
+          $("#swap_" + videoId).attr("title", "Set this video as visible");
         }
+        console.log("ok");
+      }
+    )
+    .fail(
+      function (data) {
+        console.log("KO");
+      }
     );
 }
 
