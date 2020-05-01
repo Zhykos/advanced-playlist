@@ -149,7 +149,7 @@ function swapVisibility(videoId) {
 
 function displayIframeVideoPlayerThenMask(videoId) {
   displayIframeVideoPlayer(videoId);
-  maskVideo(videoId);
+  swapVisibility(videoId);
 }
 
 function openOnYoutube(videoId) {
