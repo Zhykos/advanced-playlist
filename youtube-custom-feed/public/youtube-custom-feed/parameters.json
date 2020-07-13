@@ -1,0 +1,13 @@
+{
+    "clientApiKey" : "<XXX>",
+    "clientId" : "<YYY>.apps.googleusercontent.com",
+    "channels" : [
+        {
+            "id": "<CHANNEL_ID>",
+            "whitelist": [
+                "<DB_ID>=~<REGEX>"
+            ], "blacklist": [
+                "<DB_ID>=~<REGEX>"
+            ]
+        }]
+}

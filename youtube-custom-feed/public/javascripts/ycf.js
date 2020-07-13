@@ -1,3 +1,20 @@
+function readTextFile() {
+  var jsonText = null;
+  var rawFile = new XMLHttpRequest();
+  rawFile.overrideMimeType("application/json");
+  rawFile.open("GET", "../youtube-custom-feed/parameters.json", false);
+  rawFile.onreadystatechange = function() {
+      if (rawFile.readyState === 4 && rawFile.status == "200") {
+        jsonText = rawFile.responseText;
+      }
+  }
+  rawFile.send(null);
+  return jsonText;
+}
+
+const ycfJson = readTextFile();
+const ycf = JSON.parse(ycfJson);
+
 function authenticate() {
   return gapi.auth2.getAuthInstance()
     .signIn({ scope: "https://www.googleapis.com/auth/youtube.readonly" })

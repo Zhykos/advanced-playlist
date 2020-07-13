@@ -6,6 +6,7 @@ const logger = require('morgan');
 const lowdb = require('lowdb');
 const bodyParser = require("body-parser");
 
+const ycf = require('./public/youtube-custom-feed/parameters.json');
 const FileSync = require('lowdb/adapters/FileSync');
 
 const app = express();
@@ -21,9 +22,46 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/',
   function (req, res) {
-    res.render('index', { videos: db.get('videos').sortBy('publishDate').value().reverse() });
+    var videos = [];
+    const visibleVideos = db.get('videos').filter({visible: 'true'}).sortBy('publishDate').value().reverse();
+    visibleVideos.forEach(video => {
+      const filteredVideo = filter(video);
+      if (filteredVideo) {
+        videos.push(filteredVideo);
+      }
+    });
+    res.render('index', { videos: videos });
   }
 );
+
+function filter (video) {
+  var result = null;
+  const channelId = video.channelId;
+  ycf.channels.forEach(channel => {
+    if (channel.id == channelId) {
+      const whitelist = channel.whitelist;
+      const blacklist = channel.blacklist;
+      if (whitelist) {
+        whitelist.forEach(white => {
+          const parts = white.split('=~');
+          if (video[parts[0]].match(parts[1])) {
+            result = video;
+          }
+        });
+      }
+      if (blacklist && result == null) {
+        blacklist.forEach(black => {
+          const parts = black.split('=~');
+          if (!video[parts[0]].match(parts[1])) {
+            result = video;
+          }
+        });
+      }
+      return;
+    }
+  });
+  return result;
+}
 
 app.post('/addVideoInDatabase',
   function (req, res) {
