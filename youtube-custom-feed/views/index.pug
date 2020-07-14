@@ -8,8 +8,8 @@ html
     script(src='/javascripts/ycf.js')
   body
 
-    mixin displayVideo(text, image, videoId, channelTitle, visible, filter)
-      div.video
+    mixin displayVideo(text, image, videoId, channelTitle, visible, filter, displayHiddenVideos)
+      div.video(id="video_" + videoId)
         if visible && filter == "NONE"
           img(src=image, id="img_" + videoId)
           div(id="title_" + videoId)= text
@@ -24,9 +24,9 @@ html
         else if filter == "WHITELIST"
           img(src="images/whitelist.png" title="Video masked because of a whitelist parameter")
         img(src="images/play.png" title="Open this video" onclick='displayIframeVideoPlayer("' + videoId + '")')
-        img(src="images/play-hide.png" title="Open this video then mask it" onclick='displayIframeVideoPlayerThenMask("' + videoId + '")')
+        img(src="images/play-hide.png" title="Open this video then mask it" onclick='displayIframeVideoPlayerThenMask("' + videoId + '", "' + displayHiddenVideos + '")')
         if visible
-          img(src="images/hide.png" title="Hide this video" onclick='swapVisibility("' + videoId + '")', id="swap_" + videoId)
+          img(src="images/hide.png" title="Hide this video" onclick='swapVisibility("' + videoId + '", "' + displayHiddenVideos + '")', id="swap_" + videoId)
         else
           img(src="images/visible.png" title="Set this video as visible" onclick='swapVisibility("' + videoId + '")', id="swap_" + videoId)
         img(src="images/open-youtube.png" title="Open this video on YouTube" onclick='openOnYoutube("' + videoId + '")')
@@ -44,6 +44,6 @@ html
           div#iframe
           a(href='#' onclick='$("#popup").fadeOut("slow")')#close Close video
       each val in videos
-        +displayVideo(val.videoTitle, val.videoThumbnailSrc, val.videoId, val.channelTitle, val.visible, val.filter)
+        +displayVideo(val.videoTitle, val.videoThumbnailSrc, val.videoId, val.channelTitle, val.visible, val.filter, displayHiddenVideos)
       else
         span No video in database

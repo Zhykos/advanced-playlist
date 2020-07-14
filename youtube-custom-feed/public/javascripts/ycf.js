@@ -137,7 +137,7 @@ function displayIframeVideoPlayer(videoId) {
   $("#popup").fadeIn('slow');
 }
 
-function swapVisibility(videoId) {
+function swapVisibility(videoId, displayHiddenVideos) {
   $.post("/swapVisibility", { videoId: videoId })
     .done(
       function (data) {
@@ -162,11 +162,14 @@ function swapVisibility(videoId) {
         console.log("KO");
       }
     );
+    if (displayHiddenVideos != "true") {
+      $("#video_" + videoId).hide();
+    }
 }
 
-function displayIframeVideoPlayerThenMask(videoId) {
+function displayIframeVideoPlayerThenMask(videoId, displayHiddenVideos) {
   displayIframeVideoPlayer(videoId);
-  swapVisibility(videoId);
+  swapVisibility(videoId, displayHiddenVideos);
 }
 
 function openOnYoutube(videoId) {
