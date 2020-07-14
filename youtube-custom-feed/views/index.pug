@@ -9,11 +9,12 @@ html
   body
 
     mixin displayVideo(text, image, videoId, channelTitle, visible, filter)
-      div
+      div.video
         if visible && filter == "NONE"
           img(src=image, id="img_" + videoId)
           div(id="title_" + videoId)= text
-          div(id="channel_" + videoId)= channelTitle
+          div(id="channel_" + videoId)
+            i= channelTitle
         else
           img.hiddenImage(src=image, id="img_" + videoId)
           div.hiddenText(id="title_" + videoId)= text
