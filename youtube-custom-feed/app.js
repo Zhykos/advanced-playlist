@@ -24,15 +24,15 @@ app.get('/',
   function (req, res) {
     var videos = [];
     var visibleVideosStream = db.get('videos');
-    if (req.query.hidden == "true") {
-      console.log("hidden");
-    } else {
+    if (req.query.hidden != "true") {
       visibleVideosStream = visibleVideosStream.filter({visible: 'true'});
     }
     const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
     visibleVideos.forEach(video => {
       setFilterStatus(video);
-      videos.push(video);
+      if (req.query.hidden == "true" || video.filter == filterStatus.NONE) {
+        videos.push(video);
+      }
     });
     res.render('index', { videos: videos, displayHiddenVideos: req.query.hidden });
   }
@@ -54,15 +54,15 @@ function setFilterStatus (video) {
       if (whitelist) {
         whitelist.forEach(white => {
           const parts = white.split('=~');
-          if (video[parts[0]].match(parts[1])) {
+          if (!video[parts[0]].match(parts[1])) {
             video["filter"] = filterStatus.WHITELIST;
           }
         });
       }
-      if (blacklist && result == null) {
+      if (blacklist) {
         blacklist.forEach(black => {
           const parts = black.split('=~');
-          if (!video[parts[0]].match(parts[1])) {
+          if (video[parts[0]].match(parts[1])) {
             video["filter"] = filterStatus.BLACKLIST;
           }
         });

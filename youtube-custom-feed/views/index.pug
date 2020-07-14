@@ -8,9 +8,9 @@ html
     script(src='/javascripts/ycf.js')
   body
 
-    mixin displayVideo(text, image, videoId, channelTitle, visible)
+    mixin displayVideo(text, image, videoId, channelTitle, visible, filter)
       div
-        if visible
+        if visible && filter == "NONE"
           img(src=image, id="img_" + videoId)
           div(id="title_" + videoId)= text
           div(id="channel_" + videoId)= channelTitle
@@ -18,6 +18,10 @@ html
           img.hiddenImage(src=image, id="img_" + videoId)
           div.hiddenText(id="title_" + videoId)= text
           div.hiddenText(id="channel_" + videoId)= channelTitle
+        if filter == "BLACKLIST"
+          img(src="images/blacklist.png" title="Video masked because of a blacklist parameter")
+        else if filter == "WHITELIST"
+          img(src="images/whitelist.png" title="Video masked because of a whitelist parameter")
         img(src="images/play.png" title="Open this video" onclick='displayIframeVideoPlayer("' + videoId + '")')
         img(src="images/play-hide.png" title="Open this video then mask it" onclick='displayIframeVideoPlayerThenMask("' + videoId + '")')
         if visible
@@ -39,6 +43,6 @@ html
           div#iframe
           a(href='#' onclick='$("#popup").fadeOut("slow")')#close Close video
       each val in videos
-        +displayVideo(val.videoTitle, val.videoThumbnailSrc, val.videoId, val.channelTitle, val.visible)
+        +displayVideo(val.videoTitle, val.videoThumbnailSrc, val.videoId, val.channelTitle, val.visible, val.filter)
       else
         span No video in database
