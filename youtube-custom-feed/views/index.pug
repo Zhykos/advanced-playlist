@@ -33,16 +33,18 @@ html
 
     block content
       h1 My YouTube Custom Feed
-      button(type='button' onclick='authenticate().then(loadClient)') authorize and load
-      button(type='button' onclick='execute()') execute
+      button(type='button' onclick='authenticate().then(loadClient)') Authorize my Google connection
+      button(type='button' onclick='execute()') Fetch videos on YouTube
       if displayHiddenVideos == "true"
         button(type='button' onclick='hideMaskedVideos()') Hide masked videos
       else
         button(type='button' onclick='displayHiddenVideos()') Display hidden videos
       div#wrapper
+        br
         div(display=none)#popup
           div#iframe
           a(href='#' onclick='$("#popup").fadeOut("slow")')#close Close video
+      br
       each val in videos
         +displayVideo(val.videoTitle, val.videoThumbnailSrc, val.videoId, val.channelTitle, val.visible, val.filter, displayHiddenVideos)
       else
