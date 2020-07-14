@@ -23,19 +23,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/',
   function (req, res) {
     var videos = [];
-    const visibleVideos = db.get('videos').filter({visible: 'true'}).sortBy('publishDate').value().reverse();
+    var visibleVideosStream = db.get('videos');
+    if (req.query.hidden == "true") {
+      console.log("hidden");
+    } else {
+      visibleVideosStream = visibleVideosStream.filter({visible: 'true'});
+    }
+    const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
     visibleVideos.forEach(video => {
-      const filteredVideo = filter(video);
-      if (filteredVideo) {
-        videos.push(filteredVideo);
-      }
+      setFilterStatus(video);
+      videos.push(video);
     });
-    res.render('index', { videos: videos });
+    res.render('index', { videos: videos, displayHiddenVideos: req.query.hidden });
   }
 );
 
-function filter (video) {
-  var result = null;
+const filterStatus = {
+  NONE: 'NONE',
+  BLACKLIST: 'BLACKLIST',
+  WHITELIST: 'WHITELIST'
+};
+
+function setFilterStatus (video) {
+  video["filter"] = filterStatus.NONE;
   const channelId = video.channelId;
   ycf.channels.forEach(channel => {
     if (channel.id == channelId) {
@@ -45,7 +55,7 @@ function filter (video) {
         whitelist.forEach(white => {
           const parts = white.split('=~');
           if (video[parts[0]].match(parts[1])) {
-            result = video;
+            video["filter"] = filterStatus.WHITELIST;
           }
         });
       }
@@ -53,14 +63,13 @@ function filter (video) {
         blacklist.forEach(black => {
           const parts = black.split('=~');
           if (!video[parts[0]].match(parts[1])) {
-            result = video;
+            video["filter"] = filterStatus.BLACKLIST;
           }
         });
       }
       return;
     }
   });
-  return result;
 }
 
 app.post('/addVideoInDatabase',

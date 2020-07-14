@@ -173,3 +173,21 @@ function openOnYoutube(videoId) {
   const win = window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
   win.focus();
 }
+
+function displayHiddenVideos() {
+  reloadCurrentPageWithParameter("hidden=true");
+}
+
+function hideMaskedVideos() {
+  reloadCurrentPageWithParameter("hidden=false");
+}
+
+function reloadCurrentPageWithParameter(newParam) {
+  var url = window.location.href;    
+  const paramIndex = url.indexOf('?');
+  if (paramIndex > -1) {
+    url = url.substring(paramIndex, 0);
+  }
+  url += '?' + newParam;
+  window.location.href = url;
+}
