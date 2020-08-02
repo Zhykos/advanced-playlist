@@ -25,7 +25,7 @@ app.get('/',
     var videos = [];
     var visibleVideosStream = db.get('videos');
     if (req.query.hidden != "true") {
-      visibleVideosStream = visibleVideosStream.filter({visible: 'true'});
+      visibleVideosStream = visibleVideosStream.filter({ visible: 'true' });
     }
     const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
     visibleVideos.forEach(video => {
@@ -44,7 +44,7 @@ const filterStatus = {
   WHITELIST: 'WHITELIST'
 };
 
-function setFilterStatus (video) {
+function setFilterStatus(video) {
   video["filter"] = filterStatus.NONE;
   const channelId = video.channelId;
   ycf.channels.forEach(channel => {
@@ -53,18 +53,12 @@ function setFilterStatus (video) {
       const blacklist = channel.blacklist;
       if (whitelist) {
         whitelist.forEach(white => {
-          const parts = white.split('=~');
-          if (!video[parts[0]].match(parts[1])) {
-            video["filter"] = filterStatus.WHITELIST;
-          }
+          filterVideo(white, video, filterStatus.WHITELIST);
         });
       }
       if (blacklist) {
         blacklist.forEach(black => {
-          const parts = black.split('=~');
-          if (video[parts[0]].match(parts[1])) {
-            video["filter"] = filterStatus.BLACKLIST;
-          }
+          filterVideo(black, video, filterStatus.BLACKLIST);
         });
       }
       return;
@@ -72,9 +66,44 @@ function setFilterStatus (video) {
   });
 }
 
+function filterVideo(filter, video, expectedStatus) {
+  try {
+    const parts = filter.split('=~');
+    if (parts.length > 1) {
+      if ((!video[parts[0]].match(parts[1])) == (expectedStatus == filterStatus.WHITELIST)) {
+        video["filter"] = expectedStatus;
+      }
+    } else {
+      const parts = filter.split('>');
+      if (parts.length > 1) {
+        if (video[parts[0]] <= youtubeDurationIntoSeconds(parts[1]) == (expectedStatus == filterStatus.WHITELIST)) {
+          video["filter"] = expectedStatus;
+        }
+      }
+    }
+  } catch (exception) {
+    console.error(exception);
+  }
+}
+
+// Thanks :) https://gist.github.com/denniszhao/8972cd4ae637cf10fe01
+function youtubeDurationIntoSeconds(duration) {
+  var a = duration.match(/\d+H|\d+M|\d+S/g);
+  var result = 0;
+  var d = { 'H': 3600, 'M': 60, 'S': 1 };
+
+  for (var i = 0; i < a.length; i++) {
+    const num = a[i].slice(0, a[i].length - 1);
+    const type = a[i].slice(a[i].length - 1, a[i].length);
+    result += parseInt(num) * d[type];
+  }
+  return result;
+}
+
 app.post('/addVideoInDatabase',
   function (req, res) {
     if (!db.has('videos').value() || !db.get('videos').find({ videoId: req.body.videoId }).value()) {
+      req.body.videoDuration = youtubeDurationIntoSeconds(req.body.videoDuration);
       db.get('videos').push(req.body).write();
     }
     res.end();
