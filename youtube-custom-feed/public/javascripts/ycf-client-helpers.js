@@ -1,19 +1,16 @@
-function readTextFile() {
-  var jsonText = null;
+function readTextFile(callback) {
   var rawFile = new XMLHttpRequest();
   rawFile.overrideMimeType("application/json");
-  rawFile.open("GET", "../youtube-custom-feed/parameters.json", false);
+  rawFile.open("GET", "../youtube-custom-feed/parameters.json", true);
   rawFile.onreadystatechange = function() {
       if (rawFile.readyState === 4 && rawFile.status == "200") {
-        jsonText = rawFile.responseText;
+        callback(rawFile.responseText);
+      } else {
+        callback(null);
       }
   }
   rawFile.send(null);
-  return jsonText;
 }
-
-const ycfJson = readTextFile();
-const ycf = JSON.parse(ycfJson);
 
 function authenticate() {
   return gapi.auth2.getAuthInstance()
@@ -124,12 +121,6 @@ function insertDataFromVideoId(videoId) {
     }
   );
 }
-
-gapi.load("client:auth2",
-  function () {
-    gapi.auth2.init({ client_id: ycf.clientId });
-  }
-);
 
 function displayIframeVideoPlayer(videoId) {
   const iframe = `<iframe width="480" height="270" src="//www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;

@@ -30,3 +30,7 @@ a {
 #wrapper {
   text-align: center;
 }
+
+#contents {
+  display: none;
+}
