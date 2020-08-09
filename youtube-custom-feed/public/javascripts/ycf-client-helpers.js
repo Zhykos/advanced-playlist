@@ -2,12 +2,12 @@ function readTextFile(callback) {
   var rawFile = new XMLHttpRequest();
   rawFile.overrideMimeType("application/json");
   rawFile.open("GET", "../youtube-custom-feed/parameters.json", true);
-  rawFile.onreadystatechange = function() {
-      if (rawFile.readyState === 4 && rawFile.status == "200") {
-        callback(rawFile.responseText);
-      } else {
-        callback(null);
-      }
+  rawFile.onreadystatechange = function () {
+    if (rawFile.readyState === 4 && rawFile.status == "200") {
+      callback(rawFile.responseText);
+    } else {
+      callback(null);
+    }
   }
   rawFile.send(null);
 }
@@ -48,15 +48,15 @@ function execute() {
 
 function insertDataFromChannel(channelId) {
   gapi.client.youtube.channels.list({
-    "part": "contentDetails",
+    "part": "contentDetails,snippet",
     "id": channelId
   }).then(
     function (response) {
-      const uploadItems = response.result.items;
-      if (uploadItems.length == 0) {
+      const items = response.result.items;
+      if (items.length == 0) {
         console.error(`No playlist found on channel '${channelId}'.`);
       } else {
-        insertDataFromUploadedPlaylist(uploadItems[0].contentDetails.relatedPlaylists.uploads)
+        insertDataFromUploadedPlaylist(items[0].contentDetails.relatedPlaylists.uploads, items[0].snippet.thumbnails.default.url)
       }
     },
     function (err) {
@@ -65,7 +65,7 @@ function insertDataFromChannel(channelId) {
   );
 }
 
-function insertDataFromUploadedPlaylist(uploadPlaylistId) {
+function insertDataFromUploadedPlaylist(uploadPlaylistId, channelIconUrl) {
   gapi.client.youtube.playlistItems.list({
     "part": "contentDetails",
     "playlistId": uploadPlaylistId,
@@ -76,7 +76,7 @@ function insertDataFromUploadedPlaylist(uploadPlaylistId) {
       if (videoItems.length == 0) {
         console.error(`No video found on playlist '${uploadPlaylistId}'.`);
       } else {
-        videoItems.forEach(video => insertDataFromVideoId(video.contentDetails.videoId));
+        videoItems.forEach(video => insertDataFromVideoId(video.contentDetails.videoId, channelIconUrl));
       }
     },
     function (err) {
@@ -85,15 +85,13 @@ function insertDataFromUploadedPlaylist(uploadPlaylistId) {
   );
 }
 
-function insertDataFromVideoId(videoId) {
+function insertDataFromVideoId(videoId, channelIconUrl) {
   gapi.client.youtube.videos.list({
     "part": "contentDetails,player,snippet",
     "id": videoId
   }).then(
     function (response) {
-      //console.log("Response", response);
-      //const html = generateHTMLFrom(response);
-      //$("#videos").append(html);
+      console.log("Response", response);
       const videoItems = response.result.items;
       if (videoItems.length == 0) {
         console.error(`No video found with ID '${videoId}'.`);
@@ -107,7 +105,8 @@ function insertDataFromVideoId(videoId) {
           videoDuration: video.contentDetails.duration,
           channelId: video.snippet.channelId,
           publishDate: video.snippet.publishedAt,
-          visible: true
+          visible: true,
+          channelImage: channelIconUrl
         };
         $.post("/addVideoInDatabase", videoData,
           function (data) {
@@ -153,9 +152,9 @@ function swapVisibility(videoId, displayHiddenVideos) {
         console.log("KO");
       }
     );
-    if (displayHiddenVideos != "true") {
-      $("#video_" + videoId).hide();
-    }
+  if (displayHiddenVideos != "true") {
+    $("#video_" + videoId).hide();
+  }
 }
 
 function displayIframeVideoPlayerThenMask(videoId, displayHiddenVideos) {
@@ -169,19 +168,50 @@ function openOnYoutube(videoId) {
 }
 
 function displayHiddenVideos() {
-  reloadCurrentPageWithParameter("hidden=true");
+  const parameters = getParametersFromUrl();
+  parameters.hidden = "true";
+  reloadCurrentPageWithParameters(parameters);
 }
 
 function hideMaskedVideos() {
-  reloadCurrentPageWithParameter("hidden=false");
+  const parameters = getParametersFromUrl();
+  parameters.hidden = "false";
+  reloadCurrentPageWithParameters(parameters);
 }
 
-function reloadCurrentPageWithParameter(newParam) {
-  var url = window.location.href;    
-  const paramIndex = url.indexOf('?');
-  if (paramIndex > -1) {
-    url = url.substring(paramIndex, 0);
+function reloadCurrentPageWithParameters(parameters) {
+  var newUrl = window.location.protocol + "//" + window.location.host;
+  if (parameters) {
+    const params = [];
+    Object.keys(parameters).forEach(function (key) {
+      params.push(key + '=' + parameters[key]);
+    });
+    newUrl += "?" + params.join("&");
   }
-  url += '?' + newParam;
-  window.location.href = url;
+  window.location.href = newUrl;
+}
+
+function displayVideosFromChannel(channelId) {
+  const parameters = getParametersFromUrl();
+  if ("#all" == channelId) {
+    parameters.channel = "all";
+  } else {
+    parameters.channel = channelId;
+  }
+  reloadCurrentPageWithParameters(parameters);
+}
+
+// https://stackoverflow.com/a/8486188
+function getParametersFromUrl() {
+  const url = window.location.search;
+  const query = url.substr(1);
+  const result = {};
+  query.split("&").forEach(part => {
+    if (part) {
+      const item = part.split("=");
+      result[item[0]] = decodeURIComponent(item[1]);
+    }
+  });
+  console.log(result);
+  return result;
 }

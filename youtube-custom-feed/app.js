@@ -22,19 +22,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/',
   function (req, res) {
-    var videos = [];
+    const videos = [];
     var visibleVideosStream = db.get('videos');
-    if (req.query.hidden != "true") {
+    if (req.query.hidden != "true") { // "undefined" is none in URL
       visibleVideosStream = visibleVideosStream.filter({ visible: 'true' });
     }
+    if (req.query.channel && req.query.channel != "all") {
+      visibleVideosStream = visibleVideosStream.filter({ channelId: req.query.channel });
+    }
     const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
+    var lastChannelTitle;
     visibleVideos.forEach(video => {
       setFilterStatus(video);
       if (req.query.hidden == "true" || video.filter == filterStatus.NONE) {
+        const channelsInDB = db.get('channels').filter({ channelId: video.channelId }).value();
+        video.channelTitle = channelsInDB[0].channelTitle;
+        lastChannelTitle = channelsInDB[0].channelTitle;
         videos.push(video);
       }
     });
-    res.render('index', { videos: videos, displayHiddenVideos: req.query.hidden });
+    const channels = [];
+    const channelsInDB = db.get('channels').sortBy('channelTitle').value();
+    channelsInDB.forEach(channel => {
+      channels.push(channel);
+    });
+    res.render('index', { videos: videos, channels: channels, displayHiddenVideos: req.query.hidden, channel: req.query.channel, channelTitle: lastChannelTitle });
   }
 );
 
@@ -103,8 +115,25 @@ function youtubeDurationIntoSeconds(duration) {
 app.post('/addVideoInDatabase',
   function (req, res) {
     if (!db.has('videos').value() || !db.get('videos').find({ videoId: req.body.videoId }).value()) {
-      req.body.videoDuration = youtubeDurationIntoSeconds(req.body.videoDuration);
-      db.get('videos').push(req.body).write();
+      const videoDuration = youtubeDurationIntoSeconds(req.body.videoDuration);
+      const newVideoData = {
+        videoId: req.body.videoId,
+        videoThumbnailSrc: req.body.videoThumbnailSrc,
+        videoTitle: req.body.videoTitle,
+        videoDuration: videoDuration,
+        channelId: req.body.channelId,
+        publishDate: req.body.publishDate,
+        visible: req.body.visible
+      };
+      db.get('videos').push(newVideoData).write();
+    }
+    if (!db.has('channels').value() || !db.get('channels').find({ channelId: req.body.channelId }).value()) {
+      const newChannelData = {
+        channelTitle: req.body.channelTitle,
+        channelId: req.body.channelId,
+        channelImage: req.body.channelImage
+      };
+      db.get('channels').push(newChannelData).write();
     }
     res.end();
   }
@@ -155,3 +184,4 @@ module.exports = app;
 const adapter = new FileSync('db.json');
 const db = lowdb(adapter);
 db.defaults({ videos: [] }).write();
+db.defaults({ channels: [] }).write();
