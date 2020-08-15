@@ -25,17 +25,20 @@ function authenticate() {
     );
 }
 
-function loadClient() {
+function loadClient(callback) {
   gapi.client.setApiKey(ycf.clientApiKey);
   return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
     .then(
       function () {
-        console.log("GAPI client loaded for API");
+        console.log("Google API client loaded");
         $("#fetch").show();
         $("#connection").hide();
+        if (callback) {
+          callback();
+        }
       },
       function (err) {
-        console.error("Error loading GAPI client for API", err);
+        console.error("Error loading Google API client", err);
       }
     );
 }
