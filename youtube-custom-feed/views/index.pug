@@ -42,6 +42,16 @@ html
       img(src="images/loading.gif" title="Loading...")
     div#contents
       div#sidebar
+        a(href="javascript:;" onclick='authenticate().then(loadClient)') Authorize my Google connection
+        br
+        br
+        a(href="javascript:;" onclick='execute()') Fetch videos on YouTube
+        br
+        br
+        if displayHiddenVideos == "true"
+          a(href="javascript:;" onclick='hideMaskedVideos()') Hide masked videos
+        else
+          a(href="javascript:;" onclick='displayHiddenVideos()') Display hidden videos
         h2 Channels
         +displayChannelInSidebar("#all", "All channels", null)
         each val in channels
@@ -60,12 +70,6 @@ html
             h2 All videos: filters activated (default display)
           else
             h2= "All videos from channel " + channelTitle + ": filters activated"
-        button(type='button' onclick='authenticate().then(loadClient)') Authorize my Google connection
-        button(type='button' onclick='execute()') Fetch videos on YouTube
-        if displayHiddenVideos == "true"
-          button(type='button' onclick='hideMaskedVideos()') Hide masked videos
-        else
-          button(type='button' onclick='displayHiddenVideos()') Display hidden videos
         div#wrapper
           br
           div(display=none)#popup
