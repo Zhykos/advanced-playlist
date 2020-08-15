@@ -36,6 +36,14 @@ a {
   display: none;
 }
 
+div.menu {
+  padding-bottom: 5px;
+}
+
+#fetch {
+  display: none;
+}
+
 /* https://www.w3schools.com/howto/howto_css_fixed_sidebar.asp */
 
 #sidebar {

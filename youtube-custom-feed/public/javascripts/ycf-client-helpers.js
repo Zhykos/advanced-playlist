@@ -31,6 +31,8 @@ function loadClient() {
     .then(
       function () {
         console.log("GAPI client loaded for API");
+        $("#fetch").show();
+        $("#connection").hide();
       },
       function (err) {
         console.error("Error loading GAPI client for API", err);

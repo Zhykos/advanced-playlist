@@ -42,16 +42,15 @@ html
       img(src="images/loading.gif" title="Loading...")
     div#contents
       div#sidebar
-        a(href="javascript:;" onclick='authenticate().then(loadClient)') Authorize my Google connection
-        br
-        br
-        a(href="javascript:;" onclick='execute()') Fetch videos on YouTube
-        br
-        br
-        if displayHiddenVideos == "true"
-          a(href="javascript:;" onclick='hideMaskedVideos()') Hide masked videos
-        else
-          a(href="javascript:;" onclick='displayHiddenVideos()') Display hidden videos
+        div.menu(id="connection")
+          a(href="javascript:;" onclick='authenticate().then(loadClient)') Connection
+        div.menu(id="fetch")
+          a(href="javascript:;" onclick='execute()') Fetch videos
+        div.menu
+          if displayHiddenVideos == "true"
+            a(href="javascript:;" onclick='hideMaskedVideos()') Hide masked videos
+          else
+            a(href="javascript:;" onclick='displayHiddenVideos()') Display hidden videos
         h2 Channels
         +displayChannelInSidebar("#all", "All channels", null)
         each val in channels
