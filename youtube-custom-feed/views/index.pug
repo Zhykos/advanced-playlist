@@ -29,7 +29,7 @@ html
         if visible
           img(src="images/hide.png" title="Hide this video" onclick='swapVisibility("' + videoId + '", "' + displayHiddenVideos + '")', id="swap_" + videoId)
         else
-          img(src="images/visible.png" title="Set this video as visible" onclick='swapVisibility("' + videoId + '")', id="swap_" + videoId)
+          img(src="images/visible.png" title="Set this video as visible" onclick='swapVisibility("' + videoId + '", "' + displayHiddenVideos + '")', id="swap_" + videoId)
         img(src="images/open-youtube.png" title="Open this video on YouTube" onclick='openOnYoutube("' + videoId + '")')
 
     mixin displayChannelInSidebar(id, text, image)
