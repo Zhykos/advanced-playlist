@@ -96,7 +96,6 @@ function insertDataFromVideoId(videoId, channelIconUrl) {
     "id": videoId
   }).then(
     function (response) {
-      console.log("Response", response);
       const videoItems = response.result.items;
       if (videoItems.length == 0) {
         console.error(`No video found with ID '${videoId}'.`);
@@ -157,7 +156,7 @@ function swapVisibility(videoId, displayHiddenVideos) {
         console.log("KO");
       }
     );
-  if (displayHiddenVideos != "true") {
+  if (displayHiddenVideos != "true" && displayHiddenVideos != true) {
     $("#video_" + videoId).hide();
   }
 }
@@ -217,6 +216,5 @@ function getParametersFromUrl() {
       result[item[0]] = decodeURIComponent(item[1]);
     }
   });
-  console.log(result);
   return result;
 }
