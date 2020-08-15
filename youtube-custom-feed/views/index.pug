@@ -51,13 +51,13 @@ html
       div#main
         h1 My YouTube Custom Feed
         if displayHiddenVideos == "true"
-          if channel == "all"
+          if !channel || channel == "all"
             h2 All videos: no filter
           else
             h2= "All videos from channel " + channelTitle + ": no filter"
         else
-          if channel == "all"
-            h2 All videos: filters activated (display by default)
+          if !channel || channel == "all"
+            h2 All videos: filters activated (default display)
           else
             h2= "All videos from channel " + channelTitle + ": filters activated"
         button(type='button' onclick='authenticate().then(loadClient)') Authorize my Google connection
