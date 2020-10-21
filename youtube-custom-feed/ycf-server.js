@@ -24,8 +24,9 @@ app.get('/',
   function (req, res) {
     const videos = [];
     var visibleVideosStream = db.get('videos');
-    if (req.query.hidden != "true") { // "undefined" is none in URL
-      visibleVideosStream = visibleVideosStream.filter({ visible: 'true', visible: true });
+    console.log(req.query.hidden);
+    if (!req.query.hidden || req.query.hidden != "true") {
+      visibleVideosStream = visibleVideosStream.filter((v => v.visible == 'true' || v.visible));
     }
     if (req.query.channel && req.query.channel != "all") {
       visibleVideosStream = visibleVideosStream.filter({ channelId: req.query.channel });
@@ -46,7 +47,7 @@ app.get('/',
     channelsInDB.forEach(channel => {
       channels.push(channel);
     });
-    if (!lastChannelTitle && req.query.channel != "all") {
+    if (!lastChannelTitle && req.query.channel && req.query.channel != "all") {
       const channelsInDB = db.get('channels').filter({ channelId: req.query.channel }).value();
       lastChannelTitle = channelsInDB[0].channelTitle;
     }
