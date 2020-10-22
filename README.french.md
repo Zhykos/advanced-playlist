@@ -52,7 +52,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](readme-images/client-guide-00.jpg)
 
-YouTube Custom Feed (*YCF*) est un projet que j'ai imaginé après m'être abonné à des chaines YouTube ayant plusieurs émissions, mais avec certaines qui ne m'intéressaient pas.
+YouTube Custom Feed (*YCF*) est un projet que j'ai imaginé après m'être abonné à des chaines YouTube ayant plusieurs émissions, mais dont certaines qui ne m'intéressaient pas.
 
 *YCF* permet de lister vos chaines préférées et d'ajouter des filtres sur les noms des vidéos que vous ne souhaitez pas voir dans votre flux de vidéos.
 
@@ -70,11 +70,11 @@ Vous devez récupérer une version de YCF sur votre machine pour l'utiliser.
 
 2. Le second prérequis est d'avoir un compte développeur YouTube/Google : https://developers.google.com/youtube/v3/getting-started
 
-3. Il faudra ensuite récupérer une Clé API et un ID client OAuth 2.0 : console.developers.google.com/apis/credentials
+3. Il faudra ensuite récupérer une Clé API et un ID client OAuth 2.0 : https://console.developers.google.com/apis/credentials
 
 ### Installation
 
-1. Téléchargez la dernière version : https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/releases
+1. Téléchargez la dernière version de *YCF* : https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/releases
 
 2. Dézipper la version et ouvrez un Terminal dans le dossier.
 
@@ -102,7 +102,7 @@ nmp start
 
 ### Configuration
 
-Comme expliqué auparavant, la configuration se fait dans le fichier "*/public/youtube-custom-feed/parameters.json*". Il s'agit d'un fichier au format JSON, voyez sûr que la syntaxe soit correcte pour le bon fonctionnement de l'application.
+Comme expliqué auparavant, la configuration se fait dans le fichier "*/public/youtube-custom-feed/parameters.json*". Il s'agit d'un fichier au format JSON. Soyez sûr que la syntaxe soit correcte pour le bon fonctionnement de l'application.
 
 #### Ajouter une chaîne
 
@@ -125,7 +125,7 @@ Dans le fichier JSON, dans le noeud *channels*, ajoutez un nouvel objet avec un 
 
 #### Liste blanche
 
-La liste blanche permet de filtrer les vidéos d'une chaîne spécifique. Seules les vidéos répondant aux filtres de la liste blanche seront affichées. La liste blanche est appliquée avant la liste noire (plus ci-dessous pour cette dernière).
+La liste blanche permet de filtrer les vidéos d'une chaîne spécifique. Seules les vidéos répondant aux filtres de la liste blanche seront affichées. La liste blanche est appliquée avant la liste noire (plus de détails ci-dessous pour cette dernière).
 
 Les syntaxes de filtres seront détaillées dans un paragraphe dédié.
 
@@ -204,7 +204,7 @@ Utilisez l'attribut "*videoTitle*", l'opérateur "*=~*" et une expression régul
 
 ##### Filtrer une durée "supérieure strictement à"
 
-Utilisez l'attribut "*videoDuration*", l'opérateur "*>*" et une expression spécifique au format YouTube (exemple : 8H22M pour 8 heure et 22 minutes) :
+Utilisez l'attribut "*videoDuration*", l'opérateur "*>*" et une expression spécifique au format YouTube (exemple : 8H22M pour 8 heures et 22 minutes) :
 
 ```json
 "channels" : [
@@ -271,6 +271,8 @@ Il est possible de n'afficher les vidéos que d'une seule chaîne, avec les filt
 
 Le menu à gauche permet de passer d'une chaîne à l'autre ou d'afficher toutes les chaînes.
 
+La chaîne sélectionnée est spécifiée dans le libellé en haut de la page.
+
 ![Guide 11](readme-images/client-guide-11.jpg)
 
 #### Menu vidéo
@@ -281,10 +283,10 @@ Chaque vidéo a un menu spécifique pour la regarder ou changer ses attributs.
 
 Explication des icônes, de gauche à droite :
 <ul>
-<li><img src="public/images/play.png" alt="Play" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page ;</li>
-<li><img src="public/images/play-hide.png" alt="Play then hide" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page. La vidéo sera également modifiée pour ne plus apparaître dans votre flux ;</li>
-<li><img src="public/images/hide.png" alt="Hide" /> La vidéo est modifiée pour ne plus apparaître dans votre flux ;</li>
-<li><img src="public/images/open-youtube.png" alt="YouTube" /> Lecture de la vidéo dans YouTube.</li>
+<li><img src="youtube-custom-feed/public/images/play.png" alt="Play" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page ;</li>
+<li><img src="youtube-custom-feed/public/images/play-hide.png" alt="Play then hide" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page. La vidéo sera également modifiée pour ne plus apparaître dans votre flux ;</li>
+<li><img src="youtube-custom-feed/public/images/hide.png" alt="Hide" width="12" /> La vidéo est modifiée pour ne plus apparaître dans votre flux ;</li>
+<li><img src="youtube-custom-feed/public/images/open-youtube.png" alt="YouTube" width="12" /> Lecture de la vidéo dans YouTube.</li>
 </ul>
 
 Vidéo ouverte dans le navigateur : 
@@ -295,7 +297,7 @@ Vous pouvez fermer la vidéo via le lien en dessous :
 
 ![Guide 14](readme-images/client-guide-14.jpg)
 
-Dans le cas où vous avez vous-même caché une vidéo, il est possible de la rendre à nouveau visible à l'aide de l'icône <img src="public/images/visible.png" alt="Visible" />.
+Dans le cas où vous avez vous-même caché une vidéo, il est possible de la rendre à nouveau visible à l'aide de l'icône <img src="youtube-custom-feed/public/images/visible.png" alt="Visible" width="12" />.
 
 Attention, cette fonctionnalité n'est disponible que si vous affichez les vidéos cachées.
 
@@ -306,8 +308,8 @@ Attention, cette fonctionnalité n'est disponible que si vous affichez les vidé
 Dans le cas où vous affichez toutes les vidéos, une icône peut être visible pour comprendre si la vidéo correspond à un filtre de liste blanche ou de liste noire. Actuellement aucun détail précis n'est disponible.
 
 <ul>
-<li><img src="public/images/blacklist.png" alt="Blaclist" /> Cette vidéo a été filtrée par une liste noire ;</li>
-<li><img src="public/images/whitelist.png" alt="Play then hide" /> Cette vidéo a été filtrée par une liste blanche.</li>
+<li><img src="youtube-custom-feed/public/images/blacklist.png" alt="Blacklist" /> Cette vidéo a été filtrée par une liste noire ;</li>
+<li><img src="youtube-custom-feed/public/images/whitelist.png" alt="Whitelist" /> Cette vidéo a été filtrée par une liste blanche.</li>
 </ul>
 
 Exemple de filtrage par liste noire :
