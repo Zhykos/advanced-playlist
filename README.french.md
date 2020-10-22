@@ -18,9 +18,9 @@
   <p align="center">
     Votre flux vidéo personnalisé
     <br />
-    <img src="readme-images/france.png" alt="France" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
+    <img src="readme-images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
-    <img src="readme-images/uk.png" alt="English" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
+    <img src="readme-images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Reporter un bug</a>
@@ -34,23 +34,23 @@
 <!-- TABLE OF CONTENTS -->
 ## Table des matières
 
-* [About the Project](#about-the-project)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
+* [À propos du projet](#à-propos-du-projet)
+* [Commencer à utiliser *YCF*](#commencer-à-utiliser-ycf)
+  * [Prérequis](#prérequis)
   * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
+* [Utilisation de *YCF*](#utilisation-de-ycf)
+* [Feuille de route](#feuille-de-route)
+* [Contribuer au projet](#contribuer-au-projet)
+* [Licence](#licence)
 * [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+* [Remerciements](#remerciements)
 
 
 
 <!-- ABOUT THE PROJECT -->
 ## À propos du projet
 
-[![Product Name Screen Shot][product-screenshot]](https://github.com/Zhykos/fr.zhykos.youtubecustomfeed)
+[![Product Name Screen Shot][product-screenshot]](readme-images/client-guide-00.jpg)
 
 YouTube Custom Feed (*YCF*) est un projet que j'ai imaginé après m'être abonné à des chaines YouTube ayant plusieurs émissions, mais avec certaines qui ne m'intéressaient pas.
 
@@ -400,4 +400,4 @@ Lien du projet : [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https:/
 [issues-url]: https://github.com/Zhykos/repo/issues
 [license-shield]: https://img.shields.io/github/license/Zhykos/repo.svg?style=flat-square
 [license-url]: https://github.com/Zhykos/repo/blob/master/LICENSE.txt
-[product-screenshot]: readme-images/screenshot.png
+[product-screenshot]: readme-images/client-guide-00.jpg
