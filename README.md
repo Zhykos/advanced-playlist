@@ -16,101 +16,117 @@
   <h3 align="center">YouTube Custom Feed</h3>
 
   <p align="center">
-    Votre flux vidéo personnalisé
-    <br />
-    <img src="readme-images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
+    <i>YCF</i> : your own video feed
     <br />
     <img src="readme-images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
     <br />
+    <img src="readme-images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
-    <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Reporter un bug</a>
+    <br />
+    <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Proposer une évolution</a>
+    <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Request Feature</a>
+    <br />
+    <br />
+    Sorry for my English :(
   </p>
 </p>
 
 
 
 <!-- TABLE OF CONTENTS -->
-## Table des matières
+## Table of Contents
 
-* [À propos du projet](#à-propos-du-projet)
-* [Commencer à utiliser *YCF*](#commencer-à-utiliser-ycf)
-  * [Prérequis](#prérequis)
+* [About the Project](#about-the-project)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
   * [Installation](#installation)
-* [Utilisation de *YCF*](#utilisation-de-ycf)
-* [Feuille de route](#feuille-de-route)
-* [Contribuer au projet](#contribuer-au-projet)
-* [Licence](#licence)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [License](#license)
 * [Contact](#contact)
-* [Remerciements](#remerciements)
+* [Acknowledgements](#acknowledgements)
+* [FAQ](#faq)
 
 
 
 <!-- ABOUT THE PROJECT -->
-## À propos du projet
+## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](readme-images/client-guide-00.jpg)
 
-YouTube Custom Feed (*YCF*) est un projet que j'ai imaginé après m'être abonné à des chaines YouTube ayant plusieurs émissions, mais dont certaines qui ne m'intéressaient pas.
+YouTube Custom Feed (*YCF*) is a project I wanted to create after subing to channels which have different shows, and some don't interessed me.
 
-*YCF* permet de lister vos chaines préférées et d'ajouter des filtres sur les noms des vidéos que vous ne souhaitez pas voir dans votre flux de vidéos.
+With *YCF* you list your favorite channels and filter video names you don't want to see in your feed.
 
-**ATTENTION** La version 1.0 est une version MVP (produit minimum viable ou *Minimum Viable Product*), c'est-à-dire qu'elle fonctionne, mais ne propose pas d'interface graphique évoluée ou n'est pas destinée aux utilisateurs lambdas.
+**WARNING**: Version 1.0 is a *MVP* (Minimum Viable Product), which means it works well but does not have a great user interface nor is for common users.
+
+**WARNING 2**: I'm not a Javascript developer so some features may have been not developed well.
+
+Application *developed with YouTube* : https://www.youtube.com
+
+![Developed with YouTube](readme-images/developed-with-youtube-sentence-case-dark.png)
+
+
 
 
 <!-- GETTING STARTED -->
-## Commencer à utiliser *YCF*
+## Getting Started
 
-Vous devez récupérer une version de YCF sur votre machine pour l'utiliser.
+You must download a YCF version to use it.
 
-### Prérequis
+### Prerequisites
 
-1. Vous avez besoin que NodeJS soit installé sur votre machine. Site officiel : https://nodejs.org/
+1. NodeJS must be installed on your computer. Official website: https://nodejs.org/
 
-2. Le second prérequis est d'avoir un compte développeur YouTube/Google : https://developers.google.com/youtube/v3/getting-started
+2. You need to have a YouTube/Google developer account: https://developers.google.com/youtube/v3/getting-started
 
-3. Il faudra ensuite récupérer une Clé API et un ID client OAuth 2.0 : https://console.developers.google.com/apis/credentials
+3. Get an API Key and an ID client OAuth 2.0: https://console.developers.google.com/apis/credentials
+
+Google console screen where to get keys:
+
+![Guide 17](readme-images/client-guide-17.jpg)
 
 ### Installation
 
-1. Téléchargez la dernière version de *YCF* : https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/releases
+1. Download latest version of YCF: https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/releases
 
-2. Dézipper la version et ouvrez un Terminal dans le dossier.
+2. Unzip it and open a Terminal within the directory..
 
-3. Installez les paquets NPM.
+3. Install NPM packages.
 ```sh
 npm install
 ```
-4. Configurez l'application en modifiant le fichier "*/public/youtube-custom-feed/parameters.json*". "*clientApiKey*" aura la valeur de votre Clé API. "*clientId*" aura la valeur de votre ID client OAuth 2.0.
+4. Configure application by modifying file "*/public/youtube-custom-feed/parameters.json*". Set "*clientApiKey*" with YouTube API Key. Set "*clientId*" with ID client OAuth 2.0.
 
-5. Ajoutez vos chaines préférées et les filtres (voir le paragraphe ci-dessous).
+5. Add your favorite channels (see below).
 
-6. Démarrez l'application.
+6. Start application.
 ```sh
 nmp start
 ```
 
-7. Ouvrez un navigateur web à l'adresse http://localhost:3000/
+7. Open a browser http://localhost:3000/
 
 
 
 <!-- USAGE EXAMPLES -->
-## Utilisation de *YCF*
+## Usage
 
-**ATTENTION** : la version 1.0 est destinée à un public habitué au développement.
+**WARNING** : version 1.0 is for developer people.
 
-### Configuration
+### Settings
 
-Comme expliqué auparavant, la configuration se fait dans le fichier "*/public/youtube-custom-feed/parameters.json*". Il s'agit d'un fichier au format JSON. Soyez sûr que la syntaxe soit correcte pour le bon fonctionnement de l'application.
+Settings are in "*/public/youtube-custom-feed/parameters.json*". It's a JSON file. Be sure syntax is correct!
 
-#### Ajouter une chaîne
+#### Add a channel
 
-Tout d'abord, récupérez l'identifiant de la chaîne que vous souhaitez ajouter. Rendez-vous sur YouTube, sur la page de la chaîne. L'identifiant se trouve dans l'URL :
+Get the channel ID you wish to add in your custom feed. Go to YouTube and search the wanted channel. ID is in the URL:
 
 ![YouTube channel](readme-images/youtube-channel.jpg)
 
-Dans le fichier JSON, dans le noeud *channels*, ajoutez un nouvel objet avec un attribut *id* :
+In the JSON file, into *channels* node, add a new object with an attribute *id*:
 
 ```json
 "channels" : [
@@ -123,13 +139,13 @@ Dans le fichier JSON, dans le noeud *channels*, ajoutez un nouvel objet avec un 
     ]
 ```
 
-#### Liste blanche
+#### Whitelist
 
-La liste blanche permet de filtrer les vidéos d'une chaîne spécifique. Seules les vidéos répondant aux filtres de la liste blanche seront affichées. La liste blanche est appliquée avant la liste noire (plus de détails ci-dessous pour cette dernière).
+Whitelist allows you to filter videos from a channel. Only videos which matches whitelists will be displayed. Whitelist filters videos before blacklists (see below for blacklist).
 
-Les syntaxes de filtres seront détaillées dans un paragraphe dédié.
+Filters syntaxes will be explained below.
 
-Pour appliquer une liste blanche, ajoutez l'élément suivant dans le fichier JSON :
+To add a whitelist for a specific channel, modify your JSON file:
 
 ```json
 "channels" : [
@@ -142,13 +158,13 @@ Pour appliquer une liste blanche, ajoutez l'élément suivant dans le fichier JS
     ]
 ```
 
-#### Liste noire
+#### Blacklist
 
-La liste noire permet de filtrer les vidéos d'une chaîne spécifique. Les vidéos répondant aux filtres ne seront pas affichées. La liste noire est appliquée après la liste blanche, peu importe sa place dans le fichier JSON.
+Blacklist allows you to filter videos from a channel. Videos which matches blackists will not be displayed. Whitelist filters videos before blacklists (see below for blacklist).
 
-Les syntaxes de filtres seront détaillées dans un paragraphe dédié.
+Filters syntaxes will be explained below.
 
-Pour appliquer une liste noire, ajoutez l'élément suivant dans le fichier JSON :
+To add a blacklist for a specific channel, modify your JSON file:
 
 ```json
 "channels" : [
@@ -161,11 +177,11 @@ Pour appliquer une liste noire, ajoutez l'élément suivant dans le fichier JSON
     ]
 ```
 
-#### Avoir les listes blanches et noires
+#### Having whitelist and blacklist
 
-Il est tout à fait possible d'avoir les deux possibilités de filtres.
+You may add both whitelist and blacklist.
 
-**RAPPEL** : la liste blanche sera appliquée avant la liste noire, peu importe le positionnement dans le fichier JSON.
+**REMINDER**: whitelist filters videos before blacklists.
 
 ```json
 "channels" : [
@@ -181,15 +197,15 @@ Il est tout à fait possible d'avoir les deux possibilités de filtres.
     ]
 ```
 
-#### Syntaxe des filtres
+#### Filters syntaxes
 
-Les filtres, que ce soit pour la liste blanche ou noire, sont identiques. À l'heure actuelle, il n'y a que deux filtres possibles :
-* Filtre sur le nom de la vidéo ;
-* Filtre sur la durée de la vidéo.
+Filters for whitelist and blacklist are identicals. For now only two filters are available:
+* Video name filter;
+* Video duration filter.
 
-##### Filtrer un nom
+##### Filter a name
 
-Utilisez l'attribut "*videoTitle*", l'opérateur "*=~*" et une expression régulière (compatible avec Javascript) :
+Use attribute "*videoTitle*", operator "*=~*" and regex (compatible with Javascript) :
 
 ```json
 "channels" : [
@@ -202,9 +218,9 @@ Utilisez l'attribut "*videoTitle*", l'opérateur "*=~*" et une expression régul
     ]
 ```
 
-##### Filtrer une durée "supérieure strictement à"
+##### Filter a duration "greater than"
 
-Utilisez l'attribut "*videoDuration*", l'opérateur "*>*" et une expression spécifique au format YouTube (exemple : 8H22M pour 8 heures et 22 minutes) :
+Use attribute "*videoDuration*", operator "*>*" and a specific YouTube expression (example : 8H22M for 8 hours and 22 minutes) :
 
 ```json
 "channels" : [
@@ -217,106 +233,104 @@ Utilisez l'attribut "*videoDuration*", l'opérateur "*>*" et une expression spé
     ]
 ```
 
-### Utilisation dans le navigateur web
+### Usage in a browser
 
-*Note* : L'interface n'est actuellement disponible qu'en anglais.
+#### First usage
 
-#### Première utilisation
-
-Lors de votre première utilisation, l'interface sera vide.
+User interface will be empty.
 
 ![Guide 01](readme-images/client-guide-01.jpg)
 
-L'application utilise l'API de YouTube pour récupérer des informations sur la plateforme de vidéos, d'après votre configuration précisée dans le fichier JSON.
+This application uses YouTub API to fetch data about videos with your settings in the JSON file.
 
-Connectez-vous à votre compte YouTube/Google avec lequel vous avez généré vos identifiants ajoutés dans le fichier JSON.
+Sign-up to your YouTube/Google account which allowed you to get API Keys (the ones you put in the JSON file).
 
 ![Guide 02](readme-images/client-guide-02.jpg)
 
 ![Guide 03](readme-images/client-guide-03.jpg)
 
-Une fois la connexion réussie, vous pouvez récupérer les informations depuis YouTube. Celles-ci seront enregistrées dans une base de données interne à l'application (un gros fichier JSON).
+One you're logged, you can fetch data which will be saved in a local database (a huge JSON file).
 
 ![Guide 04](readme-images/client-guide-04.jpg)
 
-Il n'y a actuellement aucun moyen de savoir si la récupération a fonctionné. Ouvrez la console développeur (généralement avec le raccourci F12) pour vérifier si cela a fonctionné.
+There is no way to know if fetching works well. So open developer console (via F12 shortcut) to check if everything is OK.
 
 ![Guide 05](readme-images/client-guide-05.jpg)
 
-Rafraichissez la page pour voir apparaître vos vidéos.
+Refresh webpage to see your videos.
 
 ![Guide 06](readme-images/client-guide-06.jpg)
 
-#### Afficher les vidéos cachées
+#### Display hidden videos
 
-Les filtres permettent de cacher les vidéos que l'on souhaite ne pas voir dans votre flux. Cependant, on peut avoir envie de vérifier si les filtres ont bien fonctionné.
+Filters hide videos you don't want to see in your feed. You can check and see videos which matches your filters.
 
-On peut passer à l'affichage complet via le lien dédié.
+Change display with the link.
 
 ![Guide 07](readme-images/client-guide-07.jpg)
 
-Les vidéos filtrées apparaissent en gris.
+Filtered videos appear like a grey videos.
 
 ![Guide 08](readme-images/client-guide-08.jpg)
 
-Le lien en haut à gauche permet de cacher à nouveau les vidéos filtrées.
+Upper left link allows to hide filtered videos.
 
 ![Guide 09](readme-images/client-guide-09.jpg)
 
-#### Afficher les vidéos d'une chaîne spécifique
+#### Display videos from one channel
 
-Il est possible de n'afficher les vidéos que d'une seule chaîne, avec les filtres associés.
+You can display videos from one and only one channel.
 
 ![Guide 10](readme-images/client-guide-10.jpg)
 
-Le menu à gauche permet de passer d'une chaîne à l'autre ou d'afficher toutes les chaînes.
+Left menu allows you to switch between channels.
 
-La chaîne sélectionnée est spécifiée dans le libellé en haut de la page.
+Selected channel name is displayed in upper webpage label.
 
 ![Guide 11](readme-images/client-guide-11.jpg)
 
-#### Menu vidéo
+#### Video menu
 
-Chaque vidéo a un menu spécifique pour la regarder ou changer ses attributs.
+Each video has a specific menu to watch it or change some caracteristics.
 
 ![Guide 12](readme-images/client-guide-12.jpg)
 
-Explication des icônes, de gauche à droite :
+Icons meaning from left to right:
 <ul>
-<li><img src="youtube-custom-feed/public/images/play.png" alt="Play" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page ;</li>
-<li><img src="youtube-custom-feed/public/images/play-hide.png" alt="Play then hide" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page. La vidéo sera également modifiée pour ne plus apparaître dans votre flux ;</li>
-<li><img src="youtube-custom-feed/public/images/hide.png" alt="Hide" width="12" /> La vidéo est modifiée pour ne plus apparaître dans votre flux ;</li>
-<li><img src="youtube-custom-feed/public/images/open-youtube.png" alt="YouTube" width="12" /> Lecture de la vidéo dans YouTube.</li>
+<li><img src="youtube-custom-feed/public/images/play.png" alt="Play" width="12" /> Watch video. Video will be displayed on the top of the webpage;</li>
+<li><img src="youtube-custom-feed/public/images/play-hide.png" alt="Play then hide" width="12" /> Watch video (like above) then hide it from your feed;</li>
+<li><img src="youtube-custom-feed/public/images/hide.png" alt="Hide" width="12" /> Hide this video from your feed;</li>
+<li><img src="youtube-custom-feed/public/images/open-youtube.png" alt="YouTube" width="12" /> Open this video on YouTube.</li>
 </ul>
 
-Vidéo ouverte dans le navigateur : 
+Opened video: 
 
 ![Guide 13](readme-images/client-guide-13.jpg)
 
-Vous pouvez fermer la vidéo via le lien en dessous :
+Vous can close the video:
 
 ![Guide 14](readme-images/client-guide-14.jpg)
 
-Dans le cas où vous avez vous-même caché une vidéo, il est possible de la rendre à nouveau visible à l'aide de l'icône <img src="youtube-custom-feed/public/images/visible.png" alt="Visible" width="12" />.
+You can *unhide* a hidden video with icon <img src="youtube-custom-feed/public/images/visible.png" alt="Visible" width="12" />.
 
-Attention, cette fonctionnalité n'est disponible que si vous affichez les vidéos cachées.
+This feature is avaible when you display hidden videos.
 
 ![Guide 15](readme-images/client-guide-15.jpg)
 
-#### Icônes des filtres pour la liste blanche ou noire
+#### Whitelist and blacklist icons
 
-Dans le cas où vous affichez toutes les vidéos, une icône peut être visible pour comprendre si la vidéo correspond à un filtre de liste blanche ou de liste noire. Actuellement aucun détail précis n'est disponible.
+When you display hidden videos, an icon is visible when it is filtered with a whitelist or blacklist filter. No further detail is provided.
 
 <ul>
-<li><img src="youtube-custom-feed/public/images/blacklist.png" alt="Blacklist" /> Cette vidéo a été filtrée par une liste noire ;</li>
-<li><img src="youtube-custom-feed/public/images/whitelist.png" alt="Whitelist" /> Cette vidéo a été filtrée par une liste blanche.</li>
+<li><img src="youtube-custom-feed/public/images/blacklist.png" alt="Blacklist" /> This video is filtered thanks to a blacklist;</li>
+<li><img src="youtube-custom-feed/public/images/whitelist.png" alt="Whitelist" /> This video is filtered thanks to a whitelist.</li>
 </ul>
 
-Exemple de filtrage par liste noire :
+Blacklist filter example:
 
 ![Guide 16](readme-images/client-guide-16.jpg)
 
-#### Fichier de configuration utilisé pour cet exemple
+#### JSON parameter file used to illustrate this example
 
 ```json
 {
@@ -334,40 +348,40 @@ Exemple de filtrage par liste noire :
 }
 ```
 
-### Mise à jour du fichier de configuration
+### Update data
 
-Cette version 1.0 demande d'éteindre l'application, puis de la redémarrer après modification du fichier de configuration JSON.
+Version 1.0 asks to reboot your application after updating JSON configuration file.
 
-De même, lorsque vous récupérez à nouveau des informations depuis YouTube, rafraichissez votre page pour voir apparaître les nouvelles vidéos.
+When you fetch data from YouTube, you need to refresh your webpage to see new videos.
 
-Enfin, sachez que l'API YouTube contient des limitations quant au nombre d'informations récupérables. Vérifiez votre console Google/YouTube pour plus de détails.
+Finally, YouTube API has some limitations (number of fetched data). Check your Google/YouTube console for further details.
 
 <!-- ROADMAP -->
-## Feuille de route
+## Roadmap
 
-Ce projet est développé sur mon temps libre et je n'en ai pas énormément...
+This project is developed during my free time so... some minutes per month.
 
-Vérifiez la page [open issues](https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues) pour voir la liste des évolutions et des bugs.
+See the [open issues](https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues) for a list of proposed features (and known issues).
 
 
 
 <!-- CONTRIBUTING -->
-## Contribuer au projet
+## Contributing
 
-Vos contributions font que la communauté *open source* est un endroit incroyable pour apprendre (je ne suis moi-même pas du tout développeur JS ou Node), créer et partager. Toute contribution sera grandement appréciée, d'autant plus que je n'ai que très peu de temps à m'y consacrer.
+Contributions are what make the open source community such an amazing place to be learn (I'm not a Javascript nor Node developer), inspire, and create. Any contributions you make are **greatly appreciated**.
 
-1. *Forkez* le projet
-2. Créez une branche pour la correction ou fonctionnalité (`git checkout -b feature/AmazingFeature`)
-3. *Commitez* vos modifications (`git commit -m 'Add some AmazingFeature'`)
-4. Poussez la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrez une *Pull Request* sur la page Github du projet
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 
 
 <!-- LICENSE -->
-## Licence
+## License
 
-Projet distribué avec la licence MIT. Ouvrez le fichier `LICENSE` pour plus d'informations.
+Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
@@ -376,17 +390,26 @@ Projet distribué avec la licence MIT. Ouvrez le fichier `LICENSE` pour plus d'i
 
 Thomas Cicognani - [@zhykos](https://twitter.com/zhykos) - github@tomtom.email
 
-Lien du projet : [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https://github.com/Zhykos/fr.zhykos.youtubecustomfeed)
+Project link: [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https://github.com/Zhykos/fr.zhykos.youtubecustomfeed)
 
 
 
 <!-- ACKNOWLEDGEMENTS -->
-## Remerciements
+## Acknowledgements
 
-* Icônes vidéo par Smashicons sur Flaticon : https://www.flaticon.com/authors/smashicons
-* Icônes *blacklist* et *whitelist* par Rudez Studio : https://www.iconfinder.com/Ruslancorel
-* *Template* du Readme : https://github.com/othneildrew/Best-README-Template
-* Icônes des pays par Wikipédia
+* YouTube ™ of course! 
+* Video icons by Smashicons on Flaticon: https://www.flaticon.com/authors/smashicons
+* *Blacklist* et *whitelist* icons by Rudez Studio: https://www.iconfinder.com/Ruslancorel
+* Readme template: https://github.com/othneildrew/Best-README-Template
+* Country icons by Wikipédia
+
+
+
+## FAQ
+
+### Port 3000 is already used by another application, how to change it?
+
+Open file "\youtube-custom-feed\bin\www" then modify variable `var port = 3000;` with port number you want to use.
 
 
 
