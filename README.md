@@ -402,6 +402,7 @@ Project link: [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https://gi
 * *Blacklist* et *whitelist* icons by Rudez Studio: https://www.iconfinder.com/Ruslancorel
 * Readme template: https://github.com/othneildrew/Best-README-Template
 * Country icons by Wikipédia
+* Main logo from icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 
 

@@ -401,6 +401,7 @@ Lien du projet : [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https:/
 * Icônes *blacklist* et *whitelist* par Rudez Studio : https://www.iconfinder.com/Ruslancorel
 * *Template* du Readme : https://github.com/othneildrew/Best-README-Template
 * Icônes des pays par Wikipédia
+* Logo principal d'après des icônes faites par <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> sur <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 
 
