@@ -44,6 +44,11 @@ div.menu {
   display: none;
 }
 
+#settings-error {
+  display: none;
+  color: red;
+}
+
 /* https://www.w3schools.com/howto/howto_css_fixed_sidebar.asp */
 
 #sidebar {
