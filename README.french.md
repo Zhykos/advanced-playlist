@@ -16,7 +16,7 @@
   <h3 align="center">YouTube Custom Feed</h3>
 
   <p align="center">
-    Votre flux vidéo personnalisé
+    <i>YCF</i> : votre flux vidéo personnalisé
     <br />
     <img src="readme-images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
@@ -44,6 +44,7 @@
 * [Licence](#licence)
 * [Contact](#contact)
 * [Remerciements](#remerciements)
+* [F.A.Q.](#faq)
 
 
 
@@ -56,13 +57,19 @@ YouTube Custom Feed (*YCF*) est un projet que j'ai imaginé après m'être abonn
 
 *YCF* permet de lister vos chaines préférées et d'ajouter des filtres sur les noms des vidéos que vous ne souhaitez pas voir dans votre flux de vidéos.
 
-**ATTENTION** La version 1.0 est une version MVP (produit minimum viable ou *Minimum Viable Product*), c'est-à-dire qu'elle fonctionne, mais ne propose pas d'interface graphique évoluée ou n'est pas destinée aux utilisateurs lambdas.
+**ATTENTION** La version 1.0 est une version *MVP* (produit minimum viable ou *Minimum Viable Product*), c'est-à-dire qu'elle fonctionne, mais ne propose pas d'interface graphique évoluée ou n'est pas destinée aux utilisateurs lambdas.
+
+Application *developed with YouTube* : https://www.youtube.com
+
+![Developed with YouTube](readme-images/developed-with-youtube-sentence-case-dark.png)
+
+
 
 
 <!-- GETTING STARTED -->
 ## Commencer à utiliser *YCF*
 
-Vous devez récupérer une version de YCF sur votre machine pour l'utiliser.
+Vous devez récupérer une version de *YCF* sur votre machine pour l'utiliser.
 
 ### Prérequis
 
@@ -71,6 +78,10 @@ Vous devez récupérer une version de YCF sur votre machine pour l'utiliser.
 2. Le second prérequis est d'avoir un compte développeur YouTube/Google : https://developers.google.com/youtube/v3/getting-started
 
 3. Il faudra ensuite récupérer une Clé API et un ID client OAuth 2.0 : https://console.developers.google.com/apis/credentials
+
+Écran de la console Google où on récupère ces clés :
+
+![Guide 17](readme-images/client-guide-17.jpg)
 
 ### Installation
 
@@ -383,10 +394,19 @@ Lien du projet : [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https:/
 <!-- ACKNOWLEDGEMENTS -->
 ## Remerciements
 
+* YouTube ™ bien entendu ! 
 * Icônes vidéo par Smashicons sur Flaticon : https://www.flaticon.com/authors/smashicons
 * Icônes *blacklist* et *whitelist* par Rudez Studio : https://www.iconfinder.com/Ruslancorel
 * *Template* du Readme : https://github.com/othneildrew/Best-README-Template
 * Icônes des pays par Wikipédia
+
+
+
+## F.A.Q.
+
+### Le port 3000 est déjà utilisé par une autre application, comment le changer ?
+
+Ouvrez le fichier "\youtube-custom-feed\bin\www" et modifiez la variable `var port = 3000;` avec le numéro de port que vous souhaitez utiliser.
 
 
 
