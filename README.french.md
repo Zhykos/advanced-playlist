@@ -57,7 +57,9 @@ YouTube Custom Feed (*YCF*) est un projet que j'ai imaginé après m'être abonn
 
 *YCF* permet de lister vos chaines préférées et d'ajouter des filtres sur les noms des vidéos que vous ne souhaitez pas voir dans votre flux de vidéos.
 
-**ATTENTION** La version 1.0 est une version *MVP* (produit minimum viable ou *Minimum Viable Product*), c'est-à-dire qu'elle fonctionne, mais ne propose pas d'interface graphique évoluée ou n'est pas destinée aux utilisateurs lambdas.
+**ATTENTION** : la version 1.0 est une version *MVP* (produit minimum viable ou *Minimum Viable Product*), c'est-à-dire qu'elle fonctionne, mais ne propose pas d'interface graphique évoluée ou n'est pas destinée aux utilisateurs lambdas.
+
+**ATTENTION 2** : je ne suis pas un développeur Javascript, certaines fonctionnalités ne sont surement pas codées correctement...
 
 Application *developed with YouTube* : https://www.youtube.com
 
@@ -345,7 +347,7 @@ Exemple de filtrage par liste noire :
 }
 ```
 
-### Mise à jour du fichier de configuration
+### Mise à jour des données
 
 Cette version 1.0 demande d'éteindre l'application, puis de la redémarrer après modification du fichier de configuration JSON.
 
