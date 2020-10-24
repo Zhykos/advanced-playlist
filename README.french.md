@@ -409,7 +409,7 @@ Lien du projet : [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https:/
 
 ### Le port 3000 est déjà utilisé par une autre application, comment le changer ?
 
-Ouvrez le fichier "\youtube-custom-feed\bin\www" et modifiez la variable `var port = 3000;` avec le numéro de port que vous souhaitez utiliser.
+Ouvrez le fichier "/youtube-custom-feed/bin/www" et modifiez la variable `var port = 3000;` avec le numéro de port que vous souhaitez utiliser.
 
 
 
