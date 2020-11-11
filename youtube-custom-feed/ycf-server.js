@@ -186,7 +186,7 @@ app.use(
 module.exports = app;
 
 // database
-const adapter = new FileSync('db.json');
+const adapter = new FileSync('./youtube-custom-feed/db.json');
 const db = lowdb(adapter);
 db.defaults({ videos: [] }).write();
 db.defaults({ channels: [] }).write();

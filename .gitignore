@@ -6,3 +6,4 @@
 /youtube-custom-feed/public/youtube-custom-feed/parameters.zhykos.json
 /packaging/cvf-*
 /packaging/temp*
+/package-lock.json
