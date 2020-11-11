@@ -53,14 +53,18 @@ function filterVideo(filter, video, expectedStatus) {
 
 // Thanks :) https://gist.github.com/denniszhao/8972cd4ae637cf10fe01
 function youtubeDurationIntoSeconds(duration) {
-  var a = duration.match(/\d+H|\d+M|\d+S/g);
-  var result = 0;
-  var d = { 'H': 3600, 'M': 60, 'S': 1 };
-
-  for (var i = 0; i < a.length; i++) {
-    const num = a[i].slice(0, a[i].length - 1);
-    const type = a[i].slice(a[i].length - 1, a[i].length);
-    result += parseInt(num) * d[type];
+  var result = -1;
+  if (typeof duration === 'string') {
+    const matches = duration.match(/\d+H|\d+M|\d+S/g);
+    if (matches) {
+      result = 0;
+      const types = { 'H': 3600, 'M': 60, 'S': 1 };
+      for (var i = 0; i < matches.length; i++) {
+        const num = matches[i].slice(0, matches[i].length - 1);
+        const type = matches[i].slice(matches[i].length - 1, matches[i].length);
+        result += parseInt(num) * types[type];
+      }
+    }
   }
   return result;
 }
