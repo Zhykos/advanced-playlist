@@ -64,3 +64,4 @@ function youtubeDurationIntoSeconds(duration) {
   }
   return result;
 }
+exports.youtubeDurationIntoSeconds = youtubeDurationIntoSeconds;

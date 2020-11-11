@@ -7,3 +7,4 @@
 /packaging/cvf-*
 /packaging/temp*
 /package-lock.json
+/coverage
