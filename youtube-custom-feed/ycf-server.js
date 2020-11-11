@@ -6,7 +6,6 @@ const logger = require('morgan');
 const lowdb = require('lowdb');
 const bodyParser = require('body-parser');
 
-const ycf = require('./public/youtube-custom-feed/parameters.json');
 const FileSync = require('lowdb/adapters/FileSync');
 const helpers = require('./vcf-server-helpers');
 
@@ -36,7 +35,7 @@ app.get('/',
     var lastChannelTitle;
     visibleVideos.forEach(video => {
       helpers.setFilterStatus(video);
-      if (req.query.hidden == "true" || video.filter == filterStatus.NONE) {
+      if (req.query.hidden == "true" || video.filter == helpers.filterStatus.NONE) {
         const channelsInDB = db.get('channels').filter({ channelId: video.channelId }).value();
         video.channelTitle = channelsInDB[0].channelTitle;
         lastChannelTitle = channelsInDB[0].channelTitle;

@@ -1,9 +1,12 @@
 
+const ycf = require('./public/youtube-custom-feed/parameters.json');
+
 const filterStatus = {
   NONE: 'NONE',
   BLACKLIST: 'BLACKLIST',
   WHITELIST: 'WHITELIST'
 };
+exports.filterStatus = filterStatus;
 
 function setFilterStatus(video) {
   video["filter"] = filterStatus.NONE;
