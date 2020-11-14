@@ -32,24 +32,27 @@ function setFilterStatus(video) {
 exports.setFilterStatus = setFilterStatus;
 
 function filterVideo(filter, video, expectedStatus) {
-  try {
-    const parts = filter.split('=~');
-    if (parts.length > 1) {
-      if ((!video[parts[0]].match(parts[1])) == (expectedStatus == filterStatus.WHITELIST)) {
-        video["filter"] = expectedStatus;
-      }
-    } else {
-      const parts = filter.split('>');
+  if (filter && video) {
+    try {
+      const parts = filter.split('=~');
       if (parts.length > 1) {
-        if (video[parts[0]] <= youtubeDurationIntoSeconds(parts[1]) == (expectedStatus == filterStatus.WHITELIST)) {
+        if (video[parts[0]] && (!video[parts[0]].match(parts[1])) == (expectedStatus == filterStatus.WHITELIST)) {
           video["filter"] = expectedStatus;
         }
+      } else {
+        const parts = filter.split('>');
+        if (parts.length > 1) {
+          if (video[parts[0]] && video[parts[0]] <= youtubeDurationIntoSeconds(parts[1]) == (expectedStatus == filterStatus.WHITELIST)) {
+            video["filter"] = expectedStatus;
+          }
+        }
       }
+    } catch (exception) {
+      console.error(exception);
     }
-  } catch (exception) {
-    console.error(exception);
   }
 }
+exports.filterVideo = filterVideo;
 
 // Thanks :) https://gist.github.com/denniszhao/8972cd4ae637cf10fe01
 function youtubeDurationIntoSeconds(duration) {
