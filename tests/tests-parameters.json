@@ -1,0 +1,55 @@
+{
+    "clientApiKey": "",
+    "clientId": "",
+    "channels": [
+        {
+            "id": "id_nolist"
+        },
+        {
+            "id": "id_onewhite",
+            "whitelist": [
+                "videoTitle=~.*foo.*"
+            ]
+        },
+        {
+            "id": "id_twowhite",
+            "whitelist": [
+                "videoTitle=~.*foo.*",
+                "videoTitle=~.*Hello.*"
+            ]
+        },
+        {
+            "id": "id_severalwhitewrong",
+            "whitelist": [
+                "videoTitle=~.*foo.*",
+                "videoTitle=~.*Hello.*",
+                "videoTitle=~.*wrong.*"
+            ]
+        },
+        {
+            "id": "id_whitenomatch",
+            "whitelist": [
+                "videoTitle=~.*nomatch.*"
+            ]
+        },
+        {
+            "id": "id_oneblack",
+            "blacklist": [
+                "videoTitle=~.*foo.*"
+            ]
+        },
+        {
+            "id": "id_twoblack",
+            "blacklist": [
+                "videoTitle=~.*nope.*",
+                "videoTitle=~.*foo.*"
+            ]
+        },
+        {
+            "id": "blacknomatch",
+            "blacklist": [
+                "videoTitle=~.*nope.*"
+            ]
+        }
+    ]
+}

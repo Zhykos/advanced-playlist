@@ -9,25 +9,27 @@ const filterStatus = {
 exports.filterStatus = filterStatus;
 
 function setFilterStatus(video) {
-  video["filter"] = filterStatus.NONE;
-  const channelId = video.channelId;
-  ycf.channels.forEach(channel => {
-    if (channel.id == channelId) {
-      const whitelist = channel.whitelist;
-      const blacklist = channel.blacklist;
-      if (whitelist) {
-        whitelist.forEach(white => {
-          filterVideo(white, video, filterStatus.WHITELIST);
-        });
+  if (video && video.channelId) {
+    video["filter"] = filterStatus.NONE;
+    const channelId = video.channelId;
+    ycf.channels.forEach(channel => {
+      if (channel.id == channelId) {
+        const whitelist = channel.whitelist;
+        const blacklist = channel.blacklist;
+        if (whitelist) {
+          whitelist.forEach(white => {
+            filterVideo(white, video, filterStatus.WHITELIST);
+          });
+        }
+        if (blacklist) {
+          blacklist.forEach(black => {
+            filterVideo(black, video, filterStatus.BLACKLIST);
+          });
+        }
+        return;
       }
-      if (blacklist) {
-        blacklist.forEach(black => {
-          filterVideo(black, video, filterStatus.BLACKLIST);
-        });
-      }
-      return;
-    }
-  });
+    });
+  }
 }
 exports.setFilterStatus = setFilterStatus;
 

@@ -30,6 +30,9 @@
     "collectCoverageFrom": [
       "youtube-custom-feed/**/*.js",
       "!<rootDir>/node_modules/"
-    ]
+    ],
+    "moduleNameMapper": {
+      "./public/youtube-custom-feed/parameters.json": "<rootDir>/tests/tests-parameters.json"
+    }
   }
 }
