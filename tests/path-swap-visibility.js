@@ -30,7 +30,7 @@ function openDB(filename) {
 
 
 
-describe('path-add-video-in-database', () => {
+describe('Path: swap visibility tests', () => {
 
     beforeAll(() => {
         fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-01.temp');
@@ -64,7 +64,7 @@ describe('path-add-video-in-database', () => {
         expect(dbTests.get('channels').size().value()).toBe(1);
     });
 
-    test('Swap, video does not exist', () => {
+    test('Video does not exist', () => {
         const videoIdToSwap = "video-foo";
         const request = { "body": { "videoId": videoIdToSwap } };
         const response = mockResponse();
@@ -79,7 +79,7 @@ describe('path-add-video-in-database', () => {
         expect(response.status).toHaveBeenCalledWith(500);
     });
 
-    test('Swap, empty database', () => {
+    test('Empty database', () => {
         const videoIdToSwap = "video-foo";
         const request = { "body": { "videoId": videoIdToSwap } };
         const response = mockResponse();

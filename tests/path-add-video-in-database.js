@@ -30,7 +30,7 @@ function openDB(filename) {
 
 
 
-describe('path-add-video-in-database', () => {
+describe('Path: Add video in database', () => {
 
     beforeAll(() => {
         fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-01.temp');

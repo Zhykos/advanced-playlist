@@ -21,7 +21,7 @@ const dbTests = lowdb(adapter);
 dbTests.defaults({ videos: [] }).write();
 dbTests.defaults({ channels: [] }).write();
 
-describe('path-root', () => {
+describe('Path: Root', () => {
 
     beforeAll(() => {
         jest.spyOn(server.db, "get").mockImplementation(getWhat => dbTests.get(getWhat));
