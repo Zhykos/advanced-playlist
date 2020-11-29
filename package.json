@@ -32,7 +32,7 @@
       "!<rootDir>/node_modules/"
     ],
     "moduleNameMapper": {
-      "./public/youtube-custom-feed/parameters.json": "<rootDir>/tests/tests-parameters.json"
+      "./public/youtube-custom-feed/parameters.json": "<rootDir>/tests/resources/tests-parameters.json"
     }
   }
 }

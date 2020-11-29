@@ -20,86 +20,86 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/',
-  function (req, res) {
-    const videos = [];
-    var visibleVideosStream = db.get('videos');
-    console.log(req.query.hidden);
-    if (!req.query.hidden || req.query.hidden != "true") {
-      visibleVideosStream = visibleVideosStream.filter((v => v.visible == 'true' || v.visible));
-    }
-    if (req.query.channel && req.query.channel != "all") {
-      visibleVideosStream = visibleVideosStream.filter({ channelId: req.query.channel });
-    }
-    const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
-    var lastChannelTitle;
-    visibleVideos.forEach(video => {
-      helpers.setFilterStatus(video);
-      if (req.query.hidden == "true" || video.filter == helpers.filterStatus.NONE) {
-        const channelsInDB = db.get('channels').filter({ channelId: video.channelId }).value();
-        video.channelTitle = channelsInDB[0].channelTitle;
-        lastChannelTitle = channelsInDB[0].channelTitle;
-        videos.push(video);
-      }
-    });
-    const channels = [];
-    const channelsInDB = db.get('channels').sortBy('channelTitle').value();
-    channelsInDB.forEach(channel => {
-      channels.push(channel);
-    });
-    if (!lastChannelTitle && req.query.channel && req.query.channel != "all") {
-      const channelsInDB = db.get('channels').filter({ channelId: req.query.channel }).value();
+app.get('/', pathRoot);
+
+function pathRoot(req, res) {
+  const videos = [];
+  var visibleVideosStream = db.get('videos');
+  if (!req.query.hidden || req.query.hidden != "true") {
+    visibleVideosStream = visibleVideosStream.filter((v => v.visible == 'true' || v.visible));
+  }
+  if (req.query.channel && req.query.channel != "all") {
+    visibleVideosStream = visibleVideosStream.filter({ channelId: req.query.channel });
+  }
+  const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
+  var lastChannelTitle;
+  visibleVideos.forEach(video => {
+    helpers.setFilterStatus(video);
+    if (req.query.hidden == "true" || video.filter == helpers.filterStatus.NONE) {
+      const channelsInDB = db.get('channels').filter({ channelId: video.channelId }).value();
+      video.channelTitle = channelsInDB[0].channelTitle;
       lastChannelTitle = channelsInDB[0].channelTitle;
+      videos.push(video);
     }
-    res.render('index', { videos: videos, channels: channels, displayHiddenVideos: req.query.hidden, channel: req.query.channel, channelTitle: lastChannelTitle });
+  });
+  const channels = [];
+  const channelsInDB = db.get('channels').sortBy('channelTitle').value();
+  channelsInDB.forEach(channel => {
+    channels.push(channel);
+  });
+  if (!lastChannelTitle && req.query.channel && req.query.channel != "all") {
+    const channelsInDB = db.get('channels').filter({ channelId: req.query.channel }).value();
+    lastChannelTitle = channelsInDB[0].channelTitle;
   }
-);
+  res.render('index', { videos: videos, channels: channels, displayHiddenVideos: req.query.hidden, channel: req.query.channel, channelTitle: lastChannelTitle });
+}
+exports.pathRoot = pathRoot;
 
-app.post('/addVideoInDatabase',
-  function (req, res) {
-    if (!db.has('videos').value() || !db.get('videos').find({ videoId: req.body.videoId }).value()) {
-      const videoDuration = youtubeDurationIntoSeconds(req.body.videoDuration);
-      const newVideoData = {
-        videoId: req.body.videoId,
-        videoThumbnailSrc: req.body.videoThumbnailSrc,
-        videoTitle: req.body.videoTitle,
-        videoDuration: videoDuration,
-        channelId: req.body.channelId,
-        publishDate: req.body.publishDate,
-        visible: req.body.visible
-      };
-      db.get('videos').push(newVideoData).write();
-    }
-    if (!db.has('channels').value() || !db.get('channels').find({ channelId: req.body.channelId }).value()) {
-      const newChannelData = {
-        channelTitle: req.body.channelTitle,
-        channelId: req.body.channelId,
-        channelImage: req.body.channelImage
-      };
-      db.get('channels').push(newChannelData).write();
-    }
-    res.end();
+app.post('/addVideoInDatabase', path_addVideoInDatabase);
+
+function path_addVideoInDatabase(req, res) {
+  if (!db.has('videos').value() || !db.get('videos').find({ videoId: req.body.videoId }).value()) {
+    const videoDuration = youtubeDurationIntoSeconds(req.body.videoDuration);
+    const newVideoData = {
+      videoId: req.body.videoId,
+      videoThumbnailSrc: req.body.videoThumbnailSrc,
+      videoTitle: req.body.videoTitle,
+      videoDuration: videoDuration,
+      channelId: req.body.channelId,
+      publishDate: req.body.publishDate,
+      visible: req.body.visible
+    };
+    db.get('videos').push(newVideoData).write();
   }
-);
+  if (!db.has('channels').value() || !db.get('channels').find({ channelId: req.body.channelId }).value()) {
+    const newChannelData = {
+      channelTitle: req.body.channelTitle,
+      channelId: req.body.channelId,
+      channelImage: req.body.channelImage
+    };
+    db.get('channels').push(newChannelData).write();
+  }
+  res.end();
+}
+/*
+app.post('/swapVisibility', path_swapVisibility);
 
-app.post('/swapVisibility',
-  function (req, res) {
-    if (db.has('videos').value()) {
-      const findData = db.get('videos').find({ videoId: req.body.videoId });
-      const videoData = findData.value();
-      if (videoData) {
-        const currentVisible = videoData.visible;
-        findData.assign({ visible: !currentVisible }).write();
-        res.end();
-      } else {
-        res.status(500).end();
-      }
-
+function path_swapVisibility(req, res) {
+  if (db.has('videos').value()) {
+    const findData = db.get('videos').find({ videoId: req.body.videoId });
+    const videoData = findData.value();
+    if (videoData) {
+      const currentVisible = videoData.visible;
+      findData.assign({ visible: !currentVisible }).write();
+      res.end();
     } else {
       res.status(500).end();
     }
+
+  } else {
+    res.status(500).end();
   }
-);
+}
 
 // catch 404 and forward to error handler
 app.use(
@@ -122,9 +122,10 @@ app.use(
 );
 
 module.exports = app;
-
+*/
 // database
 const adapter = new FileSync('./youtube-custom-feed/db.json');
 const db = lowdb(adapter);
 db.defaults({ videos: [] }).write();
 db.defaults({ channels: [] }).write();
+exports.db = db;

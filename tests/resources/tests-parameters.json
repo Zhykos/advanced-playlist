@@ -50,6 +50,12 @@
             "blacklist": [
                 "videoTitle=~.*nope.*"
             ]
+        },
+        {
+            "id": "channel-01",
+            "blacklist": [
+                "videoTitle=~.*delete.*"
+            ]
         }
     ]
 }
