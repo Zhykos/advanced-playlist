@@ -134,3 +134,10 @@ test('filterVideo wrong video format', () => {
     expect(video.filter).toBeUndefined();
     expect(consoleErrorOutput).toMatchObject([]);
 });
+
+test('Wrong regex operator', () => {
+    const video = { "a": "foo" };
+    helpers.filterVideo("a#o", "video", helpers.filterStatus.BLACKLIST);
+    expect(video.filter).toBeUndefined();
+    expect(consoleErrorOutput).toMatchObject([]);
+});
