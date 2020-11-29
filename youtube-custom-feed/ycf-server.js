@@ -59,7 +59,7 @@ app.post('/addVideoInDatabase', path_addVideoInDatabase);
 
 function path_addVideoInDatabase(req, res) {
   if (!db.has('videos').value() || !db.get('videos').find({ videoId: req.body.videoId }).value()) {
-    const videoDuration = youtubeDurationIntoSeconds(req.body.videoDuration);
+    const videoDuration = helpers.youtubeDurationIntoSeconds(req.body.videoDuration);
     const newVideoData = {
       videoId: req.body.videoId,
       videoThumbnailSrc: req.body.videoThumbnailSrc,
@@ -81,25 +81,22 @@ function path_addVideoInDatabase(req, res) {
   }
   res.end();
 }
-/*
+exports.path_addVideoInDatabase = path_addVideoInDatabase;
+
 app.post('/swapVisibility', path_swapVisibility);
 
 function path_swapVisibility(req, res) {
-  if (db.has('videos').value()) {
-    const findData = db.get('videos').find({ videoId: req.body.videoId });
-    const videoData = findData.value();
-    if (videoData) {
-      const currentVisible = videoData.visible;
-      findData.assign({ visible: !currentVisible }).write();
-      res.end();
-    } else {
-      res.status(500).end();
-    }
-
+  const findData = db.get('videos').find({ videoId: req.body.videoId });
+  const videoData = findData.value();
+  if (videoData) {
+    const currentVisible = videoData.visible;
+    findData.assign({ visible: !currentVisible }).write();
+    res.end();
   } else {
     res.status(500).end();
   }
 }
+exports.path_swapVisibility = path_swapVisibility;
 
 // catch 404 and forward to error handler
 app.use(
@@ -121,8 +118,8 @@ app.use(
   }
 );
 
-module.exports = app;
-*/
+//module.exports = app;
+
 // database
 const adapter = new FileSync('./youtube-custom-feed/db.json');
 const db = lowdb(adapter);

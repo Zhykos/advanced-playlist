@@ -23,7 +23,13 @@ dbTests.defaults({ channels: [] }).write();
 
 describe('path-root', () => {
 
-    jest.spyOn(server.db, "get").mockImplementation(getWhat => dbTests.get(getWhat));
+    beforeAll(() => {
+        jest.spyOn(server.db, "get").mockImplementation(getWhat => dbTests.get(getWhat));
+    });
+
+    afterAll(() => {
+        jest.clearAllMocks();
+    });
 
     test('Default call', () => {
         const request = { "query": {} };
