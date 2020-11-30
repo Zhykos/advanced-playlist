@@ -67,7 +67,7 @@ describe('More errors', () => {
         const response = mockResponse();
         server.errorHandlerPlus(error, request, response, null);
         expect(response.status).toHaveBeenCalledWith(500);
-        expect(response.locals.error).toStrictEqual(error);
+        expect(response.locals.error).toStrictEqual({});
     });
 
 });
