@@ -99,24 +99,26 @@ function path_swapVisibility(req, res) {
 exports.path_swapVisibility = path_swapVisibility;
 
 // catch 404 and forward to error handler
-app.use(
-  function (req, res, next) {
-    next(createError(404));
-  }
-);
+app.use(errorHandler);
+
+function errorHandler(req, res, next) {
+  next(createError(404));
+}
+exports.errorHandler = errorHandler;
 
 // error handler
-app.use(
-  function (err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(errorHandlerPlus);
 
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-  }
-);
+function errorHandlerPlus(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+}
+exports.errorHandlerPlus = errorHandlerPlus;
 
 //module.exports = app;
 
