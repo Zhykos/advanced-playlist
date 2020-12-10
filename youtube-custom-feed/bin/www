@@ -4,7 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../ycf-server');
+var server = require('../ycf-server');
+const app = server.app;
 var debug = require('debug')('myexpressapp:server');
 var http = require('http');
 

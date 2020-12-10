@@ -120,7 +120,7 @@ function errorHandlerPlus(err, req, res, next) {
 }
 exports.errorHandlerPlus = errorHandlerPlus;
 
-//module.exports = app;
+exports.app = app;
 
 // database
 const adapter = new FileSync('./youtube-custom-feed/db.json');
