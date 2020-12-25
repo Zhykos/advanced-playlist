@@ -28,11 +28,14 @@ function openDB(filename) {
     return dbTests;
 }
 
-
-
 describe('Path: Add video in database', () => {
 
     beforeAll(() => {
+        fs.unlinkSync('./tests/resources/db-tests-for-modification-01.temp');
+        fs.unlinkSync('./tests/resources/db-tests-for-modification-02.temp');
+        fs.unlinkSync('./tests/resources/db-tests-for-modification-03.temp');
+        fs.unlinkSync('./tests/resources/db-tests-for-modification-04.temp');
+
         fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-01.temp');
         fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-02.temp');
         fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-04.temp');

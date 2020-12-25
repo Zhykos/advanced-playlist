@@ -28,11 +28,13 @@ function openDB(filename) {
     return dbTests;
 }
 
-
-
 describe('Path: swap visibility tests', () => {
 
     beforeAll(() => {
+        fs.unlinkSync('./tests/resources/db-tests-for-modification-01.temp');
+        fs.unlinkSync('./tests/resources/db-tests-for-modification-02.temp');
+        fs.unlinkSync('./tests/resources/db-tests-for-modification-03.temp');
+
         fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-01.temp');
         fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-02.temp');
     });
