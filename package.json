@@ -10,7 +10,7 @@
   "license": "TODO (MIT????)",
   "scripts": {
     "dev": "nodemon ./youtube-custom-feed/bin/www",
-    "test": "jest --coverage"
+    "test": "jest --coverage --detectOpenHandles"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -30,7 +30,8 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "youtube-custom-feed/db.json"
+      "youtube-custom-feed/db.json",
+      "tests/*.*"
     ],
     "delay": "2500"
   },
