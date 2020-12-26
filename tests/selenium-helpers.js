@@ -2,26 +2,53 @@ const { By, until } = require('selenium-webdriver');
 
 const waitUntilTime = 20000;
 
-async function selectCSS(selector, driver) {
+/*async function selectCSS(selector, driver) {
   const el = await driver.wait(
     until.elementLocated(By.css(selector)),
     waitUntilTime
   );
   return await driver.wait(until.elementIsVisible(el), waitUntilTime);
 }
-exports.selectCSS = selectCSS;
+exports.selectCSS = selectCSS;*/
 
-async function selectID(selector, driver) {
+async function selectId(selector, driver) {
   const el = await driver.wait(
     until.elementLocated(By.id(selector)),
     waitUntilTime
   );
   return await driver.wait(until.elementIsVisible(el), waitUntilTime);
 }
-exports.selectID = selectID;
+exports.selectId = selectId;
 
 async function assertNoId(selector, driver) {
-  const elements = driver.findElements(By.id(selector));
-  expect(elements).not.toMatchObject([]);
+  await driver.findElements(By.id(selector)).then(function (elements) {
+    expect(elements.length).toBe(0);
+  });
 }
 exports.assertNoId = assertNoId;
+
+async function assertVisibilityById(selector, driver, isVisible) {
+  await driver.findElements(By.id(selector)).then(function (elements) {
+    expect(elements.length).toBe(1);
+    elements[0].isDisplayed().then(function (element) {
+      expect(element, "Id = " + selector).toBe(isVisible);
+    });
+  });
+}
+
+async function assertIsVisibleById(selector, driver) {
+  await assertVisibilityById(selector, driver, true);
+}
+exports.assertIsVisibleById = assertIsVisibleById;
+
+async function assertIsNotVisibleById(selector, driver) {
+  await assertVisibilityById(selector, driver, false);
+}
+exports.assertIsNotVisibleById = assertIsNotVisibleById;
+
+function waitMilli(milliseconds) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, milliseconds);
+  });
+}
+exports.waitMilli = waitMilli;
