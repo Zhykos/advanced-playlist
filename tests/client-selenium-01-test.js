@@ -4,8 +4,8 @@ require('selenium-webdriver/chrome');
 require('chromedriver');
 //require('geckodriver');
 const helpers = require('./selenium-helpers');
-require("../youtube-custom-feed/bin/www");
-const server = require('../youtube-custom-feed/ycf-server');
+const www = require("../youtube-custom-feed/bin/www");
+const vcfServer = require('../youtube-custom-feed/ycf-server');
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const fs = require('fs');
@@ -20,8 +20,8 @@ function openDB() {
   const dbTests = lowdb(adapter);
   dbTests.defaults({ videos: [] }).write();
   dbTests.defaults({ channels: [] }).write();
-  jest.spyOn(server.db, "get").mockImplementation(getWhat => dbTests.get(getWhat));
-  jest.spyOn(server.db, "has").mockImplementation(getWhat => dbTests.has(getWhat));
+  jest.spyOn(vcfServer.db, "get").mockImplementation(getWhat => dbTests.get(getWhat));
+  jest.spyOn(vcfServer.db, "has").mockImplementation(getWhat => dbTests.has(getWhat));
   return dbTests;
 }
 
@@ -35,8 +35,8 @@ beforeAll(async () => {
 })
 
 afterAll(async () => {
-  //server.close(); FIXME
-  //driver.quit();
+  www.expressServer.close();
+  driver.quit();
 });
 
 beforeAll(() => {
