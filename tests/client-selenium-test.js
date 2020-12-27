@@ -30,24 +30,28 @@ function deleteDatabaseTempFile() {
   });
 }
 
-beforeAll(async () => {
-  driver = await new Builder().forBrowser('chrome').build();
-  deleteDatabaseTempFile();
-  fs.copyFileSync('./tests/resources/db-zhykos.json', './tests/resources/db-zhykos.temp');
-})
-
-afterAll(async () => {
+/*afterAll(async () => {
   jest.clearAllMocks();
   deleteDatabaseTempFile();
   www.expressServer.close();
   driver.quit();
+});*/
+
+describe('beforeAll', () => {
+
+  test("beforeAll", async () => {
+    driver = await new Builder().forBrowser('chrome').build();
+    deleteDatabaseTempFile();
+    fs.copyFileSync('./tests/resources/db-zhykos.json', './tests/resources/db-zhykos.temp');
+    openDB();
+  });
+
 });
 
 describe('Selenium tests', () => {
 
-  test('Initializing the context', async () => {
+  test("beforeAll", async () => {
     await driver.get(rootURL);
-    openDB();
   });
 
   test('Display hidden videos', async () => {
@@ -164,9 +168,88 @@ describe('Selenium tests', () => {
 
     // Hide video
 
-    const linkOpen = await helpers.selectId('swap_FK30dDJh7fQ', driver);
-    await linkOpen.click();
+    const linkHide = await helpers.selectId('swap_FK30dDJh7fQ', driver);
+    await linkHide.click();
     await helpers.assertIsNotVisibleById("video_FK30dDJh7fQ", driver);
+  });
+
+  test('Show masked video', async () => {
+
+    // Default display
+
+    await helpers.assertIsNotVisibleById("video_FK30dDJh7fQ", driver);
+
+    // Show all videos
+
+    const linkShowHidden = await helpers.selectId('button-show-hidden', driver);
+    await linkShowHidden.click();
+    await helpers.assertIsVisibleById("video_FK30dDJh7fQ", driver);
+
+    // Unmask video
+
+    const linkShow = await helpers.selectId('swap_FK30dDJh7fQ', driver);
+    await linkShow.click();
+    await helpers.assertIsVisibleById("video_FK30dDJh7fQ", driver);
+
+    // Undo show all videos
+
+    const linkHideHidden = await helpers.selectId('button-hide-hidden', driver);
+    await linkHideHidden.click();
+    await helpers.assertIsVisibleById("video_FK30dDJh7fQ", driver);
+  });
+
+  test('Open in origin website', async () => {
+
+    // Default display
+
+    await helpers.assertIsVisibleById("video_FK30dDJh7fQ", driver);
+
+    // Open
+
+    const linkOpenOrigin = await helpers.selectId('button-open-youtube-FK30dDJh7fQ', driver);
+    await linkOpenOrigin.click();
+    await helpers.waitMilli(2000);
+
+    await driver.getAllWindowHandles().then(function (handles) {
+      driver.switchTo().window(handles[1]);
+      helpers.assertNoId("video_FK30dDJh7fQ", driver);
+      driver.getCurrentUrl().then(function (url) {
+        expect(url).toBe("https://www.youtube.com/watch?v=FK30dDJh7fQ");
+      });
+      driver.close();
+      driver.switchTo().window(handles[0]);
+    });
+
+    // Back in main page
+
+    await helpers.assertIsVisibleById("video_FK30dDJh7fQ", driver);
+  });
+
+  test('No error', async () => {
+    await helpers.assertIsNotVisibleById("settings-error", driver);
+  });
+
+});
+
+describe('Selenium error tests', () => {
+
+  test("beforeAll", async () => {
+    await driver.get(rootURL);
+  });
+
+  test('No parameter file', async () => {
+    await helpers.assertIsVisibleById("settings-error", driver);
+  });
+
+});
+
+describe('afterAll', () => {
+
+  test("afterAll", async () => {
+    jest.clearAllMocks();
+    deleteDatabaseTempFile();
+    www.expressServer.close();
+    driver.quit();
   });
 
 });

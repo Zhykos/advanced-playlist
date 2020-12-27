@@ -29,7 +29,7 @@ exports.assertNoId = assertNoId;
 
 async function assertVisibilityById(selector, driver, isVisible) {
   await driver.findElements(By.id(selector)).then(function (elements) {
-    expect(elements.length).toBe(1);
+    expect(elements.length, "Id = " + selector).toBe(1);
     elements[0].isDisplayed().then(function (element) {
       expect(element, "Id = " + selector).toBe(isVisible);
     });

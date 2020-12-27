@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 const FileSync = require('lowdb/adapters/FileSync');
 const helpers = require('./vcf-server-helpers');
+const ycf = require('./public/youtube-custom-feed/parameters.json');
 
 const app = express();
 
@@ -20,9 +21,9 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', pathRoot);
+app.get('/', path_root);
 
-function pathRoot(req, res) {
+function path_root(req, res) {
   const videos = [];
   var visibleVideosStream = db.get('videos');
   if (!req.query.hidden || req.query.hidden != "true") {
@@ -53,7 +54,7 @@ function pathRoot(req, res) {
   }
   res.render('index', { videos: videos, channels: channels, displayHiddenVideos: req.query.hidden, channel: req.query.channel, channelTitle: lastChannelTitle });
 }
-exports.pathRoot = pathRoot;
+exports.pathRoot = path_root;
 
 app.post('/addVideoInDatabase', path_addVideoInDatabase);
 
@@ -97,6 +98,14 @@ function path_swapVisibility(req, res) {
   }
 }
 exports.path_swapVisibility = path_swapVisibility;
+
+app.post('/getParameters', path_getParameters);
+
+function path_getParameters(req, res) {
+  res.json({ clientAPI: ycf.clientApiKey, clientId: ycf.clientId, channels: ycf.channels });
+  res.end();
+}
+exports.path_getParameters = path_getParameters;
 
 // catch 404 and forward to error handler
 app.use(errorHandler);
