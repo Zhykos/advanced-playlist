@@ -1,6 +1,3 @@
-/*const rewire = require('rewire');
-const helpers = rewire('../youtube-custom-feed/vcf-server-helpers');
-var youtubeDurationIntoSeconds = helpers.__get__('youtubeDurationIntoSeconds');*/
 const helpers = require('../youtube-custom-feed/vcf-server-helpers');
 
 describe('Youtube duration into seconds tests', () => {

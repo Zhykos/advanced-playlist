@@ -3,7 +3,7 @@ require('selenium-webdriver/chrome');
 //require('selenium-webdriver/firefox');
 require('chromedriver');
 //require('geckodriver');
-const helpers = require('./selenium-helpers');
+const helpers = require('./tests-helpers');
 const www = require("../youtube-custom-feed/bin/www");
 const vcfServer = require('../youtube-custom-feed/ycf-server');
 const lowdb = require('lowdb');
@@ -25,9 +25,7 @@ function openDB() {
 }
 
 function deleteDatabaseTempFile() {
-  fs.unlink('./tests/resources/db-zhykos.temp', function (err) {
-    // XXX
-  });
+  helpers.deleteFile('./tests/resources/db-zhykos.temp');
 }
 
 describe('beforeAll', () => {

@@ -1,15 +1,7 @@
 const { By, until } = require('selenium-webdriver');
+const fs = require('fs');
 
 const waitUntilTime = 20000;
-
-/*async function selectCSS(selector, driver) {
-  const el = await driver.wait(
-    until.elementLocated(By.css(selector)),
-    waitUntilTime
-  );
-  return await driver.wait(until.elementIsVisible(el), waitUntilTime);
-}
-exports.selectCSS = selectCSS;*/
 
 async function selectId(selector, driver) {
   const el = await driver.wait(
@@ -52,3 +44,10 @@ function waitMilli(milliseconds) {
   });
 }
 exports.waitMilli = waitMilli;
+
+function deleteFile(file) {
+  fs.unlink(file, function (err) {
+    // XXX
+  });
+}
+exports.deleteFile = deleteFile;

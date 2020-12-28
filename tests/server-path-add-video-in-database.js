@@ -1,4 +1,5 @@
 const server = require('../youtube-custom-feed/ycf-server');
+const helpers = require('./tests-helpers');
 
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
@@ -31,10 +32,10 @@ function openDB(filename) {
 describe('Path: Add video in database', () => {
 
     beforeAll(() => {
-        fs.unlinkSync('./tests/resources/db-tests-for-modification-01.temp');
-        fs.unlinkSync('./tests/resources/db-tests-for-modification-02.temp');
-        fs.unlinkSync('./tests/resources/db-tests-for-modification-03.temp');
-        fs.unlinkSync('./tests/resources/db-tests-for-modification-04.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-01.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-02.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-03.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-04.temp');
 
         fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-01.temp');
         fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-02.temp');
@@ -43,10 +44,10 @@ describe('Path: Add video in database', () => {
 
     afterAll(() => {
         jest.clearAllMocks();
-        fs.unlinkSync('./tests/resources/db-tests-for-modification-01.temp');
-        fs.unlinkSync('./tests/resources/db-tests-for-modification-02.temp');
-        fs.unlinkSync('./tests/resources/db-tests-for-modification-03.temp');
-        fs.unlinkSync('./tests/resources/db-tests-for-modification-04.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-01.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-02.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-03.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-04.temp');
     });
 
     test('Add new video', () => {
