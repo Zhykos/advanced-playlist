@@ -8,14 +8,15 @@ const bodyParser = require('body-parser');
 
 const FileSync = require('lowdb/adapters/FileSync');
 const helpers = require('./vcf-server-helpers');
-const ycf = require('./public/youtube-custom-feed/parameters.json');
+const vcf = require('./public/youtube-custom-feed/parameters.json');
+exports.vcf = vcf;
 
 const app = express();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -102,7 +103,7 @@ exports.path_swapVisibility = path_swapVisibility;
 app.post('/getParameters', path_getParameters);
 
 function path_getParameters(req, res) {
-  res.json({ clientAPI: ycf.clientApiKey, clientId: ycf.clientId, channels: ycf.channels });
+  res.json({ clientApiKey: vcf.clientApiKey, clientId: vcf.clientId, channels: vcf.channels });
   res.end();
 }
 exports.path_getParameters = path_getParameters;

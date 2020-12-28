@@ -15,34 +15,27 @@ let driver;
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
 
 function openDB() {
-  jest.clearAllMocks();
+  fs.copyFileSync('./tests/resources/db-zhykos.json', './tests/resources/db-zhykos.temp');
   const adapter = new FileSync('./tests/resources/db-zhykos.temp');
   const dbTests = lowdb(adapter);
   dbTests.defaults({ videos: [] }).write();
   dbTests.defaults({ channels: [] }).write();
   jest.spyOn(vcfServer.db, "get").mockImplementation(getWhat => dbTests.get(getWhat));
   jest.spyOn(vcfServer.db, "has").mockImplementation(getWhat => dbTests.has(getWhat));
-  return dbTests;
 }
 
 function deleteDatabaseTempFile() {
   fs.unlink('./tests/resources/db-zhykos.temp', function (err) {
+    // XXX
   });
 }
-
-/*afterAll(async () => {
-  jest.clearAllMocks();
-  deleteDatabaseTempFile();
-  www.expressServer.close();
-  driver.quit();
-});*/
 
 describe('beforeAll', () => {
 
   test("beforeAll", async () => {
+    jest.clearAllMocks();
     driver = await new Builder().forBrowser('chrome').build();
     deleteDatabaseTempFile();
-    fs.copyFileSync('./tests/resources/db-zhykos.json', './tests/resources/db-zhykos.temp');
     openDB();
   });
 
@@ -234,6 +227,7 @@ describe('Selenium tests', () => {
 describe('Selenium error tests', () => {
 
   test("beforeAll", async () => {
+    vcfServer.vcf.clientApiKey = "<XXX>";
     await driver.get(rootURL);
   });
 
