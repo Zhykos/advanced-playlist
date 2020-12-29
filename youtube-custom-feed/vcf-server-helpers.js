@@ -15,12 +15,12 @@ function setFilterStatus(video) {
     ycf.channels.forEach(channel => {
       if (channel.id == channelId) {
         const whitelist = channel.whitelist;
-        const blacklist = channel.blacklist;
         if (whitelist) {
           whitelist.forEach(white => {
             filterVideo(white, video, filterStatus.WHITELIST);
           });
         }
+        const blacklist = channel.blacklist;
         if (blacklist) {
           blacklist.forEach(black => {
             filterVideo(black, video, filterStatus.BLACKLIST);
@@ -34,17 +34,17 @@ function setFilterStatus(video) {
 exports.setFilterStatus = setFilterStatus;
 
 function filterVideo(filter, video, expectedStatus) {
-  if (filter && video) {
+  if (filter && video && (expectedStatus == filterStatus.WHITELIST || expectedStatus == filterStatus.BLACKLIST)) {
     try {
       const parts = filter.split('=~');
       if (parts.length > 1) {
-        if (video[parts[0]] && (!video[parts[0]].match(parts[1])) == (expectedStatus == filterStatus.WHITELIST)) {
+        if (video[parts[0]] && video[parts[0]].match(parts[1])) {
           video["filter"] = expectedStatus;
         }
       } else {
         const parts = filter.split('>');
         if (parts.length > 1) {
-          if (video[parts[0]] && video[parts[0]] <= youtubeDurationIntoSeconds(parts[1]) == (expectedStatus == filterStatus.WHITELIST)) {
+          if (video[parts[0]] && video[parts[0]] > youtubeDurationIntoSeconds(parts[1])) {
             video["filter"] = expectedStatus;
           }
         }

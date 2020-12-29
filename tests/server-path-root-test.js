@@ -35,9 +35,7 @@ describe('Path: Root', () => {
         const request = { "query": {} };
         const response = mockResponse();
 
-        const checkBeforeVideos = JSON.stringify(dbTests.get('videos').sortBy('videoId').value());
         server.pathRoot(request, response);
-        expect(JSON.stringify(dbTests.get('videos').sortBy('videoId').value())).toBe(checkBeforeVideos);
 
         expect(response.render).toHaveBeenCalled();
         expect(response.page).toBe("index");

@@ -41,29 +41,29 @@ describe('Filter video tests', () => {
     });
 
     test('> whitelist', () => {
-        const video = { "a": "1H" };
+        const video = { "a": 4500 };
         helpers.filterVideo("a>1H11M", video, helpers.filterStatus.WHITELIST);
         expect(video.filter).toBe(helpers.filterStatus.WHITELIST);
         expect(consoleErrorOutput).toMatchObject([]);
     });
 
     test('> blacklist', () => {
-        const video = { "a": "1H" };
+        const video = { "a": 4500 };
         helpers.filterVideo("a>1H11M", video, helpers.filterStatus.BLACKLIST);
         expect(video.filter).toBe(helpers.filterStatus.BLACKLIST);
         expect(consoleErrorOutput).toMatchObject([]);
     });
 
     test('Not > whitelist', () => {
-        const video = { "a": "1H" };
-        helpers.filterVideo("a>11M", video, helpers.filterStatus.WHITELIST);
+        const video = { "a": 3600 };
+        helpers.filterVideo("a>1H11M", video, helpers.filterStatus.WHITELIST);
         expect(video.filter).toBeUndefined();
         expect(consoleErrorOutput).toMatchObject([]);
     });
 
     test('Not > blacklist', () => {
-        const video = { "a": "1H" };
-        helpers.filterVideo("a>11M", video, helpers.filterStatus.BLACKLIST);
+        const video = { "a": 3600 };
+        helpers.filterVideo("a>1H11M", video, helpers.filterStatus.BLACKLIST);
         expect(video.filter).toBeUndefined();
         expect(consoleErrorOutput).toMatchObject([]);
     });

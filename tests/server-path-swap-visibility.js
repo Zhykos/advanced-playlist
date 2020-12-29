@@ -32,19 +32,19 @@ function openDB(filename) {
 describe('Path: swap visibility tests', () => {
 
     beforeAll(() => {
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-01.temp');
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-02.temp');
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-03.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-05.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-06.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-07.temp');
 
-        fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-01.temp');
-        fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-02.temp');
+        fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-05.temp');
+        fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-06.temp');
     });
 
     afterAll(() => {
         jest.clearAllMocks();
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-01.temp');
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-02.temp');
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-03.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-05.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-06.temp');
+        helpers.deleteFile('./tests/resources/db-tests-for-modification-07.temp');
     });
 
     test('Swap', () => {
@@ -52,7 +52,7 @@ describe('Path: swap visibility tests', () => {
         const request = { "body": { "videoId": videoIdToSwap } };
         const response = mockResponse();
 
-        const dbTests = openDB('db-tests-for-modification-01.temp');
+        const dbTests = openDB('db-tests-for-modification-05.temp');
 
         expect(dbTests.get('videos').size().value()).toBe(1);
         expect(dbTests.get('videos').filter({ videoId: videoIdToSwap }).value()[0].videoTitle).toBe("Video 01");
@@ -72,7 +72,7 @@ describe('Path: swap visibility tests', () => {
         const request = { "body": { "videoId": videoIdToSwap } };
         const response = mockResponse();
 
-        const dbTests = openDB('db-tests-for-modification-02.temp');
+        const dbTests = openDB('db-tests-for-modification-06.temp');
 
         expect(dbTests.get('videos').size().value()).toBe(1);
         expect(dbTests.get('videos').filter({ videoId: videoIdToSwap }).size().value()).toBe(0);
@@ -87,7 +87,7 @@ describe('Path: swap visibility tests', () => {
         const request = { "body": { "videoId": videoIdToSwap } };
         const response = mockResponse();
 
-        const dbTests = openDB('db-tests-for-modification-03.temp');
+        const dbTests = openDB('db-tests-for-modification-07.temp');
 
         expect(dbTests.get('videos').size().value()).toBe(0);
 

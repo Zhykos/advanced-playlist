@@ -26,34 +26,48 @@ app.get('/', path_root);
 
 function path_root(req, res) {
   const videos = [];
-  var visibleVideosStream = db.get('videos');
-  if (!req.query.hidden || req.query.hidden != "true") {
-    visibleVideosStream = visibleVideosStream.filter((v => v.visible == 'true' || v.visible));
-  }
-  if (req.query.channel && req.query.channel != "all") {
-    visibleVideosStream = visibleVideosStream.filter({ channelId: req.query.channel });
-  }
-  const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
   var lastChannelTitle;
-  visibleVideos.forEach(video => {
-    helpers.setFilterStatus(video);
-    if (req.query.hidden == "true" || video.filter == helpers.filterStatus.NONE) {
-      const channelsInDB = db.get('channels').filter({ channelId: video.channelId }).value();
-      video.channelTitle = channelsInDB[0].channelTitle;
-      lastChannelTitle = channelsInDB[0].channelTitle;
-      videos.push(video);
-    }
-  });
   const channels = [];
-  const channelsInDB = db.get('channels').sortBy('channelTitle').value();
-  channelsInDB.forEach(channel => {
-    channels.push(channel);
-  });
-  if (!lastChannelTitle && req.query.channel && req.query.channel != "all") {
-    const channelsInDB = db.get('channels').filter({ channelId: req.query.channel }).value();
-    lastChannelTitle = channelsInDB[0].channelTitle;
+  if (!req.query.hidden || req.query.hidden == "false" || req.query.hidden == "true") {
+    var visibleVideosStream = db.get('videos');
+    if (!req.query.hidden || req.query.hidden == "false") {
+      visibleVideosStream = visibleVideosStream.filter((v => v.visible == 'true' || v.visible));
+    }
+    if (req.query.channel && req.query.channel != "all") {
+      visibleVideosStream = visibleVideosStream.filter({ channelId: req.query.channel });
+    }
+    const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
+    visibleVideos.forEach(video => {
+      helpers.setFilterStatus(video);
+      if (req.query.hidden == "true" || video.filter == helpers.filterStatus.NONE) {
+        const channelsInDB = db.get('channels').filter({ channelId: video.channelId }).value();
+        video.channelTitle = channelsInDB[0].channelTitle;
+        lastChannelTitle = channelsInDB[0].channelTitle;
+        videos.push(video);
+      }
+    });
+    const channelsInDB = db.get('channels').sortBy('channelTitle').value();
+    channelsInDB.forEach(channel => {
+      channels.push(channel);
+    });
+    if (!lastChannelTitle && req.query.channel && req.query.channel != "all") {
+      const channelsInDB = db.get('channels').filter({ channelId: req.query.channel }).value();
+      if (channelsInDB[0]) {
+        lastChannelTitle = channelsInDB[0].channelTitle;
+      } else {
+        lastChannelTitle = undefined;
+        channels.length = 0;
+      }
+    }
+    if (!req.query.channel || req.query.channel == "all") {
+      lastChannelTitle = undefined;
+    }
   }
-  res.render('index', { videos: videos, channels: channels, displayHiddenVideos: req.query.hidden, channel: req.query.channel, channelTitle: lastChannelTitle });
+  var displayHiddenVideos = "false";
+  if (req.query.hidden) {
+    displayHiddenVideos = req.query.hidden;
+  }
+  res.render('index', { videos: videos, channels: channels, displayHiddenVideos: displayHiddenVideos, channel: req.query.channel, channelTitle: lastChannelTitle });
 }
 exports.pathRoot = path_root;
 

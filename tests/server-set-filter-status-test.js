@@ -34,7 +34,7 @@ describe('Set filter status tests', () => {
         const video = { "channelId": "id_severalwhitewrong", "videoTitle": "Hello foo!" };
         expect(video.filter).toBeUndefined();
         helpers.setFilterStatus(video);
-        expect(video.filter).toBe(helpers.filterStatus.NONE);
+        expect(video.filter).toBe(helpers.filterStatus.WHITELIST);
     });
 
     test('id_whitenomatch', () => {
