@@ -1,5 +1,5 @@
 
-const ycf = require('./public/youtube-custom-feed/parameters.json');
+const vcf_channels = require('../etc/channels.json');
 
 const filterStatus = {
   NONE: 'NONE',
@@ -12,7 +12,7 @@ function setFilterStatus(video) {
   if (video && video.channelId) {
     video["filter"] = filterStatus.NONE;
     const channelId = video.channelId;
-    ycf.channels.forEach(channel => {
+    vcf_channels.channels.forEach(channel => {
       if (channel.id == channelId) {
         const whitelist = channel.whitelist;
         if (whitelist) {

@@ -7,9 +7,9 @@
   "keywords": [
     "TODO"
   ],
-  "license": "TODO (MIT????)",
+  "license": "TODO (MIT)",
   "scripts": {
-    "dev": "nodemon ./youtube-custom-feed/bin/www",
+    "dev": "nodemon ./youtube-custom-feed/bin/main-express.js",
     "test": "jest --coverage"
   },
   "dependencies": {
@@ -31,7 +31,7 @@
   },
   "nodemonConfig": {
     "ignore": [
-      "youtube-custom-feed/db.json",
+      "db.json",
       "tests/*.*"
     ],
     "delay": "2500"
@@ -40,12 +40,12 @@
     "testRegex": "./tests/(server|client)-.+test.js$",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "<rootDir>/youtube-custom-feed/*.js",
+      "<rootDir>/youtube-custom-feed/bin/vcf*.js",
       "<rootDir>/youtube-custom-feed/public/javascripts/*.js",
       "!<rootDir>/node_modules/"
     ],
     "moduleNameMapper": {
-      "./public/youtube-custom-feed/parameters.json": "<rootDir>/tests/resources/tests-parameters.json"
+      "./etc/channels.json": "<rootDir>/tests/resources/tests-parameters.json"
     },
     "setupFilesAfterEnv": [
       "jest-expect-message"

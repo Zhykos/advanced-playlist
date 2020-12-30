@@ -1,4 +1,4 @@
-const helpers = require('../youtube-custom-feed/vcf-server-helpers');
+const helpers = require('../youtube-custom-feed/bin/vcf-server-helpers');
 
 describe('Youtube duration into seconds tests', () => {
 

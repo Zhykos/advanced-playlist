@@ -1,6 +1,4 @@
 {
-    "clientApiKey": "<XXX>",
-    "clientId": "<YYY>.apps.googleusercontent.com",
     "channels": [
         {
             "id": "id_nolist"

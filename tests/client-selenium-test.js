@@ -4,8 +4,8 @@ require('selenium-webdriver/chrome');
 require('chromedriver');
 //require('geckodriver');
 const helpers = require('./tests-helpers');
-const www = require("../youtube-custom-feed/bin/www");
-const vcfServer = require('../youtube-custom-feed/ycf-server');
+const www = require("../youtube-custom-feed/bin/main-express.js");
+const vcfServer = require('../youtube-custom-feed/bin/vcf-server');
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const fs = require('fs');
@@ -248,7 +248,7 @@ describe('Selenium tests', () => {
 describe('Selenium error tests', () => {
 
   test("beforeAll", async () => {
-    vcfServer.vcf.clientApiKey = "<XXX>";
+    vcfServer.vcf_keys.youtube.clientApiKey = "<XXX>";
     await driver.get(rootURL);
   });
 

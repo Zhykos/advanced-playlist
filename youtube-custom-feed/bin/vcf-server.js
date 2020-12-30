@@ -8,19 +8,21 @@ const bodyParser = require('body-parser');
 
 const FileSync = require('lowdb/adapters/FileSync');
 const helpers = require('./vcf-server-helpers');
-const vcf = require('./public/youtube-custom-feed/parameters.json');
-exports.vcf = vcf;
+const vcf_channels = require('../etc/channels.json');
+exports.vcf_channels = vcf_channels;
+const vcf_keys = require('../etc/apikeys.json');
+exports.vcf_keys = vcf_keys;
 
 const app = express();
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
 
 //app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', path_root);
 
@@ -118,7 +120,7 @@ exports.path_swapVisibility = path_swapVisibility;
 app.post('/getParameters', path_getParameters);
 
 function path_getParameters(req, res) {
-  res.json({ clientApiKey: vcf.clientApiKey, clientId: vcf.clientId, channels: vcf.channels });
+  res.json({ clientApiKey: vcf_keys.youtube.clientApiKey, clientId: vcf_keys.youtube.clientId, channels: vcf_channels.channels });
   res.end();
 }
 exports.path_getParameters = path_getParameters;
@@ -148,7 +150,7 @@ exports.errorHandlerPlus = errorHandlerPlus;
 exports.app = app;
 
 // database
-const adapter = new FileSync('./youtube-custom-feed/db.json');
+const adapter = new FileSync(path.join(__dirname, '../var/db.json'));
 const db = lowdb(adapter);
 db.defaults({ videos: [] }).write();
 db.defaults({ channels: [] }).write();

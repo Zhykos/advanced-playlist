@@ -1,9 +1,8 @@
 .project
 /.settings/
 /node_modules/
-/youtube-custom-feed/db*.json
-/youtube-custom-feed/node_modules/
-/youtube-custom-feed/public/youtube-custom-feed/parameters.zhykos.json
+/youtube-custom-feed/etc/zhykos*
+/youtube-custom-feed/var/db.json
 /packaging/cvf-*
 /packaging/temp*
 /package-lock.json

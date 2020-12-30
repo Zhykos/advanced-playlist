@@ -1,5 +1,5 @@
-const server = require('../youtube-custom-feed/ycf-server');
-const helpers = require('../youtube-custom-feed/vcf-server-helpers');
+const server = require('../youtube-custom-feed/bin/vcf-server');
+const helpers = require('../youtube-custom-feed/bin/vcf-server-helpers');
 
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
