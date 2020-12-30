@@ -63,6 +63,13 @@
                 "videoTitle=~.+Sentinels.+",
                 "videoDuration>8H22M"
             ]
+        },
+        {
+            "id": "UCnygly7mB_KSETq9zPclZVA",
+            "whitelist": [
+                "videoTitle=~VR Missions.+",
+                "videoTitle=~IMMORTALS FENYX RISING.+"
+            ]
         }
     ]
 }
