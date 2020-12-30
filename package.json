@@ -37,9 +37,11 @@
     "delay": "2500"
   },
   "jest": {
-    "testRegex": "./tests/(server|client)-.*.js$",
+    "testRegex": "./tests/(server|client)-.+test.js$",
+    "collectCoverage": true,
     "collectCoverageFrom": [
-      "youtube-custom-feed/**/*.js",
+      "<rootDir>/youtube-custom-feed/*.js",
+      "<rootDir>/youtube-custom-feed/public/javascripts/*.js",
       "!<rootDir>/node_modules/"
     ],
     "moduleNameMapper": {
