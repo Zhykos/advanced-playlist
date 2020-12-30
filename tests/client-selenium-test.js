@@ -50,7 +50,7 @@ describe('Selenium tests', () => {
     // Default display
 
     await helpers.assertNoId('video_TuAc5KxXGQ4', driver);
-    await helpers.selectId('video_LOilCuZhB5o', driver);
+    await helpers.selectId('video_f5s2yomPNL0', driver);
     await helpers.assertNoId('button-hide-hidden', driver);
 
     // Show hidden
@@ -61,7 +61,7 @@ describe('Selenium tests', () => {
     await helpers.assertNoId('button-show-hidden', driver);
     await helpers.selectId('button-hide-hidden', driver);
     await helpers.selectId('video_TuAc5KxXGQ4', driver);
-    await helpers.selectId('video_LOilCuZhB5o', driver);
+    await helpers.selectId('video_f5s2yomPNL0', driver);
 
 
     // Back to default display
@@ -72,14 +72,14 @@ describe('Selenium tests', () => {
     await helpers.assertNoId('button-hide-hidden', driver);
     await helpers.selectId('button-show-hidden', driver);
     await helpers.assertNoId('video_TuAc5KxXGQ4', driver);
-    await helpers.selectId('video_LOilCuZhB5o', driver);
+    await helpers.selectId('video_f5s2yomPNL0', driver);
   });
 
   test('Change channel', async () => {
 
     // Default display
 
-    await helpers.selectId('video_LOilCuZhB5o', driver);
+    await helpers.selectId('video_f5s2yomPNL0', driver);
     await helpers.selectId('video_4QXpyrp8WUo', driver);
 
     // Zhykos channel
@@ -87,7 +87,7 @@ describe('Selenium tests', () => {
     const linkZhykos = await helpers.selectId('button-channel-UCWJHqzXc7rKO7h5TzYYBNFw', driver);
     await linkZhykos.click();
 
-    await helpers.selectId('video_LOilCuZhB5o', driver);
+    await helpers.selectId('video_f5s2yomPNL0', driver);
     await helpers.assertNoId('video_4QXpyrp8WUo', driver);
 
     // Skywilly channel
@@ -95,7 +95,7 @@ describe('Selenium tests', () => {
     const linkSkywilly = await helpers.selectId('button-channel-UCnygly7mB_KSETq9zPclZVA', driver);
     await linkSkywilly.click();
 
-    await helpers.assertNoId('video_LOilCuZhB5o', driver);
+    await helpers.assertNoId('video_f5s2yomPNL0', driver);
     await helpers.selectId('video_4QXpyrp8WUo', driver);
 
     // Back to default display
@@ -103,7 +103,7 @@ describe('Selenium tests', () => {
     const linkAllChannels = await helpers.selectId('button-channel-#all', driver);
     await linkAllChannels.click();
 
-    await helpers.selectId('video_LOilCuZhB5o', driver);
+    await helpers.selectId('video_f5s2yomPNL0', driver);
     await helpers.selectId('video_4QXpyrp8WUo', driver);
   });
 
