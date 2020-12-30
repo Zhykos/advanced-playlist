@@ -9,9 +9,11 @@ html
     script(src='/javascripts/ycf-client.js')
   body
 
-    mixin displayVideo(text, image, videoId, channelTitle, visible, filter, displayHiddenVideos)
+    mixin displayVideo(text, image, videoId, channelTitle, visible, filter, displayHiddenVideos, channelId, whiteChannels)
       div.video(id="video_" + videoId)
-        if visible && filter == "NONE"
+
+        - var showVideo = visible && ((whiteChannels.has(channelId) && filter == "WHITELIST") || ((!whiteChannels.has(channelId) && filter == "NONE")));
+        if showVideo
           img(src=image, id="img_" + videoId)
           div(id="title_" + videoId)= text
           div(id="channel_" + videoId)
@@ -20,16 +22,21 @@ html
           img.hiddenImage(src=image, id="img_" + videoId)
           div.hiddenText(id="title_" + videoId)= text
           div.hiddenText(id="channel_" + videoId)= channelTitle
+
         if filter == "BLACKLIST"
           img(src="images/blacklist.png" title="Video masked because of a blacklist parameter")
-        else if filter == "WHITELIST"
+        else
+        - if (filter == "NONE" && whiteChannels.has(channelId))
           img(src="images/whitelist.png" title="Video masked because of a whitelist parameter")
+
         img(src="images/play.png" title="Open this video" onclick='displayIframeVideoPlayer("' + videoId + '")' id="button-open-" + videoId)
         img(src="images/play-hide.png" title="Open this video then mask it" onclick='displayIframeVideoPlayerThenMask("' + videoId + '", "' + displayHiddenVideos + '")' id="button-open-hide-" + videoId)
+
         if visible
           img(src="images/hide.png" title="Hide this video" onclick='swapVisibility("' + videoId + '", "' + displayHiddenVideos + '")', id="swap_" + videoId)
         else
           img(src="images/visible.png" title="Set this video as visible" onclick='swapVisibility("' + videoId + '", "' + displayHiddenVideos + '")', id="swap_" + videoId)
+
         img(src="images/open-youtube.png" title="Open this video on YouTube" onclick='openOnYoutube("' + videoId + '")' id="button-open-youtube-" + videoId)
 
     mixin displayChannelInSidebar(id, text, image)
@@ -77,6 +84,6 @@ html
             a(href='#' onclick='$("#popup").fadeOut("slow")')#close Close video
         br
         each val in videos
-          +displayVideo(val.videoTitle, val.videoThumbnailSrc, val.videoId, val.channelTitle, val.visible, val.filter, displayHiddenVideos)
+          +displayVideo(val.videoTitle, val.videoThumbnailSrc, val.videoId, val.channelTitle, val.visible, val.filter, displayHiddenVideos, val.channelId, whiteChannels)
         else
           span No video in database

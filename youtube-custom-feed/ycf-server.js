@@ -28,6 +28,7 @@ function path_root(req, res) {
   const videos = [];
   var lastChannelTitle;
   const channels = [];
+  const hasWhiteMap = new Map();
   if (!req.query.hidden || req.query.hidden == "false" || req.query.hidden == "true") {
     var visibleVideosStream = db.get('videos');
     if (!req.query.hidden || req.query.hidden == "false") {
@@ -39,7 +40,12 @@ function path_root(req, res) {
     const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
     visibleVideos.forEach(video => {
       helpers.setFilterStatus(video);
-      if (req.query.hidden == "true" || video.filter == helpers.filterStatus.NONE) {
+      if (video.filter == helpers.filterStatus.WHITELIST) {
+        hasWhiteMap.set(video.channelId, true);
+      }
+    });
+    visibleVideos.forEach(video => {
+      if (req.query.hidden == "true" || (hasWhiteMap.has(video.channelId) && video.filter == helpers.filterStatus.WHITELIST) || (!hasWhiteMap.has(video.channelId) && video.filter == helpers.filterStatus.NONE)) {
         const channelsInDB = db.get('channels').filter({ channelId: video.channelId }).value();
         video.channelTitle = channelsInDB[0].channelTitle;
         lastChannelTitle = channelsInDB[0].channelTitle;
@@ -62,7 +68,7 @@ function path_root(req, res) {
   if (req.query.hidden) {
     displayHiddenVideos = req.query.hidden;
   }
-  res.render('index', { videos: videos, channels: channels, displayHiddenVideos: displayHiddenVideos, channel: req.query.channel, channelTitle: lastChannelTitle });
+  res.render('index', { videos: videos, channels: channels, displayHiddenVideos: displayHiddenVideos, channel: req.query.channel, channelTitle: lastChannelTitle, whiteChannels: hasWhiteMap });
 }
 exports.pathRoot = path_root;
 
