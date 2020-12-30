@@ -51,13 +51,8 @@ function path_root(req, res) {
       channels.push(channel);
     });
     if (!lastChannelTitle && req.query.channel && req.query.channel != "all") {
-      const channelsInDB = db.get('channels').filter({ channelId: req.query.channel }).value();
-      if (channelsInDB[0]) {
-        lastChannelTitle = channelsInDB[0].channelTitle;
-      } else {
-        lastChannelTitle = undefined;
-        channels.length = 0;
-      }
+      lastChannelTitle = undefined;
+      channels.length = 0;
     }
     if (!req.query.channel || req.query.channel == "all") {
       lastChannelTitle = undefined;
