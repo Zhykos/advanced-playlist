@@ -51,3 +51,23 @@ function deleteFile(file) {
   });
 }
 exports.deleteFile = deleteFile;
+
+async function assertClassById(idSelector, expectedValue, driver) {
+  await assertAttributeById(idSelector, "class", expectedValue, driver);
+}
+exports.assertClassById = assertClassById;
+
+async function assertNoClassById(idSelector, driver) {
+  await assertClassById(idSelector, "", driver);
+}
+exports.assertNoClassById = assertNoClassById;
+
+async function assertAttributeById(idSelector, attributeName, expectedValue, driver) {
+  await driver.findElements(By.id(idSelector)).then(function (elements) {
+    expect(elements.length).toBe(1);
+    elements[0].getAttribute(attributeName).then(function (element) {
+      expect(element, "Id = " + idSelector).toBe(expectedValue);
+    });
+  });
+}
+exports.assertAttributeById = assertAttributeById;

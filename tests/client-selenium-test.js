@@ -220,6 +220,29 @@ describe('Selenium tests', () => {
     await helpers.assertIsNotVisibleById("settings-error", driver);
   });
 
+  test('Check CSS', async () => {
+    const linkShowHidden = await helpers.selectId('button-show-hidden', driver);
+    await linkShowHidden.click();
+
+    await helpers.assertIsVisibleById("whitelist_Oqp-Y_LUUDo", driver);
+    await helpers.assertNoId("blacklist_Oqp-Y_LUUDo", driver);
+
+    await helpers.assertIsVisibleById("blacklist_TuAc5KxXGQ4", driver);
+    await helpers.assertNoId("whitelist_TuAc5KxXGQ4", driver);
+
+    await helpers.assertNoId("whitelist_4QXpyrp8WUo", driver);
+    await helpers.assertNoId("blacklist_4QXpyrp8WUo", driver);
+
+    await helpers.assertClassById("img_Oqp-Y_LUUDo", "hiddenImage", driver);
+    await helpers.assertClassById("title_Oqp-Y_LUUDo", "hiddenText", driver);
+
+    await helpers.assertNoClassById("img_nArW0DjUMB8", driver);
+    await helpers.assertNoClassById("title_nArW0DjUMB8", driver);
+
+    await helpers.assertAttributeById("swap_LOilCuZhB5o", "src", rootURL + "images/visible.png", driver);
+    await helpers.assertAttributeById("swap_ATsjtKOX-qY", "src", rootURL + "images/hide.png", driver);
+  });
+
 });
 
 describe('Selenium error tests', () => {

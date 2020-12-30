@@ -24,10 +24,10 @@ html
           div.hiddenText(id="channel_" + videoId)= channelTitle
 
         if filter == "BLACKLIST"
-          img(src="images/blacklist.png" title="Video masked because of a blacklist parameter")
+          img(src="images/blacklist.png" title="Video masked because of a blacklist parameter" id="blacklist_" + videoId)
         else
         - if (filter == "NONE" && whiteChannels.has(channelId))
-          img(src="images/whitelist.png" title="Video masked because of a whitelist parameter")
+          img(src="images/whitelist.png" title="Video masked because of a whitelist parameter" id="whitelist_" + videoId)
 
         img(src="images/play.png" title="Open this video" onclick='displayIframeVideoPlayer("' + videoId + '")' id="button-open-" + videoId)
         img(src="images/play-hide.png" title="Open this video then mask it" onclick='displayIframeVideoPlayerThenMask("' + videoId + '", "' + displayHiddenVideos + '")' id="button-open-hide-" + videoId)
