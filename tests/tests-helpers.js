@@ -71,3 +71,10 @@ async function assertAttributeById(idSelector, attributeName, expectedValue, dri
   });
 }
 exports.assertAttributeById = assertAttributeById;
+
+async function assertCountElementsByClass(classSelector, expectedValue, driver) {
+  await driver.findElements(By.className(classSelector)).then(function (elements) {
+    expect(elements.length).toBe(expectedValue);
+  });
+}
+exports.assertCountElementsByClass = assertCountElementsByClass;

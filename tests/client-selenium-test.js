@@ -52,6 +52,7 @@ describe('Selenium tests', () => {
     await helpers.assertNoId('video_TuAc5KxXGQ4', driver);
     await helpers.selectId('video_f5s2yomPNL0', driver);
     await helpers.assertNoId('button-hide-hidden', driver);
+    await helpers.assertCountElementsByClass("video", 38, driver);
 
     // Show hidden
 
@@ -62,6 +63,7 @@ describe('Selenium tests', () => {
     await helpers.selectId('button-hide-hidden', driver);
     await helpers.selectId('video_TuAc5KxXGQ4', driver);
     await helpers.selectId('video_f5s2yomPNL0', driver);
+    await helpers.assertCountElementsByClass("video", 100, driver);
 
 
     // Back to default display
@@ -73,6 +75,7 @@ describe('Selenium tests', () => {
     await helpers.selectId('button-show-hidden', driver);
     await helpers.assertNoId('video_TuAc5KxXGQ4', driver);
     await helpers.selectId('video_f5s2yomPNL0', driver);
+    await helpers.assertCountElementsByClass("video", 38, driver);
   });
 
   test('Change channel', async () => {
