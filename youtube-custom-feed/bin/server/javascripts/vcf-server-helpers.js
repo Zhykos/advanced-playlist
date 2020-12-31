@@ -1,5 +1,5 @@
 
-const vcf_channels = require('../etc/channels.json');
+const vcf_channels = require('../../../etc/channels.json');
 
 const filterStatus = {
   NONE: 'NONE',

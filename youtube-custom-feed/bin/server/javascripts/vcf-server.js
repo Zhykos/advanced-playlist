@@ -8,9 +8,9 @@ const bodyParser = require('body-parser');
 
 const FileSync = require('lowdb/adapters/FileSync');
 const helpers = require('./vcf-server-helpers');
-const vcf_channels = require('../etc/channels.json');
+const vcf_channels = require('../../../etc/channels.json');
 exports.vcf_channels = vcf_channels;
-const vcf_keys = require('../etc/apikeys.json');
+const vcf_keys = require('../../../etc/apikeys.json');
 exports.vcf_keys = vcf_keys;
 
 const app = express();
@@ -22,7 +22,7 @@ app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, '../../client')));
 
 app.get('/', path_root);
 
@@ -150,7 +150,7 @@ exports.errorHandlerPlus = errorHandlerPlus;
 exports.app = app;
 
 // database
-const adapter = new FileSync(path.join(__dirname, '../var/db.json'));
+const adapter = new FileSync(path.join(__dirname, '../../../var/db.json'));
 const db = lowdb(adapter);
 db.defaults({ videos: [] }).write();
 db.defaults({ channels: [] }).write();

@@ -9,7 +9,7 @@
   ],
   "license": "TODO (MIT)",
   "scripts": {
-    "dev": "nodemon ./youtube-custom-feed/bin/main-express.js",
+    "dev": "nodemon ./youtube-custom-feed/bin/server/javascripts/main-express.js",
     "test": "jest --coverage"
   },
   "dependencies": {
@@ -40,8 +40,8 @@
     "testRegex": "./tests/(server|client)-.+test.js$",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "<rootDir>/youtube-custom-feed/bin/vcf*.js",
-      "<rootDir>/youtube-custom-feed/public/javascripts/*.js",
+      "<rootDir>/youtube-custom-feed/bin/server/javascripts/vcf*.js",
+      "<rootDir>/youtube-custom-feed/bin/client/javascripts/vcf*.js",
       "!<rootDir>/node_modules/"
     ],
     "moduleNameMapper": {
