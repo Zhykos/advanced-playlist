@@ -7,7 +7,7 @@
   "keywords": [
     "TODO"
   ],
-  "license": "TODO (MIT)",
+  "license": "MIT",
   "scripts": {
     "dev": "nodemon ./youtube-custom-feed/bin/server/javascripts/main-express.js",
     "test": "jest --coverage"
