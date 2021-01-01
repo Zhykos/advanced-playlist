@@ -6,6 +6,7 @@ require('geckodriver');
 const helpers = require('./tests-helpers');
 const www = require("../youtube-custom-feed/bin/server/javascripts/main-express");
 const vcfServer = require('../youtube-custom-feed/bin/server/javascripts/vcf-server');
+const config = require('../youtube-custom-feed/bin/config.js');
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const fs = require('fs');
@@ -32,7 +33,7 @@ describe('beforeAll', () => {
 
   test("beforeAll", async () => {
     jest.clearAllMocks();
-    driver = await new Builder().forBrowser('chrome').build();
+    driver = await new Builder().forBrowser(config.BROWSER_TEST).build();
     deleteDatabaseTempFile();
     openDB();
   });
@@ -180,9 +181,9 @@ describe('Selenium tests', () => {
     await linkShowHidden.click();
     await helpers.waitMilli(2000);
     await helpers.assertIsVisibleById("video_FK30dDJh7fQ", driver);
-    
+
     // Unmask video
-    
+
     const linkShow = await helpers.selectId('swap_FK30dDJh7fQ', driver);
     await linkShow.click();
     await helpers.waitMilli(2000);
