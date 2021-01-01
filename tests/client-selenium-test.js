@@ -1,8 +1,8 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 require('selenium-webdriver/chrome');
-//require('selenium-webdriver/firefox');
+require('selenium-webdriver/firefox');
 require('chromedriver');
-//require('geckodriver');
+require('geckodriver');
 const helpers = require('./tests-helpers');
 const www = require("../youtube-custom-feed/bin/server/javascripts/main-express");
 const vcfServer = require('../youtube-custom-feed/bin/server/javascripts/vcf-server');
@@ -172,23 +172,27 @@ describe('Selenium tests', () => {
     // Default display
 
     await helpers.assertIsNotVisibleById("video_FK30dDJh7fQ", driver);
+    await helpers.waitMilli(2000);
 
     // Show all videos
 
     const linkShowHidden = await helpers.selectId('button-show-hidden', driver);
     await linkShowHidden.click();
+    await helpers.waitMilli(2000);
     await helpers.assertIsVisibleById("video_FK30dDJh7fQ", driver);
-
+    
     // Unmask video
-
+    
     const linkShow = await helpers.selectId('swap_FK30dDJh7fQ', driver);
     await linkShow.click();
+    await helpers.waitMilli(2000);
     await helpers.assertIsVisibleById("video_FK30dDJh7fQ", driver);
 
     // Undo show all videos
 
     const linkHideHidden = await helpers.selectId('button-hide-hidden', driver);
     await linkHideHidden.click();
+    await helpers.waitMilli(2000);
     await helpers.assertIsVisibleById("video_FK30dDJh7fQ", driver);
   });
 
@@ -226,6 +230,7 @@ describe('Selenium tests', () => {
   test('Check CSS', async () => {
     const linkShowHidden = await helpers.selectId('button-show-hidden', driver);
     await linkShowHidden.click();
+    await helpers.waitMilli(2000);
 
     await helpers.assertIsVisibleById("whitelist_Oqp-Y_LUUDo", driver);
     await helpers.assertNoId("blacklist_Oqp-Y_LUUDo", driver);
