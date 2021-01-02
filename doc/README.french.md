@@ -85,6 +85,11 @@ Vous devez récupérer une version de *YCF* sur votre machine pour l'utiliser.
 
 ![Guide 17](readme-images/client-guide-17.jpg)
 
+4. Si vous souhaitez lancer les tests, installez :
+   1. GraphicsMagick : http://www.graphicsmagick.org
+   2. Chrome : https://www.google.com/intl/fr_fr/chrome/
+   3. Firefox : https://www.mozilla.org/fr/firefox/new/
+
 ### Installation
 
 1. Téléchargez la dernière version de *YCF* : https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/releases

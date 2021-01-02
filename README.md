@@ -88,6 +88,11 @@ Google console screen where to get keys:
 
 ![Guide 17](readme-images/client-guide-17.jpg)
 
+4. If you want to run tests, install:
+   1. GraphicsMagick: http://www.graphicsmagick.org
+   2. Chrome: https://www.google.com/intl/fr_fr/chrome/
+   3. Firefox: https://www.mozilla.org/fr/firefox/new/
+
 ### Installation
 
 1. Download latest version of YCF: https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/releases
