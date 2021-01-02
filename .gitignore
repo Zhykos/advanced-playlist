@@ -9,3 +9,4 @@
 /coverage
 /tests/resources/*.temp
 /debug.log
+/doc/images/*temp.jpg

@@ -262,6 +262,34 @@ describe('Selenium tests', () => {
 
 });
 
+describe('Other screenshots', () => {
+
+  test('Take screenshots', async () => {
+    // TODOs
+    // client-guide-01
+    // client-guide-02
+    // client-guide-04
+    // client-guide-05
+
+    // TODOs (cut/modify)
+    // client-guide-09
+    // client-guide-10
+    // client-guide-12
+    // client-guide-14
+    // client-guide-15
+    // client-guide-16
+  });
+
+  test('client-guide-06', async () => {
+    await helpers.cropImage('client-guide-00', 'client-guide-06', 0, 0, 1920, 720);
+  });
+
+  test('client-guide-07', async () => {
+    await helpers.cropImage('client-guide-00', 'client-guide-07-temp', 0, 0, 805, 449);
+    await helpers.drawRectangle('client-guide-07-temp', 'client-guide-07', 7, 47, 157, 94);
+  });
+});
+
 describe('Selenium error tests', () => {
 
   test("beforeAll", async () => {
@@ -271,34 +299,6 @@ describe('Selenium error tests', () => {
 
   test('No parameter file', async () => {
     await helpers.assertIsVisibleById("settings-error", driver);
-  });
-
-});
-
-describe('Other screenshots', () => {
-
-  test("beforeAll", async () => {
-    vcfServer.vcf_keys.youtube.clientApiKey = "<XXX>";
-    await driver.get(rootURL);
-  });
-
-  test('Take screenshots', async () => {
-    // TODOs
-    // client-guide-01
-    // client-guide-02
-    // client-guide-04
-    // client-guide-05
-    // youtube-channel
-
-    // TODOs (cut/modify)
-    // client-guide-06
-    // client-guide-07
-    // client-guide-09
-    // client-guide-10
-    // client-guide-12
-    // client-guide-14
-    // client-guide-15
-    // client-guide-16
   });
 
 });

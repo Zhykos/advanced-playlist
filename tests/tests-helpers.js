@@ -2,6 +2,8 @@ const { By, until } = require('selenium-webdriver');
 const fs = require('fs');
 const pngToJpeg = require('png-to-jpeg');
 const config = require('../youtube-custom-feed/bin/config.js');
+const Jimp = require('jimp');
+const gm = require('gm');
 
 const waitUntilTime = 20000;
 
@@ -90,3 +92,25 @@ async function takeScreenshotForDocumentation(filename, driver) {
   }
 }
 exports.takeScreenshotForDocumentation = takeScreenshotForDocumentation;
+
+async function cropImage(inFilename, outFilename, x, y, w, h) {
+  if (config.BROWSER_TEST == "chrome") {
+    await Jimp.read("./doc/images/" + inFilename + ".jpg")
+      .then(image => {
+        return image.crop(x, y, w, h).write("./doc/images/" + outFilename + ".jpg");
+      })
+      .catch(err => {
+        console.error(err); // XXX
+      });
+  }
+}
+exports.cropImage = cropImage;
+
+async function drawRectangle(inFilename, outFilename, x1, y1, x2, y2) {
+  await gm("./doc/images/" + inFilename + ".jpg").drawRectangle(x1, y1, x2, y2).write("./doc/images/" + outFilename + ".jpg", function (err) {
+    if (err) {
+      console.log(err); // XXX
+    }
+  });
+}
+exports.drawRectangle = drawRectangle;
