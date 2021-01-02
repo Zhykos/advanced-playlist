@@ -34,6 +34,7 @@ describe('beforeAll', () => {
   test("beforeAll", async () => {
     jest.clearAllMocks();
     driver = await new Builder().forBrowser(config.BROWSER_TEST).build();
+    await driver.manage().window().maximize();
     deleteDatabaseTempFile();
     openDB();
   });
@@ -44,6 +45,7 @@ describe('Selenium tests', () => {
 
   test("beforeAll", async () => {
     await driver.get(rootURL);
+    await helpers.takeScreenshotForDocumentation("client-guide-00", driver);
   });
 
   test('Display hidden videos', async () => {
@@ -66,6 +68,7 @@ describe('Selenium tests', () => {
     await helpers.selectId('video_f5s2yomPNL0', driver);
     await helpers.assertCountElementsByClass("video", 100, driver);
 
+    await helpers.takeScreenshotForDocumentation("client-guide-08", driver);
 
     // Back to default display
 
@@ -93,6 +96,8 @@ describe('Selenium tests', () => {
 
     await helpers.selectId('video_f5s2yomPNL0', driver);
     await helpers.assertNoId('video_4QXpyrp8WUo', driver);
+
+    await helpers.takeScreenshotForDocumentation("client-guide-11", driver);
 
     // Skywilly channel
 
@@ -122,6 +127,9 @@ describe('Selenium tests', () => {
     const linkOpen = await helpers.selectId('button-open-4QXpyrp8WUo', driver);
     await linkOpen.click();
     await helpers.assertIsVisibleById("popup", driver);
+
+    await helpers.waitMilli(2000);
+    await helpers.takeScreenshotForDocumentation("client-guide-13", driver);
 
     // Close video
 
@@ -263,6 +271,34 @@ describe('Selenium error tests', () => {
 
   test('No parameter file', async () => {
     await helpers.assertIsVisibleById("settings-error", driver);
+  });
+
+});
+
+describe('Other screenshots', () => {
+
+  test("beforeAll", async () => {
+    vcfServer.vcf_keys.youtube.clientApiKey = "<XXX>";
+    await driver.get(rootURL);
+  });
+
+  test('Take screenshots', async () => {
+    // TODOs
+    // client-guide-01
+    // client-guide-02
+    // client-guide-04
+    // client-guide-05
+    // youtube-channel
+
+    // TODOs (cut/modify)
+    // client-guide-06
+    // client-guide-07
+    // client-guide-09
+    // client-guide-10
+    // client-guide-12
+    // client-guide-14
+    // client-guide-15
+    // client-guide-16
   });
 
 });

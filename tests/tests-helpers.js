@@ -1,5 +1,7 @@
 const { By, until } = require('selenium-webdriver');
 const fs = require('fs');
+const pngToJpeg = require('png-to-jpeg');
+const config = require('../youtube-custom-feed/bin/config.js');
 
 const waitUntilTime = 20000;
 
@@ -78,3 +80,13 @@ async function assertCountElementsByClass(classSelector, expectedValue, driver) 
   });
 }
 exports.assertCountElementsByClass = assertCountElementsByClass;
+
+async function takeScreenshotForDocumentation(filename, driver) {
+  if (config.BROWSER_TEST == "chrome") {
+    await driver.takeScreenshot().then(function (png64) {
+      const buffer = Buffer.from(png64, 'base64');
+      pngToJpeg({ quality: 90 })(buffer).then(output => fs.writeFileSync("./doc/images/" + filename + ".jpg", output));
+    });
+  }
+}
+exports.takeScreenshotForDocumentation = takeScreenshotForDocumentation;
