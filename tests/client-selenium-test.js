@@ -286,7 +286,7 @@ describe('Other screenshots', () => {
 
   test('client-guide-07', async () => {
     await helpers.cropImage('client-guide-00', 'client-guide-07-temp', 0, 0, 805, 449);
-    await helpers.drawRectangle('client-guide-07-temp', 'client-guide-07', 7, 47, 157, 94);
+    await helpers.drawRedNotFilledRectangle('client-guide-07-temp', 'client-guide-07', 7, 47, 157, 94);
   });
 });
 

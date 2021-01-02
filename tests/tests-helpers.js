@@ -106,11 +106,11 @@ async function cropImage(inFilename, outFilename, x, y, w, h) {
 }
 exports.cropImage = cropImage;
 
-async function drawRectangle(inFilename, outFilename, x1, y1, x2, y2) {
-  await gm("./doc/images/" + inFilename + ".jpg").drawRectangle(x1, y1, x2, y2).write("./doc/images/" + outFilename + ".jpg", function (err) {
+async function drawRedNotFilledRectangle(inFilename, outFilename, x1, y1, x2, y2) {
+  await gm("./doc/images/" + inFilename + ".jpg").stroke("#FF0000", 0).strokeWidth(5).drawLine(x1, y1, x2, y1).drawLine(x2, y1, x2, y2).drawLine(x2, y2, x1, y2).drawLine(x1, y2, x1, y1).write("./doc/images/" + outFilename + ".jpg", function (err) {
     if (err) {
       console.log(err); // XXX
     }
   });
 }
-exports.drawRectangle = drawRectangle;
+exports.drawRedNotFilledRectangle = drawRedNotFilledRectangle;
