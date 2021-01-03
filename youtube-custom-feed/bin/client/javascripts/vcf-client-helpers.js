@@ -1,6 +1,6 @@
 function authenticate() {
   return gapi.auth2.getAuthInstance()
-    .signIn({ scope: "https://www.googleapis.com/auth/youtube.readonly" })
+    .signIn({ scope: "https://www.googleapis.com/auth/youtube.readonly", ux_mode: 'redirect', redirect_uri: 'http://localhost:3000' })
     .then(
       function () {
         console.log("Sign-in successful");

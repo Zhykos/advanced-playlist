@@ -7,6 +7,7 @@ const helpers = require('./tests-helpers');
 const www = require("../youtube-custom-feed/bin/server/javascripts/main-express");
 const vcfServer = require('../youtube-custom-feed/bin/server/javascripts/vcf-server');
 const config = require('../youtube-custom-feed/bin/config.js');
+const passwords = require('./etc/passwords.json');
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const fs = require('fs');
@@ -14,6 +15,7 @@ const fs = require('fs');
 const rootURL = 'http://localhost:3000/';
 let driver;
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
+const clientApiKey = vcfServer.vcf_keys.youtube.clientApiKey;
 
 function openDB() {
   fs.copyFileSync('./tests/resources/db-zhykos.json', './tests/resources/db-zhykos.temp');
@@ -25,8 +27,18 @@ function openDB() {
   jest.spyOn(vcfServer.db, "has").mockImplementation(getWhat => dbTests.has(getWhat));
 }
 
+function openEmptyDB() {
+  const adapter = new FileSync('./tests/resources/db-empty.temp');
+  const dbTests = lowdb(adapter);
+  dbTests.defaults({ videos: [] }).write();
+  dbTests.defaults({ channels: [] }).write();
+  jest.spyOn(vcfServer.db, "get").mockImplementation(getWhat => dbTests.get(getWhat));
+  jest.spyOn(vcfServer.db, "has").mockImplementation(getWhat => dbTests.has(getWhat));
+}
+
 function deleteDatabaseTempFile() {
   helpers.deleteFile('./tests/resources/db-zhykos.temp');
+  helpers.deleteFile('./tests/resources/db-empty.temp');
 }
 
 describe('beforeAll', () => {
@@ -45,7 +57,7 @@ describe('Selenium tests', () => {
 
   test("beforeAll", async () => {
     await driver.get(rootURL);
-    await helpers.takeScreenshotForDocumentation("client-guide-00", driver);
+    helpers.takeScreenshotForDocumentation("client-guide-00", driver);
   });
 
   test('Display hidden videos', async () => {
@@ -68,7 +80,7 @@ describe('Selenium tests', () => {
     await helpers.selectId('video_f5s2yomPNL0', driver);
     await helpers.assertCountElementsByClass("video", 100, driver);
 
-    await helpers.takeScreenshotForDocumentation("client-guide-08", driver);
+    helpers.takeScreenshotForDocumentation("client-guide-08", driver);
 
     // Back to default display
 
@@ -97,7 +109,7 @@ describe('Selenium tests', () => {
     await helpers.selectId('video_f5s2yomPNL0', driver);
     await helpers.assertNoId('video_4QXpyrp8WUo', driver);
 
-    await helpers.takeScreenshotForDocumentation("client-guide-11", driver);
+    helpers.takeScreenshotForDocumentation("client-guide-11", driver);
 
     // Skywilly channel
 
@@ -129,7 +141,7 @@ describe('Selenium tests', () => {
     await helpers.assertIsVisibleById("popup", driver);
 
     await helpers.waitMilli(2000);
-    await helpers.takeScreenshotForDocumentation("client-guide-13", driver);
+    helpers.takeScreenshotForDocumentation("client-guide-13", driver);
 
     // Close video
 
@@ -262,33 +274,78 @@ describe('Selenium tests', () => {
 
 });
 
-describe('Other screenshots', () => {
+// Not a test but I dont care...
+if (config.BROWSER_TEST == "chrome") {
+  describe('Other screenshots', () => {
 
-  test('Take screenshots', async () => {
-    // TODOs
-    // client-guide-01
-    // client-guide-02
-    // client-guide-04
-    // client-guide-05
+    test('Delete temp files', () => {
+      helpers.deleteFile('./doc/images/client-guide-07-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-09-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-10-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-12-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-14-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-15-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-16-temp.jpg');
+    });
 
-    // TODOs (cut/modify)
-    // client-guide-09
-    // client-guide-10
-    // client-guide-12
-    // client-guide-14
-    // client-guide-15
-    // client-guide-16
+    test('client-guide-06', () => {
+      helpers.cropImage('client-guide-00', 'client-guide-06', 0, 0, 1920, 720);
+    });
+
+    test('client-guide-07', () => {
+      helpers.cropImage('client-guide-00', 'client-guide-07-temp', 0, 0, 805, 449).then(function () {
+        helpers.drawRedNotFilledRectangle('client-guide-07-temp', 'client-guide-07', 7, 47, 157, 94);
+      });
+    });
+
+    test('client-guide-09', () => {
+      helpers.cropImage('client-guide-08', 'client-guide-09-temp', 0, 0, 581, 386).then(function () {
+        helpers.drawRedNotFilledRectangle('client-guide-09-temp', 'client-guide-09', 7, 47, 157, 94);
+      });
+    });
+
+    test('client-guide-10', () => {
+      helpers.cropImage('client-guide-00', 'client-guide-10-temp', 0, 0, 581, 386).then(function () {
+        helpers.drawRedNotFilledRectangle('client-guide-10-temp', 'client-guide-10', 4, 152, 146, 251);
+      });
+    });
+
+    test('client-guide-12', () => {
+      helpers.cropImage('client-guide-00', 'client-guide-12-temp', 998, 156, 1202, 353).then(function () {
+        helpers.drawRedNotFilledRectangle('client-guide-12-temp', 'client-guide-12', 45, 167, 151, 196);
+      });
+    });
+
+    test('client-guide-14', () => {
+      helpers.cropImage('client-guide-13', 'client-guide-14-temp', 755, 136, 1283, 488).then(function () {
+        helpers.drawRedNotFilledRectangle('client-guide-14-temp', 'client-guide-14', 231, 291, 318, 310);
+      });
+    });
+
+    test('client-guide-15', () => {
+      helpers.cropImage('client-guide-08', 'client-guide-15-temp', 184, 341, 407, 532).then(function () {
+        helpers.drawRedNotFilledRectangle('client-guide-15-temp', 'client-guide-15', 102, 144, 148, 184);
+      });
+    });
+
+    test('client-guide-16', () => {
+      helpers.cropImage('client-guide-08', 'client-guide-16-temp', 790, 161, 999, 342).then(function () {
+        helpers.drawRedNotFilledRectangle('client-guide-16-temp', 'client-guide-16', 48, 148, 70, 177);
+      });
+    });
+
+    test('Delete temp files', () => {
+      helpers.deleteFile('./doc/images/client-guide-07-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-09-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-10-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-12-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-14-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-15-temp.jpg');
+      helpers.deleteFile('./doc/images/client-guide-16-temp.jpg');
+    });
+
   });
-
-  test('client-guide-06', async () => {
-    await helpers.cropImage('client-guide-00', 'client-guide-06', 0, 0, 1920, 720);
-  });
-
-  test('client-guide-07', async () => {
-    await helpers.cropImage('client-guide-00', 'client-guide-07-temp', 0, 0, 805, 449);
-    await helpers.drawRedNotFilledRectangle('client-guide-07-temp', 'client-guide-07', 7, 47, 157, 94);
-  });
-});
+}
 
 describe('Selenium error tests', () => {
 
@@ -299,6 +356,110 @@ describe('Selenium error tests', () => {
 
   test('No parameter file', async () => {
     await helpers.assertIsVisibleById("settings-error", driver);
+  });
+
+});
+
+describe('Empty database', () => {
+
+  test("beforeAll", async () => {
+    vcfServer.vcf_keys.youtube.clientApiKey = clientApiKey;
+    vcfServer.vcf_channels.channels.splice(0, 9);
+    jest.clearAllMocks();
+    openEmptyDB();
+    helpers.deleteFile('./doc/images/client-guide-empty-temp.jpg');
+    helpers.deleteFile('./doc/images/client-guide-03-temp.jpg');
+    helpers.deleteFile('./doc/images/client-guide-04-temp.jpg');
+  });
+
+  test("empty homepage", async () => {
+    await driver.get(rootURL);
+
+    if (config.BROWSER_TEST == "chrome") {
+      helpers.takeScreenshotForDocumentation("client-guide-empty-temp", driver);
+
+      await helpers.waitMilli(2000);
+
+      await helpers.cropImage('client-guide-empty-temp', 'client-guide-01', 0, 0, 649, 290).then(function () {
+        helpers.drawRedNotFilledRectangle('client-guide-01', 'client-guide-02', 9, 15, 122, 46);
+      });
+    }
+  });
+
+  test("fetch videos", async () => {
+    await driver.findElements(By.xpath('//*[@id="main"]/div[@class="video"]')).then(function (elements) {
+      expect(elements.length).toBe(0);
+    });
+
+    const linkConnect = await helpers.selectId('button-connection', driver);
+    await linkConnect.click();
+    await helpers.waitMilli(2000);
+
+    await driver.findElements(By.id("identifierId")).then(function (elements) {
+      expect(elements.length).toBe(1);
+      elements[0].sendKeys(passwords.youtube.login);
+    });
+
+    await driver.findElements(By.xpath('//*[@id="identifierNext"]/div/button')).then(function (elements) {
+      expect(elements.length).toBe(1);
+      elements[0].click();
+    });
+
+    await helpers.waitMilli(3000);
+
+    await driver.findElements(By.xpath('//*[@id="password"]/div[1]/div/div[1]/input')).then(function (elements) {
+      expect(elements.length).toBe(1);
+      elements[0].sendKeys(passwords.youtube.password);
+    });
+
+    await driver.findElements(By.xpath('//*[@id="passwordNext"]/div/button')).then(function (elements) {
+      expect(elements.length).toBe(1);
+      elements[0].click();
+    });
+
+    // TODO Conditional wait if double auth
+    await helpers.waitMilli(30000);
+
+    helpers.takeScreenshotForDocumentation("client-guide-03", driver);
+
+    await driver.findElements(By.xpath('//*[@id="view_container"]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div/div/ul/li[1]/div')).then(function (elements) {
+      expect(elements.length).toBe(1);
+      elements[0].click();
+    });
+
+    await helpers.waitMilli(3000);
+
+    await driver.findElements(By.xpath('//*[@id="main"]/div[@class="video"]')).then(function (elements) {
+      expect(elements.length).toBe(0);
+    });
+
+    helpers.takeScreenshotForDocumentation("client-guide-04", driver);
+
+    const linkFetch = await helpers.selectId('button-fetch', driver);
+    await linkFetch.click();
+    await helpers.waitMilli(3000);
+
+    await driver.navigate().refresh();
+
+    await driver.findElements(By.xpath('//*[@id="main"]/div[@class="video"]')).then(function (elements) {
+      expect(elements.length).toBe(39);
+    });
+
+    if (config.BROWSER_TEST == "chrome") {
+      await helpers.cropImage('client-guide-03', 'client-guide-03-temp', 725, 205, 1205, 755).then(function () {
+        helpers.drawBlackRectangle('client-guide-03-temp', 'client-guide-03', 35, 205, 435, 345);
+      });
+
+      await helpers.cropImage('client-guide-04', 'client-guide-04-temp', 0, 0, 643, 216).then(function () {
+        helpers.drawRedNotFilledRectangle('client-guide-04-temp', 'client-guide-04', 7, 15, 135, 45);
+      });
+    }
+  });
+
+  test("delete temp files", async () => {
+    helpers.deleteFile('./doc/images/client-guide-empty-temp.jpg');
+    helpers.deleteFile('./doc/images/client-guide-03-temp.jpg');
+    helpers.deleteFile('./doc/images/client-guide-04-temp.jpg');
   });
 
 });

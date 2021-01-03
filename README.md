@@ -10,7 +10,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed">
-    <img src="readme-images/logo.png" alt="Logo" width="80" height="80" />
+    <img src="doc/images/logo.png" alt="Logo" width="80" height="80" />
   </a>
 
   <h3 align="center">YouTube Custom Feed</h3>
@@ -18,9 +18,9 @@
   <p align="center">
     <i>YCF</i> : your own video feed
     <br />
-    <img src="readme-images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
+    <img src="doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
     <br />
-    <img src="readme-images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
+    <img src="doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/doc/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Report Bug</a>
@@ -54,9 +54,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](readme-images/client-guide-00.jpg)
+![Product screenshot](doc/images/client-guide-00.jpg)
 
-YouTube Custom Feed (*YCF*) is a project I wanted to create after subing to channels which have different shows, and some don't interessed me.
+YouTube Custom Feed (*YCF*) is a project I wanted to create after subbing to channels which have different shows, and some don't interested me.
 
 With *YCF* you list your favorite channels and filter video names you don't want to see in your feed.
 
@@ -66,7 +66,7 @@ With *YCF* you list your favorite channels and filter video names you don't want
 
 Application *developed with YouTube* : https://www.youtube.com
 
-![Developed with YouTube](readme-images/developed-with-youtube-sentence-case-dark.png)
+![Developed with YouTube](doc/images/developed-with-youtube-sentence-case-dark.png)
 
 
 
@@ -86,7 +86,7 @@ You must download a YCF version to use it.
 
 Google console screen where to get keys:
 
-![Guide 17](readme-images/client-guide-17.jpg)
+![Guide 17](doc/images/client-guide-17.jpg)
 
 4. If you want to run tests, install:
    1. GraphicsMagick: http://www.graphicsmagick.org
@@ -129,7 +129,7 @@ Settings are in "*/public/youtube-custom-feed/parameters.json*". It's a JSON fil
 
 Get the channel ID you wish to add in your custom feed. Go to YouTube and search the wanted channel. ID is in the URL:
 
-![YouTube channel](readme-images/youtube-channel.jpg)
+![YouTube channel](doc/images/youtube-channel.jpg)
 
 In the JSON file, into *channels* node, add a new object with an attribute *id*:
 
@@ -165,7 +165,7 @@ To add a whitelist for a specific channel, modify your JSON file:
 
 #### Blacklist
 
-Blacklist allows you to filter videos from a channel. Videos which matches blackists will not be displayed. Whitelist filters videos before blacklists (see below for blacklist).
+Blacklist allows you to filter videos from a channel. Videos which matches blacklists will not be displayed. Whitelist filters videos before blacklists (see below for blacklist).
 
 Filters syntaxes will be explained below.
 
@@ -204,7 +204,7 @@ You may add both whitelist and blacklist.
 
 #### Filters syntaxes
 
-Filters for whitelist and blacklist are identicals. For now only two filters are available:
+Filters for whitelist and blacklist are identical. For now only two filters are available:
 * Video name filter;
 * Video duration filter.
 
@@ -244,27 +244,27 @@ Use attribute "*videoDuration*", operator "*>*" and a specific YouTube expressio
 
 User interface will be empty.
 
-![Guide 01](readme-images/client-guide-01.jpg)
+![Guide 01](doc/images/client-guide-01.jpg)
 
 This application uses YouTub API to fetch data about videos with your settings in the JSON file.
 
 Sign-up to your YouTube/Google account which allowed you to get API Keys (the ones you put in the JSON file).
 
-![Guide 02](readme-images/client-guide-02.jpg)
+![Guide 02](doc/images/client-guide-02.jpg)
 
-![Guide 03](readme-images/client-guide-03.jpg)
+![Guide 03](doc/images/client-guide-03.jpg)
 
 One you're logged, you can fetch data which will be saved in a local database (a huge JSON file).
 
-![Guide 04](readme-images/client-guide-04.jpg)
+![Guide 04](doc/images/client-guide-04.jpg)
 
 There is no way to know if fetching works well. So open developer console (via F12 shortcut) to check if everything is OK.
 
-![Guide 05](readme-images/client-guide-05.jpg)
+![Guide 05](doc/images/client-guide-05.jpg)
 
 Refresh webpage to see your videos.
 
-![Guide 06](readme-images/client-guide-06.jpg)
+![Guide 06](doc/images/client-guide-06.jpg)
 
 #### Display hidden videos
 
@@ -272,68 +272,68 @@ Filters hide videos you don't want to see in your feed. You can check and see vi
 
 Change display with the link.
 
-![Guide 07](readme-images/client-guide-07.jpg)
+![Guide 07](doc/images/client-guide-07.jpg)
 
 Filtered videos appear like a grey videos.
 
-![Guide 08](readme-images/client-guide-08.jpg)
+![Guide 08](doc/images/client-guide-08.jpg)
 
 Upper left link allows to hide filtered videos.
 
-![Guide 09](readme-images/client-guide-09.jpg)
+![Guide 09](doc/images/client-guide-09.jpg)
 
 #### Display videos from one channel
 
 You can display videos from one and only one channel.
 
-![Guide 10](readme-images/client-guide-10.jpg)
+![Guide 10](doc/images/client-guide-10.jpg)
 
 Left menu allows you to switch between channels.
 
 Selected channel name is displayed in upper webpage label.
 
-![Guide 11](readme-images/client-guide-11.jpg)
+![Guide 11](doc/images/client-guide-11.jpg)
 
 #### Video menu
 
-Each video has a specific menu to watch it or change some caracteristics.
+Each video has a specific menu to watch it or change some characteristics.
 
-![Guide 12](readme-images/client-guide-12.jpg)
+![Guide 12](doc/images/client-guide-12.jpg)
 
 Icons meaning from left to right:
 <ul>
-<li><img src="youtube-custom-feed/public/images/play.png" alt="Play" width="12" /> Watch video. Video will be displayed on the top of the webpage;</li>
-<li><img src="youtube-custom-feed/public/images/play-hide.png" alt="Play then hide" width="12" /> Watch video (like above) then hide it from your feed;</li>
-<li><img src="youtube-custom-feed/public/images/hide.png" alt="Hide" width="12" /> Hide this video from your feed;</li>
-<li><img src="youtube-custom-feed/public/images/open-youtube.png" alt="YouTube" width="12" /> Open this video on YouTube.</li>
+<li><img src="youtube-custom-feed/bin/client/images/play.png" alt="Play" width="12" /> Watch video. Video will be displayed on the top of the webpage;</li>
+<li><img src="youtube-custom-feed/bin/client/images/play-hide.png" alt="Play then hide" width="12" /> Watch video (like above) then hide it from your feed;</li>
+<li><img src="youtube-custom-feed/bin/client/images/hide.png" alt="Hide" width="12" /> Hide this video from your feed;</li>
+<li><img src="youtube-custom-feed/bin/client/images/open-youtube.png" alt="YouTube" width="12" /> Open this video on YouTube.</li>
 </ul>
 
 Opened video: 
 
-![Guide 13](readme-images/client-guide-13.jpg)
+![Guide 13](doc/images/client-guide-13.jpg)
 
 Vous can close the video:
 
-![Guide 14](readme-images/client-guide-14.jpg)
+![Guide 14](doc/images/client-guide-14.jpg)
 
 You can *unhide* a hidden video with icon <img src="youtube-custom-feed/public/images/visible.png" alt="Visible" width="12" />.
 
-This feature is avaible when you display hidden videos.
+This feature is available when you display hidden videos.
 
-![Guide 15](readme-images/client-guide-15.jpg)
+![Guide 15](doc/images/client-guide-15.jpg)
 
 #### Whitelist and blacklist icons
 
 When you display hidden videos, an icon is visible when it is filtered with a whitelist or blacklist filter. No further detail is provided.
 
 <ul>
-<li><img src="youtube-custom-feed/public/images/blacklist.png" alt="Blacklist" /> This video is filtered thanks to a blacklist;</li>
-<li><img src="youtube-custom-feed/public/images/whitelist.png" alt="Whitelist" /> This video is filtered thanks to a whitelist.</li>
+<li><img src="youtube-custom-feed/bin/client/images/blacklist.png" alt="Blacklist" /> This video is filtered thanks to a blacklist;</li>
+<li><img src="youtube-custom-feed/bin/client/images/whitelist.png" alt="Whitelist" /> This video is filtered thanks to a whitelist.</li>
 </ul>
 
 Blacklist filter example:
 
-![Guide 16](readme-images/client-guide-16.jpg)
+![Guide 16](doc/images/client-guide-16.jpg)
 
 #### JSON parameter file used to illustrate this example
 
@@ -431,4 +431,3 @@ Open file "/youtube-custom-feed/bin/www" then modify variable `var port = 3000;`
 [issues-url]: https://github.com/Zhykos/repo/issues
 [license-shield]: https://img.shields.io/github/license/Zhykos/repo.svg?style=flat-square
 [license-url]: https://github.com/Zhykos/repo/blob/master/LICENSE.txt
-[product-screenshot]: readme-images/client-guide-00.jpg

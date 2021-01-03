@@ -50,9 +50,9 @@ html
     div#contents
       div#sidebar
         div.menu(id="connection")
-          a(href="javascript:;" onclick='authenticate().then(loadClient)') Connection
+          a(href="javascript:;" onclick='authenticate().then(loadClient)' id="button-connection") Connection
         div.menu(id="fetch")
-          a(href="javascript:;" onclick='execute()') Fetch videos
+          a(href="javascript:;" onclick='execute()' id="button-fetch") Fetch videos
         div.menu
           if displayHiddenVideos == "true"
             a(href="javascript:;" onclick='hideMaskedVideos()' id="button-hide-hidden") Hide masked videos

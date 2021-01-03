@@ -1,9 +1,9 @@
 const { By, until } = require('selenium-webdriver');
 const fs = require('fs');
 const pngToJpeg = require('png-to-jpeg');
-const config = require('../youtube-custom-feed/bin/config.js');
 const Jimp = require('jimp');
 const gm = require('gm');
+const config = require('../youtube-custom-feed/bin/config.js');
 
 const waitUntilTime = 20000;
 
@@ -83,34 +83,47 @@ async function assertCountElementsByClass(classSelector, expectedValue, driver) 
 }
 exports.assertCountElementsByClass = assertCountElementsByClass;
 
-async function takeScreenshotForDocumentation(filename, driver) {
-  if (config.BROWSER_TEST == "chrome") {
-    await driver.takeScreenshot().then(function (png64) {
+function takeScreenshotForDocumentation(filename, driver) {
+  driver.takeScreenshot().then(function (png64) {
+    if (config.BROWSER_TEST == "chrome") {
       const buffer = Buffer.from(png64, 'base64');
-      pngToJpeg({ quality: 90 })(buffer).then(output => fs.writeFileSync("./doc/images/" + filename + ".jpg", output));
-    });
-  }
+      pngToJpeg({ quality: 90 })(buffer).then(function (output) {
+        fs.writeFileSync("./doc/images/" + filename + ".jpg", output);
+      });
+    }
+  });
 }
 exports.takeScreenshotForDocumentation = takeScreenshotForDocumentation;
 
-async function cropImage(inFilename, outFilename, x, y, w, h) {
-  if (config.BROWSER_TEST == "chrome") {
-    await Jimp.read("./doc/images/" + inFilename + ".jpg")
+function cropImage(inFilename, outFilename, x1, y1, x2, y2) {
+  return new Promise((resolve, reject) => {
+    Jimp.read("./doc/images/" + inFilename + ".jpg")
       .then(image => {
-        return image.crop(x, y, w, h).write("./doc/images/" + outFilename + ".jpg");
+        image.crop(x1, y1, x2 - x1, y2 - y1).writeAsync("./doc/images/" + outFilename + ".jpg").then(function (res) {
+          resolve(res);
+        });
       })
       .catch(err => {
-        console.error(err); // XXX
+        reject("cropImage: " + err);
       });
-  }
+  });
 }
 exports.cropImage = cropImage;
 
-async function drawRedNotFilledRectangle(inFilename, outFilename, x1, y1, x2, y2) {
-  await gm("./doc/images/" + inFilename + ".jpg").stroke("#FF0000", 0).strokeWidth(5).drawLine(x1, y1, x2, y1).drawLine(x2, y1, x2, y2).drawLine(x2, y2, x1, y2).drawLine(x1, y2, x1, y1).write("./doc/images/" + outFilename + ".jpg", function (err) {
+function drawRedNotFilledRectangle(inFilename, outFilename, x1, y1, x2, y2) {
+  gm("./doc/images/" + inFilename + ".jpg").stroke("#FF0000", 0).strokeWidth(5).drawLine(x1, y1, x2, y1).drawLine(x2, y1, x2, y2).drawLine(x2, y2, x1, y2).drawLine(x1, y2, x1, y1).write("./doc/images/" + outFilename + ".jpg", function (err) {
     if (err) {
-      console.log(err); // XXX
+      console.log("drawRedNotFilledRectangle: " + err); // XXX
     }
   });
 }
 exports.drawRedNotFilledRectangle = drawRedNotFilledRectangle;
+
+function drawBlackRectangle(inFilename, outFilename, x1, y1, x2, y2) {
+  gm("./doc/images/" + inFilename + ".jpg").stroke("#000000", 0).drawRectangle(x1, y1, x2, y2).write("./doc/images/" + outFilename + ".jpg", function (err) {
+    if (err) {
+      console.log("drawBlackRectangle: " + err); // XXX
+    }
+  });
+}
+exports.drawBlackRectangle = drawBlackRectangle;

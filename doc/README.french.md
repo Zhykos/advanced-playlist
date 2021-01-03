@@ -10,7 +10,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed">
-    <img src="readme-images/logo.png" alt="Logo" width="80" height="80" />
+    <img src="../doc/images/logo.png" alt="Logo" width="80" height="80" />
   </a>
 
   <h3 align="center">YouTube Custom Feed</h3>
@@ -18,9 +18,9 @@
   <p align="center">
     <i>YCF</i> : votre flux vidéo personnalisé
     <br />
-    <img src="readme-images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
+    <img src="../doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
-    <img src="readme-images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
+    <img src="../doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
     <br />
     <br />
     <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Reporter un bug</a>
@@ -51,7 +51,7 @@
 <!-- ABOUT THE PROJECT -->
 ## À propos du projet
 
-[![Product Name Screen Shot][product-screenshot]](readme-images/client-guide-00.jpg)
+![Product screenshot](../doc/images/client-guide-00.jpg)
 
 YouTube Custom Feed (*YCF*) est un projet que j'ai imaginé après m'être abonné à des chaines YouTube ayant plusieurs émissions, mais dont certaines qui ne m'intéressaient pas.
 
@@ -63,7 +63,7 @@ YouTube Custom Feed (*YCF*) est un projet que j'ai imaginé après m'être abonn
 
 Application *developed with YouTube* : https://www.youtube.com
 
-![Developed with YouTube](readme-images/developed-with-youtube-sentence-case-dark.png)
+![Developed with YouTube](../doc/images/developed-with-youtube-sentence-case-dark.png)
 
 
 
@@ -83,7 +83,7 @@ Vous devez récupérer une version de *YCF* sur votre machine pour l'utiliser.
 
 Écran de la console Google où on récupère ces clés :
 
-![Guide 17](readme-images/client-guide-17.jpg)
+![Guide 17](../doc/images/client-guide-17.jpg)
 
 4. Si vous souhaitez lancer les tests, installez :
    1. GraphicsMagick : http://www.graphicsmagick.org
@@ -126,7 +126,7 @@ Comme expliqué auparavant, la configuration se fait dans le fichier "*/public/y
 
 Tout d'abord, récupérez l'identifiant de la chaîne que vous souhaitez ajouter. Rendez-vous sur YouTube, sur la page de la chaîne. L'identifiant se trouve dans l'URL :
 
-![YouTube channel](readme-images/youtube-channel.jpg)
+![YouTube channel](../doc/images/youtube-channel.jpg)
 
 Dans le fichier JSON, dans le noeud *channels*, ajoutez un nouvel objet avec un attribut *id* :
 
@@ -243,27 +243,27 @@ Utilisez l'attribut "*videoDuration*", l'opérateur "*>*" et une expression spé
 
 Lors de votre première utilisation, l'interface sera vide.
 
-![Guide 01](readme-images/client-guide-01.jpg)
+![Guide 01](../doc/images/client-guide-01.jpg)
 
 L'application utilise l'API de YouTube pour récupérer des informations sur la plateforme de vidéos, d'après votre configuration précisée dans le fichier JSON.
 
 Connectez-vous à votre compte YouTube/Google avec lequel vous avez généré vos identifiants ajoutés dans le fichier JSON.
 
-![Guide 02](readme-images/client-guide-02.jpg)
+![Guide 02](../doc/images/client-guide-02.jpg)
 
-![Guide 03](readme-images/client-guide-03.jpg)
+![Guide 03](../doc/images/client-guide-03.jpg)
 
 Une fois la connexion réussie, vous pouvez récupérer les informations depuis YouTube. Celles-ci seront enregistrées dans une base de données interne à l'application (un gros fichier JSON).
 
-![Guide 04](readme-images/client-guide-04.jpg)
+![Guide 04](../doc/images/client-guide-04.jpg)
 
 Il n'y a actuellement aucun moyen de savoir si la récupération a fonctionné. Ouvrez la console développeur (généralement avec le raccourci F12) pour vérifier si cela a fonctionné.
 
-![Guide 05](readme-images/client-guide-05.jpg)
+![Guide 05](../doc/images/client-guide-05.jpg)
 
 Rafraichissez la page pour voir apparaître vos vidéos.
 
-![Guide 06](readme-images/client-guide-06.jpg)
+![Guide 06](../doc/images/client-guide-06.jpg)
 
 #### Afficher les vidéos cachées
 
@@ -271,68 +271,68 @@ Les filtres permettent de cacher les vidéos que l'on souhaite ne pas voir dans 
 
 On peut passer à l'affichage complet via le lien dédié.
 
-![Guide 07](readme-images/client-guide-07.jpg)
+![Guide 07](../doc/images/client-guide-07.jpg)
 
 Les vidéos filtrées apparaissent en gris.
 
-![Guide 08](readme-images/client-guide-08.jpg)
+![Guide 08](../doc/images/client-guide-08.jpg)
 
 Le lien en haut à gauche permet de cacher à nouveau les vidéos filtrées.
 
-![Guide 09](readme-images/client-guide-09.jpg)
+![Guide 09](../doc/images/client-guide-09.jpg)
 
 #### Afficher les vidéos d'une chaîne spécifique
 
 Il est possible de n'afficher les vidéos que d'une seule chaîne, avec les filtres associés.
 
-![Guide 10](readme-images/client-guide-10.jpg)
+![Guide 10](../doc/images/client-guide-10.jpg)
 
 Le menu à gauche permet de passer d'une chaîne à l'autre ou d'afficher toutes les chaînes.
 
 La chaîne sélectionnée est spécifiée dans le libellé en haut de la page.
 
-![Guide 11](readme-images/client-guide-11.jpg)
+![Guide 11](../doc/images/client-guide-11.jpg)
 
 #### Menu vidéo
 
 Chaque vidéo a un menu spécifique pour la regarder ou changer ses attributs.
 
-![Guide 12](readme-images/client-guide-12.jpg)
+![Guide 12](../doc/images/client-guide-12.jpg)
 
 Explication des icônes, de gauche à droite :
 <ul>
-<li><img src="youtube-custom-feed/public/images/play.png" alt="Play" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page ;</li>
-<li><img src="youtube-custom-feed/public/images/play-hide.png" alt="Play then hide" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page. La vidéo sera également modifiée pour ne plus apparaître dans votre flux ;</li>
-<li><img src="youtube-custom-feed/public/images/hide.png" alt="Hide" width="12" /> La vidéo est modifiée pour ne plus apparaître dans votre flux ;</li>
-<li><img src="youtube-custom-feed/public/images/open-youtube.png" alt="YouTube" width="12" /> Lecture de la vidéo dans YouTube.</li>
+<li><img src="../youtube-custom-feed/bin/client/images/play.png" alt="Play" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page ;</li>
+<li><img src="../youtube-custom-feed/bin/client/images/play-hide.png" alt="Play then hide" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page. La vidéo sera également modifiée pour ne plus apparaître dans votre flux ;</li>
+<li><img src="../youtube-custom-feed/bin/client/images/hide.png" alt="Hide" width="12" /> La vidéo est modifiée pour ne plus apparaître dans votre flux ;</li>
+<li><img src="../youtube-custom-feed/bin/client/images/open-youtube.png" alt="YouTube" width="12" /> Lecture de la vidéo dans YouTube.</li>
 </ul>
 
 Vidéo ouverte dans le navigateur : 
 
-![Guide 13](readme-images/client-guide-13.jpg)
+![Guide 13](../doc/images/client-guide-13.jpg)
 
 Vous pouvez fermer la vidéo via le lien en dessous :
 
-![Guide 14](readme-images/client-guide-14.jpg)
+![Guide 14](../doc/images/client-guide-14.jpg)
 
 Dans le cas où vous avez vous-même caché une vidéo, il est possible de la rendre à nouveau visible à l'aide de l'icône <img src="youtube-custom-feed/public/images/visible.png" alt="Visible" width="12" />.
 
 Attention, cette fonctionnalité n'est disponible que si vous affichez les vidéos cachées.
 
-![Guide 15](readme-images/client-guide-15.jpg)
+![Guide 15](../doc/images/client-guide-15.jpg)
 
 #### Icônes des filtres pour la liste blanche ou noire
 
 Dans le cas où vous affichez toutes les vidéos, une icône peut être visible pour comprendre si la vidéo correspond à un filtre de liste blanche ou de liste noire. Actuellement aucun détail précis n'est disponible.
 
 <ul>
-<li><img src="youtube-custom-feed/public/images/blacklist.png" alt="Blacklist" /> Cette vidéo a été filtrée par une liste noire ;</li>
-<li><img src="youtube-custom-feed/public/images/whitelist.png" alt="Whitelist" /> Cette vidéo a été filtrée par une liste blanche.</li>
+<li><img src="../youtube-custom-feed/bin/client/images/blacklist.png" alt="Blacklist" /> Cette vidéo a été filtrée par une liste noire ;</li>
+<li><img src="../youtube-custom-feed/bin/client/images/whitelist.png" alt="Whitelist" /> Cette vidéo a été filtrée par une liste blanche.</li>
 </ul>
 
 Exemple de filtrage par liste noire :
 
-![Guide 16](readme-images/client-guide-16.jpg)
+![Guide 16](../doc/images/client-guide-16.jpg)
 
 #### Fichier de configuration utilisé pour cet exemple
 
@@ -430,4 +430,3 @@ Ouvrez le fichier "/youtube-custom-feed/bin/www" et modifiez la variable `var po
 [issues-url]: https://github.com/Zhykos/repo/issues
 [license-shield]: https://img.shields.io/github/license/Zhykos/repo.svg?style=flat-square
 [license-url]: https://github.com/Zhykos/repo/blob/master/LICENSE.txt
-[product-screenshot]: readme-images/client-guide-00.jpg
