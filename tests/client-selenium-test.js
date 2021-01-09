@@ -17,7 +17,8 @@ let driver;
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
 const clientApiKey = vcfServer.vcf_keys.youtube.clientApiKey;
 
-function openDB() {
+async function openDB() {
+  await helpers.deleteFile('./tests/resources/db-zhykos.temp');
   fs.copyFileSync('./tests/resources/db-zhykos.json', './tests/resources/db-zhykos.temp');
   const adapter = new FileSync('./tests/resources/db-zhykos.temp');
   const dbTests = lowdb(adapter);
@@ -27,7 +28,8 @@ function openDB() {
   jest.spyOn(vcfServer.db, "has").mockImplementation(getWhat => dbTests.has(getWhat));
 }
 
-function openEmptyDB() {
+async function openEmptyDB() {
+  helpers.deleteFile('./tests/resources/db-empty.temp');
   const adapter = new FileSync('./tests/resources/db-empty.temp');
   const dbTests = lowdb(adapter);
   dbTests.defaults({ videos: [] }).write();
@@ -36,26 +38,20 @@ function openEmptyDB() {
   jest.spyOn(vcfServer.db, "has").mockImplementation(getWhat => dbTests.has(getWhat));
 }
 
-function deleteDatabaseTempFile() {
-  helpers.deleteFile('./tests/resources/db-zhykos.temp');
-  helpers.deleteFile('./tests/resources/db-empty.temp');
-}
-
 describe('beforeAll', () => {
 
   test("beforeAll", async () => {
     jest.clearAllMocks();
     driver = await new Builder().forBrowser(config.BROWSER_TEST).build();
     await driver.manage().window().maximize();
-    deleteDatabaseTempFile();
-    openDB();
+    await openDB();
   });
 
 });
 
 describe('Selenium tests', () => {
 
-  test("beforeAll", async () => {
+  test("Init tests", async () => {
     await driver.get(rootURL);
     helpers.takeScreenshotForDocumentation("client-guide-00", driver);
   });
@@ -278,7 +274,7 @@ describe('Selenium tests', () => {
 if (config.BROWSER_TEST == "chrome") {
   describe('Other screenshots', () => {
 
-    test('Delete temp files', () => {
+    test('Delete temp files', async () => {
       helpers.deleteFile('./doc/images/client-guide-07-temp.jpg');
       helpers.deleteFile('./doc/images/client-guide-09-temp.jpg');
       helpers.deleteFile('./doc/images/client-guide-10-temp.jpg');
@@ -334,7 +330,7 @@ if (config.BROWSER_TEST == "chrome") {
       });
     });
 
-    test('Delete temp files', () => {
+    test('Delete temp files', async () => {
       helpers.deleteFile('./doc/images/client-guide-07-temp.jpg');
       helpers.deleteFile('./doc/images/client-guide-09-temp.jpg');
       helpers.deleteFile('./doc/images/client-guide-10-temp.jpg');
@@ -349,7 +345,7 @@ if (config.BROWSER_TEST == "chrome") {
 
 describe('Selenium error tests', () => {
 
-  test("beforeAll", async () => {
+  test("Init error tests", async () => {
     vcfServer.vcf_keys.youtube.clientApiKey = "<XXX>";
     await driver.get(rootURL);
   });
@@ -362,14 +358,15 @@ describe('Selenium error tests', () => {
 
 describe('Empty database', () => {
 
-  test("beforeAll", async () => {
+  test("Init empty database", async () => {
     vcfServer.vcf_keys.youtube.clientApiKey = clientApiKey;
     vcfServer.vcf_channels.channels.splice(0, 9);
     jest.clearAllMocks();
-    openEmptyDB();
+    await openEmptyDB();
     helpers.deleteFile('./doc/images/client-guide-empty-temp.jpg');
     helpers.deleteFile('./doc/images/client-guide-03-temp.jpg');
-    helpers.deleteFile('./doc/images/client-guide-04-temp.jpg');
+    helpers.deleteFile('./doc/images/client-guide-04-temp1.jpg');
+    helpers.deleteFile('./doc/images/client-guide-04-temp2.jpg');
   });
 
   test("empty homepage", async () => {
@@ -433,7 +430,7 @@ describe('Empty database', () => {
       expect(elements.length).toBe(0);
     });
 
-    helpers.takeScreenshotForDocumentation("client-guide-04", driver);
+    helpers.takeScreenshotForDocumentation("client-guide-04-temp1", driver);
 
     const linkFetch = await helpers.selectId('button-fetch', driver);
     await linkFetch.click();
@@ -450,16 +447,21 @@ describe('Empty database', () => {
         helpers.drawBlackRectangle('client-guide-03-temp', 'client-guide-03', 35, 205, 435, 345);
       });
 
-      await helpers.cropImage('client-guide-04', 'client-guide-04-temp', 0, 0, 643, 216).then(function () {
-        helpers.drawRedNotFilledRectangle('client-guide-04-temp', 'client-guide-04', 7, 15, 135, 45);
-      });
+      await helpers.cropImage('client-guide-04-temp1', 'client-guide-04-temp2', 0, 0, 643, 216).then(croppedImage => {
+        helpers.drawRedNotFilledRectangle('client-guide-04-temp2', 'client-guide-04', 7, 15, 135, 45);
+      },
+        errMessage => { console.log(errMessage); }
+      );
+
+      await helpers.waitMilli(3000);
     }
   });
 
   test("delete temp files", async () => {
     helpers.deleteFile('./doc/images/client-guide-empty-temp.jpg');
     helpers.deleteFile('./doc/images/client-guide-03-temp.jpg');
-    helpers.deleteFile('./doc/images/client-guide-04-temp.jpg');
+    helpers.deleteFile('./doc/images/client-guide-04-temp1.jpg');
+    helpers.deleteFile('./doc/images/client-guide-04-temp2.jpg');
   });
 
 });
@@ -468,7 +470,8 @@ describe('afterAll', () => {
 
   test("afterAll", async () => {
     jest.clearAllMocks();
-    deleteDatabaseTempFile();
+    helpers.deleteFile('./tests/resources/db-zhykos.temp');
+    helpers.deleteFile('./tests/resources/db-empty.temp');
     www.expressServer.close();
     driver.quit();
   });

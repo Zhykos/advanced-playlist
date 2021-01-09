@@ -50,9 +50,10 @@ function waitMilli(milliseconds) {
 exports.waitMilli = waitMilli;
 
 function deleteFile(file) {
-  fs.unlink(file, function (err) {
-    // XXX
-  });
+  if (fs.existsSync(file)) {
+    fs.unlinkSync(file);
+  }
+  expect(fs.existsSync(file)).toBeFalsy();
 }
 exports.deleteFile = deleteFile;
 
@@ -112,18 +113,14 @@ exports.cropImage = cropImage;
 
 function drawRedNotFilledRectangle(inFilename, outFilename, x1, y1, x2, y2) {
   gm("./doc/images/" + inFilename + ".jpg").stroke("#FF0000", 0).strokeWidth(5).drawLine(x1, y1, x2, y1).drawLine(x2, y1, x2, y2).drawLine(x2, y2, x1, y2).drawLine(x1, y2, x1, y1).write("./doc/images/" + outFilename + ".jpg", function (err) {
-    if (err) {
-      console.log("drawRedNotFilledRectangle: " + err); // XXX
-    }
+    expect(err).toBeUndefined();
   });
 }
 exports.drawRedNotFilledRectangle = drawRedNotFilledRectangle;
 
 function drawBlackRectangle(inFilename, outFilename, x1, y1, x2, y2) {
   gm("./doc/images/" + inFilename + ".jpg").stroke("#000000", 0).drawRectangle(x1, y1, x2, y2).write("./doc/images/" + outFilename + ".jpg", function (err) {
-    if (err) {
-      console.log("drawBlackRectangle: " + err); // XXX
-    }
+    expect(err).toBeUndefined();
   });
 }
 exports.drawBlackRectangle = drawBlackRectangle;
