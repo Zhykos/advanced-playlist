@@ -45,7 +45,6 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "<rootDir>/youtube-custom-feed/bin/server/javascripts/vcf*.js",
-      "<rootDir>/youtube-custom-feed/bin/client/javascripts/vcf*.js",
       "!<rootDir>/node_modules/"
     ],
     "moduleNameMapper": {
