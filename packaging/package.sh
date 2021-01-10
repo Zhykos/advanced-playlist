@@ -1,6 +1,6 @@
 #!/bin/bash
 
-### eg. ./package.sh 1.0.0
+### Command line example: ./package.sh 1.0.0
 
 if [[ $# -eq 0 ]] ; then
     echo Missing one argument with package version!
@@ -20,20 +20,23 @@ rm -f "temp-ls-ref.txt"
 
 mkdir "cvf-v$1"
 
-git checkout HEAD -- ../youtube-custom-feed/public/youtube-custom-feed/parameters.json
+git checkout HEAD -- ../youtube-custom-feed/etc/apikeys.json
+git checkout HEAD -- ../youtube-custom-feed/etc/channels.json
 
 cp readme.txt "cvf-v$1/readme.txt"
 cp ../LICENSE.txt "cvf-v$1/LICENSE.txt"
-cp ../release-note.md "cvf-v$1/release-note.md"
-cp -r ../youtube-custom-feed "cvf-v$1/youtube-custom-feed"
+cp ../doc/release-note.md "cvf-v$1/release-note.md"
+cp -r ../youtube-custom-feed "cvf-v$1/custom-video-feed"
 
-rm -f "cvf-v$1/youtube-custom-feed/db.json"
-rm -fr "cvf-v$1/youtube-custom-feed/node_modules"
-rm -fr "cvf-v$1/youtube-custom-feed/public/youtube-custom-feed"
+rm -fr "cvf-v$1/custom-video-feed/var"
+rm -fr "cvf-v$1/custom-video-feed/node_modules"
+rm -fr "cvf-v$1/custom-video-feed/etc"
 
-mkdir "cvf-v$1/youtube-custom-feed/public/youtube-custom-feed"
+mkdir "cvf-v$1/custom-video-feed/etc"
+mkdir "cvf-v$1/custom-video-feed/var"
 
-cp "../youtube-custom-feed/public/youtube-custom-feed/parameters.json" "cvf-v$1/youtube-custom-feed/public/youtube-custom-feed/parameters.json"
+cp "../youtube-custom-feed/etc/apikeys.json" "cvf-v$1/custom-video-feed/etc/apikeys.json"
+cp "../youtube-custom-feed/etc/channels.json" "cvf-v$1/custom-video-feed/etc/channels.json"
 
 echo Done!
 echo
@@ -43,14 +46,33 @@ echo
 echo Checking files...
 echo
 
-if cmp -s "ref-parameters.json" "cvf-v$1/youtube-custom-feed/public/youtube-custom-feed/parameters.json"; then
-    echo JSON parameters file is OK!
+if cmp -s "ref-apikeys.json" "cvf-v$1/custom-video-feed/etc/apikeys.json"; then
+    echo JSON API keys parameters file is OK!
     echo
 else
-    echo Wrong JSON parameters file!
+    echo Wrong JSON API keys parameters file!
     echo Check following contents with reference file:
     echo
-    cat "cvf-v$1/youtube-custom-feed/public/youtube-custom-feed/parameters.json"
+    echo "Packaged file:"
+    cat "../youtube-custom-feed/etc/apikeys.json"
+    echo
+    echo "Reference file:"
+    cat "ref-apikeys.json"
+    exit 1
+fi
+
+if cmp -s "ref-channels.json" "cvf-v$1/custom-video-feed/etc/channels.json"; then
+    echo JSON channels parameters file is OK!
+    echo
+else
+    echo Wrong channels keys parameters file!
+    echo Check following contents with reference file:
+    echo
+    echo "Packaged file:"
+    cat "../youtube-custom-feed/etc/channels.json"
+    echo
+    echo "Reference file:"
+    cat "ref-channels.json"
     exit 1
 fi
 
