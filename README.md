@@ -48,6 +48,7 @@
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 * [FAQ](#faq)
+* [Launch tests](#launch-tests)
 
 
 
@@ -88,11 +89,6 @@ Google console screen where to get keys:
 
 ![Guide 17](doc/images/client-guide-17.jpg)
 
-4. If you want to run tests, install:
-   1. GraphicsMagick: http://www.graphicsmagick.org
-   2. Chrome: https://www.google.com/intl/fr_fr/chrome/
-   3. Firefox: https://www.mozilla.org/fr/firefox/new/
-
 ### Installation
 
 1. Download latest version of YCF: https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/releases
@@ -103,7 +99,8 @@ Google console screen where to get keys:
 ```sh
 npm install
 ```
-4. Configure application by modifying file "*/public/youtube-custom-feed/parameters.json*". Set "*clientApiKey*" with YouTube API Key. Set "*clientId*" with ID client OAuth 2.0.
+
+4. Configure application by modifying the file "*src/etc/apikeys.json*" : "*clientApiKey*". Set "*clientApiKey*" with YouTube API Key. Set "*clientId*" with ID client OAuth 2.0.
 
 5. Add your favorite channels (see below).
 
@@ -123,7 +120,7 @@ nmp start
 
 ### Settings
 
-Settings are in "*/public/youtube-custom-feed/parameters.json*". It's a JSON file. Be sure syntax is correct!
+Settings are in "*src/etc/channels.json*". It's a JSON file. Be sure syntax is correct!
 
 #### Add a channel
 
@@ -316,7 +313,7 @@ Vous can close the video:
 
 ![Guide 14](doc/images/client-guide-14.jpg)
 
-You can *unhide* a hidden video with icon <img src="youtube-custom-feed/public/images/visible.png" alt="Visible" width="12" />.
+You can *unhide* a hidden video with icon <img src="youtube-custom-feed/bin/client/images/visible.png" alt="Visible" width="12" />.
 
 This feature is available when you display hidden videos.
 
@@ -337,21 +334,7 @@ Blacklist filter example:
 
 #### JSON parameter file used to illustrate this example
 
-```json
-{
-    "clientApiKey" : "<secret1>",
-    "clientId" : "<secret2>.apps.googleusercontent.com",
-    "channels" : [
-        {
-            "id": "UCWJHqzXc7rKO7h5TzYYBNFw",
-            "blacklist": [
-                "videoTitle=~.+Sentinels.+",
-                "videoDuration>8H22M"
-            ]
-        }
-    ]
-}
-```
+This file is there: "*tests/resources/tests-parameters.json*".
 
 ### Update data
 
@@ -415,7 +398,19 @@ Project link: [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https://gi
 
 ### Port 3000 is already used by another application, how to change it?
 
-Open file "/youtube-custom-feed/bin/www" then modify variable `var port = 3000;` with port number you want to use.
+Open file "*src/bin/server/javascripts/main-express.js*" then modify variable `var port = 3000;` with port number you want to use.
+
+
+## Launch tests
+
+This tests documentation is not complete! A complete doc will be written some day...
+
+If you want to run tests, install:
+  1. GraphicsMagick: http://www.graphicsmagick.org
+  2. Chrome: https://www.google.com/intl/fr_fr/chrome/
+  3. Firefox: https://www.mozilla.org/fr/firefox/new/
+
+Then fill in your Google IDs with login and password in file: "*tests/etc/passwords.json*". These IDs are the ones you used to get your API keys.
 
 
 

@@ -45,6 +45,7 @@
 * [Contact](#contact)
 * [Remerciements](#remerciements)
 * [F.A.Q.](#faq)
+* [Lancer les tests](#lancer-les-tests)
 
 
 
@@ -85,10 +86,6 @@ Vous devez récupérer une version de *YCF* sur votre machine pour l'utiliser.
 
 ![Guide 17](../doc/images/client-guide-17.jpg)
 
-4. Si vous souhaitez lancer les tests, installez :
-   1. GraphicsMagick : http://www.graphicsmagick.org
-   2. Chrome : https://www.google.com/intl/fr_fr/chrome/
-   3. Firefox : https://www.mozilla.org/fr/firefox/new/
 
 ### Installation
 
@@ -100,7 +97,7 @@ Vous devez récupérer une version de *YCF* sur votre machine pour l'utiliser.
 ```sh
 npm install
 ```
-4. Configurez l'application en modifiant le fichier "*/public/youtube-custom-feed/parameters.json*". "*clientApiKey*" aura la valeur de votre Clé API. "*clientId*" aura la valeur de votre ID client OAuth 2.0.
+4. Configurez l'application en modifiant le fichier "*src/etc/apikeys.json*" : "*clientApiKey*" aura la valeur de votre Clé API ; "*clientId*" aura la valeur de votre ID client OAuth 2.0.
 
 5. Ajoutez vos chaines préférées et les filtres (voir le paragraphe ci-dessous).
 
@@ -120,7 +117,7 @@ nmp start
 
 ### Configuration
 
-Comme expliqué auparavant, la configuration se fait dans le fichier "*/public/youtube-custom-feed/parameters.json*". Il s'agit d'un fichier au format JSON. Soyez sûr que la syntaxe soit correcte pour le bon fonctionnement de l'application.
+La configuration se fait dans le fichier "*src/etc/channels.json*". Il s'agit d'un fichier au format JSON. Soyez sûr que la syntaxe soit correcte pour le bon fonctionnement de l'application.
 
 #### Ajouter une chaîne
 
@@ -128,7 +125,7 @@ Tout d'abord, récupérez l'identifiant de la chaîne que vous souhaitez ajouter
 
 ![YouTube channel](../doc/images/youtube-channel.jpg)
 
-Dans le fichier JSON, dans le noeud *channels*, ajoutez un nouvel objet avec un attribut *id* :
+Dans le fichier JSON, dans le nœud *channels*, ajoutez un nouvel objet avec un attribut *id* :
 
 ```json
 "channels" : [
@@ -315,7 +312,7 @@ Vous pouvez fermer la vidéo via le lien en dessous :
 
 ![Guide 14](../doc/images/client-guide-14.jpg)
 
-Dans le cas où vous avez vous-même caché une vidéo, il est possible de la rendre à nouveau visible à l'aide de l'icône <img src="youtube-custom-feed/public/images/visible.png" alt="Visible" width="12" />.
+Dans le cas où vous avez vous-même caché une vidéo, il est possible de la rendre à nouveau visible à l'aide de l'icône <img src="../youtube-custom-feed/bin/client/images/visible.png" alt="Visible" width="12" />.
 
 Attention, cette fonctionnalité n'est disponible que si vous affichez les vidéos cachées.
 
@@ -336,21 +333,8 @@ Exemple de filtrage par liste noire :
 
 #### Fichier de configuration utilisé pour cet exemple
 
-```json
-{
-    "clientApiKey" : "<secret1>",
-    "clientId" : "<secret2>.apps.googleusercontent.com",
-    "channels" : [
-        {
-            "id": "UCWJHqzXc7rKO7h5TzYYBNFw",
-            "blacklist": [
-                "videoTitle=~.+Sentinels.+",
-                "videoDuration>8H22M"
-            ]
-        }
-    ]
-}
-```
+Le fichier est disponible à : "*tests/resources/tests-parameters.json*".
+
 
 ### Mise à jour des données
 
@@ -414,7 +398,19 @@ Lien du projet : [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https:/
 
 ### Le port 3000 est déjà utilisé par une autre application, comment le changer ?
 
-Ouvrez le fichier "/youtube-custom-feed/bin/www" et modifiez la variable `var port = 3000;` avec le numéro de port que vous souhaitez utiliser.
+Ouvrez le fichier "*src/bin/server/javascripts/main-express.js*" et modifiez la variable `var port = 3000;` avec le numéro de port que vous souhaitez utiliser.
+
+
+## Lancer les tests
+
+Cette documentation sur les tests n'est pas complète ! Une doc complète sera écrite un jour...
+
+Si vous souhaitez lancer les tests, installez :
+  1. GraphicsMagick : http://www.graphicsmagick.org
+  2. Chrome : https://www.google.com/intl/fr_fr/chrome/
+  3. Firefox : https://www.mozilla.org/fr/firefox/new/
+
+Remplissez vos identifiants Google avec votre utilisateur et mot de passe dans le fichier : "*tests/etc/passwords.json*". Ces identifiants sont ceux qui vous permettent de récupérer les clés API.
 
 
 
