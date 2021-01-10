@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "author": "Thomas 'Zhykos' Cicognani",
   "private": true,
-  "description": "TODO",
+  "description": "Create your own video feed without any subscriptions",
   "keywords": [
-    "TODO"
+    "video", "video feed", "youtube", "custom"
   ],
   "license": "MIT",
   "scripts": {

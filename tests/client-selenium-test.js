@@ -414,8 +414,11 @@ describe('Empty database', () => {
       elements[0].click();
     });
 
-    // TODO Conditional wait if double auth
-    await helpers.waitMilli(30000);
+    if (passwords.youtube.hasDoubleAuth) {
+      await helpers.waitMilli(30000);
+    } else {
+      await helpers.waitMilli(3000);
+    }
 
     helpers.takeScreenshotForDocumentation("client-guide-03", driver);
 
