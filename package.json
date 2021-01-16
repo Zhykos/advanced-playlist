@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon ./youtube-custom-feed/bin/server/javascripts/main-express.js",
+    "dev": "nodemon ./src/bin/server/javascripts/main-express.js",
     "chrome-test": "set BROWSER_TEST=chrome && jest --coverage --detectOpenHandles",
     "firefox-test": "set BROWSER_TEST=firefox && jest --coverage --detectOpenHandles"
   },
@@ -44,7 +44,7 @@
     "testRegex": "./tests/(server|client)-.+test.js$",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "<rootDir>/youtube-custom-feed/bin/server/javascripts/vcf*.js",
+      "<rootDir>/src/bin/server/javascripts/vcf*.js",
       "!<rootDir>/node_modules/"
     ],
     "moduleNameMapper": {

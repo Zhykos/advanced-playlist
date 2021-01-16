@@ -1,9 +1,9 @@
-# YouTube Custom Feed Release Notes
+# Video Custom Feed - Release Notes
 
 (sorry for my English!)
 
 ## v1.0.0
-2020-XX-YY
+2021-XX-YY
 
 * First version!
 * Fetch videos from YouTube

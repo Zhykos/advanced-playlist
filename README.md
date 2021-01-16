@@ -9,23 +9,23 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed">
+  <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed">
     <img src="doc/images/logo.png" alt="Logo" width="80" height="80" />
   </a>
 
-  <h3 align="center">YouTube Custom Feed</h3>
+  <h3 align="center">Video Custom Feed</h3>
 
   <p align="center">
-    <i>YCF</i> : your own video feed
+    <i>VCF</i> : your own video feed
     <br />
-    <img src="doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
+    <img src="doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
     <br />
-    <img src="doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/doc/README.french.md"><strong>Documentation en français »</strong></a>
+    <img src="doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/doc/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Report Bug</a>
+    <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Request Feature</a>
+    <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues">Request Feature</a>
     <br />
     <br />
     Sorry for my English :(
@@ -57,9 +57,9 @@
 
 ![Product screenshot](doc/images/client-guide-00.jpg)
 
-YouTube Custom Feed (*YCF*) is a project I wanted to create after subbing to channels which have different shows, and some don't interested me.
+Video Custom Feed (*VCF* for short) is a project I wanted to create after subbing to channels which have different shows, and some don't interested me.
 
-With *YCF* you list your favorite channels and filter video names you don't want to see in your feed.
+With *VCF* you list your favorite channels and filter video names you don't want to see in your feed.
 
 **WARNING**: Version 1.0 is a *MVP* (Minimum Viable Product), which means it works well but does not have a great user interface nor is for common users.
 
@@ -75,7 +75,7 @@ Application *developed with YouTube* : https://www.youtube.com
 <!-- GETTING STARTED -->
 ## Getting Started
 
-You must download a YCF version to use it.
+You must download a *VCF* version to use it.
 
 ### Prerequisites
 
@@ -83,7 +83,7 @@ You must download a YCF version to use it.
 
 2. You need to have a YouTube/Google developer account: https://developers.google.com/youtube/v3/getting-started
 
-3. Get an API Key and an ID client OAuth 2.0: https://console.developers.google.com/apis/credentials
+3. Get a Google API Key and an ID client OAuth 2.0: https://console.developers.google.com/apis/credentials
 
 Google console screen where to get keys:
 
@@ -91,7 +91,7 @@ Google console screen where to get keys:
 
 ### Installation
 
-1. Download latest version of YCF: https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/releases
+1. Download latest version of *VCF*: https://github.com/Zhykos/fr.zhykos.videocustomfeed/releases
 
 2. Unzip it and open a Terminal within the directory..
 
@@ -299,10 +299,10 @@ Each video has a specific menu to watch it or change some characteristics.
 
 Icons meaning from left to right:
 <ul>
-<li><img src="youtube-custom-feed/bin/client/images/play.png" alt="Play" width="12" /> Watch video. Video will be displayed on the top of the webpage;</li>
-<li><img src="youtube-custom-feed/bin/client/images/play-hide.png" alt="Play then hide" width="12" /> Watch video (like above) then hide it from your feed;</li>
-<li><img src="youtube-custom-feed/bin/client/images/hide.png" alt="Hide" width="12" /> Hide this video from your feed;</li>
-<li><img src="youtube-custom-feed/bin/client/images/open-youtube.png" alt="YouTube" width="12" /> Open this video on YouTube.</li>
+<li><img src="src/bin/client/images/play.png" alt="Play" width="12" /> Watch video. Video will be displayed on the top of the webpage;</li>
+<li><img src="src/bin/client/images/play-hide.png" alt="Play then hide" width="12" /> Watch video (like above) then hide it from your feed;</li>
+<li><img src="src/bin/client/images/hide.png" alt="Hide" width="12" /> Hide this video from your feed;</li>
+<li><img src="src/bin/client/images/open-website.png" alt="Website" width="12" /> Open this video on its website.</li>
 </ul>
 
 Opened video: 
@@ -313,7 +313,7 @@ Vous can close the video:
 
 ![Guide 14](doc/images/client-guide-14.jpg)
 
-You can *unhide* a hidden video with icon <img src="youtube-custom-feed/bin/client/images/visible.png" alt="Visible" width="12" />.
+You can *unhide* a hidden video with icon <img src="src/bin/client/images/visible.png" alt="Visible" width="12" />.
 
 This feature is available when you display hidden videos.
 
@@ -324,8 +324,8 @@ This feature is available when you display hidden videos.
 When you display hidden videos, an icon is visible when it is filtered with a whitelist or blacklist filter. No further detail is provided.
 
 <ul>
-<li><img src="youtube-custom-feed/bin/client/images/blacklist.png" alt="Blacklist" /> This video is filtered thanks to a blacklist;</li>
-<li><img src="youtube-custom-feed/bin/client/images/whitelist.png" alt="Whitelist" /> This video is filtered thanks to a whitelist.</li>
+<li><img src="src/bin/client/images/blacklist.png" alt="Blacklist" /> This video is filtered thanks to a blacklist;</li>
+<li><img src="src/bin/client/images/whitelist.png" alt="Whitelist" /> This video is filtered thanks to a whitelist.</li>
 </ul>
 
 Blacklist filter example:
@@ -349,7 +349,7 @@ Finally, YouTube API has some limitations (number of fetched data). Check your G
 
 This project is developed during my free time so... some minutes per month.
 
-See the [open issues](https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues) for a list of proposed features (and known issues).
 
 
 
@@ -378,7 +378,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Thomas Cicognani - [@zhykos](https://twitter.com/zhykos) - github@tomtom.email
 
-Project link: [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https://github.com/Zhykos/fr.zhykos.youtubecustomfeed)
+Project link: [https://github.com/Zhykos/fr.zhykos.videocustomfeed](https://github.com/Zhykos/fr.zhykos.videocustomfeed)
 
 
 

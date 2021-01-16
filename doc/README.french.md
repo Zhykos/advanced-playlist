@@ -9,23 +9,23 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed">
+  <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed">
     <img src="../doc/images/logo.png" alt="Logo" width="80" height="80" />
   </a>
 
-  <h3 align="center">YouTube Custom Feed</h3>
+  <h3 align="center">Video Custom Feed</h3>
 
   <p align="center">
-    <i>YCF</i> : votre flux vidéo personnalisé
+    <i>VCF</i> : votre flux vidéo personnalisé
     <br />
-    <img src="../doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
+    <img src="../doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
-    <img src="../doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
+    <img src="../doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Reporter un bug</a>
+    <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues">Reporter un bug</a>
     ·
-    <a href="https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues">Proposer une évolution</a>
+    <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues">Proposer une évolution</a>
   </p>
 </p>
 
@@ -35,10 +35,10 @@
 ## Table des matières
 
 * [À propos du projet](#à-propos-du-projet)
-* [Commencer à utiliser *YCF*](#commencer-à-utiliser-ycf)
+* [Commencer à utiliser *VCF*](#commencer-à-utiliser-vcf)
   * [Prérequis](#prérequis)
   * [Installation](#installation)
-* [Utilisation de *YCF*](#utilisation-de-ycf)
+* [Utilisation de *VCF*](#utilisation-de-vcf)
 * [Feuille de route](#feuille-de-route)
 * [Contribuer au projet](#contribuer-au-projet)
 * [Licence](#licence)
@@ -54,13 +54,13 @@
 
 ![Product screenshot](../doc/images/client-guide-00.jpg)
 
-YouTube Custom Feed (*YCF*) est un projet que j'ai imaginé après m'être abonné à des chaines YouTube ayant plusieurs émissions, mais dont certaines qui ne m'intéressaient pas.
+Video Custom Feed (*VCF* en abrégé) est un projet que j'ai imaginé après m'être abonné à des chaines YouTube ayant plusieurs émissions, mais dont certaines qui ne m'intéressaient pas.
 
-*YCF* permet de lister vos chaines préférées et d'ajouter des filtres sur les noms des vidéos que vous ne souhaitez pas voir dans votre flux de vidéos.
+*VCF* permet de lister vos chaines préférées et d'ajouter des filtres sur les noms des vidéos que vous ne souhaitez pas voir dans votre flux de vidéos.
 
 **ATTENTION** : la version 1.0 est une version *MVP* (produit minimum viable ou *Minimum Viable Product*), c'est-à-dire qu'elle fonctionne, mais ne propose pas d'interface graphique évoluée ou n'est pas destinée aux utilisateurs lambdas.
 
-**ATTENTION 2** : je ne suis pas un développeur Javascript, certaines fonctionnalités ne sont surement pas codées correctement...
+**ATTENTION 2** : je ne suis pas un développeur Javascript, certaines fonctionnalités ne sont sûrement pas codées correctement...
 
 Application *developed with YouTube* : https://www.youtube.com
 
@@ -70,9 +70,9 @@ Application *developed with YouTube* : https://www.youtube.com
 
 
 <!-- GETTING STARTED -->
-## Commencer à utiliser *YCF*
+## Commencer à utiliser *VCF*
 
-Vous devez récupérer une version de *YCF* sur votre machine pour l'utiliser.
+Vous devez récupérer une version de *VCF* sur votre machine pour l'utiliser.
 
 ### Prérequis
 
@@ -80,7 +80,7 @@ Vous devez récupérer une version de *YCF* sur votre machine pour l'utiliser.
 
 2. Le second prérequis est d'avoir un compte développeur YouTube/Google : https://developers.google.com/youtube/v3/getting-started
 
-3. Il faudra ensuite récupérer une Clé API et un ID client OAuth 2.0 : https://console.developers.google.com/apis/credentials
+3. Il faudra ensuite récupérer une Clé API Google et un ID client OAuth 2.0 : https://console.developers.google.com/apis/credentials
 
 Écran de la console Google où on récupère ces clés :
 
@@ -89,7 +89,7 @@ Vous devez récupérer une version de *YCF* sur votre machine pour l'utiliser.
 
 ### Installation
 
-1. Téléchargez la dernière version de *YCF* : https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/releases
+1. Téléchargez la dernière version de *VCF* : https://github.com/Zhykos/fr.zhykos.videocustomfeed/releases
 
 2. Dézipper la version et ouvrez un Terminal dans le dossier.
 
@@ -111,7 +111,7 @@ nmp start
 
 
 <!-- USAGE EXAMPLES -->
-## Utilisation de *YCF*
+## Utilisation de *VCF*
 
 **ATTENTION** : la version 1.0 est destinée à un public habitué au développement.
 
@@ -258,7 +258,7 @@ Il n'y a actuellement aucun moyen de savoir si la récupération a fonctionné. 
 
 ![Guide 05](../doc/images/client-guide-05.jpg)
 
-Rafraichissez la page pour voir apparaître vos vidéos.
+Rafraîchissez la page pour voir apparaître vos vidéos.
 
 ![Guide 06](../doc/images/client-guide-06.jpg)
 
@@ -298,10 +298,10 @@ Chaque vidéo a un menu spécifique pour la regarder ou changer ses attributs.
 
 Explication des icônes, de gauche à droite :
 <ul>
-<li><img src="../youtube-custom-feed/bin/client/images/play.png" alt="Play" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page ;</li>
-<li><img src="../youtube-custom-feed/bin/client/images/play-hide.png" alt="Play then hide" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page. La vidéo sera également modifiée pour ne plus apparaître dans votre flux ;</li>
-<li><img src="../youtube-custom-feed/bin/client/images/hide.png" alt="Hide" width="12" /> La vidéo est modifiée pour ne plus apparaître dans votre flux ;</li>
-<li><img src="../youtube-custom-feed/bin/client/images/open-youtube.png" alt="YouTube" width="12" /> Lecture de la vidéo dans YouTube.</li>
+<li><img src="../src/bin/client/images/play.png" alt="Play" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page ;</li>
+<li><img src="../src/bin/client/images/play-hide.png" alt="Play then hide" width="12" /> Lecture de la vidéo. La vidéo s'affichera en haut de la page. La vidéo sera également modifiée pour ne plus apparaître dans votre flux ;</li>
+<li><img src="../src/bin/client/images/hide.png" alt="Hide" width="12" /> La vidéo est modifiée pour ne plus apparaître dans votre flux ;</li>
+<li><img src="../src/bin/client/images/open-website.png" alt="Website" width="12" /> Lecture de la vidéo sur son site.</li>
 </ul>
 
 Vidéo ouverte dans le navigateur : 
@@ -312,7 +312,7 @@ Vous pouvez fermer la vidéo via le lien en dessous :
 
 ![Guide 14](../doc/images/client-guide-14.jpg)
 
-Dans le cas où vous avez vous-même caché une vidéo, il est possible de la rendre à nouveau visible à l'aide de l'icône <img src="../youtube-custom-feed/bin/client/images/visible.png" alt="Visible" width="12" />.
+Dans le cas où vous avez vous-même caché une vidéo, il est possible de la rendre à nouveau visible à l'aide de l'icône <img src="../src/bin/client/images/visible.png" alt="Visible" width="12" />.
 
 Attention, cette fonctionnalité n'est disponible que si vous affichez les vidéos cachées.
 
@@ -323,8 +323,8 @@ Attention, cette fonctionnalité n'est disponible que si vous affichez les vidé
 Dans le cas où vous affichez toutes les vidéos, une icône peut être visible pour comprendre si la vidéo correspond à un filtre de liste blanche ou de liste noire. Actuellement aucun détail précis n'est disponible.
 
 <ul>
-<li><img src="../youtube-custom-feed/bin/client/images/blacklist.png" alt="Blacklist" /> Cette vidéo a été filtrée par une liste noire ;</li>
-<li><img src="../youtube-custom-feed/bin/client/images/whitelist.png" alt="Whitelist" /> Cette vidéo a été filtrée par une liste blanche.</li>
+<li><img src="../src/bin/client/images/blacklist.png" alt="Blacklist" /> Cette vidéo a été filtrée par une liste noire ;</li>
+<li><img src="../src/bin/client/images/whitelist.png" alt="Whitelist" /> Cette vidéo a été filtrée par une liste blanche.</li>
 </ul>
 
 Exemple de filtrage par liste noire :
@@ -340,7 +340,7 @@ Le fichier est disponible à : "*tests/resources/tests-parameters.json*".
 
 Cette version 1.0 demande d'éteindre l'application, puis de la redémarrer après modification du fichier de configuration JSON.
 
-De même, lorsque vous récupérez à nouveau des informations depuis YouTube, rafraichissez votre page pour voir apparaître les nouvelles vidéos.
+De même, lorsque vous récupérez à nouveau des informations depuis YouTube, rafraîchissez votre page pour voir apparaître les nouvelles vidéos.
 
 Enfin, sachez que l'API YouTube contient des limitations quant au nombre d'informations récupérables. Vérifiez votre console Google/YouTube pour plus de détails.
 
@@ -349,7 +349,7 @@ Enfin, sachez que l'API YouTube contient des limitations quant au nombre d'infor
 
 Ce projet est développé sur mon temps libre et je n'en ai pas énormément...
 
-Vérifiez la page [open issues](https://github.com/Zhykos/fr.zhykos.youtubecustomfeed/issues) pour voir la liste des évolutions et des bugs.
+Vérifiez la page [open issues](https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues) pour voir la liste des évolutions et des bugs.
 
 
 
@@ -378,7 +378,7 @@ Projet distribué avec la licence MIT. Ouvrez le fichier `LICENSE` pour plus d'i
 
 Thomas Cicognani - [@zhykos](https://twitter.com/zhykos) - github@tomtom.email
 
-Lien du projet : [https://github.com/Zhykos/fr.zhykos.youtubecustomfeed](https://github.com/Zhykos/fr.zhykos.youtubecustomfeed)
+Lien du projet : [https://github.com/Zhykos/fr.zhykos.videocustomfeed](https://github.com/Zhykos/fr.zhykos.videocustomfeed)
 
 
 

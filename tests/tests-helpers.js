@@ -3,7 +3,7 @@ const fs = require('fs');
 const pngToJpeg = require('png-to-jpeg');
 const Jimp = require('jimp');
 const gm = require('gm');
-const config = require('../youtube-custom-feed/bin/config.js');
+const config = require('../src/bin/config.js');
 
 const waitUntilTime = 20000;
 

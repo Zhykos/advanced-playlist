@@ -1,4 +1,4 @@
-const helpers = require('../youtube-custom-feed/bin/server/javascripts/vcf-server-helpers');
+const helpers = require('../src/bin/server/javascripts/vcf-server-helpers');
 
 describe('Set filter status tests', () => {
 

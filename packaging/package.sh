@@ -20,13 +20,13 @@ rm -f "temp-ls-ref.txt"
 
 mkdir "cvf-v$1"
 
-git checkout HEAD -- ../youtube-custom-feed/etc/apikeys.json
-git checkout HEAD -- ../youtube-custom-feed/etc/channels.json
+git checkout HEAD -- ../src/etc/apikeys.json
+git checkout HEAD -- ../src/etc/channels.json
 
 cp readme.txt "cvf-v$1/readme.txt"
 cp ../LICENSE.txt "cvf-v$1/LICENSE.txt"
 cp ../doc/release-note.md "cvf-v$1/release-note.md"
-cp -r ../youtube-custom-feed "cvf-v$1/custom-video-feed"
+cp -r ../src "cvf-v$1/custom-video-feed"
 
 rm -fr "cvf-v$1/custom-video-feed/var"
 rm -fr "cvf-v$1/custom-video-feed/node_modules"
@@ -35,8 +35,8 @@ rm -fr "cvf-v$1/custom-video-feed/etc"
 mkdir "cvf-v$1/custom-video-feed/etc"
 mkdir "cvf-v$1/custom-video-feed/var"
 
-cp "../youtube-custom-feed/etc/apikeys.json" "cvf-v$1/custom-video-feed/etc/apikeys.json"
-cp "../youtube-custom-feed/etc/channels.json" "cvf-v$1/custom-video-feed/etc/channels.json"
+cp "../src/etc/apikeys.json" "cvf-v$1/custom-video-feed/etc/apikeys.json"
+cp "../src/etc/channels.json" "cvf-v$1/custom-video-feed/etc/channels.json"
 
 echo Done!
 echo
@@ -54,7 +54,7 @@ else
     echo Check following contents with reference file:
     echo
     echo "Packaged file:"
-    cat "../youtube-custom-feed/etc/apikeys.json"
+    cat "../src/etc/apikeys.json"
     echo
     echo "Reference file:"
     cat "ref-apikeys.json"
@@ -69,7 +69,7 @@ else
     echo Check following contents with reference file:
     echo
     echo "Packaged file:"
-    cat "../youtube-custom-feed/etc/channels.json"
+    cat "../src/etc/channels.json"
     echo
     echo "Reference file:"
     cat "ref-channels.json"

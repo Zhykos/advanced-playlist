@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title YouTube Custom Feed
+    title Video Custom Feed
     link(rel='stylesheet' href='/stylesheets/style.css')
     script(src='https://apis.google.com/js/api.js')
     script(src='https://code.jquery.com/jquery-3.4.1.min.js')
@@ -37,7 +37,7 @@ html
         else
           img(src="images/visible.png" title="Set this video as visible" onclick='swapVisibility("' + videoId + '", "' + displayHiddenVideos + '")', id="swap_" + videoId)
 
-        img(src="images/open-youtube.png" title="Open this video on YouTube" onclick='openOnYoutube("' + videoId + '")' id="button-open-youtube-" + videoId)
+        img(src="images/open-website.png" title="Open this video on its website" onclick='openWebsite("' + videoId + '")' id="button-open-website-" + videoId)
 
     mixin displayChannelInSidebar(id, text, image)
       div.channel
@@ -65,8 +65,8 @@ html
         else
           span No channel in database
       div#main
-        h1 My YouTube Custom Feed
-        h2#settings-error Please configure your settings in file "/public/youtube-custom-feed/parameters.json"
+        h1 My Video Custom Feed
+        h2#settings-error Please configure your settings in directory "/src/etc/"
         if displayHiddenVideos == "true"
           if !channel || channel == "all"
             h2 All videos: no filter

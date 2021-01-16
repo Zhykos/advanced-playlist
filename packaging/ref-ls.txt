@@ -24,7 +24,7 @@ cvf-v1.0.0/custom-video-feed/bin/client/images:
 blacklist.png
 hide.png
 loading.gif
-open-youtube.png
+open-website.png
 play-hide.png
 play.png
 visible.png

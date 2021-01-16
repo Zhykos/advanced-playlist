@@ -12,7 +12,7 @@ function authenticate() {
 }
 
 function loadClient(callback) {
-  gapi.client.setApiKey(ycf.clientApiKey);
+  gapi.client.setApiKey(vcf.clientApiKey);
   return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
     .then(
       function () {
@@ -30,10 +30,10 @@ function loadClient(callback) {
 }
 
 function execute() {
-  if (ycf.channels.length == 0) {
-    console.error("No custom channel, check file 'youtube-custom-feed/parameters.js'.");
+  if (vcf.channels.length == 0) {
+    console.error("No custom channel, check file 'src/parameters.js'.");
   } else {
-    ycf.channels.forEach(channel => insertDataFromChannel(channel.id));
+    vcf.channels.forEach(channel => insertDataFromChannel(channel.id));
   }
 }
 
@@ -152,7 +152,7 @@ function displayIframeVideoPlayerThenMask(videoId, displayHiddenVideos) {
   swapVisibility(videoId, displayHiddenVideos);
 }
 
-function openOnYoutube(videoId) {
+function openWebsite(videoId) {
   const win = window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
   win.focus();
 }

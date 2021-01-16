@@ -1,11 +1,11 @@
-var ycf;
+var vcf;
 
 $.post("/getParameters")
   .done(
     function (res) {
-      ycf = res;
-      if (ycf) {
-        if (ycf.clientApiKey == "<XXX>" || ycf.clientId == "<YYY>.apps.googleusercontent.com") {
+      vcf = res;
+      if (vcf) {
+        if (vcf.clientApiKey == "<XXX>" || vcf.clientId == "<YYY>.apps.googleusercontent.com") {
           $("#loading").hide();
           $("#contents").show();
           $("#settings-error").show();
@@ -13,7 +13,7 @@ $.post("/getParameters")
         } else {
           gapi.load("client:auth2",
             function () {
-              gapi.auth2.init({ client_id: ycf.clientId }).then(
+              gapi.auth2.init({ client_id: vcf.clientId }).then(
                 function () {
                   const GoogleAuth = gapi.auth2.getAuthInstance();
                   if (GoogleAuth.isSignedIn.get()) {

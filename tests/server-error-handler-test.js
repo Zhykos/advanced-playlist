@@ -1,4 +1,4 @@
-const server = require('../youtube-custom-feed/bin/server/javascripts/vcf-server');
+const server = require('../src/bin/server/javascripts/vcf-server');
 
 const mockResponse = () => {
     const response = { "locals": {} };

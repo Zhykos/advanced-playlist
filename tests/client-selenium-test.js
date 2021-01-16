@@ -4,9 +4,9 @@ require('selenium-webdriver/firefox');
 require('chromedriver');
 require('geckodriver');
 const helpers = require('./tests-helpers');
-const www = require("../youtube-custom-feed/bin/server/javascripts/main-express");
-const vcfServer = require('../youtube-custom-feed/bin/server/javascripts/vcf-server');
-const config = require('../youtube-custom-feed/bin/config.js');
+const www = require("../src/bin/server/javascripts/main-express");
+const vcfServer = require('../src/bin/server/javascripts/vcf-server');
+const config = require('../src/bin/config.js');
 const passwords = require('./etc/passwords.json');
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
@@ -221,7 +221,7 @@ describe('Selenium tests', () => {
 
     // Open
 
-    const linkOpenOrigin = await helpers.selectId('button-open-youtube-FK30dDJh7fQ', driver);
+    const linkOpenOrigin = await helpers.selectId('button-open-website-FK30dDJh7fQ', driver);
     await linkOpenOrigin.click();
     await helpers.waitMilli(2000);
 
