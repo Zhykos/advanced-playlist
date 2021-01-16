@@ -416,13 +416,13 @@ Then fill in your Google IDs with login and password in file: "*tests/etc/passwo
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Zhykos/repo.svg?style=flat-square
-[contributors-url]: https://github.com/Zhykos/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Zhykos/repo.svg?style=flat-square
-[forks-url]: https://github.com/Zhykos/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/Zhykos/repo.svg?style=flat-square
-[stars-url]: https://github.com/Zhykos/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Zhykos/repo.svg?style=flat-square
-[issues-url]: https://github.com/Zhykos/repo/issues
-[license-shield]: https://img.shields.io/github/license/Zhykos/repo.svg?style=flat-square
-[license-url]: https://github.com/Zhykos/repo/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[contributors-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[forks-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/network/members
+[stars-shield]: https://img.shields.io/github/stars/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[stars-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[issues-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues
+[license-shield]: https://img.shields.io/github/license/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[license-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/master/LICENSE.txt
