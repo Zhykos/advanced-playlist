@@ -1,6 +1,7 @@
 cvf-v1.0.0:
-LICENSE.txt
 custom-video-feed
+LICENSE.txt
+package.json
 readme.txt
 release-note.md
 
@@ -25,14 +26,14 @@ blacklist.png
 hide.png
 loading.gif
 open-website.png
-play-hide.png
 play.png
+play-hide.png
 visible.png
 whitelist.png
 
 cvf-v1.0.0/custom-video-feed/bin/client/javascripts:
-vcf-client-helpers.js
 vcf-client.js
+vcf-client-helpers.js
 
 cvf-v1.0.0/custom-video-feed/bin/client/stylesheets:
 style.css
@@ -43,8 +44,8 @@ views
 
 cvf-v1.0.0/custom-video-feed/bin/server/javascripts:
 main-express.js
-vcf-server-helpers.js
 vcf-server.js
+vcf-server-helpers.js
 
 cvf-v1.0.0/custom-video-feed/bin/server/views:
 error.pug

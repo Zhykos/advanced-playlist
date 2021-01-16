@@ -16,7 +16,7 @@ echo
 rm -fr "cvf-v$1"
 rm -f "cvf-v$1.zip"
 rm -f "cvf-v$1.hash"
-rm -f "temp-ls-ref.txt"
+rm -f "temp-ls.txt"
 
 mkdir "cvf-v$1"
 
@@ -27,6 +27,7 @@ cp readme.txt "cvf-v$1/readme.txt"
 cp ../LICENSE.txt "cvf-v$1/LICENSE.txt"
 cp ../doc/release-note.md "cvf-v$1/release-note.md"
 cp -r ../src "cvf-v$1/custom-video-feed"
+cp ../package.json "cvf-v$1/package.json"
 
 rm -fr "cvf-v$1/custom-video-feed/var"
 rm -fr "cvf-v$1/custom-video-feed/node_modules"
