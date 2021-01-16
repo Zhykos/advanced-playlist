@@ -389,7 +389,7 @@ Project link: [https://github.com/Zhykos/fr.zhykos.videocustomfeed](https://gith
 * Video icons by Smashicons on Flaticon: https://www.flaticon.com/authors/smashicons
 * *Blacklist* et *whitelist* icons by Rudez Studio: https://www.iconfinder.com/Ruslancorel
 * Readme template: https://github.com/othneildrew/Best-README-Template
-* Country icons by Wikipédia
+* Country icons by Wikipédia: https://en.wikipedia.org/wiki/Main_Page
 * Main logo from icons made by <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
 

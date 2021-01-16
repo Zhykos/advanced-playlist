@@ -18,7 +18,7 @@
   <p align="center">
     <i>VCF</i> : votre flux vidéo personnalisé
     <br />
-    <img src="../doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/README.french.md"><strong>Documentation en français »</strong></a>
+    <img src="../doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/doc/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
     <img src="../doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
     <br />
@@ -389,8 +389,8 @@ Lien du projet : [https://github.com/Zhykos/fr.zhykos.videocustomfeed](https://g
 * Icônes vidéo par Smashicons sur Flaticon : https://www.flaticon.com/authors/smashicons
 * Icônes *blacklist* et *whitelist* par Rudez Studio : https://www.iconfinder.com/Ruslancorel
 * *Template* du Readme : https://github.com/othneildrew/Best-README-Template
-* Icônes des pays par Wikipédia
-* Logo principal d'après des icônes faites par <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> sur <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+* Icônes des pays par Wikipédia : https://fr.wikipedia.org/wiki/Wikip%C3%A9dia:Accueil_principal
+* Logo principal d'après des icônes faites par <a href="https://www.flaticon.com/authors/pixel-perfect" title="Pixel perfect">Pixel perfect</a> sur <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
 
 
 
