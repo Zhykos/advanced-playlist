@@ -3,7 +3,7 @@
 (sorry for my English!)
 
 ## v1.0.0
-2021-XX-YY
+2021-01-16
 
 * First version!
 * Fetch videos from YouTube
