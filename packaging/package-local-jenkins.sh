@@ -78,7 +78,7 @@ else
 fi
 
 ls -R "cvf-v$1" > "temp-ls.txt"
-if cmp -s "ref-ls.txt" "temp-ls.txt"; then
+if cmp -s "ref-ls-local-jenkins.txt" "temp-ls.txt"; then
     echo Files listing is OK!
     rm -f "temp-ls.txt"
     echo
