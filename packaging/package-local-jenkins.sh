@@ -77,7 +77,9 @@ else
     exit 1
 fi
 
+dos2unix "ref-ls-local-jenkins.txt"
 ls -R "cvf-v$1" > "temp-ls.txt"
+dos2unix "temp-ls.txt"
 if cmp -s "ref-ls-local-jenkins.txt" "temp-ls.txt"; then
     echo Files listing is OK!
     rm -f "temp-ls.txt"
