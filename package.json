@@ -1,58 +1,61 @@
 {
-  "name": "video-custom-feed",
-  "version": "1.0.0",
-  "author": "Thomas 'Zhykos' Cicognani",
-  "private": true,
-  "description": "Create your own video feed without any subscriptions",
-  "keywords": [
-    "video", "video feed", "youtube", "custom"
-  ],
-  "license": "MIT",
-  "scripts": {
-    "start": "node ./custom-video-feed/bin/server/javascripts/main-express.js",
-    "dev": "nodemon ./src/bin/server/javascripts/main-express.js",
-    "chrome-test": "set BROWSER_TEST=chrome && jest --coverage --detectOpenHandles",
-    "firefox-test": "set BROWSER_TEST=firefox && jest --coverage --detectOpenHandles"
-  },
-  "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "lowdb": "1.0.0",
-    "morgan": "~1.9.1",
-    "pug": "^3.0.0"
-  },
-  "devDependencies": {
-    "chromedriver": "^87.0.4",
-    "debug": "~2.6.9",
-    "geckodriver": "^1.21.1",
-    "gm": "^1.23.1",
-    "jest": "^26.6.3",
-    "jest-expect-message": "^1.0.2",
-    "jimp": "^0.16.1",
-    "nodemon": "^2.0.6",
-    "png-to-jpeg": "^1.0.1",
-    "selenium-webdriver": "3.x"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "db.json",
-      "tests/*.*"
+    "name": "video-custom-feed",
+    "version": "1.0.0",
+    "author": "Thomas 'Zhykos' Cicognani",
+    "private": true,
+    "description": "Create your own video feed without any subscriptions",
+    "keywords": [
+        "video",
+        "video feed",
+        "youtube",
+        "custom"
     ],
-    "delay": "2500"
-  },
-  "jest": {
-    "testRegex": "./tests/(server|client)-.+test.js$",
-    "collectCoverage": true,
-    "collectCoverageFrom": [
-      "<rootDir>/src/bin/server/javascripts/vcf*.js",
-      "!<rootDir>/node_modules/"
-    ],
-    "moduleNameMapper": {
-      "./etc/channels.json": "<rootDir>/tests/resources/tests-parameters.json"
+    "license": "MIT",
+    "scripts": {
+        "start": "node ./custom-video-feed/bin/server/javascripts/main-express.js",
+        "dev": "nodemon ./src/bin/server/javascripts/main-express.js",
+        "chrome-test": "set BROWSER_TEST=chrome && jest --coverage --detectOpenHandles",
+        "firefox-test": "set BROWSER_TEST=firefox && jest --coverage --detectOpenHandles"
     },
-    "setupFilesAfterEnv": [
-      "jest-expect-message"
-    ]
-  }
+    "dependencies": {
+        "cookie-parser": "~1.4.4",
+        "express": "~4.16.1",
+        "http-errors": "~1.6.3",
+        "lowdb": "1.0.0",
+        "morgan": "~1.9.1",
+        "pug": "^3.0.2"
+    },
+    "devDependencies": {
+        "chromedriver": "^90.0.1",
+        "debug": "~2.6.9",
+        "geckodriver": "^1.22.3",
+        "gm": "^1.23.1",
+        "jest": "^26.6.3",
+        "jest-expect-message": "^1.0.2",
+        "jimp": "^0.16.1",
+        "nodemon": "^2.0.7",
+        "png-to-jpeg": "^1.0.1",
+        "selenium-webdriver": "3.x"
+    },
+    "nodemonConfig": {
+        "ignore": [
+            "db.json",
+            "tests/*.*"
+        ],
+        "delay": "2500"
+    },
+    "jest": {
+        "testRegex": "./tests/(server|client)-.+test.js$",
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "<rootDir>/src/bin/server/javascripts/vcf*.js",
+            "!<rootDir>/node_modules/"
+        ],
+        "moduleNameMapper": {
+            "./etc/channels.json": "<rootDir>/tests/resources/tests-parameters.json"
+        },
+        "setupFilesAfterEnv": [
+            "jest-expect-message"
+        ]
+    }
 }
