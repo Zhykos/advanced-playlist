@@ -230,7 +230,7 @@ describe('Selenium tests', () => {
             helpers.assertNoId("video_FK30dDJh7fQ", driver);
             driver.getCurrentUrl().then(async function(url) {
                 if (url.includes("consent.youtube.com")) { // new consent page for unlogged accounts
-                    await driver.findElements(By.xpath('/html/body/div/c-wiz/div/div/div/div[2]/div[1]/div[4]/form/div[1]/div/button/span')).then(async function(elements) {
+                    await driver.findElements(By.xpath('//div/div/div/div[2]/div[1]/div[4]/form/div[1]/div/button/span')).then(async function(elements) {
                         expect(elements.length).toBe(1);
                         await elements[0].click();
                         await helpers.waitMilli(2000);
