@@ -14,7 +14,7 @@ const fs = require('fs');
 
 const rootURL = 'http://localhost:3000/';
 let driver;
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 1000 * 60 * 5;
+jest.setTimeout(1000 * 60 * 5);
 const clientApiKey = vcfServer.vcf_keys.youtube.clientApiKey;
 
 async function openDB() {
