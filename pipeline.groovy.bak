@@ -1,0 +1,74 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Install env') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Packaging') {
+            steps {
+                git branch: 'latest', url: 'https://github.com/Zhykos/fr.zhykos.videocustomfeed.git'
+                dir('packaging') {
+                    sh 'pwd'
+                    sh './package-local-jenkins.sh 1.0.1'
+                }
+            }
+
+            post {
+                success {
+                    archiveArtifacts 'packaging/cvf-*'
+                }
+            }
+        }
+        
+        stage('Modify files for tests') {
+            steps {
+                sh 'echo "{ \\"youtube\\": { \\"login\\": \\"<LOGIN>\\", \\"password\\": \\"<PASSWORD>;\\", \\"hasDoubleAuth\\": true } }" > tests/etc/passwords.json'
+                sh 'echo { \\"youtube\\": { \\"clientApiKey\\": \\"<CLIENT_API>\\", \\"clientId\\": \\"<CLIENT_ID>.apps.googleusercontent.com\\" } } > src/etc/apikeys.json'
+                sh 'echo { \\"channels\\": [<CHANNELS>] } > src/etc/channels.json'
+            }
+        }
+
+        stage('Tests Firefox') {
+            steps {
+                sh 'npm run firefox-test'
+            }
+        }
+
+        stage('Tests Chrome') {
+            steps {
+                sh 'npm run chrome-test'
+            }
+        }
+    }
+
+    post {
+        success {
+            notifySuccessful()
+        }
+        failure {
+            notifyFailed()
+        }
+    }
+}
+
+def notifySuccessful() {
+    emailext (
+      subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      to: '<EMAIL>'
+    )
+}
+
+def notifyFailed() {
+    emailext (
+      subject: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+      body: """<p>FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+        <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+      to: '<EMAIL>'
+    )
+}
