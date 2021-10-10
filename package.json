@@ -26,9 +26,9 @@
         "pug": "^3.0.2"
     },
     "devDependencies": {
-        "chromedriver": "^92.0.1",
+        "chromedriver": "^94.0.0",
         "debug": "~4.3.2",
-        "geckodriver": "^2.0.3",
+        "geckodriver": "^2.0.4",
         "gm": "^1.23.1",
         "jest": "^27.1.0",
         "jest-expect-message": "^1.0.2",
