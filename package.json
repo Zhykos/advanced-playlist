@@ -14,8 +14,8 @@
     "scripts": {
         "start": "node ./custom-video-feed/bin/server/javascripts/main-express.js",
         "dev": "nodemon ./src/bin/server/javascripts/main-express.js",
-        "chrome-test": "set BROWSER_TEST=chrome && jest --coverage",
-        "firefox-test": "set BROWSER_TEST=firefox && jest --coverage"
+        "chrome-tests": "set BROWSER_TEST=chrome && set SCREENSHOTS_TESTS=false && jest --coverage",
+        "firefox-tests": "set BROWSER_TEST=firefox && set SCREENSHOTS_TESTS=false && jest --coverage"
     },
     "dependencies": {
         "cookie-parser": "~1.4.5",
@@ -26,11 +26,11 @@
         "pug": "^3.0.2"
     },
     "devDependencies": {
-        "chromedriver": "^96.0.0",
+        "chromedriver": "^97.0.0",
         "debug": "~4.3.2",
         "geckodriver": "^2.0.4",
         "gm": "^1.23.1",
-        "jest": "^27.1.0",
+        "jest": "^26.6.3",
         "jest-expect-message": "^1.0.2",
         "jimp": "^0.16.1",
         "nodemon": "^2.0.12",

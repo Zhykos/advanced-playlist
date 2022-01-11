@@ -26,8 +26,8 @@ exports.assertNoId = assertNoId;
 async function assertVisibilityById(selector, driver, isVisible) {
     await driver.findElements(By.id(selector)).then(function(elements) {
         expect(elements.length, "Id = " + selector).toBe(1);
-        elements[0].isDisplayed().then(function(element) {
-            expect(element, "Id = '" + selector + "' must be visible = " + isVisible).toBe(isVisible);
+        elements[0].isDisplayed().then(function(isDisplayed) {
+            expect(isDisplayed, "Id = '" + selector + "' must be visible = " + isVisible).toBe(isVisible);
         });
     });
 }
@@ -85,14 +85,14 @@ async function assertCountElementsByClass(classSelector, expectedValue, driver) 
 exports.assertCountElementsByClass = assertCountElementsByClass;
 
 function takeScreenshotForDocumentation(filename, driver) {
-    driver.takeScreenshot().then(function(png64) {
-        if (config.BROWSER_TEST == "chrome") {
+    if (config.BROWSER_TEST == "chrome" && config.SCREENSHOTS_TESTS === true) {
+        driver.takeScreenshot().then(function(png64) {
             const buffer = Buffer.from(png64, 'base64');
             pngToJpeg({ quality: 90 })(buffer).then(function(output) {
                 fs.writeFileSync("./doc/images/" + filename + ".jpg", output);
             });
-        }
-    });
+        });
+    }
 }
 exports.takeScreenshotForDocumentation = takeScreenshotForDocumentation;
 
@@ -105,7 +105,6 @@ function cropImage(inFilename, outFilename, x1, y1, x2, y2) {
                 });
             })
             .catch(err => {
-                //reject("cropImage: " + err);
                 console.error("cropImage: " + err);
             });
     });

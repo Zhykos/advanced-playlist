@@ -1,7 +1,7 @@
 .project
 /.settings/
 /node_modules/
-/src/etc/zhykos*
+/src/etc/custom*
 /src/var/db.json
 /packaging/cvf-*
 /packaging/temp*
@@ -10,5 +10,4 @@
 /tests/resources/*.temp
 /debug.log
 /doc/images/*temp.jpg
-/tests/etc/zhykos*
 /pipeline.groovy

@@ -13,8 +13,8 @@ const fs = require('fs');
 
 const rootURL = 'http://localhost:3000/';
 let driver;
-jest.setTimeout(1000 * 60 * 5);
-const clientApiKey = vcfServer.vcf_keys.youtube.clientApiKey;
+jest.setTimeout(1000 * 60 * 5); // 5 minutes
+const clientApiKeyBackup = config.CLIENT_API_KEY;
 
 async function openDB() {
     await helpers.deleteFile('./tests/resources/db-zhykos.temp');
@@ -282,7 +282,7 @@ describe('Selenium tests', () => {
 });
 
 // Not a test but I dont care...
-if (config.BROWSER_TEST == "chrome") {
+if (config.SCREENSHOTS_TESTS === true) {
     describe('Other screenshots', () => {
 
         test('Delete temp files', async() => {
@@ -357,7 +357,7 @@ if (config.BROWSER_TEST == "chrome") {
 describe('Selenium error tests', () => {
 
     test("Init error tests", async() => {
-        vcfServer.vcf_keys.youtube.clientApiKey = "<XXX>";
+        config.CLIENT_API_KEY = "<XXX>";
         await driver.get(rootURL);
     });
 
@@ -370,7 +370,7 @@ describe('Selenium error tests', () => {
 describe('Empty database', () => {
 
     test("Init empty database", async() => {
-        vcfServer.vcf_keys.youtube.clientApiKey = clientApiKey;
+        config.CLIENT_API_KEY = clientApiKeyBackup;
         vcfServer.vcf_channels.channels.splice(0, 9);
         jest.clearAllMocks();
         await openEmptyDB();
@@ -383,7 +383,7 @@ describe('Empty database', () => {
     test("empty homepage", async() => {
         await driver.get(rootURL);
 
-        if (config.BROWSER_TEST == "chrome") {
+        if (config.BROWSER_TEST == "chrome" && config.SCREENSHOTS_TESTS === true) {
             helpers.takeScreenshotForDocumentation("client-guide-empty-temp", driver);
 
             await helpers.waitMilli(2000);
