@@ -403,12 +403,23 @@ Ouvrez le fichier "*src/bin/server/javascripts/main-express.js*" et modifiez la 
 
 ## Lancer les tests
 
-Cette documentation sur les tests n'est pas complète ! Une doc complète sera écrite un jour...
-
 Si vous souhaitez lancer les tests, installez :
   1. GraphicsMagick : http://www.graphicsmagick.org
   2. Chrome : https://www.google.com/intl/fr_fr/chrome/
   3. Firefox : https://www.mozilla.org/fr/firefox/new/
+
+Vos versions de Chrome et de Firefox doivent être synchrones avec les versions des Drivers Selenium précisés dans le fichier *package.json*.
+Ensuite si votre fichier de configuration *apikeys.json* n'est pas complet, vous pouvez surcharger les variables dans un terminal via les commandes :
+```shell
+export CLIENT_API_KEY=<VALUE>
+export CLIENT_ID=<VALUE>
+```
+Enfin lancer les tests à l'aide de npm :
+```shell
+npm run chrome-tests
+```
+(ou remplacer *chrome* par *firefox* selon votre préférence).
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

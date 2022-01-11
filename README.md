@@ -403,12 +403,22 @@ Open file "*src/bin/server/javascripts/main-express.js*" then modify variable `v
 
 ## Launch tests
 
-This tests documentation is not complete! A complete doc will be written some day...
-
 If you want to run tests, install:
   1. GraphicsMagick: http://www.graphicsmagick.org
   2. Chrome: https://www.google.com/intl/fr_fr/chrome/
   3. Firefox: https://www.mozilla.org/fr/firefox/new/
+
+Your Chrome and Firefox versions must be the same as the Selenium Drivers versions in *package.json* file.
+Then if your configuration file *apikeys.json* is not complete you can override values with commands in a terminal:
+```shell
+export CLIENT_API_KEY=<VALUE>
+export CLIENT_ID=<VALUE>
+```
+Finally launch tests with npm:
+```shell
+npm run chrome-tests
+```
+(or remplace *chrome* with *firefox*).
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
