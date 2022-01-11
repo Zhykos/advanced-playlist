@@ -5,7 +5,6 @@
 /src/var/db.json
 /packaging/cvf-*
 /packaging/temp*
-/package-lock.json
 /coverage
 /tests/resources/*.temp
 /debug.log
