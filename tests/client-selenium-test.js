@@ -234,8 +234,8 @@ describe('Selenium tests', () => {
                         await elements[0].click();
                         await helpers.waitMilli(2000);
 
-                        driver.getCurrentUrl().then(function(url) {
-                            expect(url).toBe("https://www.youtube.com/watch?v=FK30dDJh7fQ");
+                        driver.getCurrentUrl().then(function(currentUrl) {
+                            expect(currentUrl).toBe("https://www.youtube.com/watch?v=FK30dDJh7fQ");
                         });
                     });
                 } else {
@@ -286,13 +286,7 @@ if (config.SCREENSHOTS_TESTS === true) {
     describe('Other screenshots', () => {
 
         test('Delete temp files', async() => {
-            helpers.deleteFile('./doc/images/client-guide-07-temp.jpg');
-            helpers.deleteFile('./doc/images/client-guide-09-temp.jpg');
-            helpers.deleteFile('./doc/images/client-guide-10-temp.jpg');
-            helpers.deleteFile('./doc/images/client-guide-12-temp.jpg');
-            helpers.deleteFile('./doc/images/client-guide-14-temp.jpg');
-            helpers.deleteFile('./doc/images/client-guide-15-temp.jpg');
-            helpers.deleteFile('./doc/images/client-guide-16-temp.jpg');
+            deleteTempFiles();
         });
 
         test('client-guide-06', () => {
@@ -342,6 +336,10 @@ if (config.SCREENSHOTS_TESTS === true) {
         });
 
         test('Delete temp files', async() => {
+            deleteTempFiles();
+        });
+
+        function deleteTempFiles() {
             helpers.deleteFile('./doc/images/client-guide-07-temp.jpg');
             helpers.deleteFile('./doc/images/client-guide-09-temp.jpg');
             helpers.deleteFile('./doc/images/client-guide-10-temp.jpg');
@@ -349,7 +347,7 @@ if (config.SCREENSHOTS_TESTS === true) {
             helpers.deleteFile('./doc/images/client-guide-14-temp.jpg');
             helpers.deleteFile('./doc/images/client-guide-15-temp.jpg');
             helpers.deleteFile('./doc/images/client-guide-16-temp.jpg');
-        });
+        }
 
     });
 }

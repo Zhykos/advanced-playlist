@@ -12,7 +12,7 @@ async function selectId(selector, driver) {
         until.elementLocated(By.id(selector)),
         waitUntilTime
     );
-    return await driver.wait(until.elementIsVisible(el), waitUntilTime);
+    return driver.wait(until.elementIsVisible(el), waitUntilTime);
 }
 exports.selectId = selectId;
 
