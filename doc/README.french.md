@@ -410,10 +410,6 @@ Si vous souhaitez lancer les tests, installez :
   2. Chrome : https://www.google.com/intl/fr_fr/chrome/
   3. Firefox : https://www.mozilla.org/fr/firefox/new/
 
-Remplissez vos identifiants Google avec votre utilisateur et mot de passe dans le fichier : "*tests/etc/passwords.json*". Ces identifiants sont ceux qui vous permettent de récupérer les clés API.
-
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square

@@ -7,7 +7,6 @@ const helpers = require('./tests-helpers');
 const www = require("../src/bin/server/javascripts/main-express");
 const vcfServer = require('../src/bin/server/javascripts/vcf-server');
 const config = require('../src/bin/config.js');
-const passwords = require('./etc/passwords.json');
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const fs = require('fs');
@@ -395,88 +394,6 @@ describe('Empty database', () => {
         }
     });
 
-    test.skip("fetch videos", async() => {
-        await driver.findElements(By.xpath('//*[@id="main"]/div[@class="video"]')).then(function(elements) {
-            expect(elements.length).toBe(0);
-        });
-
-        const linkConnect = await helpers.selectId('button-connection', driver);
-        await linkConnect.click();
-        await helpers.waitMilli(2000);
-
-        await driver.findElements(By.id("identifierId")).then(function(elements) {
-            expect(elements.length).toBe(1);
-            elements[0].sendKeys(passwords.youtube.login);
-        });
-
-        await driver.findElements(By.xpath('//*[@id="identifierNext"]/div/button')).then(function(elements) {
-            expect(elements.length).toBe(1);
-            elements[0].click();
-        });
-
-        await helpers.waitMilli(3000);
-
-        await driver.findElements(By.xpath('//*[@id="password"]/div[1]/div/div[1]/input')).then(async function(elements) {
-            if (elements.length == 0) {
-                // Not secured browser: try a workaround
-                await youtubeConnectionWorkaround();
-            } else {
-                expect(elements.length).toBe(1);
-                elements[0].sendKeys(passwords.youtube.password);
-            }
-        });
-
-        await driver.findElements(By.xpath('//*[@id="passwordNext"]/div/button')).then(function(elements) {
-            expect(elements.length).toBe(1);
-            elements[0].click();
-        });
-
-        if (passwords.youtube.hasDoubleAuth) {
-            await helpers.waitMilli(30000);
-        } else {
-            await helpers.waitMilli(3000);
-        }
-
-        helpers.takeScreenshotForDocumentation("client-guide-03", driver);
-
-        await driver.findElements(By.xpath('//*[@id="view_container"]/div/div/div[2]/div/div[1]/div/form/span/section/div/div/div/div/ul/li[1]/div')).then(function(elements) {
-            expect(elements.length).toBe(1);
-            elements[0].click();
-        });
-
-        await helpers.waitMilli(3000);
-
-        await driver.findElements(By.xpath('//*[@id="main"]/div[@class="video"]')).then(function(elements) {
-            expect(elements.length).toBe(0);
-        });
-
-        helpers.takeScreenshotForDocumentation("client-guide-04-temp1", driver);
-
-        const linkFetch = await helpers.selectId('button-fetch', driver);
-        await linkFetch.click();
-        await helpers.waitMilli(3000);
-
-        await driver.navigate().refresh();
-
-        await driver.findElements(By.xpath('//*[@id="main"]/div[@class="video"]')).then(function(elements) {
-            expect(elements.length).toBe(39);
-        });
-
-        if (config.BROWSER_TEST == "chrome") {
-            await helpers.cropImage('client-guide-03', 'client-guide-03-temp', 725, 205, 1205, 755).then(function() {
-                helpers.drawBlackRectangle('client-guide-03-temp', 'client-guide-03', 35, 205, 435, 345);
-            });
-
-            await helpers.cropImage('client-guide-04-temp1', 'client-guide-04-temp2', 0, 0, 643, 216).then(croppedImage => {
-                    helpers.drawRedNotFilledRectangle('client-guide-04-temp2', 'client-guide-04', 7, 15, 135, 45);
-                },
-                errMessage => { console.log(errMessage); }
-            );
-
-            await helpers.waitMilli(3000);
-        }
-    });
-
     test("delete temp files", async() => {
         helpers.deleteFile('./doc/images/client-guide-empty-temp.jpg');
         helpers.deleteFile('./doc/images/client-guide-03-temp.jpg');
@@ -497,27 +414,3 @@ describe('afterAll', () => {
     });
 
 });
-
-async function youtubeConnectionWorkaround() {
-    await driver.get("https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?client_id=717762328687-iludtf96g1hinl76e4lc1b9a82g457nn.apps.googleusercontent.com&scope=profile%20email&redirect_uri=https%3A%2F%2Fstackauth.com%2Fauth%2Foauth2%2Fgoogle&state=%7B%22sid%22%3A1%2C%22st%22%3A%2259%3A3%3Abbc%2C16%3A1b89f0b22616eb32%2C10%3A1621595940%2C16%3Ae12a61b3379196b1%2C188bfc7145ea5573409a4fc098820f09d4b8f81ccefc83a2eb628ed2ef312378%22%2C%22cdl%22%3Anull%2C%22cid%22%3A%22717762328687-iludtf96g1hinl76e4lc1b9a82g457nn.apps.googleusercontent.com%22%2C%22k%22%3A%22Google%22%2C%22ses%22%3A%22012e2c67171243b29dbb9582cfbff102%22%7D&response_type=code&flowName=GeneralOAuthFlow");
-
-
-    await driver.findElements(By.id("identifierId")).then(function(elements) {
-        expect(elements.length).toBe(1);
-        elements[0].sendKeys(passwords.youtube.login);
-    });
-
-    await driver.findElements(By.xpath('//*[@id="identifierNext"]/div/button')).then(function(elements) {
-        expect(elements.length).toBe(1);
-        elements[0].click();
-    });
-
-    await driver.findElements(By.xpath('//*[@id="password"]/div[1]/div/div[1]/input')).then(function(elements) {
-        expect(elements.length).toBe(1);
-        elements[0].sendKeys(passwords.youtube.password);
-
-    });
-
-    await helpers.waitMilli(1500);
-    await driver.get(rootURL);
-}

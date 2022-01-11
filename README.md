@@ -410,10 +410,6 @@ If you want to run tests, install:
   2. Chrome: https://www.google.com/intl/fr_fr/chrome/
   3. Firefox: https://www.mozilla.org/fr/firefox/new/
 
-Then fill in your Google IDs with login and password in file: "*tests/etc/passwords.json*". These IDs are the ones you used to get your API keys.
-
-
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
