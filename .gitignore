@@ -9,4 +9,3 @@
 /tests/resources/*.temp
 /debug.log
 /doc/images/*temp.jpg
-/pipeline.groovy
