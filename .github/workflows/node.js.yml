@@ -9,6 +9,8 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       matrix:
         browser: [chrome, firefox]
@@ -88,3 +90,12 @@ jobs:
         git update-index --chmod=+x ./package.sh
         chmod +xr ./package.sh
         ./package.sh 1.0.1-dev
+        cd -
+
+    - if: ${{ matrix.browser == 'chrome' }}
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "./packaging/cvf-v1.0.1-dev.zip,./packaging/cvf-v1.0.1-dev.hash"
+        body: "Development version built with GitHub Workflow: prefer stable version!"
+        token: ${{ secrets.GITHUB_TOKEN }}
+        draft: true
