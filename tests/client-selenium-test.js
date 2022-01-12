@@ -1,4 +1,4 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
+const { Builder, By } = require('selenium-webdriver');
 require('selenium-webdriver/chrome');
 require('selenium-webdriver/firefox');
 require('chromedriver');
@@ -10,6 +10,7 @@ const config = require('../src/bin/config.js');
 const lowdb = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 const fs = require('fs');
+const { Options } = require('selenium-webdriver/chrome');
 
 const rootURL = 'http://localhost:3000/';
 let driver;
@@ -41,8 +42,8 @@ describe('beforeAll', () => {
 
     test("beforeAll", async() => {
         jest.clearAllMocks();
-        driver = await new Builder().forBrowser(config.BROWSER_TEST).build();
-        await driver.manage().window().maximize();
+        driver = await new Builder().forBrowser(config.BROWSER_TEST).setChromeOptions(new Options().headless()).build();
+        // await driver.manage().window().maximize();
         await openDB();
     });
 
