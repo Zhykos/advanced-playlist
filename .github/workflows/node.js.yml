@@ -6,6 +6,10 @@ on:
   schedule:
     - cron:  '0 0 * * MON'
 
+strategy:
+  matrix:
+    browser: [chrome, firefox]
+
 jobs:
   tests:
     runs-on: ubuntu-latest
@@ -27,4 +31,4 @@ jobs:
       run: |
         export CLIENT_API_KEY=$YT_CLIENT_API_KEY
         export CLIENT_ID=$YT_CLIENT_ID
-        npm run firefox-tests
+        npm run ${{ matrix.browser }}-tests
