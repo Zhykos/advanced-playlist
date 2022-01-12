@@ -42,7 +42,14 @@ describe('beforeAll', () => {
 
     test("beforeAll", async() => {
         jest.clearAllMocks();
-        driver = await new Builder().forBrowser(config.BROWSER_TEST).setChromeOptions(new Options().headless()).build();
+        let builder = new Builder().forBrowser(config.BROWSER_TEST);
+        if (config.SCREENSHOTS_TESTS == "false") {
+            builder = builder.setChromeOptions(new Options().headless());
+        }
+        driver = await builder.build();
+        if (config.SCREENSHOTS_TESTS == "true") {
+            await driver.manage().window().maximize();
+        }
         await openDB();
     });
 
@@ -282,7 +289,7 @@ describe('Selenium tests', () => {
 });
 
 // Not a test but I dont care...
-if (config.SCREENSHOTS_TESTS === true) {
+if (config.SCREENSHOTS_TESTS == "true") {
     describe('Other screenshots', () => {
 
         test('Delete temp files', async() => {
@@ -381,7 +388,7 @@ describe('Empty database', () => {
     test("empty homepage", async() => {
         await driver.get(rootURL);
 
-        if (config.BROWSER_TEST == "chrome" && config.SCREENSHOTS_TESTS === true) {
+        if (config.BROWSER_TEST == "chrome" && config.SCREENSHOTS_TESTS == "true") {
             helpers.takeScreenshotForDocumentation("client-guide-empty-temp", driver);
 
             await helpers.waitMilli(2000);

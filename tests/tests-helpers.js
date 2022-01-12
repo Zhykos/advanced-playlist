@@ -1,6 +1,5 @@
 const { By, until } = require('selenium-webdriver');
 const fs = require('fs');
-// const pngToJpeg = require('png-to-jpeg');
 const Jimp = require('jimp');
 const gm = require('gm');
 const config = require('../src/bin/config.js');
@@ -85,19 +84,17 @@ async function assertCountElementsByClass(classSelector, expectedValue, driver) 
 exports.assertCountElementsByClass = assertCountElementsByClass;
 
 function takeScreenshotForDocumentation(filename, driver) {
-    if (config.BROWSER_TEST == "chrome" && config.SCREENSHOTS_TESTS === true) {
+    if (config.BROWSER_TEST == "chrome" && config.SCREENSHOTS_TESTS == "true") {
         driver.takeScreenshot().then(function(png64) {
-            const buffer = Buffer.from(png64, 'base64');
-            // pngToJpeg({ quality: 90 })(buffer).then(function(output) {
-            //     fs.writeFileSync("./doc/images/" + filename + ".jpg", output);
-            // });
+            let base64Data = png64.replace('data:image/png;base64,', "");
+            fs.writeFileSync("./doc/images/" + filename + ".jpg", base64Data, { encoding: 'base64' });
         });
     }
 }
 exports.takeScreenshotForDocumentation = takeScreenshotForDocumentation;
 
 function cropImage(inFilename, outFilename, x1, y1, x2, y2) {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         Jimp.read("./doc/images/" + inFilename + ".jpg")
             .then(image => {
                 image.crop(x1, y1, x2 - x1, y2 - y1).writeAsync("./doc/images/" + outFilename + ".jpg").then(function(res) {

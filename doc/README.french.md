@@ -404,9 +404,8 @@ Ouvrez le fichier "*src/bin/server/javascripts/main-express.js*" et modifiez la 
 ## Lancer les tests
 
 Si vous souhaitez lancer les tests, installez :
-  1. GraphicsMagick : http://www.graphicsmagick.org
-  2. Chrome : https://www.google.com/intl/fr_fr/chrome/
-  3. Firefox : https://www.mozilla.org/fr/firefox/new/
+  1. Chrome : https://www.google.com/intl/fr_fr/chrome/
+  2. Firefox : https://www.mozilla.org/fr/firefox/new/
 
 Vos versions de Chrome et de Firefox doivent être synchrones avec les versions des Drivers Selenium précisés dans le fichier *package.json*.
 Ensuite si votre fichier de configuration *apikeys.json* n'est pas complet, vous pouvez surcharger les variables dans un terminal via les commandes :

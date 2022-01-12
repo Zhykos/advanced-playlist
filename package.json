@@ -15,7 +15,8 @@
         "start": "node ./custom-video-feed/bin/server/javascripts/main-express.js",
         "dev": "nodemon ./src/bin/server/javascripts/main-express.js",
         "chrome-tests": "set BROWSER_TEST=chrome && set SCREENSHOTS_TESTS=false && jest --coverage",
-        "firefox-tests": "set BROWSER_TEST=firefox && set SCREENSHOTS_TESTS=false && jest --coverage"
+        "firefox-tests": "set BROWSER_TEST=firefox && set SCREENSHOTS_TESTS=false && jest --coverage",
+        "doc-screen-tests": "set BROWSER_TEST=chrome && set SCREENSHOTS_TESTS=true && jest"
     },
     "dependencies": {
         "cookie-parser": "~1.4.5",
