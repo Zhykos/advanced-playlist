@@ -100,7 +100,7 @@ jobs:
         cd packaging
         git update-index --chmod=+x ./package.sh
         chmod +xr ./package.sh
-        ./package.sh ${{ env.VERSION_PRODUCT }}-dev
+        ./package.sh ${{ env.VERSION_PRODUCT }}
         cd -
 
     - if: ${{ matrix.browser == 'chrome' }}
