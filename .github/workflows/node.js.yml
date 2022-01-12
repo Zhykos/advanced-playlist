@@ -7,7 +7,7 @@ on:
     - cron:  '0 0 * * MON'
 
 env:
-  VVERSION_PRODUCT: "1.0.1-dev"
+  VERSION_PRODUCT: "1.0.1-dev"
 
 jobs:
   tests:
@@ -100,14 +100,14 @@ jobs:
         cd packaging
         git update-index --chmod=+x ./package.sh
         chmod +xr ./package.sh
-        ./package.sh ${{ VERSION_PRODUCT }}-dev
+        ./package.sh ${{ env.VERSION_PRODUCT }}-dev
         cd -
 
     - if: ${{ matrix.browser == 'chrome' }}
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "./packaging/cvf-v${{ VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ VERSION_PRODUCT }}.hash"
+        artifacts: "./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.hash"
         body: "Development version built with GitHub Workflow: prefer stable version!"
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: true
-        tag: ${{ VERSION_PRODUCT }}
+        tag: ${{ env.VERSION_PRODUCT }}
