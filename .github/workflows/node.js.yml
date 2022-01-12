@@ -7,7 +7,7 @@ on:
     - cron:  '0 0 * * MON'
 
 env:
-  VERSION_PRODUCT: 1.0.1-dev
+  VVERSION_PRODUCT: "1.0.1-dev"
 
 jobs:
   tests:
