@@ -123,3 +123,4 @@ jobs:
         prerelease: true
         tag: ${{ env.VERSION_PRODUCT }}
         removeArtifacts: true
+        allowUpdates: true
