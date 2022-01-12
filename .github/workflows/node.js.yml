@@ -76,7 +76,7 @@ jobs:
         gistID: 1e17cccbecd6e44805d33ee6a300e44b
         filename: fr.zhykos.videocustomfeed_latest.json
         label: Test Coverage
-        message: ${{ env.COVERAGE }}
+        message: ${{ env.COVERAGE }} %
         color: green
         namedLogo: jest
         style: flat-square

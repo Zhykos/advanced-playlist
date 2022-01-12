@@ -4,6 +4,7 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![Workflow][workflow-shield]][workflow-url]
+[![Coverage][coverage-shield]][workflow-url]
 
 
 <!-- PROJECT LOGO -->
@@ -434,3 +435,4 @@ npm run chrome-tests
 [license-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/master/LICENSE.txt
 [workflow-shield]: https://img.shields.io/github/workflow/status/Zhykos/fr.zhykos.videocustomfeed/CI?style=flat-square
 [workflow-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/actions/workflows/node.js.yml
+[coverage-shield]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Zhykos/1e17cccbecd6e44805d33ee6a300e44b/raw/fr.zhykos.videocustomfeed_latest.json
