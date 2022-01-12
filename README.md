@@ -401,6 +401,11 @@ Project link: [https://github.com/Zhykos/fr.zhykos.videocustomfeed](https://gith
 
 Open file "*src/bin/server/javascripts/main-express.js*" then modify variable `var port = 3000;` with port number you want to use.
 
+### What is the purpose of the GPG file in *Releases*?
+
+It's a encrypted et signed file with my public GPG file (see next question).
+You can download this file, check it then extract zip file from it.
+
 ### Where is the public key to verify zip signature?
 
 Here: "https://www.zhykos.fr/Thomas-Cicognani_0x70FD2EF8_public.asc"

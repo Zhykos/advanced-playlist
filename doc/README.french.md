@@ -401,9 +401,14 @@ Lien du projet : [https://github.com/Zhykos/fr.zhykos.videocustomfeed](https://g
 
 Ouvrez le fichier "*src/bin/server/javascripts/main-express.js*" et modifiez la variable `var port = 3000;` avec le numéro de port que vous souhaitez utiliser.
 
+### À quoi correspond le fichier GPG dans les *Releases* ?
+
+Il s'agit d'un fichier chiffré et signé avec ma clé GPG publique (voir question suivante).
+Vous pouvez juste télécharger ce fichier, le vérifier et extraire le zip de celui-ci.
+
 ### Où se trouve la clé publique pour vérifier la signature du fichier zip ?
 
-Ici : "https://www.zhykos.fr/Thomas-Cicognani_0x70FD2EF8_public.asc"
+Ici : "https://www.zhykos.fr/Thomas-Cicognani_0x70FD2EF8_public.asc"11
 
 
 ## Lancer les tests
