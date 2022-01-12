@@ -1,11 +1,10 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
 [![Workflow][workflow-shield]][workflow-url]
 [![Coverage][coverage-shield]][workflow-url]
+[![MIT License][license-shield]][license-url]
+[![Issues][issues-shield]][issues-url]
 
+[![Stable release][release-stable-shield]][release-url]
+[![Draft release][release-draft-shield]][release-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -432,16 +431,19 @@ npm run chrome-tests
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[contributors-shield]: https://img.shields.io/github/contributors/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
 [contributors-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[forks-shield]: https://img.shields.io/github/forks/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
 [forks-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/network/members
-[stars-shield]: https://img.shields.io/github/stars/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[stars-shield]: https://img.shields.io/github/stars/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
 [stars-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[issues-shield]: https://img.shields.io/github/issues/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge&logo=GitHub&label=bugs
 [issues-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues
-[license-shield]: https://img.shields.io/github/license/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
+[license-shield]: https://img.shields.io/github/license/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge&label=LICENCE
 [license-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/master/LICENSE.txt
-[workflow-shield]: https://img.shields.io/github/workflow/status/Zhykos/fr.zhykos.videocustomfeed/CI?style=flat-square
+[workflow-shield]: https://img.shields.io/github/workflow/status/Zhykos/fr.zhykos.videocustomfeed/CI?style=for-the-badge&logo=Node.js
 [workflow-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/actions/workflows/node.js.yml
-[coverage-shield]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Zhykos/1e17cccbecd6e44805d33ee6a300e44b/raw/fr.zhykos.videocustomfeed_latest.json
+[coverage-shield]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Zhykos/1e17cccbecd6e44805d33ee6a300e44b/raw/fr.zhykos.videocustomfeed_latest.json&label=COUVERTURE
+[release-stable-shield]: https://img.shields.io/github/v/release/Zhykos/fr.zhykos.videocustomfeed?style=for-the-badge&logo=YouTubeStudio
+[release-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/releases
+[release-draft-shield]: https://img.shields.io/badge/Release-DRAFT-orange?style=for-the-badge

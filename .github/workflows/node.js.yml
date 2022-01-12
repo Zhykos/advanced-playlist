@@ -88,11 +88,11 @@ jobs:
         auth: ${{ secrets.GIST }}
         gistID: 1e17cccbecd6e44805d33ee6a300e44b
         filename: fr.zhykos.videocustomfeed_latest.json
-        label: Test Coverage
+        label: COVERAGE
         message: ${{ env.COVERAGE }} %
         color: green
         namedLogo: jest
-        style: flat-square
+        style: for-the-badge
 
     - if: ${{ matrix.browser == 'chrome' }}
       name: Create release zip
