@@ -112,12 +112,12 @@ jobs:
 
     - if: ${{ matrix.browser == 'chrome' }}
       name: Sign zip
-      run: gpg --output ./packaging/cvf-v${{ env.VERSION_PRODUCT }}.sig --sign ./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip
+      run: gpg --sign ./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip
 
     - if: ${{ matrix.browser == 'chrome' }}
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.hash,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.sig"
+        artifacts: "./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.hash,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip.gpg"
         body: "Development version built with GitHub Workflow: prefer stable version!"
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: true
