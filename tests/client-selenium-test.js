@@ -43,7 +43,6 @@ describe('beforeAll', () => {
     test("beforeAll", async() => {
         jest.clearAllMocks();
         driver = await new Builder().forBrowser(config.BROWSER_TEST).setChromeOptions(new Options().headless()).build();
-        // await driver.manage().window().maximize();
         await openDB();
     });
 
