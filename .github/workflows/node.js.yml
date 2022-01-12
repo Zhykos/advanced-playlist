@@ -7,7 +7,7 @@ on:
     - cron:  '0 0 * * MON'
 
 env:
-  VERSION_PRODUCT: "1.0.1-dev"
+  VERSION_PRODUCT: "1.0.1"
 
 jobs:
   tests:
@@ -120,6 +120,6 @@ jobs:
         artifacts: "./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.hash,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip.gpg"
         body: "Development version built with GitHub Workflow: prefer stable version!"
         token: ${{ secrets.GITHUB_TOKEN }}
-        draft: true
+        prerelease: true
         tag: ${{ env.VERSION_PRODUCT }}
         removeArtifacts: true

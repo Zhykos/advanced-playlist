@@ -1,27 +1,27 @@
-cvf-v1.0.1-dev:
+cvf-v1.0.1:
 LICENSE.txt
 custom-video-feed
 package.json
 readme.txt
 release-note.md
 
-cvf-v1.0.1-dev/custom-video-feed:
+cvf-v1.0.1/custom-video-feed:
 bin
 etc
 var
 
-cvf-v1.0.1-dev/custom-video-feed/bin:
+cvf-v1.0.1/custom-video-feed/bin:
 client
 config.js
 server
 
-cvf-v1.0.1-dev/custom-video-feed/bin/client:
+cvf-v1.0.1/custom-video-feed/bin/client:
 favicon.ico
 images
 javascripts
 stylesheets
 
-cvf-v1.0.1-dev/custom-video-feed/bin/client/images:
+cvf-v1.0.1/custom-video-feed/bin/client/images:
 blacklist.png
 hide.png
 loading.gif
@@ -31,28 +31,28 @@ play.png
 visible.png
 whitelist.png
 
-cvf-v1.0.1-dev/custom-video-feed/bin/client/javascripts:
+cvf-v1.0.1/custom-video-feed/bin/client/javascripts:
 vcf-client-helpers.js
 vcf-client.js
 
-cvf-v1.0.1-dev/custom-video-feed/bin/client/stylesheets:
+cvf-v1.0.1/custom-video-feed/bin/client/stylesheets:
 style.css
 
-cvf-v1.0.1-dev/custom-video-feed/bin/server:
+cvf-v1.0.1/custom-video-feed/bin/server:
 javascripts
 views
 
-cvf-v1.0.1-dev/custom-video-feed/bin/server/javascripts:
+cvf-v1.0.1/custom-video-feed/bin/server/javascripts:
 main-express.js
 vcf-server-helpers.js
 vcf-server.js
 
-cvf-v1.0.1-dev/custom-video-feed/bin/server/views:
+cvf-v1.0.1/custom-video-feed/bin/server/views:
 error.pug
 index.pug
 
-cvf-v1.0.1-dev/custom-video-feed/etc:
+cvf-v1.0.1/custom-video-feed/etc:
 apikeys.json
 channels.json
 
-cvf-v1.0.1-dev/custom-video-feed/var:
+cvf-v1.0.1/custom-video-feed/var:
