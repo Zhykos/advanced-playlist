@@ -20,11 +20,11 @@ jobs:
     - run: npm ci
     - name: Install ChromeDriver for Ubuntu
       run: npm install chromedriver@96.0.0
-    - name: Export secret variables
+    - name: Launch tests
       env:
         YT_CLIENT_API_KEY: ${{ secrets.CLIENT_API_KEY }}
         YT_CLIENT_ID: ${{ secrets.CLIENT_ID }}
       run: |
         export CLIENT_API_KEY=$YT_CLIENT_API_KEY
         export CLIENT_ID=$YT_CLIENT_ID
-        npm run chrome-tests
+        npm run firefox-tests
