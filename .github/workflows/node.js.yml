@@ -26,6 +26,6 @@ jobs:
         YT_CLIENT_API_KEY: ${{ secrets.CLIENT_API_KEY }}
         YT_CLIENT_ID: ${{ secrets.CLIENT_ID }}
       run: |
-        export CLIENT_API_KEY=$YT_CLIENT_API_KEY
-        export CLIENT_ID=$YT_CLIENT_ID
+        export CLIENT_API_KEY=test
+        export CLIENT_ID=test
     - run: npm run chrome-tests
