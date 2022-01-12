@@ -85,4 +85,5 @@ jobs:
       name: Create release zip
       run: |
         cd packaging
+        git update-index --chmod=+x ./package.sh
         ./package.sh 1.0.1-dev
