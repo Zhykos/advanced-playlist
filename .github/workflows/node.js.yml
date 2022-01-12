@@ -28,4 +28,4 @@ jobs:
       run: |
         export CLIENT_API_KEY=test
         export CLIENT_ID=test
-    - run: npm run chrome-tests
+        npm run chrome-tests
