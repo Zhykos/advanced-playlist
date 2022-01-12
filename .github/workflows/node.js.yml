@@ -9,9 +9,8 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    environment: test
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js
@@ -22,4 +21,12 @@ jobs:
     - run: npm ci
     - name: Install ChromeDriver for Ubuntu
       run: npm install chromedriver@96.0.0
+    - shell: bash
+      name: Export secret variables
+      env:
+        CLIENT_API_KEY: ${{ secrets.CLIENT_API_KEY }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+      run: |
+        export CLIENT_API_KEY=$CLIENT_API_KEY
+        export CLIENT_ID=$CLIENT_ID
     - run: npm run chrome-tests
