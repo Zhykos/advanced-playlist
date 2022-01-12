@@ -20,6 +20,6 @@ jobs:
         node-version: 14.x
         cache: 'npm'
     - run: npm ci
-    - name: Install Chromium
-      run: sudo apt-get install chromium-browser
+    - name: Install ChromeDriver for Ubuntu
+      run: npm install chromedriver@96.0.0
     - run: npm run chrome-tests
