@@ -15,6 +15,8 @@ jobs:
       matrix:
         browser: [chrome, firefox]
     environment: tests
+    env:
+      VERSION_PRODUCT: 1.0.1-dev
     steps:
 
     - uses: actions/checkout@v2
@@ -96,13 +98,14 @@ jobs:
         cd packaging
         git update-index --chmod=+x ./package.sh
         chmod +xr ./package.sh
-        ./package.sh 1.0.1-dev
+        ./package.sh ${{ VERSION_PRODUCT }}-dev
         cd -
 
     - if: ${{ matrix.browser == 'chrome' }}
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "./packaging/cvf-v1.0.1-dev.zip,./packaging/cvf-v1.0.1-dev.hash"
+        artifacts: "./packaging/cvf-v${{ VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ VERSION_PRODUCT }}.hash"
         body: "Development version built with GitHub Workflow: prefer stable version!"
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: true
+        tag: ${{ VERSION_PRODUCT }}
