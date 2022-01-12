@@ -3,6 +3,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+[![Workflow][workflow-shield]][workflow-url]
 
 
 
@@ -432,3 +433,5 @@ npm run chrome-tests
 [issues-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues
 [license-shield]: https://img.shields.io/github/license/Zhykos/fr.zhykos.videocustomfeed.svg?style=flat-square
 [license-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/master/LICENSE.txt
+[workflow-shield]: https://img.shields.io/github/workflow/status/Zhykos/fr.zhykos.videocustomfeed/CI?style=flat-square
+[workflow-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/actions/workflows/node.js.yml
