@@ -80,3 +80,9 @@ jobs:
         color: green
         namedLogo: jest
         style: flat-square
+
+    - if: ${{ matrix.browser == 'chrome' }}
+      name: Create release zip
+      run: |
+        cd packaging
+        ./package.sh 1.0.1-dev
