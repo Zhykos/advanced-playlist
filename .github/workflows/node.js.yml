@@ -6,13 +6,12 @@ on:
   schedule:
     - cron:  '0 0 * * MON'
 
-strategy:
-  matrix:
-    browser: [chrome, firefox]
-
 jobs:
   tests:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
     environment: tests
     steps:
     - uses: actions/checkout@v2
