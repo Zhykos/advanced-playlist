@@ -122,3 +122,4 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: true
         tag: ${{ env.VERSION_PRODUCT }}
+        removeArtifacts: true
