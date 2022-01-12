@@ -34,7 +34,6 @@
         "jest-expect-message": "^1.0.2",
         "jimp": "^0.16.1",
         "nodemon": "^2.0.12",
-        "png-to-jpeg": "^1.0.1",
         "selenium-webdriver": "3.x"
     },
     "nodemonConfig": {

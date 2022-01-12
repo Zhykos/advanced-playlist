@@ -1,6 +1,6 @@
 const { By, until } = require('selenium-webdriver');
 const fs = require('fs');
-const pngToJpeg = require('png-to-jpeg');
+// const pngToJpeg = require('png-to-jpeg');
 const Jimp = require('jimp');
 const gm = require('gm');
 const config = require('../src/bin/config.js');
@@ -88,9 +88,9 @@ function takeScreenshotForDocumentation(filename, driver) {
     if (config.BROWSER_TEST == "chrome" && config.SCREENSHOTS_TESTS === true) {
         driver.takeScreenshot().then(function(png64) {
             const buffer = Buffer.from(png64, 'base64');
-            pngToJpeg({ quality: 90 })(buffer).then(function(output) {
-                fs.writeFileSync("./doc/images/" + filename + ".jpg", output);
-            });
+            // pngToJpeg({ quality: 90 })(buffer).then(function(output) {
+            //     fs.writeFileSync("./doc/images/" + filename + ".jpg", output);
+            // });
         });
     }
 }
