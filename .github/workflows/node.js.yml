@@ -121,6 +121,6 @@ jobs:
         body: "Development version built with GitHub Workflow: prefer stable version!"
         token: ${{ secrets.GITHUB_TOKEN }}
         prerelease: true
-        tag: ${{ env.VERSION_PRODUCT }}
+        name: ${{ env.VERSION_PRODUCT }}
         removeArtifacts: true
         allowUpdates: true
