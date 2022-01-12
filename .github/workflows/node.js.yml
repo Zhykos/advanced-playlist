@@ -120,7 +120,7 @@ jobs:
         artifacts: "./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.hash,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip.gpg"
         body: "Development version built with GitHub Workflow: prefer stable version!"
         token: ${{ secrets.GITHUB_TOKEN }}
-        prerelease: true
-        name: ${{ env.VERSION_PRODUCT }}
+        draft: true
+        tag: ${{ env.VERSION_PRODUCT }}
         removeArtifacts: true
         allowUpdates: true
