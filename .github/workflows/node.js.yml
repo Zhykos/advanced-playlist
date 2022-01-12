@@ -16,15 +16,21 @@ jobs:
         browser: [chrome, firefox]
     environment: tests
     steps:
+
     - uses: actions/checkout@v2
+
     - name: Use Node.js
       uses: actions/setup-node@v2
       with:
         node-version: 14.x
         cache: 'npm'
+
     - run: npm ci
-    - name: Install ChromeDriver for Ubuntu
+
+    - if: ${{ matrix.browser == 'chrome' }}
+      name: Install ChromeDriver for Ubuntu
       run: npm install chromedriver@96.0.0
+
     - name: Launch tests
       env:
         YT_CLIENT_API_KEY: ${{ secrets.CLIENT_API_KEY }}
@@ -70,6 +76,7 @@ jobs:
         echo $BRANCH_NAME
         # process.env.BRANCH = 'pull_27';
         echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
+
     - if: ${{ matrix.browser == 'chrome' }}
       name: Create the Badge
       uses: schneegans/dynamic-badges-action@v1.0.0
