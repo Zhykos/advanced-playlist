@@ -104,9 +104,20 @@ jobs:
         cd -
 
     - if: ${{ matrix.browser == 'chrome' }}
+      name: Import GPG Key
+      uses: crazy-max/ghaction-import-gpg@v1
+      env:
+        GPG_PRIVATE_KEY: ${{ secrets.PGP_PRIVATE_KEY }}
+        PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
+
+    - if: ${{ matrix.browser == 'chrome' }}
+      name: Sign zip
+      run: gpg --output ./packaging/cvf-v${{ env.VERSION_PRODUCT }}.sig --sign ./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip
+
+    - if: ${{ matrix.browser == 'chrome' }}
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.hash"
+        artifacts: "./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.hash,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.sig"
         body: "Development version built with GitHub Workflow: prefer stable version!"
         token: ${{ secrets.GITHUB_TOKEN }}
         draft: true
