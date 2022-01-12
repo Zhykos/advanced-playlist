@@ -86,4 +86,5 @@ jobs:
       run: |
         cd packaging
         git update-index --chmod=+x ./package.sh
+        chmod +xr ./package.sh
         ./package.sh 1.0.1-dev
