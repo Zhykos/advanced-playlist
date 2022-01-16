@@ -44,7 +44,14 @@ jobs:
         export CLIENT_ID=$YT_CLIENT_ID
         SUMMARY="$(npm run ${{ matrix.browser }}-tests | tail -2 | head -1)"
         TOKENS=($SUMMARY)
-        echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+        #echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+        mkdir -p artifact-bak
+        echo ${TOKENS[2]} > artifact-bak/coverage.txt
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: coverage-artifact
+        path: partifact-bak/coverage.txt
 
   badge:
     needs: tests
@@ -56,6 +63,10 @@ jobs:
     steps:
     # Coverage badge: https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
     # Only run the coverage once
+    - uses: actions/download-artifact@v2
+      with:
+        name: coverage-artifact
+
     - name: Get Coverage for badge
       run: |
         # var SUMMARY = [
@@ -74,6 +85,8 @@ jobs:
         #TOKENS=($SUMMARY)
         # process.env.COVERAGE = '31.93%';
         #echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+        COVERAGE=`cat artifact-bak/coverage.txt`
+        echo "COVERAGE=$(echo $COVERAGE)" >> $GITHUB_ENV
 
         # var REF = 'refs/pull/27/merge.json';
         REF=${{ github.ref }}
@@ -108,6 +121,8 @@ jobs:
     environment: tests
 
     steps:
+    - uses: actions/checkout@v2
+
     - name: Create release zip
       run: |
         cd packaging
