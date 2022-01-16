@@ -67,6 +67,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: coverage-artifact
+        path: artifact-bak
 
     - name: Get Coverage for badge
       run: |
