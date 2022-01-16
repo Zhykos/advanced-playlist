@@ -46,10 +46,16 @@ jobs:
         TOKENS=($SUMMARY)
         echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
 
+badge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    environment: tests
+
+    steps:
     # Coverage badge: https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
     # Only run the coverage once
-    - if: ${{ matrix.browser == 'chrome' }}
-      name: Get Coverage for badge
+    - name: Get Coverage for badge
       run: |
         # var SUMMARY = [
         #   '',
@@ -81,8 +87,7 @@ jobs:
         # process.env.BRANCH = 'pull_27';
         echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
 
-    - if: ${{ matrix.browser == 'chrome' }}
-      name: Create the Badge
+    - name: Create coverage badge
       uses: schneegans/dynamic-badges-action@v1.0.0
       with:
         auth: ${{ secrets.GIST }}
@@ -94,8 +99,14 @@ jobs:
         namedLogo: jest
         style: for-the-badge
 
-    - if: ${{ matrix.browser == 'chrome' }}
-      name: Create release zip
+  packaging:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    environment: tests
+
+    steps:
+    - name: Create release zip
       run: |
         cd packaging
         git update-index --chmod=+x ./package.sh
@@ -103,18 +114,16 @@ jobs:
         ./package.sh ${{ env.VERSION_PRODUCT }}
         cd -
 
-    - if: ${{ matrix.browser == 'chrome' }}
-      name: Import GPG Key
+    - name: Import GPG Key
       uses: crazy-max/ghaction-import-gpg@v1
       env:
         GPG_PRIVATE_KEY: ${{ secrets.PGP_PRIVATE_KEY }}
         PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
 
-    - if: ${{ matrix.browser == 'chrome' }}
-      name: Sign zip
+    - name: Sign zip
       run: gpg --sign ./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip
 
-    - if: ${{ matrix.browser == 'chrome' }}
+    - name: Release
       uses: ncipollo/release-action@v1
       with:
         artifacts: "./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.hash,./packaging/cvf-v${{ env.VERSION_PRODUCT }}.zip.gpg"
