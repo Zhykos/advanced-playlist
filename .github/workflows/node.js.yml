@@ -51,7 +51,8 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: coverage-artifact
-        path: partifact-bak/coverage.txt
+        path: artifact-bak/coverage.txt
+        if-no-files-found: error
 
   badge:
     needs: tests
