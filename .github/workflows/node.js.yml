@@ -46,7 +46,7 @@ jobs:
         TOKENS=($SUMMARY)
         echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
 
-badge:
+  badge:
     runs-on: ubuntu-latest
     permissions:
       contents: write
