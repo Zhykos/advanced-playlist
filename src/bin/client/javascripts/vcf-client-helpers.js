@@ -11,10 +11,11 @@ function authenticate() {
                 console.log('Sign-in successful');
             },
             function(err) {
-                console.error('Error signing in', err);
+                console.error('Error signing in: ' + err);
             }
         );
 }
+exports.authenticate = authenticate;
 
 function loadClient(callback) {
     gapi.client.setApiKey(vcf.clientApiKey);
@@ -30,10 +31,11 @@ function loadClient(callback) {
                 }
             },
             function(err) {
-                console.error('Error loading Google API client', err);
+                console.error('Error loading Google API client: ' + err);
             }
         );
 }
+exports.loadClient = loadClient;
 
 function execute() {
     if (vcf.channels.length == 0) {
@@ -42,6 +44,7 @@ function execute() {
         vcf.channels.forEach((channel) => insertDataFromChannel(channel.id));
     }
 }
+exports.execute = execute;
 
 function insertDataFromChannel(channelId) {
     gapi.client.youtube.channels
@@ -54,7 +57,7 @@ function insertDataFromChannel(channelId) {
                 const items = response.result.items;
                 if (items.length == 0) {
                     console.error(
-                        `No playlist found on channel '${channelId}'.`
+                        `No channel found with id: '${channelId}'.`
                     );
                 } else {
                     insertDataFromUploadedPlaylist(
@@ -64,10 +67,11 @@ function insertDataFromChannel(channelId) {
                 }
             },
             function(err) {
-                console.error('Execute error', err);
+                console.error('Cannot get channels: ' + err);
             }
         );
 }
+exports.insertDataFromChannel = insertDataFromChannel;
 
 function insertDataFromUploadedPlaylist(uploadPlaylistId, channelIconUrl) {
     gapi.client.youtube.playlistItems
@@ -93,10 +97,11 @@ function insertDataFromUploadedPlaylist(uploadPlaylistId, channelIconUrl) {
                 }
             },
             function(err) {
-                console.error('Execute error', err);
+                console.error('Cannot get playlists: ' + err);
             }
         );
 }
+exports.insertDataFromUploadedPlaylist = insertDataFromUploadedPlaylist;
 
 function insertDataFromVideoId(videoId, channelIconUrl) {
     gapi.client.youtube.videos
@@ -122,16 +127,21 @@ function insertDataFromVideoId(videoId, channelIconUrl) {
                         visible: true,
                         channelImage: channelIconUrl,
                     };
-                    $.post('/addVideoInDatabase', videoData, function(data) {
-                        console.log('ok');
-                    });
+                    $.post('/addVideoInDatabase', videoData)
+                        .done(function(unused) {
+                            console.log('ok');
+                        })
+                        .fail(function(unused) {
+                            console.error('KO');
+                        });
                 }
             },
             function(err) {
-                console.error('Execute error', err);
+                console.error('Cannot get videos from API: ' + err);
             }
         );
 }
+exports.insertDataFromVideoId = insertDataFromVideoId;
 
 function displayIframeVideoPlayer(videoId) {
     const iframe = `<iframe width="480" height="270" src="//www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
@@ -142,7 +152,7 @@ exports.displayIframeVideoPlayer = displayIframeVideoPlayer
 
 function swapVisibility(videoId, canDisplayHiddenVideos) {
     $.post('/swapVisibility', { videoId: videoId })
-        .done(function(data) {
+        .done(function(unused) {
             if ($('#img_' + videoId).hasClass('hiddenImage')) {
                 $('#img_' + videoId).removeClass('hiddenImage');
                 $('#title_' + videoId).removeClass('hiddenText');
@@ -161,19 +171,23 @@ function swapVisibility(videoId, canDisplayHiddenVideos) {
             }
             console.log('ok');
         })
-        .fail(function(data) {
-            console.log('KO');
+        .fail(function(unused) {
+            console.error('KO');
         });
     if (canDisplayHiddenVideos != 'true' && canDisplayHiddenVideos !== true) {
         $('#video_' + videoId).hide();
     }
 }
+exports.swapVisibility = swapVisibility
 
 function displayIframeVideoPlayerThenMask(videoId, canDisplayHiddenVideos) {
     displayIframeVideoPlayer(videoId);
     swapVisibility(videoId, canDisplayHiddenVideos);
 }
+exports.displayIframeVideoPlayerThenMask = displayIframeVideoPlayerThenMask
 
+/* Verified with Selenium! */
+/* istanbul ignore next */
 function openWebsite(videoId) {
     const win = window.open(
         `https://www.youtube.com/watch?v=${videoId}`,
@@ -187,12 +201,14 @@ function displayHiddenVideos() {
     parameters.hidden = 'true';
     reloadCurrentPageWithParameters(parameters);
 }
+exports.displayHiddenVideos = displayHiddenVideos;
 
 function hideMaskedVideos() {
     const parameters = getParametersFromUrl();
     parameters.hidden = 'false';
     reloadCurrentPageWithParameters(parameters);
 }
+exports.hideMaskedVideos = hideMaskedVideos;
 
 function reloadCurrentPageWithParameters(parameters) {
     var newUrl = window.location.protocol + '//' + window.location.host;
@@ -205,6 +221,7 @@ function reloadCurrentPageWithParameters(parameters) {
     }
     window.location.href = newUrl;
 }
+exports.reloadCurrentPageWithParameters = reloadCurrentPageWithParameters;
 
 function displayVideosFromChannel(channelId) {
     const parameters = getParametersFromUrl();
@@ -215,8 +232,12 @@ function displayVideosFromChannel(channelId) {
     }
     reloadCurrentPageWithParameters(parameters);
 }
+exports.displayVideosFromChannel = displayVideosFromChannel;
 
 // https://stackoverflow.com/a/8486188
+/*
+ * "?arg1=foo&arg2=hello" gives { arg1: 'foo', arg2: 'hello' }
+ */
 function getParametersFromUrl() {
     const url = window.location.search;
     const query = url.substr(1);
@@ -229,3 +250,4 @@ function getParametersFromUrl() {
     });
     return result;
 }
+exports.getParametersFromUrl = getParametersFromUrl;
