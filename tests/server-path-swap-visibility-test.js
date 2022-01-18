@@ -24,58 +24,99 @@ function openDB(filename) {
     const dbTests = lowdb(adapter);
     dbTests.defaults({ videos: [] }).write();
     dbTests.defaults({ channels: [] }).write();
-    jest.spyOn(server.db, "get").mockImplementation(getWhat => dbTests.get(getWhat));
-    jest.spyOn(server.db, "has").mockImplementation(getWhat => dbTests.has(getWhat));
+    jest.spyOn(server.db, 'get').mockImplementation((getWhat) =>
+        dbTests.get(getWhat)
+    );
+    jest.spyOn(server.db, 'has').mockImplementation((getWhat) =>
+        dbTests.has(getWhat)
+    );
     return dbTests;
 }
 
 describe('Path: swap visibility tests', () => {
-
     beforeAll(() => {
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-05.temp');
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-06.temp');
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-07.temp');
+        helpers.deleteFile(
+            './tests/resources/db-tests-for-modification-05.temp'
+        );
+        helpers.deleteFile(
+            './tests/resources/db-tests-for-modification-06.temp'
+        );
+        helpers.deleteFile(
+            './tests/resources/db-tests-for-modification-07.temp'
+        );
 
-        fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-05.temp');
-        fs.copyFileSync('./tests/resources/db-tests-for-modification.json', './tests/resources/db-tests-for-modification-06.temp');
+        fs.copyFileSync(
+            './tests/resources/db-tests-for-modification.json',
+            './tests/resources/db-tests-for-modification-05.temp'
+        );
+        fs.copyFileSync(
+            './tests/resources/db-tests-for-modification.json',
+            './tests/resources/db-tests-for-modification-06.temp'
+        );
     });
 
     afterAll(() => {
         jest.clearAllMocks();
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-05.temp');
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-06.temp');
-        helpers.deleteFile('./tests/resources/db-tests-for-modification-07.temp');
+        helpers.deleteFile(
+            './tests/resources/db-tests-for-modification-05.temp'
+        );
+        helpers.deleteFile(
+            './tests/resources/db-tests-for-modification-06.temp'
+        );
+        helpers.deleteFile(
+            './tests/resources/db-tests-for-modification-07.temp'
+        );
     });
 
     test('Swap', () => {
-        const videoIdToSwap = "video-01";
-        const request = { "body": { "videoId": videoIdToSwap } };
+        const videoIdToSwap = 'video-01';
+        const request = { body: { videoId: videoIdToSwap } };
         const response = mockResponse();
 
         const dbTests = openDB('db-tests-for-modification-05.temp');
 
         expect(dbTests.get('videos').size().value()).toBe(1);
-        expect(dbTests.get('videos').filter({ videoId: videoIdToSwap }).value()[0].videoTitle).toBe("Video 01");
-        expect(dbTests.get('videos').filter({ videoId: videoIdToSwap }).value()[0].visible).toBe(true);
+        expect(
+            dbTests.get('videos').filter({ videoId: videoIdToSwap }).value()[0]
+                .videoTitle
+        ).toBe('Video 01');
+        expect(
+            dbTests.get('videos').filter({ videoId: videoIdToSwap }).value()[0]
+                .visible
+        ).toBe(true);
         expect(dbTests.get('channels').size().value()).toBe(1);
-        expect(dbTests.get('channels').filter({ channelId: "channel-01" }).value()[0].channelTitle).toBe("Channel 01");
+        expect(
+            dbTests
+                .get('channels')
+                .filter({ channelId: 'channel-01' })
+                .value()[0].channelTitle
+        ).toBe('Channel 01');
 
         server.path_swapVisibility(request, response);
 
         expect(dbTests.get('videos').size().value()).toBe(1);
-        expect(dbTests.get('videos').filter({ videoId: videoIdToSwap }).value()[0].visible).toBe(false);
+        expect(
+            dbTests.get('videos').filter({ videoId: videoIdToSwap }).value()[0]
+                .visible
+        ).toBe(false);
         expect(dbTests.get('channels').size().value()).toBe(1);
     });
 
     test('Video does not exist', () => {
-        const videoIdToSwap = "video-foo";
-        const request = { "body": { "videoId": videoIdToSwap } };
+        const videoIdToSwap = 'video-foo';
+        const request = { body: { videoId: videoIdToSwap } };
         const response = mockResponse();
 
         const dbTests = openDB('db-tests-for-modification-06.temp');
 
         expect(dbTests.get('videos').size().value()).toBe(1);
-        expect(dbTests.get('videos').filter({ videoId: videoIdToSwap }).size().value()).toBe(0);
+        expect(
+            dbTests
+                .get('videos')
+                .filter({ videoId: videoIdToSwap })
+                .size()
+                .value()
+        ).toBe(0);
 
         server.path_swapVisibility(request, response);
 
@@ -83,8 +124,8 @@ describe('Path: swap visibility tests', () => {
     });
 
     test('Empty database', () => {
-        const videoIdToSwap = "video-foo";
-        const request = { "body": { "videoId": videoIdToSwap } };
+        const videoIdToSwap = 'video-foo';
+        const request = { body: { videoId: videoIdToSwap } };
         const response = mockResponse();
 
         const dbTests = openDB('db-tests-for-modification-07.temp');
@@ -95,5 +136,4 @@ describe('Path: swap visibility tests', () => {
 
         expect(response.status).toHaveBeenCalledWith(500);
     });
-
 });

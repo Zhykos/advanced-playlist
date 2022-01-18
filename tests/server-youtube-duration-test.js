@@ -1,17 +1,20 @@
 const helpers = require('../src/bin/server/javascripts/vcf-server-helpers');
 
 describe('Youtube duration into seconds tests', () => {
-
     test('1H', () => {
         expect(helpers.youtubeDurationIntoSeconds('1H')).toBe(1 * 60 * 60);
     });
 
     test('1H30M', () => {
-        expect(helpers.youtubeDurationIntoSeconds('1H30M')).toBe(1 * 60 * 60 + 30 * 60);
+        expect(helpers.youtubeDurationIntoSeconds('1H30M')).toBe(
+            1 * 60 * 60 + 30 * 60
+        );
     });
 
     test('1H30M15S', () => {
-        expect(helpers.youtubeDurationIntoSeconds('1H30M15S')).toBe(1 * 60 * 60 + 30 * 60 + 15);
+        expect(helpers.youtubeDurationIntoSeconds('1H30M15S')).toBe(
+            1 * 60 * 60 + 30 * 60 + 15
+        );
     });
 
     test('30M', () => {
@@ -23,7 +26,9 @@ describe('Youtube duration into seconds tests', () => {
     });
 
     test('Inverted format youtubeDurationIntoSeconds (30M1H)', () => {
-        expect(helpers.youtubeDurationIntoSeconds('30M1H')).toBe(1 * 60 * 60 + 30 * 60);
+        expect(helpers.youtubeDurationIntoSeconds('30M1H')).toBe(
+            1 * 60 * 60 + 30 * 60
+        );
     });
 
     test('Wrong format youtubeDurationIntoSeconds (30Z)', () => {
@@ -49,5 +54,4 @@ describe('Youtube duration into seconds tests', () => {
     test('Number parameter youtubeDurationIntoSeconds (4)', () => {
         expect(helpers.youtubeDurationIntoSeconds(4)).toBe(-1);
     });
-
 });

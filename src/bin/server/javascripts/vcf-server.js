@@ -29,54 +29,90 @@ function path_root(req, res) {
     var lastChannelTitle;
     const channels = [];
     const hasWhiteMap = new Map();
-    if (!req.query.hidden || req.query.hidden == "false" || req.query.hidden == "true") {
+    if (
+        !req.query.hidden ||
+        req.query.hidden == 'false' ||
+        req.query.hidden == 'true'
+    ) {
         var visibleVideosStream = db.get('videos');
-        if (!req.query.hidden || req.query.hidden == "false") {
-            visibleVideosStream = visibleVideosStream.filter((v => v.visible == 'true' || v.visible));
+        if (!req.query.hidden || req.query.hidden == 'false') {
+            visibleVideosStream = visibleVideosStream.filter(
+                (v) => v.visible == 'true' || v.visible
+            );
         }
-        if (req.query.channel && req.query.channel != "all") {
-            visibleVideosStream = visibleVideosStream.filter({ channelId: req.query.channel });
+        if (req.query.channel && req.query.channel != 'all') {
+            visibleVideosStream = visibleVideosStream.filter({
+                channelId: req.query.channel,
+            });
         }
-        const visibleVideos = visibleVideosStream.sortBy('publishDate').value().reverse();
-        visibleVideos.forEach(video => {
+        const visibleVideos = visibleVideosStream
+            .sortBy('publishDate')
+            .value()
+            .reverse();
+        visibleVideos.forEach((video) => {
             helpers.setFilterStatus(video);
             if (video.filter == helpers.filterStatus.WHITELIST) {
                 hasWhiteMap.set(video.channelId, true);
             }
         });
-        visibleVideos.forEach(video => {
-            if (req.query.hidden == "true" || (hasWhiteMap.has(video.channelId) && video.filter == helpers.filterStatus.WHITELIST) || (!hasWhiteMap.has(video.channelId) && video.filter == helpers.filterStatus.NONE)) {
-                const channelsInDBFilter = db.get('channels').filter({ channelId: video.channelId }).value();
+        visibleVideos.forEach((video) => {
+            if (
+                req.query.hidden == 'true' ||
+                (hasWhiteMap.has(video.channelId) &&
+                    video.filter == helpers.filterStatus.WHITELIST) ||
+                (!hasWhiteMap.has(video.channelId) &&
+                    video.filter == helpers.filterStatus.NONE)
+            ) {
+                const channelsInDBFilter = db
+                    .get('channels')
+                    .filter({ channelId: video.channelId })
+                    .value();
                 video.channelTitle = channelsInDBFilter[0].channelTitle;
                 lastChannelTitle = channelsInDBFilter[0].channelTitle;
                 videos.push(video);
             }
         });
         const channelsInDB = db.get('channels').sortBy('channelTitle').value();
-        channelsInDB.forEach(channel => {
+        channelsInDB.forEach((channel) => {
             channels.push(channel);
         });
-        if (!lastChannelTitle && req.query.channel && req.query.channel != "all") {
+        if (
+            !lastChannelTitle &&
+            req.query.channel &&
+            req.query.channel != 'all'
+        ) {
             lastChannelTitle = undefined;
             channels.length = 0;
         }
-        if (!req.query.channel || req.query.channel == "all") {
+        if (!req.query.channel || req.query.channel == 'all') {
             lastChannelTitle = undefined;
         }
     }
-    var displayHiddenVideos = "false";
+    var displayHiddenVideos = 'false';
     if (req.query.hidden) {
         displayHiddenVideos = req.query.hidden;
     }
-    res.render('index', { videos: videos, channels: channels, displayHiddenVideos: displayHiddenVideos, channel: req.query.channel, channelTitle: lastChannelTitle, whiteChannels: hasWhiteMap });
+    res.render('index', {
+        videos: videos,
+        channels: channels,
+        displayHiddenVideos: displayHiddenVideos,
+        channel: req.query.channel,
+        channelTitle: lastChannelTitle,
+        whiteChannels: hasWhiteMap,
+    });
 }
 exports.pathRoot = path_root;
 
 app.post('/addVideoInDatabase', path_addVideoInDatabase);
 
 function path_addVideoInDatabase(req, res) {
-    if (!db.has('videos').value() || !db.get('videos').find({ videoId: req.body.videoId }).value()) {
-        const videoDuration = helpers.youtubeDurationIntoSeconds(req.body.videoDuration);
+    if (
+        !db.has('videos').value() ||
+        !db.get('videos').find({ videoId: req.body.videoId }).value()
+    ) {
+        const videoDuration = helpers.youtubeDurationIntoSeconds(
+            req.body.videoDuration
+        );
         const newVideoData = {
             videoId: req.body.videoId,
             videoThumbnailSrc: req.body.videoThumbnailSrc,
@@ -84,15 +120,18 @@ function path_addVideoInDatabase(req, res) {
             videoDuration: videoDuration,
             channelId: req.body.channelId,
             publishDate: req.body.publishDate,
-            visible: req.body.visible
+            visible: req.body.visible,
         };
         db.get('videos').push(newVideoData).write();
     }
-    if (!db.has('channels').value() || !db.get('channels').find({ channelId: req.body.channelId }).value()) {
+    if (
+        !db.has('channels').value() ||
+        !db.get('channels').find({ channelId: req.body.channelId }).value()
+    ) {
         const newChannelData = {
             channelTitle: req.body.channelTitle,
             channelId: req.body.channelId,
-            channelImage: req.body.channelImage
+            channelImage: req.body.channelImage,
         };
         db.get('channels').push(newChannelData).write();
     }
@@ -118,7 +157,11 @@ exports.path_swapVisibility = path_swapVisibility;
 app.post('/getParameters', path_getParameters);
 
 function path_getParameters(req, res) {
-    res.json({ clientApiKey: config.CLIENT_API_KEY, clientId: config.CLIENT_ID, channels: vcf_channels.channels });
+    res.json({
+        clientApiKey: config.CLIENT_API_KEY,
+        clientId: config.CLIENT_ID,
+        channels: vcf_channels.channels,
+    });
     res.end();
 }
 exports.path_getParameters = path_getParameters;
