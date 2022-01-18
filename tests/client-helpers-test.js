@@ -83,6 +83,11 @@ afterEach(() => {
     jest.resetAllMocks();
 });
 
+afterAll(() => {
+    delete(global.gapi)
+    delete(global.vcf)
+});
+
 test('displayIframeVideoPlayer', () => {
     document.body.innerHTML =
         '<div id="iframe"></div>' +
