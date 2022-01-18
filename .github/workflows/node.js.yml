@@ -42,17 +42,7 @@ jobs:
       run: |
         export CLIENT_API_KEY=$YT_CLIENT_API_KEY
         export CLIENT_ID=$YT_CLIENT_ID
-        SUMMARY="$(npm run ${{ matrix.browser }}-tests | tail -2 | head -1)"
-        TOKENS=($SUMMARY)
-        #echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
-        mkdir -p artifact-bak
-        echo ${TOKENS[2]} > artifact-bak/coverage.txt
-
-    - uses: actions/upload-artifact@v2
-      with:
-        name: coverage-artifact
-        path: artifact-bak/coverage.txt
-        if-no-files-found: error
+        npm run ${{ matrix.browser }}-tests
 
   badge:
     needs: tests
@@ -62,15 +52,30 @@ jobs:
     environment: tests
 
     steps:
-    # Coverage badge: https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
-    # Only run the coverage once
-    - uses: actions/download-artifact@v2
-      with:
-        name: coverage-artifact
-        path: artifact-bak
+    - uses: actions/checkout@v2
 
-    - name: Get Coverage for badge
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+        cache: 'npm'
+
+    - run: npm ci
+
+    - name: Install ChromeDriver for Ubuntu
+      run: npm install chromedriver@96.0.0
+
+    # Coverage badge: https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
+    - name: Launch tests then set Coverage for badge
+      env:
+        YT_CLIENT_API_KEY: ${{ secrets.CLIENT_API_KEY }}
+        YT_CLIENT_ID: ${{ secrets.CLIENT_ID }}
       run: |
+        export CLIENT_API_KEY=$YT_CLIENT_API_KEY
+        export CLIENT_ID=$YT_CLIENT_ID
+        SUMMARY="$(npm run chrome-tests | tail -2 | head -1)"
+        TOKENS=($SUMMARY)
+        echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
         # var SUMMARY = [
         #   '',
         #   '=============================== Coverage summary ===============================',
@@ -87,8 +92,8 @@ jobs:
         #TOKENS=($SUMMARY)
         # process.env.COVERAGE = '31.93%';
         #echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
-        COVERAGE=`cat artifact-bak/coverage.txt`
-        echo "COVERAGE=$(echo $COVERAGE)" >> $GITHUB_ENV
+        #COVERAGE=`cat artifact-bak/coverage.txt`
+        #echo "COVERAGE=$(echo $COVERAGE)" >> $GITHUB_ENV
 
         # var REF = 'refs/pull/27/merge.json';
         REF=${{ github.ref }}
