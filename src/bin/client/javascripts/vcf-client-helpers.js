@@ -7,10 +7,10 @@ function authenticate() {
             redirect_uri: 'http://localhost:3000',
         })
         .then(
-            function () {
+            function() {
                 console.log('Sign-in successful');
             },
-            function (err) {
+            function(err) {
                 console.error('Error signing in', err);
             }
         );
@@ -21,7 +21,7 @@ function loadClient(callback) {
     return gapi.client
         .load('https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest')
         .then(
-            function () {
+            function() {
                 console.log('Google API client loaded');
                 $('#fetch').show();
                 $('#connection').hide();
@@ -29,7 +29,7 @@ function loadClient(callback) {
                     callback();
                 }
             },
-            function (err) {
+            function(err) {
                 console.error('Error loading Google API client', err);
             }
         );
@@ -50,7 +50,7 @@ function insertDataFromChannel(channelId) {
             id: channelId,
         })
         .then(
-            function (response) {
+            function(response) {
                 const items = response.result.items;
                 if (items.length == 0) {
                     console.error(
@@ -63,7 +63,7 @@ function insertDataFromChannel(channelId) {
                     );
                 }
             },
-            function (err) {
+            function(err) {
                 console.error('Execute error', err);
             }
         );
@@ -77,7 +77,7 @@ function insertDataFromUploadedPlaylist(uploadPlaylistId, channelIconUrl) {
             maxResults: 50,
         })
         .then(
-            function (response) {
+            function(response) {
                 const videoItems = response.result.items;
                 if (videoItems.length == 0) {
                     console.error(
@@ -92,7 +92,7 @@ function insertDataFromUploadedPlaylist(uploadPlaylistId, channelIconUrl) {
                     );
                 }
             },
-            function (err) {
+            function(err) {
                 console.error('Execute error', err);
             }
         );
@@ -105,7 +105,7 @@ function insertDataFromVideoId(videoId, channelIconUrl) {
             id: videoId,
         })
         .then(
-            function (response) {
+            function(response) {
                 const videoItems = response.result.items;
                 if (videoItems.length == 0) {
                     console.error(`No video found with ID '${videoId}'.`);
@@ -122,12 +122,12 @@ function insertDataFromVideoId(videoId, channelIconUrl) {
                         visible: true,
                         channelImage: channelIconUrl,
                     };
-                    $.post('/addVideoInDatabase', videoData, function (data) {
+                    $.post('/addVideoInDatabase', videoData, function(data) {
                         console.log('ok');
                     });
                 }
             },
-            function (err) {
+            function(err) {
                 console.error('Execute error', err);
             }
         );
@@ -138,10 +138,11 @@ function displayIframeVideoPlayer(videoId) {
     $('#iframe').html(iframe);
     $('#popup').fadeIn('slow');
 }
+exports.displayIframeVideoPlayer = displayIframeVideoPlayer
 
 function swapVisibility(videoId, canDisplayHiddenVideos) {
     $.post('/swapVisibility', { videoId: videoId })
-        .done(function (data) {
+        .done(function(data) {
             if ($('#img_' + videoId).hasClass('hiddenImage')) {
                 $('#img_' + videoId).removeClass('hiddenImage');
                 $('#title_' + videoId).removeClass('hiddenText');
@@ -160,7 +161,7 @@ function swapVisibility(videoId, canDisplayHiddenVideos) {
             }
             console.log('ok');
         })
-        .fail(function (data) {
+        .fail(function(data) {
             console.log('KO');
         });
     if (canDisplayHiddenVideos != 'true' && canDisplayHiddenVideos !== true) {
@@ -197,7 +198,7 @@ function reloadCurrentPageWithParameters(parameters) {
     var newUrl = window.location.protocol + '//' + window.location.host;
     if (parameters) {
         const params = [];
-        Object.keys(parameters).forEach(function (key) {
+        Object.keys(parameters).forEach(function(key) {
             params.push(key + '=' + parameters[key]);
         });
         newUrl += '?' + params.join('&');

@@ -17,7 +17,8 @@
         "chrome-tests": "set BROWSER_TEST=chrome && set SCREENSHOTS_TESTS=false && jest --coverage",
         "firefox-tests": "set BROWSER_TEST=firefox && set SCREENSHOTS_TESTS=false && jest --coverage",
         "doc-screen-tests": "set BROWSER_TEST=chrome && set SCREENSHOTS_TESTS=true && jest",
-        "pretty": "npx prettier --write **.js"
+        "pretty": "npx prettier --write **.js",
+        "tests-dev": "set BROWSER_TEST=chrome && set SCREENSHOTS_TESTS=false && jest --coverage --watchAll"
     },
     "dependencies": {
         "cookie-parser": "~1.4.5",
@@ -35,9 +36,10 @@
         "jest": "^26.6.3",
         "jest-expect-message": "^1.0.2",
         "jimp": "^0.16.1",
+        "jquery": "^3.6.0",
         "nodemon": "^2.0.12",
-        "selenium-webdriver": "3.x",
-        "prettier": "2.5.1"
+        "prettier": "2.5.1",
+        "selenium-webdriver": "3.x"
     },
     "nodemonConfig": {
         "ignore": [
@@ -51,7 +53,7 @@
         "collectCoverage": true,
         "collectCoverageFrom": [
             "<rootDir>/src/bin/server/javascripts/vcf*.js",
-            "!<rootDir>/node_modules/"
+            "<rootDir>/src/bin/client/javascripts/vcf*.js"
         ],
         "moduleNameMapper": {
             "./etc/channels.json": "<rootDir>/tests/resources/tests-parameters.json"
@@ -63,6 +65,9 @@
             "text-summary",
             "text",
             "json-summary"
+        ],
+        "setupFiles": [
+            "<rootDir>/tests/resources/test-env.js"
         ]
     }
 }
