@@ -27,23 +27,6 @@ global.gapi = {
         func();
     },
     client: {
-        //     youtube: {
-        //         videos: {
-        //             list(unused) {
-        //                 return CUSTOMTHEN;
-        //             }
-        //         },
-        //         playlistItems: {
-        //             list(unused) {
-        //                 return CUSTOMTHEN;
-        //             }
-        //         },
-        //         channels: {
-        //             list(unused) {
-        //                 return CUSTOMTHEN;
-        //             }
-        //         }
-        //     },
         setApiKey(unused) {
             // Do nothing
         },
@@ -136,14 +119,7 @@ describe('client ; error', () => {
 
 describe('client ; ok', () => {
 
-    const server = setupServer(
-        rest.post('http://localhost/getParameters', (unused, res, ctx) => {
-            return res(ctx.json({
-                clientApiKey: 'foo',
-                clientId: 'foo'
-            }))
-        })
-    )
+    const server = initMockServerWithFooSettings()
 
     beforeAll(() => server.listen())
     afterEach(() => server.resetHandlers())
@@ -169,14 +145,7 @@ describe('client ; ok', () => {
 
 describe('client ; ok ; not connected', () => {
 
-    const server = setupServer(
-        rest.post('http://localhost/getParameters', (unused, res, ctx) => {
-            return res(ctx.json({
-                clientApiKey: 'foo',
-                clientId: 'foo'
-            }))
-        })
-    )
+    const server = initMockServerWithFooSettings()
 
     beforeAll(() => server.listen())
     afterEach(() => server.resetHandlers())
@@ -207,4 +176,15 @@ function initDom() {
         '<div id="settings-error" style="display:none"></div>' +
         '<div id="connection"></div>' +
         '<div id="fetch"></div>';
+}
+
+function initMockServerWithFooSettings() {
+    return setupServer(
+        rest.post('http://localhost/getParameters', (unused, res, ctx) => {
+            return res(ctx.json({
+                clientApiKey: 'foo',
+                clientId: 'foo'
+            }))
+        })
+    );
 }

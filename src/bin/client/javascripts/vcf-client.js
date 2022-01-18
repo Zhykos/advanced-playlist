@@ -1,5 +1,3 @@
-// const { loadClient } = require('./vcf-client-helpers.js');
-
 var vcf;
 
 function init() {
