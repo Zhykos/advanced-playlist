@@ -6,6 +6,7 @@
         "Cnygly",
         "flaticon",
         "Forkez",
+        "gapi",
         "geckodriver",
         "ghaction",
         "javascripts",
@@ -25,5 +26,6 @@
         "Xpyrp",
         "YYBN",
         "Zhykos"
-    ]
+    ],
+    "prettier.requireConfig": true
 }
