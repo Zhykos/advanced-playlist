@@ -50,7 +50,7 @@
         "delay": "2500"
     },
     "jest": {
-        "testRegex": "./tests/(server)-.*test.js$",
+        "testRegex": "./tests/(server|client)-.*test.js$",
         "collectCoverage": true,
         "collectCoverageFrom": [
             "<rootDir>/src/bin/server/javascripts/vcf*.js",
