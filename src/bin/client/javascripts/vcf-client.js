@@ -2,7 +2,7 @@ var vcf;
 
 function init() {
     $.post('/getParameters')
-        .done(function(res) {
+        .done(function (res) {
             vcf = res;
             if (
                 vcf.clientApiKey == '<XXX>' ||
@@ -13,13 +13,13 @@ function init() {
                 $('#settings-error').show();
                 $('#connection').hide();
             } else {
-                gapi.load('client:auth2', function() {
+                gapi.load('client:auth2', function () {
                     gapi.auth2
                         .init({ client_id: vcf.clientId })
-                        .then(function() {
+                        .then(function () {
                             const GoogleAuth = gapi.auth2.getAuthInstance();
                             if (GoogleAuth.isSignedIn.get()) {
-                                loadClient(function() {
+                                loadClient(function () {
                                     $('#loading').hide();
                                     $('#contents').show();
                                 });
@@ -33,8 +33,8 @@ function init() {
                 });
             }
         })
-        .fail(function(data) {
-            console.error("Error getting API parameters: " + data);
+        .fail(function (data) {
+            console.error('Error getting API parameters: ' + data);
         });
 }
 exports.init = init;

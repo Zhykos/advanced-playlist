@@ -50,7 +50,7 @@ async function openEmptyDB() {
 }
 
 describe('beforeAll', () => {
-    test('beforeAll', async() => {
+    test('beforeAll', async () => {
         jest.clearAllMocks();
         let builder = new Builder().forBrowser(config.BROWSER_TEST);
         if (config.SCREENSHOTS_TESTS == 'false') {
@@ -65,12 +65,12 @@ describe('beforeAll', () => {
 });
 
 describe('Selenium tests', () => {
-    test('Init tests', async() => {
+    test('Init tests', async () => {
         await driver.get(rootURL);
         helpers.takeScreenshotForDocumentation('client-guide-00', driver);
     });
 
-    test('Display hidden videos', async() => {
+    test('Display hidden videos', async () => {
         // Default display
 
         await helpers.assertNoId('video_TuAc5KxXGQ4', driver);
@@ -109,7 +109,7 @@ describe('Selenium tests', () => {
         await helpers.assertCountElementsByClass('video', 38, driver);
     });
 
-    test('Change channel', async() => {
+    test('Change channel', async () => {
         // Default display
 
         await helpers.selectId('video_f5s2yomPNL0', driver);
@@ -151,7 +151,7 @@ describe('Selenium tests', () => {
         await helpers.selectId('video_4QXpyrp8WUo', driver);
     });
 
-    test('Open video iframe', async() => {
+    test('Open video iframe', async () => {
         // Default display
 
         await helpers.assertIsNotVisibleById('popup', driver);
@@ -177,7 +177,7 @@ describe('Selenium tests', () => {
         await helpers.selectId('video_4QXpyrp8WUo', driver);
     });
 
-    test('Open video then mask', async() => {
+    test('Open video then mask', async () => {
         // Default display
 
         await helpers.assertIsNotVisibleById('popup', driver);
@@ -201,7 +201,7 @@ describe('Selenium tests', () => {
         await helpers.assertIsNotVisibleById('video_4QXpyrp8WUo', driver);
     });
 
-    test('Mask video', async() => {
+    test('Mask video', async () => {
         // Default display
 
         await helpers.selectId('video_FK30dDJh7fQ', driver);
@@ -214,7 +214,7 @@ describe('Selenium tests', () => {
         await helpers.assertIsNotVisibleById('video_FK30dDJh7fQ', driver);
     });
 
-    test('Show masked video', async() => {
+    test('Show masked video', async () => {
         // Default display
 
         await helpers.assertIsNotVisibleById('video_FK30dDJh7fQ', driver);
@@ -248,7 +248,7 @@ describe('Selenium tests', () => {
         await helpers.assertIsVisibleById('video_FK30dDJh7fQ', driver);
     });
 
-    test('Open video in source website', async() => {
+    test('Open video in source website', async () => {
         // Default display
 
         await helpers.assertIsVisibleById('video_FK30dDJh7fQ', driver);
@@ -262,10 +262,10 @@ describe('Selenium tests', () => {
         await linkOpenOrigin.click();
         await helpers.waitMilli(2000);
 
-        await driver.getAllWindowHandles().then(function(handles) {
+        await driver.getAllWindowHandles().then(function (handles) {
             driver.switchTo().window(handles[1]);
             helpers.assertNoId('video_FK30dDJh7fQ', driver);
-            driver.getCurrentUrl().then(async function(url) {
+            driver.getCurrentUrl().then(async function (url) {
                 if (url.includes('consent.youtube.com')) {
                     // new consent page for unlogged accounts
                     await driver
@@ -274,12 +274,12 @@ describe('Selenium tests', () => {
                                 '//div/div/div/div[2]/div[1]/div[4]/form/div[1]/div/button/span'
                             )
                         )
-                        .then(async function(elements) {
+                        .then(async function (elements) {
                             expect(elements.length).toBe(1);
                             await elements[0].click();
                             await helpers.waitMilli(2000);
 
-                            driver.getCurrentUrl().then(function(currentUrl) {
+                            driver.getCurrentUrl().then(function (currentUrl) {
                                 expect(currentUrl).toBe(
                                     'https://www.youtube.com/watch?v=FK30dDJh7fQ'
                                 );
@@ -300,11 +300,11 @@ describe('Selenium tests', () => {
         await helpers.assertIsVisibleById('video_FK30dDJh7fQ', driver);
     });
 
-    test('No error', async() => {
+    test('No error', async () => {
         await helpers.assertIsNotVisibleById('settings-error', driver);
     });
 
-    test('Check CSS', async() => {
+    test('Check CSS', async () => {
         const linkShowHidden = await helpers.selectId(
             'button-show-hidden',
             driver
@@ -349,7 +349,7 @@ describe('Selenium tests', () => {
 // Not a test but I dont care...
 if (config.SCREENSHOTS_TESTS == 'true') {
     describe('Other screenshots', () => {
-        test('Delete temp files', async() => {
+        test('Delete temp files', async () => {
             deleteTempFiles();
         });
 
@@ -374,7 +374,7 @@ if (config.SCREENSHOTS_TESTS == 'true') {
                     805,
                     449
                 )
-                .then(function() {
+                .then(function () {
                     helpers.drawRedNotFilledRectangle(
                         'client-guide-07-temp',
                         'client-guide-07',
@@ -396,7 +396,7 @@ if (config.SCREENSHOTS_TESTS == 'true') {
                     581,
                     386
                 )
-                .then(function() {
+                .then(function () {
                     helpers.drawRedNotFilledRectangle(
                         'client-guide-09-temp',
                         'client-guide-09',
@@ -418,7 +418,7 @@ if (config.SCREENSHOTS_TESTS == 'true') {
                     581,
                     386
                 )
-                .then(function() {
+                .then(function () {
                     helpers.drawRedNotFilledRectangle(
                         'client-guide-10-temp',
                         'client-guide-10',
@@ -440,7 +440,7 @@ if (config.SCREENSHOTS_TESTS == 'true') {
                     1202,
                     353
                 )
-                .then(function() {
+                .then(function () {
                     helpers.drawRedNotFilledRectangle(
                         'client-guide-12-temp',
                         'client-guide-12',
@@ -462,7 +462,7 @@ if (config.SCREENSHOTS_TESTS == 'true') {
                     1283,
                     488
                 )
-                .then(function() {
+                .then(function () {
                     helpers.drawRedNotFilledRectangle(
                         'client-guide-14-temp',
                         'client-guide-14',
@@ -484,7 +484,7 @@ if (config.SCREENSHOTS_TESTS == 'true') {
                     407,
                     532
                 )
-                .then(function() {
+                .then(function () {
                     helpers.drawRedNotFilledRectangle(
                         'client-guide-15-temp',
                         'client-guide-15',
@@ -506,7 +506,7 @@ if (config.SCREENSHOTS_TESTS == 'true') {
                     999,
                     342
                 )
-                .then(function() {
+                .then(function () {
                     helpers.drawRedNotFilledRectangle(
                         'client-guide-16-temp',
                         'client-guide-16',
@@ -518,7 +518,7 @@ if (config.SCREENSHOTS_TESTS == 'true') {
                 });
         });
 
-        test('Delete temp files', async() => {
+        test('Delete temp files', async () => {
             deleteTempFiles();
         });
 
@@ -535,18 +535,18 @@ if (config.SCREENSHOTS_TESTS == 'true') {
 }
 
 describe('Selenium error tests', () => {
-    test('Init error tests', async() => {
+    test('Init error tests', async () => {
         config.CLIENT_API_KEY = '<XXX>';
         await driver.get(rootURL);
     });
 
-    test('No parameter file', async() => {
+    test('No parameter file', async () => {
         await helpers.assertIsVisibleById('settings-error', driver);
     });
 });
 
 describe('Empty database', () => {
-    test('Init empty database', async() => {
+    test('Init empty database', async () => {
         config.CLIENT_API_KEY = clientApiKeyBackup;
         vcfServer.vcf_channels.channels.splice(0, 9);
         jest.clearAllMocks();
@@ -557,7 +557,7 @@ describe('Empty database', () => {
         helpers.deleteFile('./doc/images/client-guide-04-temp2.jpg');
     });
 
-    test('empty homepage', async() => {
+    test('empty homepage', async () => {
         await driver.get(rootURL);
 
         if (
@@ -580,7 +580,7 @@ describe('Empty database', () => {
                     649,
                     290
                 )
-                .then(function() {
+                .then(function () {
                     helpers.drawRedNotFilledRectangle(
                         'client-guide-01',
                         'client-guide-02',
@@ -593,7 +593,7 @@ describe('Empty database', () => {
         }
     });
 
-    test('delete temp files', async() => {
+    test('delete temp files', async () => {
         helpers.deleteFile('./doc/images/client-guide-empty-temp.jpg');
         helpers.deleteFile('./doc/images/client-guide-03-temp.jpg');
         helpers.deleteFile('./doc/images/client-guide-04-temp1.jpg');
@@ -602,7 +602,7 @@ describe('Empty database', () => {
 });
 
 describe('afterAll', () => {
-    test('afterAll', async() => {
+    test('afterAll', async () => {
         jest.clearAllMocks();
         helpers.deleteFile('./tests/resources/db-zhykos.temp');
         helpers.deleteFile('./tests/resources/db-empty.temp');

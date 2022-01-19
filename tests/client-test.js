@@ -11,16 +11,18 @@ const mockedConsoleError = (output) => consoleErrorOutput.push(output);
 const THEN = {
     then(func) {
         func();
-    }
-}
+    },
+};
 
 const GoogleAuth = {
     isSignedIn: {
-        get() { /* TO MOCK */ }
-    }
-}
+        get() {
+            /* TO MOCK */
+        },
+    },
+};
 
-global.vcf = { clientApiKey: '' }
+global.vcf = { clientApiKey: '' };
 
 global.gapi = {
     load(unused, func) {
@@ -32,7 +34,7 @@ global.gapi = {
         },
         load(unused) {
             return THEN;
-        }
+        },
     },
     auth2: {
         init() {
@@ -40,18 +42,17 @@ global.gapi = {
         },
         getAuthInstance() {
             return GoogleAuth;
-        }
-    }
-}
-
+        },
+    },
+};
 
 beforeEach(() => {
     console.error = mockedConsoleError;
     consoleErrorOutput = [];
-    initDom()
+    initDom();
     jest.clearAllMocks();
     jest.resetAllMocks();
-})
+});
 
 afterEach(() => {
     console.error = originalConsoleError;
@@ -60,113 +61,109 @@ afterEach(() => {
 });
 
 afterAll(() => {
-    delete(global.gapi)
-    delete(global.vcf)
+    delete global.gapi;
+    delete global.vcf;
 });
 
 describe('client ; no auth', () => {
-
     const server = setupServer(
         rest.post('http://localhost/getParameters', (unused, res, ctx) => {
-            return res(ctx.json({
-                clientApiKey: '<XXX>',
-                clientId: '<YYY>.apps.googleusercontent.com'
-            }))
+            return res(
+                ctx.json({
+                    clientApiKey: '<XXX>',
+                    clientId: '<YYY>.apps.googleusercontent.com',
+                })
+            );
         })
-    )
+    );
 
-    beforeAll(() => server.listen())
-    afterEach(() => server.resetHandlers())
-    afterAll(() => server.close())
+    beforeAll(() => server.listen());
+    afterEach(() => server.resetHandlers());
+    afterAll(() => server.close());
 
-    test('client', async() => {
+    test('client', async () => {
         init();
         await new Promise((r) => setTimeout(r, 2000));
 
         expect(consoleErrorOutput).toMatchObject([]);
-        expect($('#loading').css('display')).toBe('none')
-        expect($('#contents').css('display')).toBe('block')
-        expect($('#settings-error').css('display')).toBe('block')
-        expect($('#connection').css('display')).toBe('none')
+        expect($('#loading').css('display')).toBe('none');
+        expect($('#contents').css('display')).toBe('block');
+        expect($('#settings-error').css('display')).toBe('block');
+        expect($('#connection').css('display')).toBe('none');
     });
-
 });
 
 describe('client ; error', () => {
-
     const server = setupServer(
         rest.post('http://localhost/getParameters', (unused, res, ctx) => {
-            return res(ctx.status(500))
+            return res(ctx.status(500));
         })
-    )
+    );
 
-    beforeAll(() => server.listen())
-    afterEach(() => server.resetHandlers())
-    afterAll(() => server.close())
+    beforeAll(() => server.listen());
+    afterEach(() => server.resetHandlers());
+    afterAll(() => server.close());
 
-    test('client', async() => {
+    test('client', async () => {
         init();
         await new Promise((r) => setTimeout(r, 2000));
 
-        expect(consoleErrorOutput).toMatchObject(["Error getting API parameters: [object Object]"]);
-        expect($('#loading').css('display')).toBe('block')
-        expect($('#contents').css('display')).toBe('none')
-        expect($('#settings-error').css('display')).toBe('none')
-        expect($('#connection').css('display')).toBe('block')
+        expect(consoleErrorOutput).toMatchObject([
+            'Error getting API parameters: [object Object]',
+        ]);
+        expect($('#loading').css('display')).toBe('block');
+        expect($('#contents').css('display')).toBe('none');
+        expect($('#settings-error').css('display')).toBe('none');
+        expect($('#connection').css('display')).toBe('block');
     });
-
 });
 
 describe('client ; ok', () => {
+    const server = initMockServerWithFooSettings();
 
-    const server = initMockServerWithFooSettings()
-
-    beforeAll(() => server.listen())
-    afterEach(() => server.resetHandlers())
-    afterAll(() => server.close())
+    beforeAll(() => server.listen());
+    afterEach(() => server.resetHandlers());
+    afterAll(() => server.close());
 
     // XXX Do not know how to call "loadClient" method in Helper :o
-    test.skip('client', async() => {
-        jest.spyOn(GoogleAuth.isSignedIn, "get").mockImplementation(() => {
+    test.skip('client', async () => {
+        jest.spyOn(GoogleAuth.isSignedIn, 'get').mockImplementation(() => {
             return true;
-        })
+        });
 
         init();
         await new Promise((r) => setTimeout(r, 2000));
 
         expect(consoleErrorOutput).toMatchObject([]);
-        expect($('#loading').css('display')).toBe('none')
-        expect($('#contents').css('display')).toBe('block')
-        expect($('#settings-error').css('display')).toBe('none')
-        expect($('#connection').css('display')).toBe('none')
+        expect($('#loading').css('display')).toBe('none');
+        expect($('#contents').css('display')).toBe('block');
+        expect($('#settings-error').css('display')).toBe('none');
+        expect($('#connection').css('display')).toBe('none');
     });
-
 });
 
 describe('client ; ok ; not connected', () => {
+    const server = initMockServerWithFooSettings();
 
-    const server = initMockServerWithFooSettings()
+    beforeAll(() => server.listen());
+    afterEach(() => server.resetHandlers());
+    afterAll(() => server.close());
 
-    beforeAll(() => server.listen())
-    afterEach(() => server.resetHandlers())
-    afterAll(() => server.close())
-
-    test('client', async() => {
-        jest.spyOn(GoogleAuth.isSignedIn, "get").mockImplementation(() => {
+    test('client', async () => {
+        jest.spyOn(GoogleAuth.isSignedIn, 'get').mockImplementation(() => {
             return false;
-        })
+        });
 
         init();
         await new Promise((r) => setTimeout(r, 2000));
 
         expect(consoleErrorOutput).toMatchObject([]);
-        expect($('#loading').css('display')).toBe('none')
-        expect($('#contents').css('display')).toBe('block')
-        expect($('#settings-error').css('display')).toBe('none')
-        expect($('#connection').css('display')).toBe('block')
-        expect($('#fetch').css('display')).toBe('none')
+        expect($('#loading').css('display')).toBe('none');
+        expect($('#contents').css('display')).toBe('block');
+        expect($('#settings-error').css('display')).toBe('none');
+        expect($('#connection').css('display')).toBe('block');
+        expect($('#fetch').css('display')).toBe('none');
     });
-
 });
 
 function initDom() {
@@ -181,10 +178,12 @@ function initDom() {
 function initMockServerWithFooSettings() {
     return setupServer(
         rest.post('http://localhost/getParameters', (unused, res, ctx) => {
-            return res(ctx.json({
-                clientApiKey: 'foo',
-                clientId: 'foo'
-            }))
+            return res(
+                ctx.json({
+                    clientApiKey: 'foo',
+                    clientId: 'foo',
+                })
+            );
         })
     );
 }

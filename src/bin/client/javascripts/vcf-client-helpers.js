@@ -7,10 +7,10 @@ function authenticate() {
             redirect_uri: 'http://localhost:3000',
         })
         .then(
-            function() {
+            function () {
                 console.log('Sign-in successful');
             },
-            function(err) {
+            function (err) {
                 console.error('Error signing in: ' + err);
             }
         );
@@ -22,7 +22,7 @@ function loadClient(callback) {
     return gapi.client
         .load('https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest')
         .then(
-            function() {
+            function () {
                 console.log('Google API client loaded');
                 $('#fetch').show();
                 $('#connection').hide();
@@ -30,7 +30,7 @@ function loadClient(callback) {
                     callback();
                 }
             },
-            function(err) {
+            function (err) {
                 console.error('Error loading Google API client: ' + err);
             }
         );
@@ -53,12 +53,10 @@ function insertDataFromChannel(channelId) {
             id: channelId,
         })
         .then(
-            function(response) {
+            function (response) {
                 const items = response.result.items;
                 if (items.length == 0) {
-                    console.error(
-                        `No channel found with id: '${channelId}'.`
-                    );
+                    console.error(`No channel found with id: '${channelId}'.`);
                 } else {
                     insertDataFromUploadedPlaylist(
                         items[0].contentDetails.relatedPlaylists.uploads,
@@ -66,7 +64,7 @@ function insertDataFromChannel(channelId) {
                     );
                 }
             },
-            function(err) {
+            function (err) {
                 console.error('Cannot get channels: ' + err);
             }
         );
@@ -81,7 +79,7 @@ function insertDataFromUploadedPlaylist(uploadPlaylistId, channelIconUrl) {
             maxResults: 50,
         })
         .then(
-            function(response) {
+            function (response) {
                 const videoItems = response.result.items;
                 if (videoItems.length == 0) {
                     console.error(
@@ -96,7 +94,7 @@ function insertDataFromUploadedPlaylist(uploadPlaylistId, channelIconUrl) {
                     );
                 }
             },
-            function(err) {
+            function (err) {
                 console.error('Cannot get playlists: ' + err);
             }
         );
@@ -110,7 +108,7 @@ function insertDataFromVideoId(videoId, channelIconUrl) {
             id: videoId,
         })
         .then(
-            function(response) {
+            function (response) {
                 const videoItems = response.result.items;
                 if (videoItems.length == 0) {
                     console.error(`No video found with ID '${videoId}'.`);
@@ -128,15 +126,15 @@ function insertDataFromVideoId(videoId, channelIconUrl) {
                         channelImage: channelIconUrl,
                     };
                     $.post('/addVideoInDatabase', videoData)
-                        .done(function(unused) {
+                        .done(function (unused) {
                             console.log('ok');
                         })
-                        .fail(function(unused) {
+                        .fail(function (unused) {
                             console.error('KO');
                         });
                 }
             },
-            function(err) {
+            function (err) {
                 console.error('Cannot get videos from API: ' + err);
             }
         );
@@ -148,11 +146,11 @@ function displayIframeVideoPlayer(videoId) {
     $('#iframe').html(iframe);
     $('#popup').fadeIn('slow');
 }
-exports.displayIframeVideoPlayer = displayIframeVideoPlayer
+exports.displayIframeVideoPlayer = displayIframeVideoPlayer;
 
 function swapVisibility(videoId, canDisplayHiddenVideos) {
     $.post('/swapVisibility', { videoId: videoId })
-        .done(function(unused) {
+        .done(function (unused) {
             if ($('#img_' + videoId).hasClass('hiddenImage')) {
                 $('#img_' + videoId).removeClass('hiddenImage');
                 $('#title_' + videoId).removeClass('hiddenText');
@@ -171,20 +169,20 @@ function swapVisibility(videoId, canDisplayHiddenVideos) {
             }
             console.log('ok');
         })
-        .fail(function(unused) {
+        .fail(function (unused) {
             console.error('KO');
         });
     if (canDisplayHiddenVideos != 'true' && canDisplayHiddenVideos !== true) {
         $('#video_' + videoId).hide();
     }
 }
-exports.swapVisibility = swapVisibility
+exports.swapVisibility = swapVisibility;
 
 function displayIframeVideoPlayerThenMask(videoId, canDisplayHiddenVideos) {
     displayIframeVideoPlayer(videoId);
     swapVisibility(videoId, canDisplayHiddenVideos);
 }
-exports.displayIframeVideoPlayerThenMask = displayIframeVideoPlayerThenMask
+exports.displayIframeVideoPlayerThenMask = displayIframeVideoPlayerThenMask;
 
 /* Verified with Selenium! */
 /* istanbul ignore next */
@@ -214,7 +212,7 @@ function reloadCurrentPageWithParameters(parameters) {
     var newUrl = window.location.protocol + '//' + window.location.host;
     if (parameters) {
         const params = [];
-        Object.keys(parameters).forEach(function(key) {
+        Object.keys(parameters).forEach(function (key) {
             params.push(key + '=' + parameters[key]);
         });
         newUrl += '?' + params.join('&');
