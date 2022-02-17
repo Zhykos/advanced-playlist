@@ -5,6 +5,9 @@ on:
     branches: [ latest ]
   schedule:
     - cron:  '0 0 * * MON'
+  pull_request:
+    branches:    
+      - latest
 
 env:
   VERSION_PRODUCT: "1.0.1"
@@ -30,9 +33,9 @@ jobs:
 
     - run: npm ci
 
-    - if: ${{ matrix.browser == 'chrome' }}
-      name: Install ChromeDriver for Ubuntu
-      run: npm install chromedriver@96.0.0
+    #- if: ${{ matrix.browser == 'chrome' }}
+    #  name: Install ChromeDriver for Ubuntu
+    #  run: npm install chromedriver@96.0.0
 
     - name: Launch tests
       env:
