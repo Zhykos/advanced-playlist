@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 const $ = require('jquery');
 const { rest } = require('msw');
 const { setupServer } = require('msw/node');

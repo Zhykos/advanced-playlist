@@ -29,15 +29,15 @@
         "pug": "^3.0.2"
     },
     "devDependencies": {
-        "chromedriver": "^98.0.0",
+        "chromedriver": "^100.0.0",
         "debug": "~4.3.2",
-        "geckodriver": "^2.0.4",
+        "geckodriver": "^3.0.1",
         "gm": "^1.23.1",
-        "jest": "^26.6.3",
+        "jest": "^27.5.1",
         "jest-expect-message": "^1.0.2",
         "jimp": "^0.16.1",
         "jquery": "^3.6.0",
-        "msw": "^0.36.4",
+        "msw": "^0.39.2",
         "nodemon": "^2.0.12",
         "prettier": "2.5.1",
         "selenium-webdriver": "3.x"
