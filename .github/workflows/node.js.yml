@@ -33,9 +33,9 @@ jobs:
 
     - run: npm ci
 
-    #- if: ${{ matrix.browser == 'chrome' }}
-    #  name: Install ChromeDriver for Ubuntu
-    #  run: npm install chromedriver@96.0.0
+    - if: ${{ matrix.browser == 'chrome' }}
+      name: Install ChromeDriver 100 for Ubuntu
+      run: npm install chromedriver@100.0.0
 
     - name: Launch tests
       env:
@@ -63,7 +63,7 @@ jobs:
 
     - run: npm ci
 
-    - name: Install ChromeDriver for Ubuntu
+    - name: Install ChromeDriver 100 for Ubuntu
       run: npm install chromedriver@100.0.0
 
     # Coverage badge: https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
