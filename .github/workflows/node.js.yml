@@ -34,8 +34,8 @@ jobs:
     - run: npm ci
 
     - if: ${{ matrix.browser == 'chrome' }}
-      name: Install ChromeDriver 100 for Ubuntu
-      run: npm install chromedriver@100.0.0
+      name: Install ChromeDriver 98 for Ubuntu
+      run: npm install chromedriver@98.0.0
 
     - name: Launch tests
       env:
