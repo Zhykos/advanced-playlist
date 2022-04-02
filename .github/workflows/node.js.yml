@@ -19,7 +19,7 @@ jobs:
       contents: write
     strategy:
       matrix:
-        browser: [chrome, firefox]
+        browser: [chrome]
 
     steps:
 
