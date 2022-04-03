@@ -24,13 +24,15 @@ exports.assertNoId = assertNoId;
 
 async function assertVisibilityById(selector, driver, isVisible) {
     await driver.findElements(By.id(selector)).then(function (elements) {
-        expect(elements.length, 'Id = ' + selector).toBe(1);
-        elements[0].isDisplayed().then(function (isDisplayed) {
-            expect(
-                isDisplayed,
-                "Id = '" + selector + "' must be visible = " + isVisible
-            ).toBe(isVisible);
-        });
+        try {
+            expect(elements.length).toBe(1);
+            elements[0].isDisplayed().then(function (isDisplayed) {
+                expect(isDisplayed).toBe(isVisible);
+            });
+        } catch(e) {
+            console.error("Id = '" + selector + "' must be visible = " + isVisible);
+            throw e;
+        }
     });
 }
 

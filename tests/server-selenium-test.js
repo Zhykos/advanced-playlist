@@ -248,7 +248,7 @@ describe('Selenium tests', () => {
         await helpers.assertIsVisibleById('video_FK30dDJh7fQ', driver);
     });
 
-    test('Open video in source website', async () => {
+    test.skip('Open video in source website', async () => {
         // Default display
 
         await helpers.assertIsVisibleById('video_FK30dDJh7fQ', driver);
@@ -300,11 +300,11 @@ describe('Selenium tests', () => {
         await helpers.assertIsVisibleById('video_FK30dDJh7fQ', driver);
     });
 
-    test('No error', async () => {
+    test.skip('No error', async () => {
         await helpers.assertIsNotVisibleById('settings-error', driver);
     });
 
-    test('Check CSS', async () => {
+    test.skip('Check CSS', async () => {
         const linkShowHidden = await helpers.selectId(
             'button-show-hidden',
             driver
