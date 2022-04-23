@@ -10,7 +10,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed">
+  <a href="https://github.com/Zhykos/advanced-playlist">
     <img src="doc/images/logo.png" alt="Logo" width="80" height="80" />
   </a>
 
@@ -19,14 +19,14 @@
   <p align="center">
     <i>VCF</i> : your own video feed
     <br />
-    <img src="doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
+    <img src="doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/advanced-playlist/blob/latest/README.md"><strong>English documentation »</strong></a>
     <br />
-    <img src="doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/doc/README.french.md"><strong>Documentation en français »</strong></a>
+    <img src="doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/advanced-playlist/blob/latest/doc/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues">Report Bug</a>
+    <a href="https://github.com/Zhykos/advanced-playlist/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues">Request Feature</a>
+    <a href="https://github.com/Zhykos/advanced-playlist/issues">Request Feature</a>
     <br />
     <br />
     Sorry for my English :(
@@ -92,7 +92,7 @@ Google console screen where to get keys:
 
 ### Installation
 
-1. Download latest version of *VCF*: https://github.com/Zhykos/fr.zhykos.videocustomfeed/releases
+1. Download latest version of *VCF*: https://github.com/Zhykos/advanced-playlist/releases
 
 2. Unzip it and open a Terminal within the directory..
 
@@ -350,7 +350,7 @@ Finally, YouTube API has some limitations (number of fetched data). Check your G
 
 This project is developed during my free time so... some minutes per month.
 
-See the [open issues](https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/Zhykos/advanced-playlist/issues) for a list of proposed features (and known issues).
 
 
 
@@ -379,7 +379,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Thomas Cicognani - [@zhykos](https://twitter.com/zhykos) - github@tomtom.email
 
-Project link: [https://github.com/Zhykos/fr.zhykos.videocustomfeed](https://github.com/Zhykos/fr.zhykos.videocustomfeed)
+Project link: [https://github.com/Zhykos/advanced-playlist](https://github.com/Zhykos/advanced-playlist)
 
 
 
@@ -431,19 +431,19 @@ npm run chrome-tests
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
-[contributors-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
-[forks-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/network/members
-[stars-shield]: https://img.shields.io/github/stars/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
-[stars-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge&logo=GitHub
-[issues-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues
-[license-shield]: https://img.shields.io/github/license/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
-[license-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/master/LICENSE.txt
-[workflow-shield]: https://img.shields.io/github/workflow/status/Zhykos/fr.zhykos.videocustomfeed/CI?style=for-the-badge&logo=Node.js
-[workflow-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/actions/workflows/node.js.yml
-[coverage-shield]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Zhykos/1e17cccbecd6e44805d33ee6a300e44b/raw/fr.zhykos.videocustomfeed_latest.json
-[release-stable-shield]: https://img.shields.io/github/v/release/Zhykos/fr.zhykos.videocustomfeed?style=for-the-badge&logo=YouTubeStudio
-[release-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/releases
+[contributors-shield]: https://img.shields.io/github/contributors/Zhykos/advanced-playlist.svg?style=for-the-badge
+[contributors-url]: https://github.com/Zhykos/advanced-playlist/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Zhykos/advanced-playlist.svg?style=for-the-badge
+[forks-url]: https://github.com/Zhykos/advanced-playlist/network/members
+[stars-shield]: https://img.shields.io/github/stars/Zhykos/advanced-playlist.svg?style=for-the-badge
+[stars-url]: https://github.com/Zhykos/advanced-playlist/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Zhykos/advanced-playlist.svg?style=for-the-badge&logo=GitHub
+[issues-url]: https://github.com/Zhykos/advanced-playlist/issues
+[license-shield]: https://img.shields.io/github/license/Zhykos/advanced-playlist.svg?style=for-the-badge
+[license-url]: https://github.com/Zhykos/advanced-playlist/blob/master/LICENSE.txt
+[workflow-shield]: https://img.shields.io/github/workflow/status/Zhykos/advanced-playlist/CI?style=for-the-badge&logo=Node.js
+[workflow-url]: https://github.com/Zhykos/advanced-playlist/actions/workflows/node.js.yml
+[coverage-shield]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Zhykos/1e17cccbecd6e44805d33ee6a300e44b/raw/advanced-playlist-coverage-latest.json
+[release-stable-shield]: https://img.shields.io/github/v/release/Zhykos/advanced-playlist?style=for-the-badge&logo=YouTubeStudio
+[release-url]: https://github.com/Zhykos/advanced-playlist/releases
 [release-draft-shield]: https://img.shields.io/badge/Release-DRAFT-orange?style=for-the-badge

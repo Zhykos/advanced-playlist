@@ -9,7 +9,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed">
+  <a href="https://github.com/Zhykos/advanced-playlist">
     <img src="../doc/images/logo.png" alt="Logo" width="80" height="80" />
   </a>
 
@@ -18,14 +18,14 @@
   <p align="center">
     <i>VCF</i> : votre flux vidéo personnalisé
     <br />
-    <img src="../doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/doc/README.french.md"><strong>Documentation en français »</strong></a>
+    <img src="../doc/images/france.png" alt="France" width="16" /> <a href="https://github.com/Zhykos/advanced-playlist/blob/latest/doc/README.french.md"><strong>Documentation en français »</strong></a>
     <br />
-    <img src="../doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/latest/README.md"><strong>English documentation »</strong></a>
+    <img src="../doc/images/uk.png" alt="English" width="16" /> <a href="https://github.com/Zhykos/advanced-playlist/blob/latest/README.md"><strong>English documentation »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues">Reporter un bug</a>
+    <a href="https://github.com/Zhykos/advanced-playlist/issues">Reporter un bug</a>
     ·
-    <a href="https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues">Proposer une évolution</a>
+    <a href="https://github.com/Zhykos/advanced-playlist/issues">Proposer une évolution</a>
   </p>
 </p>
 
@@ -89,7 +89,7 @@ Vous devez récupérer une version de *VCF* sur votre machine pour l'utiliser.
 
 ### Installation
 
-1. Téléchargez la dernière version de *VCF* : https://github.com/Zhykos/fr.zhykos.videocustomfeed/releases
+1. Téléchargez la dernière version de *VCF* : https://github.com/Zhykos/advanced-playlist/releases
 
 2. Dézipper la version et ouvrez un Terminal dans le dossier.
 
@@ -349,7 +349,7 @@ Enfin, sachez que l'API YouTube contient des limitations quant au nombre d'infor
 
 Ce projet est développé sur mon temps libre et je n'en ai pas énormément...
 
-Vérifiez la page [open issues](https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues) pour voir la liste des évolutions et des bugs.
+Vérifiez la page [open issues](https://github.com/Zhykos/advanced-playlist/issues) pour voir la liste des évolutions et des bugs.
 
 
 
@@ -378,7 +378,7 @@ Projet distribué avec la licence MIT. Ouvrez le fichier `LICENSE` pour plus d'i
 
 Thomas Cicognani - [@zhykos](https://twitter.com/zhykos) - github@tomtom.email
 
-Lien du projet : [https://github.com/Zhykos/fr.zhykos.videocustomfeed](https://github.com/Zhykos/fr.zhykos.videocustomfeed)
+Lien du projet : [https://github.com/Zhykos/advanced-playlist](https://github.com/Zhykos/advanced-playlist)
 
 
 
@@ -431,19 +431,19 @@ npm run chrome-tests
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
-[contributors-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
-[forks-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/network/members
-[stars-shield]: https://img.shields.io/github/stars/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge
-[stars-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge&logo=GitHub&label=bugs
-[issues-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/issues
-[license-shield]: https://img.shields.io/github/license/Zhykos/fr.zhykos.videocustomfeed.svg?style=for-the-badge&label=LICENCE
-[license-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/blob/master/LICENSE.txt
-[workflow-shield]: https://img.shields.io/github/workflow/status/Zhykos/fr.zhykos.videocustomfeed/CI?style=for-the-badge&logo=Node.js
-[workflow-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/actions/workflows/node.js.yml
-[coverage-shield]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Zhykos/1e17cccbecd6e44805d33ee6a300e44b/raw/fr.zhykos.videocustomfeed_latest.json&label=COUVERTURE
-[release-stable-shield]: https://img.shields.io/github/v/release/Zhykos/fr.zhykos.videocustomfeed?style=for-the-badge&logo=YouTubeStudio
-[release-url]: https://github.com/Zhykos/fr.zhykos.videocustomfeed/releases
+[contributors-shield]: https://img.shields.io/github/contributors/Zhykos/advanced-playlist.svg?style=for-the-badge
+[contributors-url]: https://github.com/Zhykos/advanced-playlist/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Zhykos/advanced-playlist.svg?style=for-the-badge
+[forks-url]: https://github.com/Zhykos/advanced-playlist/network/members
+[stars-shield]: https://img.shields.io/github/stars/Zhykos/advanced-playlist.svg?style=for-the-badge
+[stars-url]: https://github.com/Zhykos/advanced-playlist/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Zhykos/advanced-playlist.svg?style=for-the-badge&logo=GitHub&label=bugs
+[issues-url]: https://github.com/Zhykos/advanced-playlist/issues
+[license-shield]: https://img.shields.io/github/license/Zhykos/advanced-playlist.svg?style=for-the-badge&label=LICENCE
+[license-url]: https://github.com/Zhykos/advanced-playlist/blob/master/LICENSE.txt
+[workflow-shield]: https://img.shields.io/github/workflow/status/Zhykos/advanced-playlist/CI?style=for-the-badge&logo=Node.js
+[workflow-url]: https://github.com/Zhykos/advanced-playlist/actions/workflows/node.js.yml
+[coverage-shield]: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/Zhykos/1e17cccbecd6e44805d33ee6a300e44b/raw/advanced-playlist-coverage-latest.json&label=COUVERTURE
+[release-stable-shield]: https://img.shields.io/github/v/release/Zhykos/advanced-playlist?style=for-the-badge&logo=YouTubeStudio
+[release-url]: https://github.com/Zhykos/advanced-playlist/releases
 [release-draft-shield]: https://img.shields.io/badge/Release-DRAFT-orange?style=for-the-badge

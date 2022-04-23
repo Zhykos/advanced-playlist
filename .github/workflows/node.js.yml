@@ -2,12 +2,12 @@ name: CI
 
 on:
   push:
-    branches: [ latest ]
+    branches: [ main ]
   schedule:
     - cron:  '0 0 * * MON'
   pull_request:
     branches:    
-      - latest
+      - main
 
 env:
   VERSION_PRODUCT: "1.0.1"
@@ -114,7 +114,7 @@ jobs:
       with:
         auth: ${{ secrets.GIST }}
         gistID: 1e17cccbecd6e44805d33ee6a300e44b
-        filename: fr.zhykos.videocustomfeed_latest.json
+        filename: advanced-playlist-coverage-latest.json
         label: COVERAGE
         message: ${{ env.COVERAGE }} %
         color: green
