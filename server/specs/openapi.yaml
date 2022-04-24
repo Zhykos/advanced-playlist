@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: Advanced playlist API
+  version: '2.0'
+paths:
+  /videos:
+    get:
+      summary: Get all videos to display
+      description: Get all videos to display
+      operationId: 'getVideos'
+      responses:
+        '200':
+          description: All videos within the body response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/video'
+              examples:
+                several videos example:
+                  value: "[{ id: 'video-AAA', title: 'Top 10 best animes' }, { id: 'video-BBB', title: 'Top 10 best movies' }]"
+                no result:
+                  value: "[]"
+      tags:
+        - videos
+tags:
+  - name: videos
+    description: All services for videos
+components:
+  schemas:
+    video:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string

@@ -1,0 +1,10 @@
+{
+    "tasks": {
+        "download-api-generator": "deno run --allow-net --allow-write --allow-read ./openapi-generator/download-generator.ts",
+        "generate-api-implementation": "mkdir -p src/main/generated/deno-oak-server/ && java -jar ./openapi-generator/openapi-generator-cli.jar generate -i ./specs/openapi.yaml -g deno-oak -o src/main/generated/deno-oak-server/",
+        "format-dir": "deno fmt --options-indent-width=4 .",
+        "start-server": "deno run --allow-net --allow-read ./src/main/deno/server.ts",
+        "dev-start-server": "deno run --allow-net --allow-read --watch ./src/main/deno/server.ts",
+        "unit-tests": "deno test --allow-net --allow-read src/tests/deno/"
+    }
+}
