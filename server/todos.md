@@ -1,1 +1,0 @@
-- fix generator: enum isn't generated!

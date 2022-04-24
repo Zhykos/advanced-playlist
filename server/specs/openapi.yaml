@@ -92,8 +92,6 @@ components:
     FilteredStatus:
       type: string
       description: Filter used to hide this video
-      items:
-        type: string
       enum:
         - user
         - whitelist-title
