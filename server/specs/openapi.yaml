@@ -16,7 +16,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/video'
+                  $ref: '#/components/schemas/Video'
               examples:
                 several videos example:
                   value: "[{ id: 'video-AAA', title: 'Top 10 best animes' }, { id: 'video-BBB', title: 'Top 10 best movies' }]"
@@ -29,13 +29,72 @@ tags:
     description: All services for videos
 components:
   schemas:
-    video:
+    Video:
       type: object
+      description: A video
       properties:
         id:
           type: string
+          description: Specific video ID
         title:
           type: string
+          description: Title of the video
+        url:
+          type: string
+          description: URL of the video
+        origin:
+          type: string
+          description: Origin of the video
+          enum:
+          - youtube
+        played:
+          type: boolean
+          description: Is the video has been played by the user?
+          default: false
+        thumbnail:
+          type: string
+          description: URL of the thumbnail
+        duration:
+          type: integer
+          format: int32
+          description: Duration of the video in seconds
+        filteredStatuses:
+          type: array
+          description: List of filters used to hide this video
+          items:
+            $ref: '#/components/schemas/FilteredStatus'
+        channel:
+          $ref: '#/components/schemas/Channel'
       required:
         - id
         - title
+        - url
+        - origin
+        - played
+        - duration
+        - filteredStatuses
+    Channel:
+      type: object
+      description: A video channel. A channel contains lots of videos from a user
+      properties:
+        id:
+          type: string
+          description: Specific channel ID
+        title:
+          type: string
+          description: Title of the channel
+        thumbnail:
+          type: string
+          description: URL of the thumbnail
+      required:
+        - id
+        - title
+    FilteredStatus:
+      type: string
+      description: Filter used to hide this video
+      items:
+        type: string
+      enum:
+        - user
+        - whitelist-title
+        - blacklist-title
