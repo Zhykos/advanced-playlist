@@ -2,10 +2,21 @@
     "tasks": {
         "download-api-generator": "deno run --allow-net --allow-write --allow-read ./openapi-generator/download-generator.ts",
         "generate-api-implementation": "mkdir -p src/main/generated/deno-oak-server/ && java -jar ./openapi-generator/openapi-generator-cli.jar generate -i ./specs/openapi.yaml -g deno-oak -o src/main/generated/deno-oak-server/",
-        "format-dir": "deno fmt --options-indent-width=4 .",
+        "format-project": "deno fmt",
         "start-server": "deno run --allow-net --allow-read ./src/main/deno/server.ts",
         "dev-start-server": "deno run --allow-net --allow-read --watch ./src/main/deno/server.ts",
         "unit-tests": "deno test --allow-net --allow-read --allow-write src/tests/deno/",
         "dev-start-tests-server": "deno run --allow-net --allow-read --watch ./src/tests/deno/server.ts"
+    },
+    "fmt": {
+        "files": {
+            "include": ["."],
+            "exclude": [
+                "src/tests/postman/Advanced Playlist - Dedicated to unit tests.postman_collection.json"
+            ]
+        },
+        "options": {
+            "indentWidth": 4
+        }
     }
 }
