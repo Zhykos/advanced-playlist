@@ -36,3 +36,6 @@ components:
           type: string
         title:
           type: string
+      required:
+        - id
+        - title
