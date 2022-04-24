@@ -33,10 +33,12 @@
 											"    const data01 = jsonData[0];\r",
 											"    pm.expect(data01.id).to.eql(\"video_01\");\r",
 											"    pm.expect(data01.title).to.eql(\"Video 01\");\r",
+											"    pm.expect(data01._id).to.be.undefined;\r",
 											"\r",
 											"    const data02 = jsonData[1];\r",
 											"    pm.expect(data02.id).to.eql(\"video_02\");\r",
 											"    pm.expect(data02.title).to.eql(\"Vidéo 02\");\r",
+											"    pm.expect(data02._id).to.be.undefined;\r",
 											"});"
 										],
 										"type": "text/javascript"
