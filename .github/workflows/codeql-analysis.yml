@@ -39,6 +39,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Install Deno
+      run: curl -fsSL https://deno.land/x/install/install.sh | sh
     - name: Download OpenAPI Generator for server
       run: /home/runner/.deno/bin/deno run --allow-net --allow-write --allow-read ./server/openapi-generator/download-generator.ts
     - name: Generate server
