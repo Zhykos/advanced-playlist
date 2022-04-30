@@ -1,9 +1,21 @@
 import { Video } from "../../generated/deno-oak-server/models/Video.ts";
-import { VideosDatabase } from "./VideosDatabase.ts";
-import { videosCollection } from "./MongoDbAtlas.ts";
+import { AuthYoutube } from "../models/AuthYoutube.ts";
+import { IAuth } from "../models/IAuth.ts";
+import { IVideosDatabase, ProviderArg } from "./IVideosDatabase.ts";
+import { authCollection, videosCollection } from "./MongoDbAtlas.ts";
 
-export class VideosDatabaseMongoDbAtlas implements VideosDatabase {
+export class VideosDatabaseMongoDbAtlas implements IVideosDatabase {
+    getAuthProvider(
+        arg: ProviderArg & { name: "youtube" },
+    ): Promise<AuthYoutube> {
+        return this.internalGetAuthProvider(arg.name);
+    }
+
     getAllVideos(): Promise<Video[]> {
         return videosCollection.find();
+    }
+
+    private internalGetAuthProvider(name: string): Promise<IAuth> {
+        return authCollection.findOne({ provider: name });
     }
 }

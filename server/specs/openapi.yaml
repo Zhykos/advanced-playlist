@@ -24,6 +24,15 @@ paths:
                   value: "[]"
       tags:
         - videos
+    post:
+      summary: Fetch all new videos onto the server
+      description: Fetch all new videos onto the server
+      operationId: 'fetchVideos'
+      responses:
+        '200':
+          description: Fetch succeeded
+      tags:
+        - videos
 tags:
   - name: videos
     description: All services for videos

@@ -1,3 +1,4 @@
-- créer une méthode pour transformer la base bouchon en base mongo (pour tester le bon fonctionnement de mongo)
+- créer une méthode pour transformer la base bouchon en base mongo (pour tester
+  le bon fonctionnement de mongo)
 - lancer les tests postman sur la base bouchon
 - lancer les tests postman sur la base mongo
