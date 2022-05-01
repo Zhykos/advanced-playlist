@@ -11,10 +11,7 @@ export class TestsHelpers {
 
     public static createInstance = async () => {
         const videosDatabaseMongoDbAtlas = new VideosDatabaseMongoDbAtlas();
-        const videosProviderYoutube = await VideosProviderYoutube
-            .createInstance(
-                videosDatabaseMongoDbAtlas,
-            );
+        const videosProviderYoutube = new VideosProviderYoutube("");
         return new TestsHelpers(
             videosDatabaseMongoDbAtlas,
             videosProviderYoutube,

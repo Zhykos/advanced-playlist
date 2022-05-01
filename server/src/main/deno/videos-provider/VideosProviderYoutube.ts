@@ -1,23 +1,13 @@
-import { IVideosDatabase } from "../database/IVideosDatabase.ts";
 import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
 import { IVideosProvider } from "./IVideosProvider.ts";
 import { YouTube } from "./deps.ts";
-import { AuthYoutube } from "../models/youtube/AuthYoutube.ts";
 import { YoutubeChannel } from "../models/youtube/YoutubeChannel.ts";
 
 export class VideosProviderYoutube implements IVideosProvider {
     private youtubeApi: YouTube;
 
-    public static createInstance = async (database: IVideosDatabase) => {
-        const { api_key }: AuthYoutube = await database.getAuthProvider({
-            name: "youtube",
-        });
-        const youtubeApi = new YouTube(api_key, false);
-        return new VideosProviderYoutube(youtubeApi);
-    };
-
-    private constructor(youtubeApi: YouTube) {
-        this.youtubeApi = youtubeApi;
+    constructor(apiKey: string) {
+        this.youtubeApi = new YouTube(apiKey, false);
     }
 
     async getYoutubeChannel(name: string): Promise<YoutubeChannel> {
