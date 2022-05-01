@@ -1,41 +1,18 @@
-import { assertEquals, resolvesNext, stub } from "./deps.ts";
-import { VideosService } from "../../main/deno/services/VideosService.ts";
+import { assertEquals } from "./deps.ts";
 import { Video } from "../../main/generated/deno-oak-server/models/Video.ts";
-import { VideosDatabaseMongoDbAtlas } from "../../main/deno/database/VideosDatabaseMongoDbAtlas.ts";
-import { VideosProviderYoutube } from "../../main/deno/videos-provider/VideosProviderYoutube.ts";
-import { videosCollection } from "./mocks/FakeDatabase.ts";
-import { AuthYoutube } from "../../main/deno/models/youtube/AuthYoutube.ts";
+import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 
-// Specific implementations
-
-const videosDatabaseMongoDbAtlas = new VideosDatabaseMongoDbAtlas();
-const videosProviderYoutube = await VideosProviderYoutube.createInstance(
-    videosDatabaseMongoDbAtlas,
-);
-
-// Service implementations
-
-const videoService = new VideosService(
-    videosDatabaseMongoDbAtlas,
-    videosProviderYoutube,
-);
-
-// Tests
+const testsHelpers = await TestsHelpers.createInstance();
 
 Deno.test("Get all videos", async () => {
-    const getAllVideosStub = stub(
-        videosDatabaseMongoDbAtlas,
-        "getAllVideos",
-        resolvesNext([videosCollection]),
-    );
-    const getAuthProviderStub = stub(
-        videosDatabaseMongoDbAtlas,
-        "getAuthProvider",
-        resolvesNext([new AuthYoutube("")]),
-    );
+    const getAllVideosStub = testsHelpers
+        .createStubForGettingAllVideosFromDatabase();
+    const getAuthProviderStub = testsHelpers
+        .createStubForGettingYoutubeAuthProviderFromDatabase();
 
     try {
-        const allVideos: Array<Video> = await videoService.getVideos();
+        const allVideos: Array<Video> = await testsHelpers
+            .getStubbedVideosDatabaseMongoDbAtlas().getAllVideos();
         assertEquals(allVideos.length, 2);
         assertEquals(allVideos[0].id, "video_01");
         assertEquals(allVideos[0].title, "Video 01");

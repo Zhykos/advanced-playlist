@@ -1,35 +1,20 @@
-import { assertEquals, resolvesNext, stub } from "./deps.ts";
-import { VideosProviderYoutube } from "../../main/deno/videos-provider/VideosProviderYoutube.ts";
+import { assertEquals } from "./deps.ts";
 import { Channel } from "../../main/generated/deno-oak-server/models/Channel.ts";
-import { VideosDatabaseMongoDbAtlas } from "../../main/deno/database/VideosDatabaseMongoDbAtlas.ts";
-import { channelsCollection as channelsYoutubeCollection } from "./mocks/FakeYoutube.ts";
-import { AuthYoutube } from "../../main/deno/models/youtube/AuthYoutube.ts";
+import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 
-// Specific implementations
-
-const videosDatabaseMongoDbAtlas = new VideosDatabaseMongoDbAtlas();
-const videosProviderYoutube = await VideosProviderYoutube.createInstance(
-    videosDatabaseMongoDbAtlas,
-);
-
-// Tests
+const testsHelpers = await TestsHelpers.createInstance();
 
 Deno.test("Get zhykos' channel", async () => {
-    const getYoutubeChannelStub = stub(
-        videosProviderYoutube,
-        "getYoutubeChannel",
-        resolvesNext(channelsYoutubeCollection),
-    );
-    const getAuthProviderStub = stub(
-        videosDatabaseMongoDbAtlas,
-        "getAuthProvider",
-        resolvesNext([new AuthYoutube("")]),
-    );
+    const getYoutubeChannelStub = testsHelpers
+        .createStubForGettingChannelFromYoutube();
+    const getAuthProviderStub = testsHelpers
+        .createStubForGettingYoutubeAuthProviderFromDatabase();
 
     try {
-        const channel: Channel = await videosProviderYoutube.getChannel(
-            "zhykos",
-        );
+        const channel: Channel = await testsHelpers
+            .getStubbedVideosProviderYoutube().getChannel(
+                "zhykos",
+            );
         assertEquals("channel", channel.id);
         assertEquals("Channel 01", channel.title);
     } finally {
