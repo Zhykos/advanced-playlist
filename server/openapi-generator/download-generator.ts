@@ -1,11 +1,10 @@
-import { writableStreamFromWriter } from "https://deno.land/std@0.136.0/streams/mod.ts";
-import { crypto } from "https://deno.land/std@0.136.0/crypto/mod.ts";
+import { crypto, writableStreamFromWriter } from "./deps.ts";
 
 const baseUrl =
-    "https://github.com/Zhykos/deno-server-openapi-generator/releases/download/0.2.0-beta/";
+    "https://github.com/Zhykos/deno-server-openapi-generator/releases/download/0.3.0-beta/";
 const jarFilename = "openapi-generator-cli.jar";
 const hashFilename = "openapi-generator-cli.sha256";
-const targetDirectory = "./server/openapi-generator/";
+const targetDirectory = "./openapi-generator/";
 
 await download(baseUrl, jarFilename);
 await download(baseUrl, hashFilename);
