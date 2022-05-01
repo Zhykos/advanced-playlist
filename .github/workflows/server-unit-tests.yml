@@ -17,15 +17,13 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v3
     - name: Download OpenAPI Generator for server
-      run: |
-        cd server
-        /home/runner/.deno/bin/deno run --allow-net --allow-write --allow-read ./openapi-generator/download-generator.ts
+      working-directory: ./server
+      run: /home/runner/.deno/bin/deno run --allow-net --allow-write --allow-read ./openapi-generator/download-generator.ts
     - name: Generate server
+      working-directory: ./server
       run: |
-        cd server
         mkdir -p ./src/main/generated/deno-oak-server/
         java -jar ./openapi-generator/openapi-generator-cli.jar generate -i ./specs/openapi.yaml -g deno-oak -o ./src/main/generated/deno-oak-server/
     - name: Launch tests
-      run: |
-        cd server
-        /home/runner/.deno/bin/deno test --allow-net --allow-read ./src/tests/deno/
+      working-directory: ./server
+      run: /home/runner/.deno/bin/deno test --allow-net --allow-read ./src/tests/deno/

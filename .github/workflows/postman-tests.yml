@@ -22,17 +22,18 @@ jobs:
       run: |
         curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
         sudo apt-get install -y nodejs
+    - name: Install Deno
+      run: curl -fsSL https://deno.land/x/install/install.sh | sh
     - name: Checkout repo
       uses: actions/checkout@v3
     - name: Install newman
       run: npm -g install newman
     - name: Download OpenAPI Generator for server
-      run: |
-        cd server
-        /home/runner/.deno/bin/deno run --allow-net --allow-write --allow-read ./openapi-generator/download-generator.ts
+      working-directory: ./server
+      run: /home/runner/.deno/bin/deno run --allow-net --allow-write --allow-read ./openapi-generator/download-generator.ts
     - name: Generate server
+      working-directory: ./server
       run: |
-        cd server
         mkdir -p ./src/main/generated/deno-oak-server/
         java -jar ./openapi-generator/openapi-generator-cli.jar generate -i ./specs/openapi.yaml -g deno-oak -o ./src/main/generated/deno-oak-server/
     - name: Build Docker image for the server
@@ -45,8 +46,7 @@ jobs:
       run: sleep 30s
       shell: bash
     - name: Launch Postman with newman
-      run: |
-        cd ./server/src/tests/postman
-        newman run "./Advanced Playlist - Dedicated to unit tests.postman_collection.json"
+      working-directory: ./server/src/tests/postman
+      run: newman run "./Advanced Playlist - Dedicated to unit tests.postman_collection.json"
     - name: Stop Deno server
       run: docker stop unit-tests-server
