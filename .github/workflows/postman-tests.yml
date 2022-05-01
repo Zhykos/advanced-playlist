@@ -1,0 +1,43 @@
+name: Postman tests
+
+on:
+  push:
+    branches: [ '2.0' ]
+  pull_request:
+    branches: [ '2.0' ]
+  schedule:
+    - cron:  '0 0 * * 6'
+  workflow_dispatch:
+    branches: [ '2.0' ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 5
+
+    steps:
+    - name: Install NodeJS
+      run: |
+        curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+    - name: Checkout repo
+      uses: actions/checkout@v3
+    - name: Install newman
+      run: npm -g install newman
+    - name: Build Docker image for the server
+      run: |
+        cd ./server
+        docker build . -t unit-tests-server:latest
+    - name: Launch Deno server
+      run: docker run -d -p 3666:3666 --name unit-tests-server unit-tests-server:latest
+    - name: Sleep for 30 seconds waiting for the server to start
+      run: sleep 30s
+      shell: bash
+    - name: Launch Postman with newman
+      run: |
+        cd ./server/src/tests/postman
+        newman run "./Advanced Playlist - Dedicated to unit tests.postman_collection.json"
+    - name: Stop Deno server
+      run: docker stop unit-tests-server

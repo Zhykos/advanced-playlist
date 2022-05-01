@@ -5,7 +5,8 @@
         "format-project": "deno fmt",
         "start-server": "deno run --allow-net --allow-read ./src/main/deno/server.ts",
         "dev-start-server": "deno run --allow-net --allow-read --watch ./src/main/deno/server.ts",
-        "unit-tests": "deno test --allow-net --allow-read --allow-write src/tests/deno/"
+        "unit-tests": "deno test --allow-net --allow-read --allow-write src/tests/deno/",
+        "dev-start-unit-tests-server": "deno run --allow-net --allow-read --watch ./src/tests/deno/server.stubbed.ts"
     },
     "fmt": {
         "files": {

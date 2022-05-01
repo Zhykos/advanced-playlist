@@ -19,7 +19,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -47,12 +47,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/videos",
+									"raw": "http://localhost:3666/videos",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3000",
+									"port": "3666",
 									"path": [
 										"videos"
 									]
@@ -73,7 +73,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -93,12 +93,12 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/videos",
+									"raw": "http://localhost:3666/videos",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3000",
+									"port": "3666",
 									"path": [
 										"videos"
 									]
