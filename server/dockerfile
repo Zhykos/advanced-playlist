@@ -5,4 +5,4 @@ ADD ./ /server/
 
 EXPOSE 3666
 
-CMD /bin/deno run --allow-net --allow-read ./src/tests/deno/server.stubbed.ts
+CMD /bin/deno run --allow-net --allow-read /server/src/tests/deno/server.stubbed.ts
