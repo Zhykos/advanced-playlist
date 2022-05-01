@@ -26,6 +26,15 @@ jobs:
       uses: actions/checkout@v3
     - name: Install newman
       run: npm -g install newman
+    - name: Download OpenAPI Generator for server
+      run: |
+        cd server
+        /home/runner/.deno/bin/deno run --allow-net --allow-write --allow-read ./openapi-generator/download-generator.ts
+    - name: Generate server
+      run: |
+        cd server
+        mkdir -p ./src/main/generated/deno-oak-server/
+        java -jar ./openapi-generator/openapi-generator-cli.jar generate -i ./specs/openapi.yaml -g deno-oak -o ./src/main/generated/deno-oak-server/
     - name: Build Docker image for the server
       run: |
         cd ./server

@@ -42,9 +42,14 @@ jobs:
     - name: Install Deno
       run: curl -fsSL https://deno.land/x/install/install.sh | sh
     - name: Download OpenAPI Generator for server
-      run: /home/runner/.deno/bin/deno run --allow-net --allow-write --allow-read ./server/openapi-generator/download-generator.ts
+      run: |
+        cd server
+        /home/runner/.deno/bin/deno run --allow-net --allow-write --allow-read ./openapi-generator/download-generator.ts
     - name: Generate server
-      run: mkdir -p ./server/src/main/generated/deno-oak-server/ && java -jar ./server/openapi-generator/openapi-generator-cli.jar generate -i ./server/specs/openapi.yaml -g deno-oak -o ./server/src/main/generated/deno-oak-server/
+      run: |
+        cd server
+        mkdir -p ./src/main/generated/deno-oak-server/
+        java -jar ./openapi-generator/openapi-generator-cli.jar generate -i ./specs/openapi.yaml -g deno-oak -o ./src/main/generated/deno-oak-server/
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
