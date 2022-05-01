@@ -10,7 +10,7 @@ const videosProviderYoutube = await VideosProviderYoutube.createInstance(
     videosDatabaseMongoDbAtlas,
 );
 
-// Service implementations
+// Services implementations
 
 const videoService = new VideosService(
     videosDatabaseMongoDbAtlas,
