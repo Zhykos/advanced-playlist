@@ -3,6 +3,7 @@ import { VideosProviderYoutube } from "../../main/deno/videos-provider/VideosPro
 import { Channel } from "../../main/generated/deno-oak-server/models/Channel.ts";
 import { VideosDatabaseMongoDbAtlas } from "../../main/deno/database/VideosDatabaseMongoDbAtlas.ts";
 import { channelsCollection as channelsYoutubeCollection } from "./mocks/FakeYoutube.ts";
+import { AuthYoutube } from "../../main/deno/models/youtube/AuthYoutube.ts";
 
 // Specific implementations
 
@@ -19,6 +20,11 @@ Deno.test("Get zhykos' channel", async () => {
         "getYoutubeChannel",
         resolvesNext(channelsYoutubeCollection),
     );
+    const getAuthProviderStub = stub(
+        videosDatabaseMongoDbAtlas,
+        "getAuthProvider",
+        resolvesNext([new AuthYoutube("")]),
+    );
 
     try {
         const channel: Channel = await videosProviderYoutube.getChannel(
@@ -28,5 +34,6 @@ Deno.test("Get zhykos' channel", async () => {
         assertEquals("Channel 01", channel.title);
     } finally {
         getYoutubeChannelStub.restore();
+        getAuthProviderStub.restore();
     }
 });

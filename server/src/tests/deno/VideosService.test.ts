@@ -4,6 +4,7 @@ import { Video } from "../../main/generated/deno-oak-server/models/Video.ts";
 import { VideosDatabaseMongoDbAtlas } from "../../main/deno/database/VideosDatabaseMongoDbAtlas.ts";
 import { VideosProviderYoutube } from "../../main/deno/videos-provider/VideosProviderYoutube.ts";
 import { videosCollection } from "./mocks/FakeDatabase.ts";
+import { AuthYoutube } from "../../main/deno/models/youtube/AuthYoutube.ts";
 
 // Specific implementations
 
@@ -27,6 +28,12 @@ Deno.test("Get all videos", async () => {
         "getAllVideos",
         resolvesNext([videosCollection]),
     );
+    const getAuthProviderStub = stub(
+        videosDatabaseMongoDbAtlas,
+        "getAuthProvider",
+        resolvesNext([new AuthYoutube("")]),
+    );
+
     try {
         const allVideos: Array<Video> = await videoService.getVideos();
         assertEquals(allVideos.length, 2);
@@ -36,5 +43,6 @@ Deno.test("Get all videos", async () => {
         assertEquals(allVideos[1].title, "Vidéo 02");
     } finally {
         getAllVideosStub.restore();
+        getAuthProviderStub.restore();
     }
 });
