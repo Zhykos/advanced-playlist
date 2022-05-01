@@ -2,3 +2,4 @@
   le bon fonctionnement de mongo)
 - lancer les tests postman sur la base bouchon
 - lancer les tests postman sur la base mongo
+- vérifier s'il y a des nouvelles versions des composants Deno (à automatiser ?)

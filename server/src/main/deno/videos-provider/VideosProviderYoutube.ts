@@ -2,7 +2,8 @@ import { IVideosDatabase } from "../database/IVideosDatabase.ts";
 import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
 import { IVideosProvider } from "./IVideosProvider.ts";
 import { YouTube } from "./deps.ts";
-import { AuthYoutube } from "../models/AuthYoutube.ts";
+import { AuthYoutube } from "../models/youtube/AuthYoutube.ts";
+import { YoutubeChannel } from "../models/youtube/YoutubeChannel.ts";
 
 export class VideosProviderYoutube implements IVideosProvider {
     private youtubeApi: YouTube;
@@ -19,11 +20,18 @@ export class VideosProviderYoutube implements IVideosProvider {
         this.youtubeApi = youtubeApi;
     }
 
+    async getYoutubeChannel(name: string): Promise<YoutubeChannel> {
+        return await this.youtubeApi
+            .channels_list({
+                part: "snippet",
+                forUsername: name,
+            });
+    }
+
     async getChannel(name: string): Promise<Channel> {
-        const youtubeChannelObj = await this.youtubeApi.channels_list({
-            part: "snippet",
-            forUsername: name,
-        });
+        const youtubeChannelObj: YoutubeChannel = await this.getYoutubeChannel(
+            name,
+        );
         return new Promise((resolve, reject) => {
             const totalResults = youtubeChannelObj.pageInfo.totalResults;
             if (totalResults == 1) {

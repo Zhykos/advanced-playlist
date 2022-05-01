@@ -1,5 +1,5 @@
 import { Video } from "../../generated/deno-oak-server/models/Video.ts";
-import { AuthYoutube } from "../models/AuthYoutube.ts";
+import { AuthYoutube } from "../models/youtube/AuthYoutube.ts";
 import { IAuth } from "../models/IAuth.ts";
 import { IVideosDatabase, ProviderArg } from "./IVideosDatabase.ts";
 import { authCollection, videosCollection } from "./MongoDbAtlas.ts";

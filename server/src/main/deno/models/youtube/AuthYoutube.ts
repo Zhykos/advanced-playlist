@@ -1,4 +1,4 @@
-import { IAuth } from "./IAuth.ts";
+import { IAuth } from "../IAuth.ts";
 
 export class AuthYoutube implements IAuth {
     provider: string;

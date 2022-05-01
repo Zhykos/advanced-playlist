@@ -1,5 +1,5 @@
 import { Video } from "../../generated/deno-oak-server/models/Video.ts";
-import { AuthYoutube } from "../models/AuthYoutube.ts";
+import { AuthYoutube } from "../models/youtube/AuthYoutube.ts";
 
 export interface IVideosDatabase {
     getAllVideos(): Promise<Array<Video>>;
