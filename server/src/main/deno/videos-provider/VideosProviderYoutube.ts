@@ -19,12 +19,23 @@ export class VideosProviderYoutube implements IVideosProvider {
         this.youtubeApi = youtubeApi;
     }
 
-    getChannel(name: string): Channel {
-        this.youtubeApi.channels_list({ part: "snippet", forUsername: name })
-            .then(function (response: any) {
-                console.log(response);
-            });
-
-        throw new Error("Method not implemented.");
+    async getChannel(name: string): Promise<Channel> {
+        const youtubeChannelObj = await this.youtubeApi.channels_list({
+            part: "snippet",
+            forUsername: name,
+        });
+        return new Promise((resolve, reject) => {
+            const totalResults = youtubeChannelObj.pageInfo.totalResults;
+            if (totalResults == 1) {
+                const channel = new Channel();
+                channel.id = youtubeChannelObj.items[0].id;
+                channel.title = youtubeChannelObj.items[0].snippet.id;
+                resolve(channel);
+            } else {
+                reject(
+                    `Cannot get channel '${name}' because there is ${totalResults} search results.`,
+                );
+            }
+        });
     }
 }

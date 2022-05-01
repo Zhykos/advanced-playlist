@@ -9,10 +9,10 @@
 			"name": "Videos",
 			"item": [
 				{
-					"name": "Get all videos",
+					"name": "Get all videos to display",
 					"item": [
 						{
-							"name": "Get all videos",
+							"name": "getVideos",
 							"event": [
 								{
 									"listen": "test",
@@ -33,12 +33,10 @@
 											"    const data01 = jsonData[0];\r",
 											"    pm.expect(data01.id).to.eql(\"video_01\");\r",
 											"    pm.expect(data01.title).to.eql(\"Video 01\");\r",
-											"    pm.expect(data01._id).to.be.undefined;\r",
 											"\r",
 											"    const data02 = jsonData[1];\r",
 											"    pm.expect(data02.id).to.eql(\"video_02\");\r",
 											"    pm.expect(data02.title).to.eql(\"Vidéo 02\");\r",
-											"    pm.expect(data02._id).to.be.undefined;\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -47,6 +45,52 @@
 							],
 							"request": {
 								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/videos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"videos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Fetch all new videos onto the server",
+					"item": [
+						{
+							"name": "fetchVideos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.eql({});\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
 								"header": [],
 								"url": {
 									"raw": "http://localhost:3000/videos",

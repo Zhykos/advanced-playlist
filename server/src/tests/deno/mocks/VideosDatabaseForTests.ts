@@ -9,7 +9,7 @@ import { AuthYoutube } from "../../../main/deno/models/AuthYoutube.ts";
 
 export class VideosDatabaseForTests implements IVideosDatabase {
     getAuthProvider(
-        arg: ProviderArg & { name: "youtube" },
+        _arg: ProviderArg & { name: "youtube" },
     ): Promise<AuthYoutube> {
         return Helpers.wrapPromise(new AuthYoutube(""));
     }

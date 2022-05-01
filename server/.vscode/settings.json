@@ -6,6 +6,7 @@
         "Autosave",
         "Bson",
         "maincluster",
-        "openapi"
+        "openapi",
+        "zhykos"
     ]
 }
