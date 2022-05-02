@@ -10,7 +10,7 @@ paths:
       operationId: 'getVideos'
       responses:
         '200':
-          description: All videos within the body response
+          description: "Success: all videos within the body response"
           content:
             application/json:
               schema:
@@ -18,9 +18,9 @@ paths:
                 items:
                   $ref: '#/components/schemas/Video'
               examples:
-                several videos example:
+                got several videos:
                   value: "[{ id: 'video-AAA', title: 'Top 10 best animes' }, { id: 'video-BBB', title: 'Top 10 best movies' }]"
-                no result:
+                got no result:
                   value: "[]"
       tags:
         - videos
@@ -30,7 +30,18 @@ paths:
       operationId: 'fetchVideos'
       responses:
         '200':
-          description: Fetch succeeded
+          description: "Success: list of added videos"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+              examples:
+                fetched several videos:
+                  value: "[{ id: 'video-AAA', title: 'Top 10 best animes' }, { id: 'video-BBB', title: 'Top 10 best movies' }]"
+                fetched no video:
+                  value: "[]"
       tags:
         - videos
 tags:
@@ -95,9 +106,14 @@ components:
         thumbnail:
           type: string
           description: URL of the thumbnail
+        origin:
+          type: object
+          description: Origin of the channel
+          $ref: '#/components/schemas/Origin'
       required:
         - id
         - title
+        - origin
     FilteredStatus:
       type: string
       description: Filter used to hide this video
@@ -105,3 +121,8 @@ components:
         - user
         - whitelist-title
         - blacklist-title
+    Origin:
+      type: string
+      description: Origin of the media
+      enum:
+        - youtube

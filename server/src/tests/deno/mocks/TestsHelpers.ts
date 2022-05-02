@@ -1,42 +1,61 @@
 import { resolvesNext, stub } from "../deps.ts";
-import { channelsCollection as channelsYoutubeCollection } from "./FakeYoutube.ts";
+import {
+    channelsCollection as channelsYoutubeCollection,
+    videosCollection as videosYoutubeCollection,
+} from "./FakeYoutube.ts";
 import { videosCollection } from "./FakeDatabase.ts";
 import { VideosDatabaseMongoDbAtlas } from "../../../main/deno/database/VideosDatabaseMongoDbAtlas.ts";
 import { VideosProviderYoutube } from "../../../main/deno/videos-provider/VideosProviderYoutube.ts";
 import { AuthYoutube } from "../../../main/deno/models/youtube/AuthYoutube.ts";
+import { IVideosDatabase } from "../../../main/deno/database/IVideosDatabase.ts";
+import { ISubscriptionsDatabase } from "../../../main/deno/database/ISubscriptionsDatabase.ts";
+import { SubscriptionsDatabaseMongo } from "../../../main/deno/database/SubscriptionsDatabaseMongo.ts";
+import { VideosService } from "../../../main/deno/services/VideosService.ts";
+import { VideosProviderYoutubeImpl } from "../../../main/deno/videos-provider/VideosProviderYoutubeImpl.ts";
+import { IVideosProvider } from "../../../main/deno/videos-provider/IVideosProvider.ts";
 
 export class TestsHelpers {
-    private videosDatabaseMongoDbAtlas: VideosDatabaseMongoDbAtlas;
-    private videosProviderYoutube: VideosProviderYoutube;
+    private videosDatabase: IVideosDatabase;
+    private subDatabase: ISubscriptionsDatabase;
+    private videosProviderYoutubeImpl: VideosProviderYoutubeImpl;
 
     public static createInstance = async () => {
-        const videosDatabaseMongoDbAtlas = new VideosDatabaseMongoDbAtlas();
-        const videosProviderYoutube = new VideosProviderYoutube("");
         return new TestsHelpers(
-            videosDatabaseMongoDbAtlas,
-            videosProviderYoutube,
+            new VideosDatabaseMongoDbAtlas(),
+            new SubscriptionsDatabaseMongo(),
+            new VideosProviderYoutubeImpl(""),
         );
     };
 
     private constructor(
-        videosDatabaseMongoDbAtlas: VideosDatabaseMongoDbAtlas,
-        videosProviderYoutube: VideosProviderYoutube,
+        videosDatabase: IVideosDatabase,
+        subDatabase: ISubscriptionsDatabase,
+        videosProviderYoutubeImpl: VideosProviderYoutubeImpl,
     ) {
-        this.videosDatabaseMongoDbAtlas = videosDatabaseMongoDbAtlas;
-        this.videosProviderYoutube = videosProviderYoutube;
+        this.videosDatabase = videosDatabase;
+        this.subDatabase = subDatabase;
+        this.videosProviderYoutubeImpl = videosProviderYoutubeImpl;
     }
 
     createStubForGettingChannelFromYoutube() {
         return stub(
-            this.videosProviderYoutube,
-            "getYoutubeChannel",
+            this.videosProviderYoutubeImpl,
+            "getChannel",
             resolvesNext(channelsYoutubeCollection),
+        );
+    }
+
+    createStubForGettingVideosFromChannelFromYoutube() {
+        return stub(
+            this.videosProviderYoutubeImpl,
+            "getVideosFromChannel",
+            resolvesNext([videosYoutubeCollection]),
         );
     }
 
     createStubForGettingYoutubeAuthProviderFromDatabase() {
         return stub(
-            this.videosDatabaseMongoDbAtlas,
+            this.videosDatabase,
             "getAuthProvider",
             resolvesNext([new AuthYoutube("")]),
         );
@@ -44,17 +63,31 @@ export class TestsHelpers {
 
     createStubForGettingAllVideosFromDatabase() {
         return stub(
-            this.videosDatabaseMongoDbAtlas,
+            this.videosDatabase,
             "getAllVideos",
             resolvesNext([videosCollection]),
         );
     }
 
-    getStubbedVideosDatabaseMongoDbAtlas() {
-        return this.videosDatabaseMongoDbAtlas;
+    // createStubForFetchingVideosFromDatabase() {
+    //     return stub(
+    //         this.videosDatabase,
+    //         "fetchVideos",
+    //         resolvesNext([videosCollection]),
+    //     );
+    // }
+
+    createVideosService(): VideosService {
+        return new VideosService(
+            this.videosDatabase,
+            this.subDatabase,
+            this.createVideosProvider(),
+        );
     }
 
-    getStubbedVideosProviderYoutube() {
-        return this.videosProviderYoutube;
+    createVideosProvider(): IVideosProvider {
+        return new VideosProviderYoutube(
+            this.videosProviderYoutubeImpl,
+        );
     }
 }

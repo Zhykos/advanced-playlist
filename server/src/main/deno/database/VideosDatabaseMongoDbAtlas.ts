@@ -5,7 +5,7 @@ import { IVideosDatabase, ProviderArg } from "./IVideosDatabase.ts";
 import { authCollection, videosCollection } from "./MongoDbAtlas.ts";
 
 export class VideosDatabaseMongoDbAtlas implements IVideosDatabase {
-    getAuthProvider(
+    getAuthProvider( // FIXME rien à foutre ici !!!!!!!!!!!
         arg: ProviderArg & { name: "youtube" },
     ): Promise<AuthYoutube> {
         return this.internalGetAuthProvider(arg.name);

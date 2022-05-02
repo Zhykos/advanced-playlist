@@ -1,27 +1,22 @@
 import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
 import { IVideosProvider } from "./IVideosProvider.ts";
-import { YouTube } from "./deps.ts";
 import { YoutubeChannel } from "../models/youtube/YoutubeChannel.ts";
+import { Video } from "../../generated/deno-oak-server/models/Video.ts";
+import { VideosProviderYoutubeImpl } from "./VideosProviderYoutubeImpl.ts";
+import { IYoutubeVideo } from "../models/youtube/IYoutubeVideo.ts";
 
 export class VideosProviderYoutube implements IVideosProvider {
-    private youtubeApi: YouTube;
+    private youtubeApiImpl: VideosProviderYoutubeImpl;
 
-    constructor(apiKey: string) {
-        this.youtubeApi = new YouTube(apiKey, false);
-    }
-
-    async getYoutubeChannel(name: string): Promise<YoutubeChannel> {
-        return await this.youtubeApi
-            .channels_list({
-                part: "snippet",
-                forUsername: name,
-            });
+    constructor(youtubeApiImpl: VideosProviderYoutubeImpl) {
+        this.youtubeApiImpl = youtubeApiImpl;
     }
 
     async getChannel(name: string): Promise<Channel> {
-        const youtubeChannelObj: YoutubeChannel = await this.getYoutubeChannel(
-            name,
-        );
+        const youtubeChannelObj: YoutubeChannel = await this.youtubeApiImpl
+            .getChannel(
+                name,
+            );
         return new Promise((resolve, reject) => {
             const totalResults = youtubeChannelObj.pageInfo.totalResults;
             if (totalResults == 1) {
@@ -34,6 +29,20 @@ export class VideosProviderYoutube implements IVideosProvider {
                     `Cannot get channel '${name}' because there is ${totalResults} search results.`,
                 );
             }
+        });
+    }
+
+    async getVideosFromChannel(channel: Channel): Promise<Array<Video>> {
+        const youtubeVideos: Array<IYoutubeVideo> = await this.youtubeApiImpl
+            .getVideosFromChannel(channel.id);
+        return new Promise((resolve) => {
+            const videos: Array<Video> = youtubeVideos.map((youtubeVideo) => {
+                const video = new Video();
+                video.id = youtubeVideo.id.videoId;
+                video.title = youtubeVideo.snippet.title;
+                return video;
+            });
+            resolve(videos);
         });
     }
 }

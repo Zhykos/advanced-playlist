@@ -4,7 +4,7 @@ import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 
 // Mock results
 
-const testsHelpers = await TestsHelpers.createInstance();
+const testsHelpers: TestsHelpers = await TestsHelpers.createInstance();
 let stubForGettingAllVideosFromDatabase = testsHelpers
     .createStubForGettingAllVideosFromDatabase();
 let stubForGettingChannelFromYoutube = testsHelpers
@@ -14,10 +14,7 @@ let stubForGettingYoutubeAuthProviderFromDatabase = testsHelpers
 
 // Services implementations
 
-const videoService = new VideosService(
-    testsHelpers.getStubbedVideosDatabaseMongoDbAtlas(),
-    testsHelpers.getStubbedVideosProviderYoutube(),
-);
+const videoService: VideosService = testsHelpers.createVideosService();
 
 // Server
 
