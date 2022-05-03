@@ -1,4 +1,4 @@
-import { YouTube } from "../../videos-provider/deps.ts";
+import { YouTube } from "../../../videos-provider/impl/deps.ts";
 import { IProviderAuth } from "../IProviderAuth.ts";
 
 export class YoutubeAuth implements IProviderAuth {

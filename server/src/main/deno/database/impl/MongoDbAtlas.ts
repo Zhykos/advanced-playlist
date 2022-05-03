@@ -1,13 +1,13 @@
-import { MongoClient } from "../deps.ts";
-import { APP_ID, DATA_API_KEY } from "../config.ts";
-import { Video } from "../../generated/deno-oak-server/models/Video.ts";
+import { MongoClient } from "./deps.ts";
+import { MONGO_ATLAS_APP_ID, MONGO_ATLAS_DATA_API_KEY } from "./MongoConfig.ts";
+import { Video } from "../../../generated/deno-oak-server/models/Video.ts";
 import { IProviderAuth } from "../models/IProviderAuth.ts";
-import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
+import { Channel } from "../../../generated/deno-oak-server/models/Channel.ts";
 
 const client = new MongoClient({
-    appId: APP_ID,
+    appId: MONGO_ATLAS_APP_ID,
     dataSource: "maincluster",
-    apiKey: DATA_API_KEY,
+    apiKey: MONGO_ATLAS_DATA_API_KEY,
 });
 
 const database = client.database("advancedplaylist");

@@ -1,5 +1,5 @@
-import { IYoutubeVideo } from "../../../main/deno/models/youtube/IYoutubeVideo.ts";
-import { IYoutubeChannel } from "../../../main/deno/models/youtube/IYoutubeChannel.ts";
+import { IYoutubeVideo } from "../../../main/deno/videos-provider/models/IYoutubeVideo.ts";
+import { IYoutubeChannel } from "../../../main/deno/videos-provider/models/IYoutubeChannel.ts";
 
 export const channelsCollection = new Array<IYoutubeChannel>();
 

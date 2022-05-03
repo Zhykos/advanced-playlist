@@ -7,17 +7,17 @@ import {
     channelsCollection as channelsDatabaseCollection,
     videosCollection as videosDatabaseCollection,
 } from "./FakeDatabase.ts";
-import { VideosDatabaseMongo } from "../../../main/deno/database/VideosDatabaseMongo.ts";
-import { VideosProviderYoutube } from "../../../main/deno/videos-provider/VideosProviderYoutube.ts";
-import { YoutubeAuth } from "../../../main/deno/models/youtube/YoutubeAuth.ts";
+import { VideosDatabaseMongo } from "../../../main/deno/database/impl/VideosDatabaseMongo.ts";
+import { VideosProviderYoutube } from "../../../main/deno/videos-provider/impl/VideosProviderYoutube.ts";
 import { IVideosDatabase } from "../../../main/deno/database/IVideosDatabase.ts";
 import { ISubscriptionsDatabase } from "../../../main/deno/database/ISubscriptionsDatabase.ts";
-import { SubscriptionsDatabaseMongo } from "../../../main/deno/database/SubscriptionsDatabaseMongo.ts";
+import { SubscriptionsDatabaseMongo } from "../../../main/deno/database/impl/SubscriptionsDatabaseMongo.ts";
 import { VideosServiceAPI } from "../../../main/deno/services-api/VideosServiceAPI.ts";
-import { VideosProviderYoutubeImpl } from "../../../main/deno/videos-provider/VideosProviderYoutubeImpl.ts";
+import { VideosProviderYoutubeImpl } from "../../../main/deno/videos-provider/impl/VideosProviderYoutubeImpl.ts";
 import { IVideosProvider } from "../../../main/deno/videos-provider/IVideosProvider.ts";
 import { IAuthorizationsDatabase } from "../../../main/deno/database/IAuthorizationsDatabase.ts";
-import { AuthorizationsDatabaseMongo } from "../../../main/deno/database/AuthorizationsDatabaseMongo.ts";
+import { AuthorizationsDatabaseMongo } from "../../../main/deno/database/impl/AuthorizationsDatabaseMongo.ts";
+import { YoutubeAuth } from "../../../main/deno/database/models/impl/YoutubeAuth.ts";
 
 export class TestsHelpers {
     private videosDatabase: IVideosDatabase;

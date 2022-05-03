@@ -1,11 +1,11 @@
 import { DenoOakServer } from "../generated/deno-oak-server/DenoOakServer.ts";
 import { VideosServiceAPI } from "./services-api/VideosServiceAPI.ts";
-import { VideosDatabaseMongo } from "./database/VideosDatabaseMongo.ts";
-import { VideosProviderYoutube } from "./videos-provider/VideosProviderYoutube.ts";
-import { YoutubeAuth } from "./models/youtube/YoutubeAuth.ts";
-import { VideosProviderYoutubeImpl } from "./videos-provider/VideosProviderYoutubeImpl.ts";
-import { SubscriptionsDatabaseMongo } from "./database/SubscriptionsDatabaseMongo.ts";
-import { AuthorizationsDatabaseMongo } from "./database/AuthorizationsDatabaseMongo.ts";
+import { VideosDatabaseMongo } from "./database/impl/VideosDatabaseMongo.ts";
+import { VideosProviderYoutube } from "./videos-provider/impl/VideosProviderYoutube.ts";
+import { VideosProviderYoutubeImpl } from "./videos-provider/impl/VideosProviderYoutubeImpl.ts";
+import { SubscriptionsDatabaseMongo } from "./database/impl/SubscriptionsDatabaseMongo.ts";
+import { AuthorizationsDatabaseMongo } from "./database/impl/AuthorizationsDatabaseMongo.ts";
+import { YoutubeAuth } from "./database/models/impl/YoutubeAuth.ts";
 
 // Specific implementations
 

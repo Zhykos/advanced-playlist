@@ -1,9 +1,9 @@
-import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
-import { IVideosProvider } from "./IVideosProvider.ts";
-import { IYoutubeChannel } from "../models/youtube/IYoutubeChannel.ts";
-import { Video } from "../../generated/deno-oak-server/models/Video.ts";
+import { Channel } from "../../../generated/deno-oak-server/models/Channel.ts";
+import { IVideosProvider } from "../IVideosProvider.ts";
+import { IYoutubeChannel } from "../models/IYoutubeChannel.ts";
+import { Video } from "../../../generated/deno-oak-server/models/Video.ts";
 import { VideosProviderYoutubeImpl } from "./VideosProviderYoutubeImpl.ts";
-import { IYoutubeVideo } from "../models/youtube/IYoutubeVideo.ts";
+import { IYoutubeVideo } from "../models/IYoutubeVideo.ts";
 
 export class VideosProviderYoutube implements IVideosProvider {
     private youtubeApiImpl: VideosProviderYoutubeImpl;

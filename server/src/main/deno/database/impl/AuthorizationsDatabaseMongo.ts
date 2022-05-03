@@ -1,7 +1,6 @@
-import { IProviderAuth } from "../models/IProviderAuth.ts";
 import { authCollection } from "./MongoDbAtlas.ts";
-import { IAuthorizationsDatabase } from "./IAuthorizationsDatabase.ts";
-import { YoutubeAuth } from "../models/youtube/YoutubeAuth.ts";
+import { IAuthorizationsDatabase } from "../IAuthorizationsDatabase.ts";
+import { YoutubeAuth } from "../models/impl/YoutubeAuth.ts";
 
 export class AuthorizationsDatabaseMongo implements IAuthorizationsDatabase {
     getProviderAuth(): Promise<YoutubeAuth> {

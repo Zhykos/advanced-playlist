@@ -1,7 +1,7 @@
 import { YouTube } from "./deps.ts";
-import { IYoutubeChannel } from "../models/youtube/IYoutubeChannel.ts";
-import { IYoutubeVideo } from "../models/youtube/IYoutubeVideo.ts";
-import { YoutubeAuth } from "../models/youtube/YoutubeAuth.ts";
+import { IYoutubeChannel } from "../models/IYoutubeChannel.ts";
+import { IYoutubeVideo } from "../models/IYoutubeVideo.ts";
+import { YoutubeAuth } from "../../database/models/impl/YoutubeAuth.ts";
 
 export class VideosProviderYoutubeImpl {
     private youtubeApi: YouTube;
