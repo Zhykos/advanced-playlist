@@ -1,15 +1,16 @@
 import { YouTube } from "./deps.ts";
-import { YoutubeChannel } from "../models/youtube/YoutubeChannel.ts";
+import { IYoutubeChannel } from "../models/youtube/IYoutubeChannel.ts";
 import { IYoutubeVideo } from "../models/youtube/IYoutubeVideo.ts";
+import { YoutubeAuth } from "../models/youtube/YoutubeAuth.ts";
 
 export class VideosProviderYoutubeImpl {
     private youtubeApi: YouTube;
 
-    constructor(apiKey: string) {
-        this.youtubeApi = new YouTube(apiKey, false);
+    constructor(youtubeAuth: YoutubeAuth) {
+        this.youtubeApi = youtubeAuth.connect();
     }
 
-    getChannel(name: string): Promise<YoutubeChannel> {
+    getChannel(name: string): Promise<IYoutubeChannel> {
         return this.youtubeApi
             .channels_list({
                 part: "snippet",

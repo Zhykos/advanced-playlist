@@ -1,10 +1,10 @@
 import { assertEquals } from "./deps.ts";
 import { Video } from "../../main/generated/deno-oak-server/models/Video.ts";
 import { TestsHelpers } from "./mocks/TestsHelpers.ts";
-import { VideosService } from "../../main/deno/services/VideosService.ts";
+import { VideosServiceAPI } from "../../main/deno/services-api/VideosServiceAPI.ts";
 
 const testsHelpers: TestsHelpers = await TestsHelpers.createInstance();
-const videosService: VideosService = testsHelpers.createVideosService();
+const videosService: VideosServiceAPI = testsHelpers.createVideosService();
 
 Deno.test("Get all videos", async () => {
     testsHelpers.createStubs();

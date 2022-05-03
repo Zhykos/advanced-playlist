@@ -7,9 +7,6 @@ export const channelsCollection = new Array<Channel>();
 initDatabase();
 
 function initDatabase() {
-    videosCollection.length = 0;
-    channelsCollection.length = 0;
-
     const channel01: Channel = insertChannel(
         "database-channel-01",
         "Channel 01",

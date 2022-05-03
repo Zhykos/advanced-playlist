@@ -1,4 +1,4 @@
-import { VideosService } from "../../main/deno/services/VideosService.ts";
+import { VideosServiceAPI } from "../../main/deno/services-api/VideosServiceAPI.ts";
 import { DenoOakServer } from "../../main/generated/deno-oak-server/DenoOakServer.ts";
 import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 
@@ -9,11 +9,11 @@ testsHelpers.createStubs();
 
 // Services implementations
 
-const videoService: VideosService = testsHelpers.createVideosService();
+const videosService: VideosServiceAPI = testsHelpers.createVideosService();
 
 // Server
 
-const server = new DenoOakServer(3666, videoService);
+const server = new DenoOakServer(3666, videosService);
 server.addEndRouteListener(() => {
     testsHelpers.resetStubs();
     testsHelpers.createStubs();

@@ -1,6 +1,6 @@
 import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
 import { IVideosProvider } from "./IVideosProvider.ts";
-import { YoutubeChannel } from "../models/youtube/YoutubeChannel.ts";
+import { IYoutubeChannel } from "../models/youtube/IYoutubeChannel.ts";
 import { Video } from "../../generated/deno-oak-server/models/Video.ts";
 import { VideosProviderYoutubeImpl } from "./VideosProviderYoutubeImpl.ts";
 import { IYoutubeVideo } from "../models/youtube/IYoutubeVideo.ts";
@@ -13,7 +13,7 @@ export class VideosProviderYoutube implements IVideosProvider {
     }
 
     async getChannel(name: string): Promise<Channel> {
-        const youtubeChannelObj: YoutubeChannel = await this.youtubeApiImpl
+        const youtubeChannelObj: IYoutubeChannel = await this.youtubeApiImpl
             .getChannel(
                 name,
             );

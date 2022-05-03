@@ -1,7 +1,7 @@
 import { IYoutubeVideo } from "../../../main/deno/models/youtube/IYoutubeVideo.ts";
-import { YoutubeChannel } from "../../../main/deno/models/youtube/YoutubeChannel.ts";
+import { IYoutubeChannel } from "../../../main/deno/models/youtube/IYoutubeChannel.ts";
 
-export const channelsCollection = new Array<YoutubeChannel>();
+export const channelsCollection = new Array<IYoutubeChannel>();
 
 export const videosCollection = new Array<IYoutubeVideo>();
 
@@ -15,7 +15,7 @@ function initDatabase() {
 }
 
 function insertChannel(id: string, title: string): void {
-    const channel: YoutubeChannel = {
+    const channel: IYoutubeChannel = {
         pageInfo: { totalResults: 1 },
         items: [{ id: id, snippet: { id: title } }],
     };

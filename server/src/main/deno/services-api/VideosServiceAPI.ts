@@ -6,7 +6,7 @@ import { IVideosProvider } from "../videos-provider/IVideosProvider.ts";
 import { ISubscriptionsDatabase } from "../database/ISubscriptionsDatabase.ts";
 import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
 
-export class VideosService implements OpenApiVideosService {
+export class VideosServiceAPI implements OpenApiVideosService {
     private videosDatabase: IVideosDatabase;
     private subsDatabase: ISubscriptionsDatabase;
     private videosProvider: IVideosProvider;

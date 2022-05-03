@@ -1,4 +1,4 @@
-export interface YoutubeChannel {
+export interface IYoutubeChannel {
     pageInfo: PageInfo;
     items: Item[];
 }
