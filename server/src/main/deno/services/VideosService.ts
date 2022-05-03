@@ -9,25 +9,26 @@ import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
 export class VideosService implements OpenApiVideosService {
     private videosDatabase: IVideosDatabase;
     private subsDatabase: ISubscriptionsDatabase;
-    private youtube: IVideosProvider;
+    private videosProvider: IVideosProvider;
 
     constructor(
         videosDatabase: IVideosDatabase,
         subsDatabase: ISubscriptionsDatabase,
-        youtube: IVideosProvider,
+        videosProvider: IVideosProvider,
     ) {
         this.videosDatabase = videosDatabase;
         this.subsDatabase = subsDatabase;
-        this.youtube = youtube;
+        this.videosProvider = videosProvider;
     }
 
     async fetchVideos(): Promise<Video[]> {
         const subChannels: Array<Channel> = await this.subsDatabase
             .getSubscribedChannels();
-        subChannels.flatMap((channel) =>
-            this.youtube.getVideosFromChannel(channel)
+        const promises: Promise<Video[]>[] = subChannels.map((channel) =>
+            this.videosProvider.getVideosFromChannel(channel)
         );
-        return Helpers.wrapPromise();
+        const fetchVideos: Video[][] = await Promise.all(promises);
+        return Helpers.wrapPromise(fetchVideos[0]);
     }
 
     async getVideos(): Promise<Video[]> {

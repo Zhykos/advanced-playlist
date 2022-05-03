@@ -3,7 +3,10 @@ import {
     channelsCollection as channelsYoutubeCollection,
     videosCollection as videosYoutubeCollection,
 } from "./FakeYoutube.ts";
-import { videosCollection } from "./FakeDatabase.ts";
+import {
+    channelsCollection as channelsDatabaseCollection,
+    videosCollection as videosDatabaseCollection,
+} from "./FakeDatabase.ts";
 import { VideosDatabaseMongoDbAtlas } from "../../../main/deno/database/VideosDatabaseMongoDbAtlas.ts";
 import { VideosProviderYoutube } from "../../../main/deno/videos-provider/VideosProviderYoutube.ts";
 import { AuthYoutube } from "../../../main/deno/models/youtube/AuthYoutube.ts";
@@ -18,6 +21,12 @@ export class TestsHelpers {
     private videosDatabase: IVideosDatabase;
     private subDatabase: ISubscriptionsDatabase;
     private videosProviderYoutubeImpl: VideosProviderYoutubeImpl;
+
+    private videosProviderYoutubeImpl_getChannel_stub: any;
+    private videosProviderYoutubeImpl_getVideosFromChannel_stub: any;
+    private videosDatabase_getAuthProvider_stub: any;
+    private videosDatabase_getAllVideos_stub: any;
+    private subDatabase_getSubscribedChannels_stub: any;
 
     public static createInstance = async () => {
         return new TestsHelpers(
@@ -37,45 +46,41 @@ export class TestsHelpers {
         this.videosProviderYoutubeImpl = videosProviderYoutubeImpl;
     }
 
-    createStubForGettingChannelFromYoutube() {
-        return stub(
+    createStubs(): void {
+        this.videosProviderYoutubeImpl_getChannel_stub = stub(
             this.videosProviderYoutubeImpl,
             "getChannel",
             resolvesNext(channelsYoutubeCollection),
         );
-    }
-
-    createStubForGettingVideosFromChannelFromYoutube() {
-        return stub(
+        this.videosProviderYoutubeImpl_getVideosFromChannel_stub = stub(
             this.videosProviderYoutubeImpl,
             "getVideosFromChannel",
             resolvesNext([videosYoutubeCollection]),
         );
-    }
-
-    createStubForGettingYoutubeAuthProviderFromDatabase() {
-        return stub(
+        this.videosDatabase_getAuthProvider_stub = stub(
             this.videosDatabase,
             "getAuthProvider",
             resolvesNext([new AuthYoutube("")]),
         );
-    }
-
-    createStubForGettingAllVideosFromDatabase() {
-        return stub(
+        this.videosDatabase_getAllVideos_stub = stub(
             this.videosDatabase,
             "getAllVideos",
-            resolvesNext([videosCollection]),
+            resolvesNext([videosDatabaseCollection]),
+        );
+        this.subDatabase_getSubscribedChannels_stub = stub(
+            this.subDatabase,
+            "getSubscribedChannels",
+            resolvesNext([channelsDatabaseCollection]),
         );
     }
 
-    // createStubForFetchingVideosFromDatabase() {
-    //     return stub(
-    //         this.videosDatabase,
-    //         "fetchVideos",
-    //         resolvesNext([videosCollection]),
-    //     );
-    // }
+    resetStubs(): void {
+        this.videosProviderYoutubeImpl_getChannel_stub.restore();
+        this.videosProviderYoutubeImpl_getVideosFromChannel_stub.restore();
+        this.videosDatabase_getAuthProvider_stub.restore();
+        this.videosDatabase_getAllVideos_stub.restore();
+        this.subDatabase_getSubscribedChannels_stub.restore();
+    }
 
     createVideosService(): VideosService {
         return new VideosService(

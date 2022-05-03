@@ -5,12 +5,7 @@ import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 // Mock results
 
 const testsHelpers: TestsHelpers = await TestsHelpers.createInstance();
-let stubForGettingAllVideosFromDatabase = testsHelpers
-    .createStubForGettingAllVideosFromDatabase();
-let stubForGettingChannelFromYoutube = testsHelpers
-    .createStubForGettingChannelFromYoutube();
-let stubForGettingYoutubeAuthProviderFromDatabase = testsHelpers
-    .createStubForGettingYoutubeAuthProviderFromDatabase();
+testsHelpers.createStubs();
 
 // Services implementations
 
@@ -20,15 +15,7 @@ const videoService: VideosService = testsHelpers.createVideosService();
 
 const server = new DenoOakServer(3666, videoService);
 server.addEndRouteListener(() => {
-    stubForGettingAllVideosFromDatabase.restore();
-    stubForGettingChannelFromYoutube.restore();
-    stubForGettingYoutubeAuthProviderFromDatabase.restore();
-
-    stubForGettingAllVideosFromDatabase = testsHelpers
-        .createStubForGettingAllVideosFromDatabase();
-    stubForGettingChannelFromYoutube = testsHelpers
-        .createStubForGettingChannelFromYoutube();
-    stubForGettingYoutubeAuthProviderFromDatabase = testsHelpers
-        .createStubForGettingYoutubeAuthProviderFromDatabase();
+    testsHelpers.resetStubs();
+    testsHelpers.createStubs();
 });
 server.start();

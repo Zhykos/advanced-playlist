@@ -8,10 +8,10 @@ export const videosCollection = new Array<IYoutubeVideo>();
 initDatabase();
 
 function initDatabase() {
-    insertChannel("channel", "Channel 01");
+    insertChannel("youtube-channel-01", "Channel 01");
 
-    insertVideo("video-01-channel-01", "Video 01");
-    insertVideo("video-02-channel-01", "Video 02");
+    insertVideo("youtube-video-01", "Video 01");
+    insertVideo("youtube-video-02", "Video 02");
 }
 
 function insertChannel(id: string, title: string): void {

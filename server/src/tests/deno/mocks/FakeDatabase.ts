@@ -10,10 +10,13 @@ function initDatabase() {
     videosCollection.length = 0;
     channelsCollection.length = 0;
 
-    const channel01: Channel = insertChannel("channel-01", "Channel 01");
+    const channel01: Channel = insertChannel(
+        "database-channel-01",
+        "Channel 01",
+    );
 
-    insertVideo("video_01", "Video 01", channel01);
-    insertVideo("video_02", "Vidéo 02", channel01);
+    insertVideo("database-video-01", "Video 01", channel01);
+    insertVideo("database-video-02", "Video 02", channel01);
 }
 
 function insertVideo(id: string, title: string, channel: Channel): void {

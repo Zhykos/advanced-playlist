@@ -8,30 +8,21 @@ const testsHelpers: TestsHelpers = await TestsHelpers.createInstance();
 const videosProvider: IVideosProvider = testsHelpers.createVideosProvider();
 
 Deno.test("Get channel", async () => {
-    const getYoutubeChannelStub = testsHelpers
-        .createStubForGettingChannelFromYoutube();
-    const getAuthProviderStub = testsHelpers
-        .createStubForGettingYoutubeAuthProviderFromDatabase();
+    testsHelpers.createStubs();
 
     try {
         const channel: Channel = await videosProvider.getChannel(
             "Channel 01",
         );
-        assertEquals("channel", channel.id);
+        assertEquals("youtube-channel-01", channel.id);
         assertEquals("Channel 01", channel.title);
     } finally {
-        getYoutubeChannelStub.restore();
-        getAuthProviderStub.restore();
+        testsHelpers.resetStubs();
     }
 });
 
 Deno.test("Get videos from a channel", async () => {
-    const stub1 = testsHelpers
-        .createStubForGettingChannelFromYoutube();
-    const stub2 = testsHelpers
-        .createStubForGettingYoutubeAuthProviderFromDatabase();
-    const stub3 = testsHelpers
-        .createStubForGettingVideosFromChannelFromYoutube();
+    testsHelpers.createStubs();
 
     try {
         const channel = new Channel();
@@ -39,13 +30,11 @@ Deno.test("Get videos from a channel", async () => {
         const allVideos: Array<Video> = await videosProvider
             .getVideosFromChannel(channel);
         assertEquals(allVideos.length, 2);
-        assertEquals(allVideos[0].id, "video-01-channel-01");
+        assertEquals(allVideos[0].id, "youtube-video-01");
         assertEquals(allVideos[0].title, "Video 01");
-        assertEquals(allVideos[1].id, "video-02-channel-01");
+        assertEquals(allVideos[1].id, "youtube-video-02");
         assertEquals(allVideos[1].title, "Video 02");
     } finally {
-        stub1.restore();
-        stub2.restore();
-        stub3.restore();
+        testsHelpers.resetStubs();
     }
 });
