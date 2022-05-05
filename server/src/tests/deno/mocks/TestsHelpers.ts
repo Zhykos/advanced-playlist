@@ -66,7 +66,7 @@ export class TestsHelpers {
         );
         this.videosDatabase_getAuthProvider_stub = stub(
             this.authDatabase,
-            "getProviderAuth",
+            "getYoutubeProviderAuth",
             resolvesNext([new YoutubeAuth("")]),
         );
         this.videosDatabase_getAllVideos_stub = stub(
