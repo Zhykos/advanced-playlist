@@ -10,8 +10,10 @@ testsHelpers.createStubs();
 
 // Services implementations
 
-const databaseService: DatabaseServiceAPI = testsHelpers.createDatabaseService()
-const providersService: ProvidersServiceAPI = testsHelpers.createProvidersService()
+const databaseService: DatabaseServiceAPI = testsHelpers
+    .createDatabaseService();
+const providersService: ProvidersServiceAPI = testsHelpers
+    .createProvidersService();
 
 // Server
 
