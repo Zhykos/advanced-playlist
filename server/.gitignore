@@ -2,3 +2,4 @@
 /src/main/generated/
 .env*
 *.debug.*
+/cov_profile*

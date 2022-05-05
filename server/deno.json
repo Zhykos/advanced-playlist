@@ -5,7 +5,9 @@
         "format-project": "deno fmt",
         "start-server": "deno run --allow-net --allow-read ./src/main/deno/server.ts",
         "dev-start-server": "deno run --allow-net --allow-read --watch ./src/main/deno/server.ts",
-        "unit-tests": "deno test --allow-net --allow-read --allow-write src/tests/deno/",
+        "unit-tests": "deno test --allow-net --allow-read --allow-write --coverage=cov_profile src/tests/deno/",
+        "unit-tests-coverage-analysis": "deno coverage cov_profile",
+        "generate-html-coverage": "deno coverage cov_profile --lcov --output=cov_profile.lcov && perl C:\\ProgramData\\chocolatey\\lib\\lcov\\tools\\bin\\genhtml -o cov_profile/html cov_profile.lcov",
         "dev-start-unit-tests-server": "deno run --allow-net --allow-read --watch ./src/tests/deno/server.stubbed.ts"
     },
     "fmt": {
