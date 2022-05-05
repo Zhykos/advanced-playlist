@@ -1,7 +1,7 @@
 import { authCollection } from "./MongoDbAtlas.ts";
 import { IAuthorizationsDatabase } from "../IAuthorizationsDatabase.ts";
 import { YoutubeAuth } from "../models/impl/YoutubeAuth.ts";
-import { IProviderAuthDatabase } from "file:///C:/Users/Zhykos/Documents/dev/advanced-playlist/server/src/main/deno/database/models/IProviderAuthDatabase.ts";
+import { IProviderAuthDatabase } from "../models/IProviderAuthDatabase.ts";
 
 export class AuthorizationsDatabaseMongo implements IAuthorizationsDatabase {
     async getYoutubeProviderAuth(): Promise<YoutubeAuth> {
