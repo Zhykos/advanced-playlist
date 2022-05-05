@@ -3,14 +3,14 @@ info:
   title: Advanced playlist API
   version: '2.0'
 paths:
-  /videos:
+  /database/videos:
     get:
       summary: Get all videos to display
-      description: Get all videos to display
-      operationId: 'getVideos'
+      description: Get all videos to display from internal database.
+      operationId: 'getVideosFromDatabase'
       responses:
         '200':
-          description: "Success: all videos within the body response"
+          description: "Success: all videos within the body response."
           content:
             application/json:
               schema:
@@ -23,14 +23,15 @@ paths:
                 got no result:
                   value: "[]"
       tags:
-        - videos
-    post:
-      summary: Fetch all new videos onto the server
-      description: Fetch all new videos onto the server
-      operationId: 'fetchVideos'
+        - database
+  /providers/videos:
+    get:
+      summary: Get all new videos from providers
+      description: Get all new videos from providers like YouTube.
+      operationId: 'getVideosFromProviders'
       responses:
         '200':
-          description: "Success: list of added videos"
+          description: "Success: all videos within the body response."
           content:
             application/json:
               schema:
@@ -43,28 +44,30 @@ paths:
                 fetched no video:
                   value: "[]"
       tags:
-        - videos
+        - providers
 tags:
-  - name: videos
-    description: All services for videos
+  - name: database
+    description: All services to manage videos saved into the internal database.
+  - name: providers
+    description: All services to manage videos which are hosted on an external video provider (like YouTube).
 components:
   schemas:
     Video:
       type: object
-      description: A video
+      description: A video.
       properties:
         id:
           type: string
-          description: Specific video ID
+          description: Specific video ID.
         title:
           type: string
-          description: Title of the video
+          description: Title of the video.
         url:
           type: string
-          description: URL of the video
+          description: URL of the video.
         origin:
           type: string
-          description: Origin of the video
+          description: Origin of the video.
           enum:
           - youtube
         played:
@@ -73,14 +76,14 @@ components:
           default: false
         thumbnail:
           type: string
-          description: URL of the thumbnail
+          description: URL of the thumbnail.
         duration:
           type: integer
           format: int32
-          description: Duration of the video in seconds
+          description: Duration of the video in seconds.
         filteredStatuses:
           type: array
-          description: List of filters used to hide this video
+          description: List of filters used to hide this video.
           items:
             $ref: '#/components/schemas/FilteredStatus'
         channel:
@@ -95,20 +98,20 @@ components:
         - filteredStatuses
     Channel:
       type: object
-      description: A video channel. A channel contains lots of videos from a user
+      description: A video channel. A channel contains lots of videos from a user.
       properties:
         id:
           type: string
-          description: Specific channel ID
+          description: Specific channel ID.
         title:
           type: string
-          description: Title of the channel
+          description: Title of the channel.
         thumbnail:
           type: string
-          description: URL of the thumbnail
+          description: URL of the thumbnail.
         origin:
           type: object
-          description: Origin of the channel
+          description: Origin of the channel.
           $ref: '#/components/schemas/Origin'
       required:
         - id
@@ -116,13 +119,13 @@ components:
         - origin
     FilteredStatus:
       type: string
-      description: Filter used to hide this video
+      description: Filter used to hide this video.
       enum:
         - user
         - whitelist-title
         - blacklist-title
     Origin:
       type: string
-      description: Origin of the media
+      description: Origin of the media.
       enum:
         - youtube

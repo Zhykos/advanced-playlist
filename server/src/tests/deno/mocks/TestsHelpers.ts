@@ -12,16 +12,17 @@ import { VideosProviderYoutube } from "../../../main/deno/videos-provider/impl/V
 import { IVideosDatabase } from "../../../main/deno/database/IVideosDatabase.ts";
 import { ISubscriptionsDatabase } from "../../../main/deno/database/ISubscriptionsDatabase.ts";
 import { SubscriptionsDatabaseMongo } from "../../../main/deno/database/impl/SubscriptionsDatabaseMongo.ts";
-import { VideosServiceAPI } from "../../../main/deno/services-api/VideosServiceAPI.ts";
+import { DatabaseServiceAPI } from "../../../main/deno/services-api/DatabaseServiceAPI.ts";
 import { VideosProviderYoutubeImpl } from "../../../main/deno/videos-provider/impl/VideosProviderYoutubeImpl.ts";
 import { IVideosProvider } from "../../../main/deno/videos-provider/IVideosProvider.ts";
 import { IAuthorizationsDatabase } from "../../../main/deno/database/IAuthorizationsDatabase.ts";
 import { AuthorizationsDatabaseMongo } from "../../../main/deno/database/impl/AuthorizationsDatabaseMongo.ts";
 import { YoutubeAuth } from "../../../main/deno/database/models/impl/YoutubeAuth.ts";
+import { ProvidersServiceAPI } from "../../../main/deno/services-api/ProvidersServiceAPI.ts";
 
 export class TestsHelpers {
     private videosDatabase: IVideosDatabase;
-    private subDatabase: ISubscriptionsDatabase;
+    private subsDatabase: ISubscriptionsDatabase;
     private authDatabase: IAuthorizationsDatabase;
     private videosProviderYoutubeImpl: VideosProviderYoutubeImpl;
 
@@ -29,7 +30,7 @@ export class TestsHelpers {
     private videosProviderYoutubeImpl_getVideosFromChannel_stub: any;
     private videosDatabase_getAuthProvider_stub: any;
     private videosDatabase_getAllVideos_stub: any;
-    private subDatabase_getSubscribedChannels_stub: any;
+    private subsDatabase_getSubscribedChannels_stub: any;
 
     public static createInstance = async () => {
         return new TestsHelpers(
@@ -43,12 +44,12 @@ export class TestsHelpers {
     private constructor(
         videosDatabase: IVideosDatabase,
         authDatabase: IAuthorizationsDatabase,
-        subDatabase: ISubscriptionsDatabase,
+        subsDatabase: ISubscriptionsDatabase,
         videosProviderYoutubeImpl: VideosProviderYoutubeImpl,
     ) {
         this.videosDatabase = videosDatabase;
         this.authDatabase = authDatabase;
-        this.subDatabase = subDatabase;
+        this.subsDatabase = subsDatabase;
         this.videosProviderYoutubeImpl = videosProviderYoutubeImpl;
     }
 
@@ -73,8 +74,8 @@ export class TestsHelpers {
             "getAllVideos",
             resolvesNext([videosDatabaseCollection]),
         );
-        this.subDatabase_getSubscribedChannels_stub = stub(
-            this.subDatabase,
+        this.subsDatabase_getSubscribedChannels_stub = stub(
+            this.subsDatabase,
             "getSubscribedChannels",
             resolvesNext([channelsDatabaseCollection]),
         );
@@ -85,13 +86,18 @@ export class TestsHelpers {
         this.videosProviderYoutubeImpl_getVideosFromChannel_stub.restore();
         this.videosDatabase_getAuthProvider_stub.restore();
         this.videosDatabase_getAllVideos_stub.restore();
-        this.subDatabase_getSubscribedChannels_stub.restore();
+        this.subsDatabase_getSubscribedChannels_stub.restore();
     }
 
-    createVideosService(): VideosServiceAPI {
-        return new VideosServiceAPI(
+    createDatabaseService(): DatabaseServiceAPI {
+        return new DatabaseServiceAPI(
             this.videosDatabase,
-            this.subDatabase,
+        );
+    }
+
+    createProvidersService(): ProvidersServiceAPI {
+        return new ProvidersServiceAPI(
+            this.subsDatabase,
             this.createVideosProvider(),
         );
     }

@@ -1,18 +1,18 @@
 {
 	"info": {
-		"_postman_id": "386ccced-cce6-4b31-bfdb-b5f3b3026afc",
+		"_postman_id": "b83810aa-80ee-4210-a593-a8aa20947de8",
 		"name": "Advanced Playlist - Dedicated to unit tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Videos",
+			"name": "Database",
 			"item": [
 				{
 					"name": "Get all videos to display",
 					"item": [
 						{
-							"name": "getVideos",
+							"name": "getVideosFromDatabase",
 							"event": [
 								{
 									"listen": "test",
@@ -53,13 +53,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3666/videos",
+									"raw": "http://localhost:3666/database/videos",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "3666",
 									"path": [
+										"database",
 										"videos"
 									]
 								}
@@ -67,12 +68,17 @@
 							"response": []
 						}
 					]
-				},
+				}
+			]
+		},
+		{
+			"name": "Providers",
+			"item": [
 				{
-					"name": "Fetch all new videos onto the server",
+					"name": "Get all new videos from providers",
 					"item": [
 						{
-							"name": "fetchVideos",
+							"name": "getVideosFromProviders",
 							"event": [
 								{
 									"listen": "test",
@@ -106,16 +112,17 @@
 								}
 							],
 							"request": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3666/videos",
+									"raw": "http://localhost:3666/providers/videos",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "3666",
 									"path": [
+										"providers",
 										"videos"
 									]
 								}

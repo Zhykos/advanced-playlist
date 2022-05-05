@@ -5,8 +5,10 @@
         "autoload",
         "Autosave",
         "Bson",
+        "Deno",
         "maincluster",
         "openapi",
+        "youtube",
         "zhykos"
     ]
 }
