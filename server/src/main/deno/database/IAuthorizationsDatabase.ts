@@ -1,5 +1,5 @@
-import { IProviderAuth } from "./models/IProviderAuth.ts";
+import { YoutubeAuth } from "./models/impl/YoutubeAuth.ts";
 
 export interface IAuthorizationsDatabase {
-    getProviderAuth(): Promise<IProviderAuth>;
+    getYoutubeProviderAuth(): Promise<YoutubeAuth>;
 }

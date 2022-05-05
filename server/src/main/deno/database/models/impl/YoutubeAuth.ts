@@ -2,7 +2,7 @@ import { YouTube } from "../../../videos-provider/impl/deps.ts";
 import { IProviderAuth } from "../IProviderAuth.ts";
 
 export class YoutubeAuth implements IProviderAuth {
-    api_key: string;
+    private api_key: string;
 
     constructor(api_key: string) {
         this.api_key = api_key;

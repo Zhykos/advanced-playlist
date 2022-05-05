@@ -18,21 +18,17 @@ export class VideosProviderYoutubeImpl {
             });
     }
 
-    getVideosFromChannel(channelId: string): Promise<Array<IYoutubeVideo>> {
-        return this.youtubeApi.search_list({
+    async getVideosFromChannel(
+        channelId: string,
+    ): Promise<Array<IYoutubeVideo>> {
+        const videos: ISearchListResult = await this.youtubeApi.search_list({
             part: "snippet",
             channelId: channelId,
         });
+        return new Promise((resolve) => resolve(videos.items));
     }
-
-    // static async debug() {
-    //     console.log(
-    //         await new VideosProviderYoutubeImpl(
-    //             "xxxxxxxxxxxxx",
-    //         ).getVideosFromChannel("xxxxxxxxxxxx"),
-    //     );
-    // }
 }
 
-// deno run --allow-net src\main\deno\videos-provider\VideosProviderYoutubeImpl.ts
-// VideosProviderYoutubeImpl.debug();
+interface ISearchListResult {
+    items: Array<IYoutubeVideo>;
+}
