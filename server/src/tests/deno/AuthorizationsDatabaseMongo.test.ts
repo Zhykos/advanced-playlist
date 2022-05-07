@@ -11,7 +11,7 @@ Deno.test("Get Youtube authorization", async () => {
     try {
         const auth: YoutubeAuth = await testsHelpers.getAuthDatabase()
             .getYoutubeProviderAuth();
-        const youtube: YouTube = auth.connect();
+        const youtube: YouTube = auth.createImpl();
         assertEquals(youtube.api_key, "foo");
     } finally {
         testsHelpers.resetStubs();
