@@ -5,7 +5,7 @@ import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 
 // Mock results
 
-const testsHelpers: TestsHelpers = await TestsHelpers.createInstance();
+const testsHelpers: TestsHelpers = new TestsHelpers();
 testsHelpers.createStubs();
 
 // Services implementations
