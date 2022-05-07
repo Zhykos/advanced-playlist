@@ -8,7 +8,7 @@ export class YoutubeAuth implements IProviderAuth {
         this.api_key = api_key;
     }
 
-    connect(): YouTube {
+    createImpl(): YouTube {
         return new YouTube(this.api_key, false);
     }
 }

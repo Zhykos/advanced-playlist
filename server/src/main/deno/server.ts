@@ -7,15 +7,19 @@ import { AuthorizationsDatabaseMongo } from "./database/impl/AuthorizationsDatab
 import { DatabaseServiceAPI } from "./services-api/DatabaseServiceAPI.ts";
 import { ProvidersServiceAPI } from "./services-api/ProvidersServiceAPI.ts";
 import { YoutubeAuth } from "./database/models/impl/YoutubeAuth.ts";
+import { MongoDbAtlas } from "./database/impl/MongoDbAtlas.ts";
+import { YouTube } from "./videos-provider/impl/deps.ts";
 
 // Specific implementations
 
-const videosDatabaseMongo = new VideosDatabaseMongo();
-const subscriptionsDatabaseMongo = new SubscriptionsDatabaseMongo();
-const authorizationsDatabaseMongo = new AuthorizationsDatabaseMongo();
+const mongo = new MongoDbAtlas()
+const videosDatabaseMongo = new VideosDatabaseMongo(mongo);
+const subscriptionsDatabaseMongo = new SubscriptionsDatabaseMongo(mongo);
+const authorizationsDatabaseMongo = new AuthorizationsDatabaseMongo(mongo);
 const youtubeAuth: YoutubeAuth = await authorizationsDatabaseMongo
     .getYoutubeProviderAuth();
-const videosProviderYoutubeImpl = new VideosProviderYoutubeImpl(youtubeAuth);
+const youtubeApi: YouTube = youtubeAuth.createImpl();
+const videosProviderYoutubeImpl = new VideosProviderYoutubeImpl(youtubeApi);
 const videosProviderYoutube = new VideosProviderYoutube(
     videosProviderYoutubeImpl,
 );
