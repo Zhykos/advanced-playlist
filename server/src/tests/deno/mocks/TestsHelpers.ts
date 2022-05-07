@@ -1,7 +1,5 @@
 import { resolvesNext, stub } from "../deps.ts";
-import {
-    videosCollection as videosYoutubeCollection,
-} from "./FakeYoutube.ts";
+import { videosCollection as videosYoutubeCollection } from "./FakeYoutube.ts";
 import {
     channelsCollection as channelsDatabaseCollection,
     videosCollection as videosDatabaseCollection,

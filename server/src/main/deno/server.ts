@@ -12,7 +12,7 @@ import { YouTube } from "./videos-provider/impl/deps.ts";
 
 // Specific implementations
 
-const mongo = new MongoDbAtlas()
+const mongo = new MongoDbAtlas();
 const videosDatabaseMongo = new VideosDatabaseMongo(mongo);
 const subscriptionsDatabaseMongo = new SubscriptionsDatabaseMongo(mongo);
 const authorizationsDatabaseMongo = new AuthorizationsDatabaseMongo(mongo);
