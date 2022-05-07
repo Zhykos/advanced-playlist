@@ -1,9 +1,15 @@
 import { Channel } from "../../../generated/deno-oak-server/models/Channel.ts";
 import { ISubscriptionsDatabase } from "../ISubscriptionsDatabase.ts";
-import { channelsCollection } from "./MongoDbAtlas.ts";
+import { MongoDbAtlas } from "./MongoDbAtlas.ts";
 
 export class SubscriptionsDatabaseMongo implements ISubscriptionsDatabase {
+    private mongo: MongoDbAtlas;
+
+    constructor(mongo: MongoDbAtlas) {
+        this.mongo = mongo;
+    }
+
     getSubscribedChannels(): Promise<Channel[]> {
-        return channelsCollection.find();
+        return this.mongo.getChannelsCollection().find();
     }
 }

@@ -4,18 +4,31 @@ import { Video } from "../../../generated/deno-oak-server/models/Video.ts";
 import { Channel } from "../../../generated/deno-oak-server/models/Channel.ts";
 import { IProviderAuthDatabase } from "../models/IProviderAuthDatabase.ts";
 
-const client = new MongoClient({
-    appId: MONGO_ATLAS_APP_ID,
-    dataSource: "maincluster",
-    apiKey: MONGO_ATLAS_DATA_API_KEY,
-});
+export class MongoDbAtlas {
+    private database;
+    private authCollection;
 
-const database = client.database("advancedplaylist");
+    constructor() {
+        const client = new MongoClient({
+            appId: MONGO_ATLAS_APP_ID,
+            dataSource: "maincluster",
+            apiKey: MONGO_ATLAS_DATA_API_KEY,
+        });
+        this.database = client.database("advancedplaylist");
+        this.authCollection = this.database.collection<IProviderAuthDatabase>(
+            "auth",
+        );
+    }
 
-export const videosCollection = database.collection<Video>("videos");
+    getVideosCollection() {
+        return this.database.collection<Video>("videos");
+    }
 
-export const authCollection = database.collection<IProviderAuthDatabase>(
-    "auth",
-);
+    findAuthProvider(provider: string): Promise<IProviderAuthDatabase> {
+        return this.authCollection.findOne({ provider: provider });
+    }
 
-export const channelsCollection = database.collection<Channel>("channels");
+    getChannelsCollection() {
+        return this.database.collection<Channel>("channels");
+    }
+}
