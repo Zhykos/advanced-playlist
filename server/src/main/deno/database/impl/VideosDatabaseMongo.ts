@@ -10,6 +10,6 @@ export class VideosDatabaseMongo implements IVideosDatabase {
     }
 
     getAllVideos(): Promise<Video[]> {
-        return this.mongo.getAllVideos();
+        return this.mongo.videosCollection.find();
     }
 }

@@ -11,9 +11,10 @@ export class AuthorizationsDatabaseMongo implements IAuthorizationsDatabase {
     }
 
     async getYoutubeProviderAuth(): Promise<YoutubeAuth> {
-        const auth: IProviderAuthDatabase = await this.mongo.findAuthProvider(
-            "youtube",
-        );
+        const auth: IProviderAuthDatabase = await this.mongo.authCollection
+            .findOne({
+                provider: "youtube",
+            });
         const split: string[] = auth.data[0].split("=");
         return Promise.resolve(new YoutubeAuth(split[1]));
     }

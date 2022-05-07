@@ -5,9 +5,9 @@ import { Channel } from "../../../generated/deno-oak-server/models/Channel.ts";
 import { IProviderAuthDatabase } from "../models/IProviderAuthDatabase.ts";
 
 export class MongoDbAtlas {
-    private authCollection;
-    private videosCollection;
-    private channelsCollection;
+    authCollection;
+    videosCollection;
+    channelsCollection;
 
     constructor() {
         const client = new MongoClient({
@@ -23,15 +23,15 @@ export class MongoDbAtlas {
         this.channelsCollection = database.collection<Channel>("channels");
     }
 
-    getAllVideos(): Promise<Video[]> {
-        return this.videosCollection.find();
-    }
+    // getAllVideos(): Promise<Video[]> {
+    //     return this.videosCollection.find();
+    // }
 
-    findAuthProvider(provider: string): Promise<IProviderAuthDatabase> {
-        return this.authCollection.findOne({ provider: provider });
-    }
+    // findAuthProvider(provider: string): Promise<IProviderAuthDatabase> {
+    //     return this.authCollection.findOne({ provider: provider });
+    // }
 
-    getSubscribedChannels(): Promise<Channel[]> {
-        return this.channelsCollection.find();
-    }
+    // getSubscribedChannels(): Promise<Channel[]> {
+    //     return this.channelsCollection.find();
+    // }
 }

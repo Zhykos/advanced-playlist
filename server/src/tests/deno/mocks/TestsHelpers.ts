@@ -26,9 +26,9 @@ export class TestsHelpers {
     private videosProviderYoutubeImpl: VideosProviderYoutubeImpl;
     private youtubeApi: YouTube;
 
-    private mongo_findAuthProvider_stub: any;
-    private mongo_getAllVideos_stub: any;
-    private mongo_getSubscribedChannels_stub: any;
+    private mongo_authCollection_findOne_stub: any;
+    private mongo_videosCollection_find_stub: any;
+    private mongo_channelsCollection_find_stub: any;
     private youtubeApi_search_list_stub: any;
 
     constructor() {
@@ -43,21 +43,21 @@ export class TestsHelpers {
     }
 
     createStubs(): void {
-        this.mongo_findAuthProvider_stub = stub(
-            this.mongo,
-            "findAuthProvider",
+        this.mongo_authCollection_findOne_stub = stub(
+            this.mongo.authCollection,
+            "findOne",
             resolvesNext([{ data: ["api=foo"], provider: "" }]),
         );
 
-        this.mongo_getAllVideos_stub = stub(
-            this.mongo,
-            "getAllVideos",
+        this.mongo_videosCollection_find_stub = stub(
+            this.mongo.videosCollection,
+            "find",
             resolvesNext([videosDatabaseCollection]),
         );
 
-        this.mongo_getSubscribedChannels_stub = stub(
-            this.mongo,
-            "getSubscribedChannels",
+        this.mongo_channelsCollection_find_stub = stub(
+            this.mongo.channelsCollection,
+            "find",
             resolvesNext([channelsDatabaseCollection]),
         );
 
@@ -69,9 +69,9 @@ export class TestsHelpers {
     }
 
     resetStubs(): void {
-        this.mongo_findAuthProvider_stub.restore();
-        this.mongo_getAllVideos_stub.restore();
-        this.mongo_getSubscribedChannels_stub.restore();
+        this.mongo_authCollection_findOne_stub.restore();
+        this.mongo_videosCollection_find_stub.restore();
+        this.mongo_channelsCollection_find_stub.restore();
         this.youtubeApi_search_list_stub.restore();
     }
 
