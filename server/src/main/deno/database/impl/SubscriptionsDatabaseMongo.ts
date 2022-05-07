@@ -10,6 +10,6 @@ export class SubscriptionsDatabaseMongo implements ISubscriptionsDatabase {
     }
 
     getSubscribedChannels(): Promise<Channel[]> {
-        return this.mongo.getChannelsCollection().find();
+        return this.mongo.getSubscribedChannels();
     }
 }

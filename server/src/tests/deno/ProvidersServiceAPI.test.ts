@@ -3,7 +3,7 @@ import { Video } from "../../main/generated/deno-oak-server/models/Video.ts";
 import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 import { ProvidersServiceAPI } from "../../main/deno/services-api/ProvidersServiceAPI.ts";
 
-const testsHelpers: TestsHelpers = await TestsHelpers.createInstance();
+const testsHelpers: TestsHelpers = new TestsHelpers();
 const providersService: ProvidersServiceAPI = testsHelpers
     .createProvidersService();
 

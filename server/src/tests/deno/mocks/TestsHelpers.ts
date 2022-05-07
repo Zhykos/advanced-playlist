@@ -1,6 +1,5 @@
-import { resolvesNext, returnsNext, stub } from "../deps.ts";
+import { resolvesNext, stub } from "../deps.ts";
 import {
-    channelsCollection as channelsYoutubeCollection,
     videosCollection as videosYoutubeCollection,
 } from "./FakeYoutube.ts";
 import {
@@ -17,9 +16,9 @@ import { VideosProviderYoutubeImpl } from "../../../main/deno/videos-provider/im
 import { IVideosProvider } from "../../../main/deno/videos-provider/IVideosProvider.ts";
 import { IAuthorizationsDatabase } from "../../../main/deno/database/IAuthorizationsDatabase.ts";
 import { AuthorizationsDatabaseMongo } from "../../../main/deno/database/impl/AuthorizationsDatabaseMongo.ts";
-import { YoutubeAuth } from "../../../main/deno/database/models/impl/YoutubeAuth.ts";
 import { ProvidersServiceAPI } from "../../../main/deno/services-api/ProvidersServiceAPI.ts";
 import { MongoDbAtlas } from "../../../main/deno/database/impl/MongoDbAtlas.ts";
+import { YouTube } from "../../../main/deno/videos-provider/impl/deps.ts";
 
 export class TestsHelpers {
     private videosDatabase: IVideosDatabase;
@@ -27,79 +26,55 @@ export class TestsHelpers {
     private mongo: MongoDbAtlas;
     private authDatabase: IAuthorizationsDatabase;
     private videosProviderYoutubeImpl: VideosProviderYoutubeImpl;
+    private youtubeApi: YouTube;
 
-    private videosProviderYoutubeImpl_getChannel_stub: any;
-    private videosProviderYoutubeImpl_getVideosFromChannel_stub: any;
-    private videosDatabase_getAuthProvider_stub: any;
-    private videosDatabase_getAllVideos_stub: any;
-    private subsDatabase_getSubscribedChannels_stub: any;
     private mongo_findAuthProvider_stub: any;
-
-    // public static createInstance = async () => {
-    //     return new TestsHelpers(
-    //         new VideosDatabaseMongo(),
-    //         new AuthorizationsDatabaseMongo(),
-    //         new SubscriptionsDatabaseMongo(),
-    //         new VideosProviderYoutubeImpl(new YoutubeAuth("")),
-    //     );
-    // };
+    private mongo_getAllVideos_stub: any;
+    private mongo_getSubscribedChannels_stub: any;
+    private youtubeApi_search_list_stub: any;
 
     constructor() {
         this.mongo = new MongoDbAtlas();
         this.videosDatabase = new VideosDatabaseMongo(this.mongo);
         this.authDatabase = new AuthorizationsDatabaseMongo(this.mongo);
         this.subsDatabase = new SubscriptionsDatabaseMongo(this.mongo);
+        this.youtubeApi = new YouTube("", false);
         this.videosProviderYoutubeImpl = new VideosProviderYoutubeImpl(
-            new YoutubeAuth(""),
+            this.youtubeApi,
         );
     }
 
     createStubs(): void {
-        // this.videosProviderYoutubeImpl_getChannel_stub = stub(
-        //     this.videosProviderYoutubeImpl,
-        //     "getChannel",
-        //     resolvesNext(channelsYoutubeCollection),
-        // );
-        // this.videosProviderYoutubeImpl_getVideosFromChannel_stub = stub(
-        //     this.videosProviderYoutubeImpl,
-        //     "getVideosFromChannel",
-        //     resolvesNext([videosYoutubeCollection]),
-        // );
-        // this.videosDatabase_getAuthProvider_stub = stub(
-        //     this.authDatabase,
-        //     "getYoutubeProviderAuth",
-        //     resolvesNext([new YoutubeAuth("")]),
-        // );
-        // this.videosDatabase_getAllVideos_stub = stub(
-        //     this.videosDatabase,
-        //     "getAllVideos",
-        //     resolvesNext([videosDatabaseCollection]),
-        // );
-        // this.subsDatabase_getSubscribedChannels_stub = stub(
-        //     this.subsDatabase,
-        //     "getSubscribedChannels",
-        //     resolvesNext([channelsDatabaseCollection]),
-        // );
-
         this.mongo_findAuthProvider_stub = stub(
             this.mongo,
             "findAuthProvider",
             resolvesNext([{ data: ["api=foo"], provider: "" }]),
         );
-        // this.getAuthCollection_findOne_stub = stub(
-        //     this.mongo.getAuthCollection(),
-        //     "findOne",
-        //     resolvesNext([{ data: ["api=foo"], provider: "" }]),
-        // );
+
+        this.mongo_getAllVideos_stub = stub(
+            this.mongo,
+            "getAllVideos",
+            resolvesNext([videosDatabaseCollection]),
+        );
+
+        this.mongo_getSubscribedChannels_stub = stub(
+            this.mongo,
+            "getSubscribedChannels",
+            resolvesNext([channelsDatabaseCollection]),
+        );
+
+        this.youtubeApi_search_list_stub = stub(
+            this.youtubeApi,
+            "search_list",
+            resolvesNext([{ items: videosYoutubeCollection }]),
+        );
     }
 
     resetStubs(): void {
-        // this.videosProviderYoutubeImpl_getChannel_stub.restore();
-        // this.videosProviderYoutubeImpl_getVideosFromChannel_stub.restore();
-        // this.videosDatabase_getAuthProvider_stub.restore();
-        // this.videosDatabase_getAllVideos_stub.restore();
-        // this.subsDatabase_getSubscribedChannels_stub.restore();
         this.mongo_findAuthProvider_stub.restore();
+        this.mongo_getAllVideos_stub.restore();
+        this.mongo_getSubscribedChannels_stub.restore();
+        this.youtubeApi_search_list_stub.restore();
     }
 
     createDatabaseService(): DatabaseServiceAPI {

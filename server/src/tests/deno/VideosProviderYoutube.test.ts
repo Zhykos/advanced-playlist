@@ -4,22 +4,8 @@ import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 import { Video } from "../../main/generated/deno-oak-server/models/Video.ts";
 import { IVideosProvider } from "../../main/deno/videos-provider/IVideosProvider.ts";
 
-const testsHelpers: TestsHelpers = await TestsHelpers.createInstance();
+const testsHelpers: TestsHelpers = new TestsHelpers();
 const videosProvider: IVideosProvider = testsHelpers.createVideosProvider();
-
-Deno.test("Get channel", async () => {
-    testsHelpers.createStubs();
-
-    try {
-        const channel: Channel = await videosProvider.getChannel(
-            "Channel 01",
-        );
-        assertEquals("youtube-channel-01", channel.id);
-        assertEquals("Channel 01", channel.title);
-    } finally {
-        testsHelpers.resetStubs();
-    }
-});
 
 Deno.test("Get videos from a channel", async () => {
     testsHelpers.createStubs();
