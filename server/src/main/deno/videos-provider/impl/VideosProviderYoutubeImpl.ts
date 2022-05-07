@@ -25,7 +25,7 @@ export class VideosProviderYoutubeImpl {
             part: "snippet",
             channelId: channelId,
         });
-        return new Promise((resolve) => resolve(videos.items));
+        return Promise.resolve(videos.items);
     }
 }
 

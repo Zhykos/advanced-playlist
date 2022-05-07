@@ -9,6 +9,6 @@ export class AuthorizationsDatabaseMongo implements IAuthorizationsDatabase {
             provider: "youtube",
         });
         const split: string[] = auth.data[0].split("=");
-        return new Promise((resolve) => resolve(new YoutubeAuth(split[1])));
+        return Promise.resolve(new YoutubeAuth(split[1]));
     }
 }

@@ -35,14 +35,12 @@ export class VideosProviderYoutube implements IVideosProvider {
     async getVideosFromChannel(channel: Channel): Promise<Array<Video>> {
         const youtubeVideos: Array<IYoutubeVideo> = await this.youtubeApiImpl
             .getVideosFromChannel(channel.id);
-        return new Promise((resolve) => {
-            const videos: Array<Video> = youtubeVideos.map((youtubeVideo) => {
-                const video = new Video();
-                video.id = youtubeVideo.id.videoId;
-                video.title = youtubeVideo.snippet.title;
-                return video;
-            });
-            resolve(videos);
+        const videos: Array<Video> = youtubeVideos.map((youtubeVideo) => {
+            const video = new Video();
+            video.id = youtubeVideo.id.videoId;
+            video.title = youtubeVideo.snippet.title;
+            return video;
         });
+        return Promise.resolve(videos);
     }
 }
