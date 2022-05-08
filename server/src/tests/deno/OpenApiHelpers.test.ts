@@ -29,3 +29,8 @@ Deno.test("no content type", () => {
     const headers: Headers = new Headers();
     assertEquals(Helpers.isFormDataBody(headers), false);
 });
+
+Deno.test("wrapPromise", async () => {
+    const result: string = await Helpers.wrapPromise("foo");
+    assertEquals(result, "foo");
+});

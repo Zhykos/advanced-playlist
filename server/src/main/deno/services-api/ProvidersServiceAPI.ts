@@ -1,6 +1,5 @@
 import { Video } from "../../generated/deno-oak-server/models/Video.ts";
 import { ProvidersService as OpenApiProvidersService } from "../../generated/deno-oak-server/services/ProvidersService.ts";
-import { Helpers } from "../../generated/deno-oak-server/controllers/Helpers.ts";
 import { IVideosProvider } from "../videos-provider/IVideosProvider.ts";
 import { IChannelsDatabase } from "../database/IChannelsDatabase.ts";
 import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
@@ -24,7 +23,7 @@ export class ProvidersServiceAPI implements OpenApiProvidersService {
             this.videosProvider.getVideosFromChannel(channel)
         );
         const fetchVideos: Video[][] = await Promise.all(promises);
-        return Helpers.wrapPromise(fetchVideos[0]);
+        return Promise.resolve(fetchVideos[0]);
     }
 
     async searchChannelFromProviders(channelName: string): Promise<Channel[]> {
