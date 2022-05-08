@@ -12,4 +12,11 @@ export class SubscriptionsDatabaseMongo implements ISubscriptionsDatabase {
     getSubscribedChannels(): Promise<Channel[]> {
         return this.mongo.channelsCollection.find();
     }
+
+    async subscribeToChannel(channel: Channel): Promise<Channel> {
+        const result: { insertedId: string } = await this.mongo
+            .channelsCollection.insertOne(channel);
+        channel._databaseId = result.insertedId;
+        return Promise.resolve(channel);
+    }
 }

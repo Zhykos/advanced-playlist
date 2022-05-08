@@ -30,6 +30,7 @@ export class TestsHelpers {
     private mongo_authCollection_findOne_stub: any;
     private mongo_videosCollection_find_stub: any;
     private mongo_channelsCollection_find_stub: any;
+    private mongo_channelsCollection_insertOne_stub: any;
     private youtubeApi_search_list_stub: any;
     private youtubeApi_channels_list_stub: any;
 
@@ -60,6 +61,12 @@ export class TestsHelpers {
             resolvesNext([channelsDatabaseCollection]),
         );
 
+        this.mongo_channelsCollection_insertOne_stub = stub(
+            this.mongo.channelsCollection,
+            "insertOne",
+            resolvesNext([{ insertedId: "foo" }]),
+        );
+
         this.youtubeApi_search_list_stub = stub(
             this.youtubeApi,
             "search_list",
@@ -77,6 +84,7 @@ export class TestsHelpers {
         this.mongo_authCollection_findOne_stub.restore();
         this.mongo_videosCollection_find_stub.restore();
         this.mongo_channelsCollection_find_stub.restore();
+        this.mongo_channelsCollection_insertOne_stub.restore();
         this.youtubeApi_search_list_stub.restore();
         this.youtubeApi_channels_list_stub.restore();
     }
@@ -84,6 +92,7 @@ export class TestsHelpers {
     createDatabaseService(): DatabaseServiceAPI {
         return new DatabaseServiceAPI(
             this.videosDatabase,
+            this.subsDatabase,
         );
     }
 

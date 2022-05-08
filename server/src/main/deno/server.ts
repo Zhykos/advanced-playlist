@@ -26,6 +26,7 @@ const videosProviderYoutube = new VideosProviderYoutube(
 
 const databaseService: DatabaseServiceAPI = new DatabaseServiceAPI(
     videosDatabaseMongo,
+    subscriptionsDatabaseMongo,
 );
 const providersService: ProvidersServiceAPI = new ProvidersServiceAPI(
     subscriptionsDatabaseMongo,

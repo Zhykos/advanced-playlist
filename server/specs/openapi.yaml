@@ -24,6 +24,33 @@ paths:
                   value: "[]"
       tags:
         - database
+  /database/channel:
+    post:
+      summary: Subscribe to a channel
+      description: "Subscribe to a channel: save it into the database to fetch all videos from it."
+      operationId: 'subscribeToChannel'
+      requestBody:
+        description: Channel to subscribe to.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Channel'
+            example:
+              channel to subscribe:
+                value: "{ id: 'channel-AAA', title: 'My best channel' }"
+      responses:
+        '200':
+          description: "Success: acknowledge saved channel."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Channel'
+              example:
+                subscribed channel:
+                  value: "{ id: 'channel-AAA', title: 'My best channel', _databaseId: 'xxxxxxxxxx' }"
+      tags:
+        - database
   /providers/videos:
     get:
       summary: Get all new videos from providers
@@ -141,6 +168,9 @@ components:
           type: object
           description: Origin of the channel.
           $ref: '#/components/schemas/Origin'
+        _databaseId:
+          type: string
+          description: Technical ID for database object.
       required:
         - id
         - title
