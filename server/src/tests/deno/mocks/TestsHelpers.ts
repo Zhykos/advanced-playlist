@@ -26,14 +26,7 @@ export class TestsHelpers {
     private mongo: MongoDbAtlas;
     private authDatabase: IAuthorizationsDatabase;
     private youtubeApi: YouTube;
-
-    private mongo_authCollection_findOne_stub: any;
-    private mongo_videosCollection_find_stub: any;
-    private mongo_videosCollection_insertMany_stub: any;
-    private mongo_channelsCollection_find_stub: any;
-    private mongo_channelsCollection_insertOne_stub: any;
-    private youtubeApi_search_list_stub: any;
-    private youtubeApi_channels_list_stub: any;
+    private stubs = new Array();
 
     constructor() {
         this.mongo = new MongoDbAtlas();
@@ -44,57 +37,65 @@ export class TestsHelpers {
     }
 
     createStubs(): void {
-        this.mongo_authCollection_findOne_stub = stub(
+        this.createStubToResolvesNext(
             this.mongo.authCollection,
             "findOne",
-            resolvesNext([{ data: ["api=foo"], provider: "" }]),
+            { data: ["api=foo"], provider: "" },
         );
 
-        this.mongo_videosCollection_find_stub = stub(
+        this.createStubToResolvesNext(
             this.mongo.videosCollection,
             "find",
-            resolvesNext([videosDatabaseCollection]),
+            videosDatabaseCollection,
         );
 
-        this.mongo_videosCollection_insertMany_stub = stub(
+        this.createStubToResolvesNext(
             this.mongo.videosCollection,
             "insertMany",
-            resolvesNext([{ insertedIds: ["foo01", "foo02"] }]),
+            { insertedIds: ["foo01", "foo02"] },
         );
 
-        this.mongo_channelsCollection_find_stub = stub(
+        this.createStubToResolvesNext(
             this.mongo.channelsCollection,
             "find",
-            resolvesNext([channelsDatabaseCollection]),
+            channelsDatabaseCollection,
         );
 
-        this.mongo_channelsCollection_insertOne_stub = stub(
+        this.createStubToResolvesNext(
             this.mongo.channelsCollection,
             "insertOne",
-            resolvesNext([{ insertedId: "foo" }]),
+            { insertedId: "foo" },
         );
 
-        this.youtubeApi_search_list_stub = stub(
+        this.createStubToResolvesNext(
             this.youtubeApi,
             "search_list",
-            resolvesNext([{ items: videosYoutubeCollection }]),
+            { items: videosYoutubeCollection },
         );
 
-        this.youtubeApi_channels_list_stub = stub(
+        this.createStubToResolvesNext(
             this.youtubeApi,
             "channels_list",
-            resolvesNext([{ items: channelsYoutubeCollection }]),
+            { items: channelsYoutubeCollection },
         );
     }
 
+    private createStubToResolvesNext(
+        objToStub: any,
+        methodToStub: string,
+        resolve: any,
+    ) {
+        const newStub = stub(
+            objToStub,
+            methodToStub,
+            resolvesNext([resolve]),
+        );
+        this.stubs.push(newStub);
+    }
+
     resetStubs(): void {
-        this.mongo_authCollection_findOne_stub.restore();
-        this.mongo_videosCollection_find_stub.restore();
-        this.mongo_videosCollection_insertMany_stub.restore();
-        this.mongo_channelsCollection_find_stub.restore();
-        this.mongo_channelsCollection_insertOne_stub.restore();
-        this.youtubeApi_search_list_stub.restore();
-        this.youtubeApi_channels_list_stub.restore();
+        this.stubs.forEach((stubToRestore) => stubToRestore.restore());
+        this.stubs.length = 0;
     }
 
     createDatabaseService(): DatabaseServiceAPI {
