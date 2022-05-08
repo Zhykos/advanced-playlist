@@ -28,7 +28,7 @@ Deno.test("Subscribe to a channel", async () => {
     testsHelpers.createStubs();
 
     try {
-        const channel: Channel = new Channel();
+        const channel = new Channel();
         channel.id = "channel-000";
         channel.title = "Channel 000";
         assertEquals(channel._databaseId, undefined);
@@ -37,6 +37,31 @@ Deno.test("Subscribe to a channel", async () => {
             .subscribeToChannel(channel);
 
         assertEquals(subscribedChannel, channel);
+    } finally {
+        testsHelpers.resetStubs();
+    }
+});
+
+Deno.test("Save videos", async () => {
+    testsHelpers.createStubs();
+
+    try {
+        const videos = new Array<Video>();
+        const video01 = new Video();
+        video01.id = "video-001";
+        video01.title = "Video 001";
+        videos.push(video01);
+        assertEquals(video01._databaseId, undefined);
+        const video02 = new Video();
+        video02.id = "video-002";
+        video02.title = "Video 002";
+        videos.push(video02);
+        assertEquals(video02._databaseId, undefined);
+
+        const savedVideos: Array<Video> = await databaseService
+            .saveVideos(videos);
+
+        assertEquals(savedVideos, videos);
     } finally {
         testsHelpers.resetStubs();
     }

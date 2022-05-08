@@ -29,6 +29,7 @@ export class TestsHelpers {
 
     private mongo_authCollection_findOne_stub: any;
     private mongo_videosCollection_find_stub: any;
+    private mongo_videosCollection_insertMany_stub: any;
     private mongo_channelsCollection_find_stub: any;
     private mongo_channelsCollection_insertOne_stub: any;
     private youtubeApi_search_list_stub: any;
@@ -53,6 +54,12 @@ export class TestsHelpers {
             this.mongo.videosCollection,
             "find",
             resolvesNext([videosDatabaseCollection]),
+        );
+
+        this.mongo_videosCollection_insertMany_stub = stub(
+            this.mongo.videosCollection,
+            "insertMany",
+            resolvesNext([{ insertedIds: ["foo01", "foo02"] }]),
         );
 
         this.mongo_channelsCollection_find_stub = stub(
@@ -83,6 +90,7 @@ export class TestsHelpers {
     resetStubs(): void {
         this.mongo_authCollection_findOne_stub.restore();
         this.mongo_videosCollection_find_stub.restore();
+        this.mongo_videosCollection_insertMany_stub.restore();
         this.mongo_channelsCollection_find_stub.restore();
         this.mongo_channelsCollection_insertOne_stub.restore();
         this.youtubeApi_search_list_stub.restore();

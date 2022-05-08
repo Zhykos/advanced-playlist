@@ -12,4 +12,13 @@ export class VideosDatabaseMongo implements IVideosDatabase {
     getAllVideos(): Promise<Video[]> {
         return this.mongo.videosCollection.find();
     }
+
+    async saveVideos(videos: Video[]): Promise<Video[]> {
+        const results: { insertedIds: string[] } = await this.mongo
+            .videosCollection.insertMany(videos);
+        for (let index = 0; index < videos.length; index++) {
+            videos[index]._databaseId = results.insertedIds[index];
+        }
+        return Promise.resolve(videos);
+    }
 }

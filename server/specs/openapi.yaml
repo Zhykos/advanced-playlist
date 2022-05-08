@@ -24,6 +24,36 @@ paths:
                   value: "[]"
       tags:
         - database
+    post:
+      summary: Save videos into the playlist
+      description: Save videos into the playlist (into the internal database).
+      operationId: 'saveVideos'
+      requestBody:
+        description: Videos to save.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Video'
+            example:
+              videos to save:
+                value: "[{ id: 'video-AAA', title: 'Top 10 best animes' }, { id: 'video-BBB', title: 'Top 10 best movies' }]"
+      responses:
+        '200':
+          description: "Success: acknowledge saved videos."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Video'
+              example:
+                saved videos:
+                  value: "[{ id: 'video-AAA', title: 'Top 10 best animes', _databaseId: 'xxxxxxxxxx01' }, { id: 'video-BBB', title: 'Top 10 best movies', _databaseId: 'xxxxxxxxxx02' }]"
+      tags:
+        - database
   /database/channel:
     post:
       summary: Subscribe to a channel
@@ -143,6 +173,9 @@ components:
             $ref: '#/components/schemas/FilteredStatus'
         channel:
           $ref: '#/components/schemas/Channel'
+        _databaseId:
+          type: string
+          description: Technical ID for database object.
       required:
         - id
         - title
