@@ -24,7 +24,7 @@ export class VideosProviderYoutube implements IVideosProvider {
             });
             return Promise.resolve(videos);
         } catch (e) {
-            return Promise.reject(e);
+            return Promise.reject(new Error(e));
         }
     }
 
@@ -63,10 +63,7 @@ export class VideosProviderYoutube implements IVideosProvider {
                 part: "snippet",
                 forUsername: channelName,
             });
-        if (result.items) {
-            return Promise.resolve(result.items);
-        }
-        return Promise.reject(result);
+        return Promise.resolve(result.items || []);
     }
 }
 

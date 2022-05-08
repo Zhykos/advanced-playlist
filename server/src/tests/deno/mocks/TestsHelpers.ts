@@ -121,4 +121,8 @@ export class TestsHelpers {
     getAuthDatabase(): IAuthorizationsDatabase {
         return this.authDatabase;
     }
+
+    getYoutubeAPI(): YouTube {
+        return this.youtubeApi;
+    }
 }
