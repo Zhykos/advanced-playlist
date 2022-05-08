@@ -5,6 +5,7 @@
         "autoload",
         "Autosave",
         "Bson",
+        "deno",
         "Deno",
         "genhtml",
         "lcov",
