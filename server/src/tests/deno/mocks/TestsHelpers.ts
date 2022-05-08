@@ -1,5 +1,8 @@
 import { resolvesNext, stub } from "../deps.ts";
-import { videosCollection as videosYoutubeCollection } from "./FakeYoutube.ts";
+import {
+    channelsCollection as channelsYoutubeCollection,
+    videosCollection as videosYoutubeCollection,
+} from "./FakeYoutube.ts";
 import {
     channelsCollection as channelsDatabaseCollection,
     videosCollection as videosDatabaseCollection,
@@ -30,6 +33,7 @@ export class TestsHelpers {
     private mongo_videosCollection_find_stub: any;
     private mongo_channelsCollection_find_stub: any;
     private youtubeApi_search_list_stub: any;
+    private youtubeApi_channels_list_stub: any;
 
     constructor() {
         this.mongo = new MongoDbAtlas();
@@ -66,6 +70,12 @@ export class TestsHelpers {
             "search_list",
             resolvesNext([{ items: videosYoutubeCollection }]),
         );
+
+        this.youtubeApi_channels_list_stub = stub(
+            this.youtubeApi,
+            "channels_list",
+            resolvesNext([{ items: channelsYoutubeCollection }]),
+        );
     }
 
     resetStubs(): void {
@@ -73,6 +83,7 @@ export class TestsHelpers {
         this.mongo_videosCollection_find_stub.restore();
         this.mongo_channelsCollection_find_stub.restore();
         this.youtubeApi_search_list_stub.restore();
+        this.youtubeApi_channels_list_stub.restore();
     }
 
     createDatabaseService(): DatabaseServiceAPI {

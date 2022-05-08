@@ -130,6 +130,58 @@
 							"response": []
 						}
 					]
+				},
+				{
+					"name": "Search a channel with its name on all providers",
+					"item": [
+						{
+							"name": "searchChannelFromProviders",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(1);\r",
+											"    \r",
+											"    const data01 = jsonData[0];\r",
+											"    pm.expect(data01.id).to.eql(\"youtube-channel-01\");\r",
+											"    pm.expect(data01.title).to.eql(\"Channel 01\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3666/providers/channel/zhykos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3666",
+									"path": [
+										"providers",
+										"channel",
+										"zhykos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}

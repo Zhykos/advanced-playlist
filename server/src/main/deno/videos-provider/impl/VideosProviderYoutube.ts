@@ -3,6 +3,7 @@ import { IVideosProvider } from "../IVideosProvider.ts";
 import { Video } from "../../../generated/deno-oak-server/models/Video.ts";
 import { VideosProviderYoutubeImpl } from "./VideosProviderYoutubeImpl.ts";
 import { IYoutubeVideo } from "../models/IYoutubeVideo.ts";
+import { IYoutubeChannel } from "../models/IYoutubeChannel.ts";
 
 export class VideosProviderYoutube implements IVideosProvider {
     private youtubeApiImpl: VideosProviderYoutubeImpl;
@@ -21,5 +22,19 @@ export class VideosProviderYoutube implements IVideosProvider {
             return video;
         });
         return Promise.resolve(videos);
+    }
+
+    async getChannels(channelName: string): Promise<Array<Channel>> {
+        const youtubeChannels: Array<IYoutubeChannel> = await this
+            .youtubeApiImpl.getChannels(channelName);
+        const channels: Array<Channel> = youtubeChannels.map(
+            (youtubeChannel) => {
+                const channel = new Channel();
+                channel.id = youtubeChannel.id;
+                channel.title = youtubeChannel.snippet.title;
+                return channel;
+            },
+        );
+        return Promise.resolve(channels);
     }
 }

@@ -24,3 +24,17 @@ Deno.test("Get videos from a channel", async () => {
         testsHelpers.resetStubs();
     }
 });
+
+Deno.test("Search a channel", async () => {
+    testsHelpers.createStubs();
+
+    try {
+        const channels: Array<Channel> = await videosProvider
+            .getChannels("");
+        assertEquals(channels.length, 1);
+        assertEquals(channels[0].id, "youtube-channel-01");
+        assertEquals(channels[0].title, "Channel 01");
+    } finally {
+        testsHelpers.resetStubs();
+    }
+});
