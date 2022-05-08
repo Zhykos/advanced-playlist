@@ -13,25 +13,32 @@ export class VideosProviderYoutube implements IVideosProvider {
     }
 
     async getVideosFromChannel(channel: Channel): Promise<Array<Video>> {
-        const youtubeVideos: Array<IYoutubeVideo> = await this
-            .getYoutubeVideosFromChannel(channel.id);
-        const videos: Array<Video> = youtubeVideos.map((youtubeVideo) => {
-            const video = new Video();
-            video.id = youtubeVideo.id.videoId;
-            video.title = youtubeVideo.snippet.title;
-            return video;
-        });
-        return Promise.resolve(videos);
+        try {
+            const youtubeVideos: Array<IYoutubeVideo> = await this
+                .getYoutubeVideosFromChannel(channel.id);
+            const videos: Array<Video> = youtubeVideos.map((youtubeVideo) => {
+                const video = new Video();
+                video.id = youtubeVideo.id.videoId;
+                video.title = youtubeVideo.snippet.title;
+                return video;
+            });
+            return Promise.resolve(videos);
+        } catch (e) {
+            return Promise.reject(e);
+        }
     }
 
     private async getYoutubeVideosFromChannel(
         channelId: string,
     ): Promise<Array<IYoutubeVideo>> {
-        const videos: ISearchListResult = await this.youtubeApi.search_list({
+        const result: ISearchListResult = await this.youtubeApi.search_list({
             part: "snippet",
             channelId: channelId,
         });
-        return Promise.resolve(videos.items);
+        if (result.items) {
+            return Promise.resolve(result.items);
+        }
+        return Promise.reject(result);
     }
 
     async getChannels(channelName: string): Promise<Array<Channel>> {
@@ -51,19 +58,22 @@ export class VideosProviderYoutube implements IVideosProvider {
     private async getYoutubeChannels(
         channelName: string,
     ): Promise<Array<IYoutubeChannel>> {
-        const channels: IChannelsListResult = await this.youtubeApi
+        const result: IChannelsListResult = await this.youtubeApi
             .channels_list({
                 part: "snippet",
                 forUsername: channelName,
             });
-        return Promise.resolve(channels.items);
+        if (result.items) {
+            return Promise.resolve(result.items);
+        }
+        return Promise.reject(result);
     }
 }
 
 interface ISearchListResult {
-    items: Array<IYoutubeVideo>;
+    items?: Array<IYoutubeVideo>;
 }
 
 interface IChannelsListResult {
-    items: Array<IYoutubeChannel>;
+    items?: Array<IYoutubeChannel>;
 }
