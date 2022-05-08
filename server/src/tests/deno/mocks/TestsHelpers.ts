@@ -13,7 +13,6 @@ import { IVideosDatabase } from "../../../main/deno/database/IVideosDatabase.ts"
 import { ISubscriptionsDatabase } from "../../../main/deno/database/ISubscriptionsDatabase.ts";
 import { SubscriptionsDatabaseMongo } from "../../../main/deno/database/impl/SubscriptionsDatabaseMongo.ts";
 import { DatabaseServiceAPI } from "../../../main/deno/services-api/DatabaseServiceAPI.ts";
-import { VideosProviderYoutubeImpl } from "../../../main/deno/videos-provider/impl/VideosProviderYoutubeImpl.ts";
 import { IVideosProvider } from "../../../main/deno/videos-provider/IVideosProvider.ts";
 import { IAuthorizationsDatabase } from "../../../main/deno/database/IAuthorizationsDatabase.ts";
 import { AuthorizationsDatabaseMongo } from "../../../main/deno/database/impl/AuthorizationsDatabaseMongo.ts";
@@ -26,7 +25,6 @@ export class TestsHelpers {
     private subsDatabase: ISubscriptionsDatabase;
     private mongo: MongoDbAtlas;
     private authDatabase: IAuthorizationsDatabase;
-    private videosProviderYoutubeImpl: VideosProviderYoutubeImpl;
     private youtubeApi: YouTube;
 
     private mongo_authCollection_findOne_stub: any;
@@ -41,9 +39,6 @@ export class TestsHelpers {
         this.authDatabase = new AuthorizationsDatabaseMongo(this.mongo);
         this.subsDatabase = new SubscriptionsDatabaseMongo(this.mongo);
         this.youtubeApi = new YouTube("", false);
-        this.videosProviderYoutubeImpl = new VideosProviderYoutubeImpl(
-            this.youtubeApi,
-        );
     }
 
     createStubs(): void {
@@ -101,7 +96,7 @@ export class TestsHelpers {
 
     createVideosProvider(): IVideosProvider {
         return new VideosProviderYoutube(
-            this.videosProviderYoutubeImpl,
+            this.youtubeApi,
         );
     }
 

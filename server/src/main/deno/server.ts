@@ -1,7 +1,6 @@
 import { DenoOakServer } from "../generated/deno-oak-server/DenoOakServer.ts";
 import { VideosDatabaseMongo } from "./database/impl/VideosDatabaseMongo.ts";
 import { VideosProviderYoutube } from "./videos-provider/impl/VideosProviderYoutube.ts";
-import { VideosProviderYoutubeImpl } from "./videos-provider/impl/VideosProviderYoutubeImpl.ts";
 import { SubscriptionsDatabaseMongo } from "./database/impl/SubscriptionsDatabaseMongo.ts";
 import { AuthorizationsDatabaseMongo } from "./database/impl/AuthorizationsDatabaseMongo.ts";
 import { DatabaseServiceAPI } from "./services-api/DatabaseServiceAPI.ts";
@@ -19,9 +18,8 @@ const authorizationsDatabaseMongo = new AuthorizationsDatabaseMongo(mongo);
 const youtubeAuth: YoutubeAuth = await authorizationsDatabaseMongo
     .getYoutubeProviderAuth();
 const youtubeApi: YouTube = youtubeAuth.createImpl();
-const videosProviderYoutubeImpl = new VideosProviderYoutubeImpl(youtubeApi);
 const videosProviderYoutube = new VideosProviderYoutube(
-    videosProviderYoutubeImpl,
+    youtubeApi,
 );
 
 // Services implementations
