@@ -1,7 +1,7 @@
 import { DenoOakServer } from "../generated/deno-oak-server/DenoOakServer.ts";
 import { VideosDatabaseMongo } from "./database/impl/VideosDatabaseMongo.ts";
 import { VideosProviderYoutube } from "./videos-provider/impl/VideosProviderYoutube.ts";
-import { SubscriptionsDatabaseMongo } from "./database/impl/SubscriptionsDatabaseMongo.ts";
+import { ChannelsDatabaseMongo } from "./database/impl/ChannelsDatabaseMongo.ts";
 import { AuthorizationsDatabaseMongo } from "./database/impl/AuthorizationsDatabaseMongo.ts";
 import { DatabaseServiceAPI } from "./services-api/DatabaseServiceAPI.ts";
 import { ProvidersServiceAPI } from "./services-api/ProvidersServiceAPI.ts";
@@ -13,7 +13,7 @@ import { YouTube } from "./videos-provider/impl/deps.ts";
 
 const mongo = new MongoDbAtlas();
 const videosDatabaseMongo = new VideosDatabaseMongo(mongo);
-const subscriptionsDatabaseMongo = new SubscriptionsDatabaseMongo(mongo);
+const channelsDatabaseMongo = new ChannelsDatabaseMongo(mongo);
 const authorizationsDatabaseMongo = new AuthorizationsDatabaseMongo(mongo);
 const youtubeAuth: YoutubeAuth = await authorizationsDatabaseMongo
     .getYoutubeProviderAuth();
@@ -26,10 +26,10 @@ const videosProviderYoutube = new VideosProviderYoutube(
 
 const databaseService: DatabaseServiceAPI = new DatabaseServiceAPI(
     videosDatabaseMongo,
-    subscriptionsDatabaseMongo,
+    channelsDatabaseMongo,
 );
 const providersService: ProvidersServiceAPI = new ProvidersServiceAPI(
-    subscriptionsDatabaseMongo,
+    channelsDatabaseMongo,
     videosProviderYoutube,
 );
 

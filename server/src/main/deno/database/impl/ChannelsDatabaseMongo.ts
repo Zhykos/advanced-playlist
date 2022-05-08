@@ -1,8 +1,8 @@
 import { Channel } from "../../../generated/deno-oak-server/models/Channel.ts";
-import { ISubscriptionsDatabase } from "../ISubscriptionsDatabase.ts";
+import { IChannelsDatabase } from "../IChannelsDatabase.ts";
 import { MongoDbAtlas } from "./MongoDbAtlas.ts";
 
-export class SubscriptionsDatabaseMongo implements ISubscriptionsDatabase {
+export class ChannelsDatabaseMongo implements IChannelsDatabase {
     private mongo: MongoDbAtlas;
 
     constructor(mongo: MongoDbAtlas) {

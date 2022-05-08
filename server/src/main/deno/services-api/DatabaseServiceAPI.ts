@@ -1,19 +1,19 @@
 import { Channel } from "../../generated/deno-oak-server/models/Channel.ts";
 import { Video } from "../../generated/deno-oak-server/models/Video.ts";
 import { DatabaseService as OpenApiDatabaseService } from "../../generated/deno-oak-server/services/DatabaseService.ts";
-import { ISubscriptionsDatabase } from "../database/ISubscriptionsDatabase.ts";
+import { IChannelsDatabase } from "../database/IChannelsDatabase.ts";
 import { IVideosDatabase } from "../database/IVideosDatabase.ts";
 
 export class DatabaseServiceAPI implements OpenApiDatabaseService {
     private videosDatabase: IVideosDatabase;
-    private subsDatabase: ISubscriptionsDatabase;
+    private channelsDatabase: IChannelsDatabase;
 
     constructor(
         videosDatabase: IVideosDatabase,
-        subsDatabase: ISubscriptionsDatabase,
+        channelsDatabase: IChannelsDatabase,
     ) {
         this.videosDatabase = videosDatabase;
-        this.subsDatabase = subsDatabase;
+        this.channelsDatabase = channelsDatabase;
     }
 
     async getVideosFromDatabase(): Promise<Video[]> {
@@ -21,7 +21,7 @@ export class DatabaseServiceAPI implements OpenApiDatabaseService {
     }
 
     async subscribeToChannel(channel: Channel): Promise<Channel> {
-        return await this.subsDatabase.subscribeToChannel(channel);
+        return await this.channelsDatabase.subscribeToChannel(channel);
     }
 
     async saveVideos(videos: Video[]): Promise<Video[]> {

@@ -10,8 +10,8 @@ import {
 import { VideosDatabaseMongo } from "../../../main/deno/database/impl/VideosDatabaseMongo.ts";
 import { VideosProviderYoutube } from "../../../main/deno/videos-provider/impl/VideosProviderYoutube.ts";
 import { IVideosDatabase } from "../../../main/deno/database/IVideosDatabase.ts";
-import { ISubscriptionsDatabase } from "../../../main/deno/database/ISubscriptionsDatabase.ts";
-import { SubscriptionsDatabaseMongo } from "../../../main/deno/database/impl/SubscriptionsDatabaseMongo.ts";
+import { IChannelsDatabase } from "../../../main/deno/database/IChannelsDatabase.ts";
+import { ChannelsDatabaseMongo } from "../../../main/deno/database/impl/ChannelsDatabaseMongo.ts";
 import { DatabaseServiceAPI } from "../../../main/deno/services-api/DatabaseServiceAPI.ts";
 import { IVideosProvider } from "../../../main/deno/videos-provider/IVideosProvider.ts";
 import { IAuthorizationsDatabase } from "../../../main/deno/database/IAuthorizationsDatabase.ts";
@@ -22,7 +22,7 @@ import { YouTube } from "../../../main/deno/videos-provider/impl/deps.ts";
 
 export class TestsHelpers {
     private videosDatabase: IVideosDatabase;
-    private subsDatabase: ISubscriptionsDatabase;
+    private channelsDatabase: IChannelsDatabase;
     private mongo: MongoDbAtlas;
     private authDatabase: IAuthorizationsDatabase;
     private youtubeApi: YouTube;
@@ -32,7 +32,7 @@ export class TestsHelpers {
         this.mongo = new MongoDbAtlas();
         this.videosDatabase = new VideosDatabaseMongo(this.mongo);
         this.authDatabase = new AuthorizationsDatabaseMongo(this.mongo);
-        this.subsDatabase = new SubscriptionsDatabaseMongo(this.mongo);
+        this.channelsDatabase = new ChannelsDatabaseMongo(this.mongo);
         this.youtubeApi = new YouTube("", false);
     }
 
@@ -101,13 +101,13 @@ export class TestsHelpers {
     createDatabaseService(): DatabaseServiceAPI {
         return new DatabaseServiceAPI(
             this.videosDatabase,
-            this.subsDatabase,
+            this.channelsDatabase,
         );
     }
 
     createProvidersService(): ProvidersServiceAPI {
         return new ProvidersServiceAPI(
-            this.subsDatabase,
+            this.channelsDatabase,
             this.createVideosProvider(),
         );
     }
