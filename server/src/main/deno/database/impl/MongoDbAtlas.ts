@@ -22,16 +22,4 @@ export class MongoDbAtlas {
         this.videosCollection = database.collection<Video>("videos");
         this.channelsCollection = database.collection<Channel>("channels");
     }
-
-    // getAllVideos(): Promise<Video[]> {
-    //     return this.videosCollection.find();
-    // }
-
-    // findAuthProvider(provider: string): Promise<IProviderAuthDatabase> {
-    //     return this.authCollection.findOne({ provider: provider });
-    // }
-
-    // getSubscribedChannels(): Promise<Channel[]> {
-    //     return this.channelsCollection.find();
-    // }
 }
