@@ -1,7 +1,7 @@
 import { crypto, writableStreamFromWriter } from "./deps.ts";
 
 const baseUrl =
-    "https://github.com/Zhykos/deno-server-openapi-generator/releases/download/0.3.0-beta/";
+    "https://github.com/Zhykos/deno-server-openapi-generator/releases/download/0.4.0-beta/";
 const jarFilename = "openapi-generator-cli.jar";
 const hashFilename = "openapi-generator-cli.sha256";
 const targetDirectory = "./openapi-generator/";
