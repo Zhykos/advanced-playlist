@@ -22,9 +22,9 @@ import { YouTube } from "../../../main/deno/videos-provider/impl/deps.ts";
 
 export class TestsHelpers {
     mongo: MongoDbAtlas;
+    channelsDatabase: IChannelsDatabase;
 
     private videosDatabase: IVideosDatabase;
-    private channelsDatabase: IChannelsDatabase;
     private authDatabase: IAuthorizationsDatabase;
     private youtubeApi: YouTube;
     private stubs = new Array();
@@ -60,6 +60,12 @@ export class TestsHelpers {
             this.mongo.channelsCollection,
             "find",
             channelsDatabaseCollection,
+        );
+
+        this.createStubToResolvesNext(
+            this.mongo.channelsCollection,
+            "findOne",
+            undefined,
         );
 
         this.createStubToResolvesNext(

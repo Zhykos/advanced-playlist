@@ -1,8 +1,11 @@
-import { assertEquals } from "./deps.ts";
+import { assertEquals, assertRejects, resolvesNext, stub } from "./deps.ts";
 import { Video } from "../../main/generated/deno-oak-server/models/Video.ts";
 import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 import { DatabaseServiceAPI } from "../../main/deno/services-api/DatabaseServiceAPI.ts";
 import { Channel } from "../../main/generated/deno-oak-server/models/Channel.ts";
+import {
+    channelsCollection as channelsDatabaseCollection,
+} from "./mocks/FakeDatabase.ts";
 
 const testsHelpers: TestsHelpers = new TestsHelpers();
 const databaseService: DatabaseServiceAPI = testsHelpers
@@ -29,16 +32,28 @@ Deno.test("Subscribe to a channel", async () => {
 
     try {
         const channel = new Channel();
-        channel.id = "channel-000";
-        channel.title = "Channel 000";
-        assertEquals(channel._databaseId, undefined);
-
         const subscribedChannel: Channel = await databaseService
             .subscribeToChannel(channel);
-
         assertEquals(subscribedChannel, channel);
     } finally {
         testsHelpers.resetStubs();
+    }
+});
+
+Deno.test("Subscribe to a channel which already exists", async () => {
+    const stubFindChannel = stub(
+        testsHelpers.mongo.channelsCollection,
+        "findOne",
+        resolvesNext(channelsDatabaseCollection),
+    );
+
+    try {
+        assertRejects(() =>
+            databaseService
+                .subscribeToChannel(new Channel())
+        );
+    } finally {
+        stubFindChannel.restore();
     }
 });
 

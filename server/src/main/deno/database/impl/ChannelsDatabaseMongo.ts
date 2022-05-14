@@ -13,6 +13,13 @@ export class ChannelsDatabaseMongo implements IChannelsDatabase {
         return this.mongo.channelsCollection.find();
     }
 
+    async hasSubscribedChannel(id: string): Promise<boolean> {
+        const channel: Channel = await this.mongo.channelsCollection.findOne({
+            id: id,
+        });
+        return channel !== undefined;
+    }
+
     async subscribeToChannel(channel: Channel): Promise<Channel> {
         const result: { insertedId: string } = await this.mongo
             .channelsCollection.insertOne(channel);

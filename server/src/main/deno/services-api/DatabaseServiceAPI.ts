@@ -21,6 +21,13 @@ export class DatabaseServiceAPI implements OpenApiDatabaseService {
     }
 
     async subscribeToChannel(channel: Channel): Promise<Channel> {
+        if (await this.channelsDatabase.hasSubscribedChannel(channel.id)) {
+            return Promise.reject(
+                new Deno.errors.AlreadyExists(
+                    `Channel with ID '${channel.id}' already exists in the database.`,
+                ),
+            );
+        }
         return await this.channelsDatabase.subscribeToChannel(channel);
     }
 
