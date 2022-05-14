@@ -66,3 +66,29 @@ Deno.test("Save videos", async () => {
         testsHelpers.resetStubs();
     }
 });
+
+Deno.test("Save videos which already exist", async () => {
+    testsHelpers.createStubs();
+
+    try {
+        const videos = new Array<Video>();
+        const video01 = new Video();
+        video01.id = "database-video-01";
+        video01.title = "Video 001";
+        videos.push(video01);
+        assertEquals(video01._databaseId, undefined);
+        const video02 = new Video();
+        video02.id = "video-003";
+        video02.title = "Video 003";
+        videos.push(video02);
+        assertEquals(video02._databaseId, undefined);
+
+        const savedVideos: Array<Video> = await databaseService
+            .saveVideos(videos);
+
+        assertEquals(savedVideos.length, 1);
+        assertEquals(savedVideos[0], video02);
+    } finally {
+        testsHelpers.resetStubs();
+    }
+});

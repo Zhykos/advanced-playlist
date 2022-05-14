@@ -24,7 +24,13 @@ export class DatabaseServiceAPI implements OpenApiDatabaseService {
         return await this.channelsDatabase.subscribeToChannel(channel);
     }
 
-    async saveVideos(videos: Video[]): Promise<Video[]> {
-        return await this.videosDatabase.saveVideos(videos);
+    async saveVideos(videosToSave: Video[]): Promise<Video[]> {
+        const existingVideos: Video[] = await this.videosDatabase.getVideos(
+            videosToSave.map((video) => video.id),
+        );
+        const existingIds: string[] = existingVideos.map((video) => video.id);
+        return await this.videosDatabase.saveVideos(
+            videosToSave.filter((video) => !existingIds.includes(video.id)),
+        );
     }
 }

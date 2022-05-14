@@ -460,6 +460,93 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "saveVideos - Video already exists",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(1);\r",
+											"\r",
+											"    const jsonData01 = jsonData[0];\r",
+											"    pm.expect(jsonData01.id).to.eql(\"video-03\");\r",
+											"    pm.expect(jsonData01.title).to.eql(\"Video 003\");\r",
+											"    pm.expect(jsonData01._databaseId).to.match(/[a-f0-9]+/i);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const port = pm.environment.get(\"port\");\r",
+											"pm.sendRequest({\r",
+											"    url: `http://localhost:${port}/dev/database/clear`,\r",
+											"    method: 'POST'\r",
+											"}, () => {\r",
+											"    pm.sendRequest({\r",
+											"        url: `http://localhost:${port}/dev/database/videos`,\r",
+											"        method: 'PUT',\r",
+											"        body: {\r",
+											"            mode: 'raw',\r",
+											"            raw: JSON.stringify([\r",
+											"                {\r",
+											"                    \"id\": \"video-01\",\r",
+											"                    \"title\": \"Video 01\"\r",
+											"                },\r",
+											"                {\r",
+											"                    \"id\": \"video-02\",\r",
+											"                    \"title\": \"Video 02\"\r",
+											"                }\r",
+											"            ])\r",
+											"        }\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"id\": \"video-01\",\r\n        \"title\": \"Video 001\"\r\n    },\r\n    {\r\n        \"id\": \"video-02\",\r\n        \"title\": \"Video 002\"\r\n    },\r\n    {\r\n        \"id\": \"video-03\",\r\n        \"title\": \"Video 003\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{port}}/database/videos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"database",
+										"videos"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
