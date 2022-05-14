@@ -1,4 +1,4 @@
-import { assertEquals, stub, resolvesNext } from "./deps.ts";
+import { assertEquals, resolvesNext, stub } from "./deps.ts";
 import { Video } from "../../main/generated/deno-oak-server/models/Video.ts";
 import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 import { ProvidersServiceAPI } from "../../main/deno/services-api/ProvidersServiceAPI.ts";
@@ -50,6 +50,6 @@ Deno.test("Fetch videos from youtube without any subscribed channel", async () =
             .getVideosFromSubscribedProviders();
         assertEquals(fetchVideos.length, 0);
     } finally {
-        stubFindChannels.restore()
+        stubFindChannels.restore();
     }
 });
