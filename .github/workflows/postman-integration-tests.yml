@@ -1,0 +1,59 @@
+name: Postman integration tests
+
+on:
+  push:
+    branches: [ '2.0' ]
+  pull_request:
+    branches: [ '2.0' ]
+  schedule:
+    - cron:  '0 0 * * 6'
+  workflow_dispatch:
+    branches: [ '2.0' ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 5
+
+    steps:
+    - name: Install NodeJS
+      run: |
+        curl -fsSL https://deb.nodesource.com/setup_17.x | sudo -E bash -
+        sudo apt-get install -y nodejs
+    - name: Install Deno
+      run: curl -fsSL https://deno.land/x/install/install.sh | sh
+    - name: Checkout repo
+      uses: actions/checkout@v3
+    - name: Install newman
+      run: npm -g install newman
+    - name: Download OpenAPI Generator for server
+      working-directory: ./server
+      run: /home/runner/.deno/bin/deno run --allow-net --allow-write --allow-read ./openapi-generator/download-generator.ts
+    - name: Generate server
+      working-directory: ./server
+      run: |
+        mkdir -p ./src/main/generated/deno-oak-server/
+        java -jar ./openapi-generator/openapi-generator-cli.jar generate -i ./specs/openapi.yaml -g deno-oak -o ./src/main/generated/deno-oak-server/
+    - name: Create env file
+      run: |
+        cd ./server
+        echo MONGO_ATLAS_DATA_API_KEY=${{ secrets.MONGO_ATLAS_DATA_API_KEY }} > .env
+        echo MONGO_ATLAS_APP_ID=${{ secrets.MONGO_ATLAS_APP_ID }} >> .env
+        echo MONGO_ATLAS_DATABASE=advancedplaylist-tests >> .env
+        echo >> .env
+    - name: Build Docker image for the server
+      run: |
+        cd ./server
+        docker build -f ./server.integration.dockerfile . -t integration-tests-server:latest
+    - name: Launch Deno server
+      run: docker run -d -p 3555:3555 --name integration-tests-server integration-tests-server:latest
+    - name: Sleep for 30 seconds waiting for the server to start
+      run: sleep 30s
+      shell: bash
+    - name: Launch Postman with newman
+      working-directory: ./server/src/tests/postman
+      run: newman run "./Advanced Playlist - Integration tests.postman_collection.json" -e "./Advanced Playlist - Integration tests.postman_environment.json"
+    - name: Stop Deno server
+      run: docker stop integration-tests-server
