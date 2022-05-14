@@ -1,4 +1,4 @@
-import { assertEquals } from "./deps.ts";
+import { assertEquals, stub, resolvesNext } from "./deps.ts";
 import { Video } from "../../main/generated/deno-oak-server/models/Video.ts";
 import { TestsHelpers } from "./mocks/TestsHelpers.ts";
 import { ProvidersServiceAPI } from "../../main/deno/services-api/ProvidersServiceAPI.ts";
@@ -35,5 +35,21 @@ Deno.test("Search channel on youtube", async () => {
         assertEquals(channels[0].title, "Channel 01");
     } finally {
         testsHelpers.resetStubs();
+    }
+});
+
+Deno.test("Fetch videos from youtube without any subscribed channel", async () => {
+    const stubFindChannels = stub(
+        testsHelpers.mongo.channelsCollection,
+        "find",
+        resolvesNext([[]]),
+    );
+
+    try {
+        const fetchVideos: Array<Video> = await providersService
+            .getVideosFromSubscribedProviders();
+        assertEquals(fetchVideos.length, 0);
+    } finally {
+        stubFindChannels.restore()
     }
 });
