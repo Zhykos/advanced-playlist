@@ -1,0 +1,366 @@
+{
+	"info": {
+		"_postman_id": "13506f5d-830a-4ac0-a59e-37fb47eb100d",
+		"name": "Advanced Playlist - Integration tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Database",
+			"item": [
+				{
+					"name": "Get all videos to display",
+					"item": [
+						{
+							"name": "getVideosFromDatabase",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(2);\r",
+											"\r",
+											"    const data01 = jsonData[0];\r",
+											"    pm.expect(data01.id).to.eql(\"database-video-01\");\r",
+											"    pm.expect(data01.title).to.eql(\"Video 01\");\r",
+											"    pm.expect(data01.played).to.be.false;\r",
+											"    pm.expect(data01.channel.id).to.eql(\"database-channel-01\");\r",
+											"    pm.expect(data01.channel.title).to.eql(\"Channel 01\");\r",
+											"\r",
+											"    const data02 = jsonData[1];\r",
+											"    pm.expect(data02.id).to.eql(\"database-video-02\");\r",
+											"    pm.expect(data02.title).to.eql(\"Video 02\");\r",
+											"    pm.expect(data02.played).to.be.false;\r",
+											"    pm.expect(data02.channel.id).to.eql(\"database-channel-01\");\r",
+											"    pm.expect(data02.channel.title).to.eql(\"Channel 01\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{port}}/database/videos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"database",
+										"videos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Save videos into the playlist",
+					"item": [
+						{
+							"name": "saveVideos",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(2);\r",
+											"\r",
+											"    const jsonData01 = jsonData[0];\r",
+											"    pm.expect(jsonData01.id).to.eql(\"video-001\");\r",
+											"    pm.expect(jsonData01.title).to.eql(\"Video 001\");\r",
+											"    pm.expect(jsonData01._databaseId).to.eql(\"foo01\");\r",
+											"\r",
+											"    const jsonData02 = jsonData[1];\r",
+											"    pm.expect(jsonData02.id).to.eql(\"video-002\");\r",
+											"    pm.expect(jsonData02.title).to.eql(\"Video 002\");\r",
+											"    pm.expect(jsonData02._databaseId).to.eql(\"foo02\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"id\": \"video-001\",\r\n        \"title\": \"Video 001\"\r\n    },\r\n    {\r\n        \"id\": \"video-002\",\r\n        \"title\": \"Video 002\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{port}}/database/videos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"database",
+										"videos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Subscribe to a channel",
+					"item": [
+						{
+							"name": "subscribeToChannel",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.id).to.eql(\"channel-000\");\r",
+											"    pm.expect(jsonData.title).to.eql(\"Channel 000\");\r",
+											"    pm.expect(jsonData._databaseId).to.eql(\"foo\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"channel-000\",\r\n    \"title\": \"Channel 000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:{{port}}/database/channel",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"database",
+										"channel"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Providers",
+			"item": [
+				{
+					"name": "Get all new videos from providers",
+					"item": [
+						{
+							"name": "getVideosFromProviders",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(2);\r",
+											"    \r",
+											"    const data01 = jsonData[0];\r",
+											"    pm.expect(data01.id).to.eql(\"youtube-video-01\");\r",
+											"    pm.expect(data01.title).to.eql(\"Video 01\");\r",
+											"    pm.expect(data01.played).to.be.false;\r",
+											"\r",
+											"    const data02 = jsonData[1];\r",
+											"    pm.expect(data02.id).to.eql(\"youtube-video-02\");\r",
+											"    pm.expect(data02.title).to.eql(\"Video 02\");\r",
+											"    pm.expect(data02.played).to.be.false;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{port}}/providers/videos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"providers",
+										"videos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Search a channel with its name on all providers",
+					"item": [
+						{
+							"name": "searchChannelFromProviders",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(1);\r",
+											"    \r",
+											"    const data01 = jsonData[0];\r",
+											"    pm.expect(data01.id).to.eql(\"youtube-channel-01\");\r",
+											"    pm.expect(data01.title).to.eql(\"Channel 01\");\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{port}}/providers/channel/zhykos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"providers",
+										"channel",
+										"zhykos"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "_dev_",
+			"item": [
+				{
+					"name": "Reset database",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check response time\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check status code\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check JSON\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(jsonData.deletedChannels).to.be.not.undefined\r",
+									"    pm.expect(jsonData.deletedVideos).to.be.not.undefined\r",
+									"    pm.expect(jsonData.remainingChannels).to.eql(0);\r",
+									"    pm.expect(jsonData.remainingVideos).to.eql(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/dev/database/reset",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"dev",
+								"database",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
