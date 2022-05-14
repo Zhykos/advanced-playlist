@@ -13,7 +13,7 @@ Deno.test("Fetch videos from youtube", async () => {
 
     try {
         const fetchVideos: Array<Video> = await providersService
-            .getVideosFromProviders();
+            .getVideosFromSubscribedProviders();
         assertEquals(fetchVideos.length, 2);
         assertEquals(fetchVideos[0].id, "youtube-video-01");
         assertEquals(fetchVideos[0].title, "Video 01");

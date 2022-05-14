@@ -83,9 +83,9 @@ paths:
         - database
   /providers/videos:
     get:
-      summary: Get all new videos from providers
+      summary: Get all new videos from subscribed providers
       description: Get all new videos from providers like YouTube, based on subscribed channels (saved in the database).
-      operationId: 'getVideosFromProviders'
+      operationId: 'getVideosFromSubscribedProviders'
       responses:
         '200':
           description: "Success: all videos within the body response."

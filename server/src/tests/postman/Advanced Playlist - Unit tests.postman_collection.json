@@ -200,10 +200,10 @@
 			"name": "Providers",
 			"item": [
 				{
-					"name": "Get all new videos from providers",
+					"name": "Get all new videos from subscribed providers",
 					"item": [
 						{
-							"name": "getVideosFromProviders",
+							"name": "getVideosFromSubscribedProviders",
 							"event": [
 								{
 									"listen": "test",
