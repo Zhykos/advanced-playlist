@@ -7,7 +7,7 @@
         "dev-start-server": "deno run --allow-net --allow-read --watch ./src/main/deno/server.ts",
         "unit-tests": "deno test --allow-net --allow-read --allow-write --coverage=cov_profile src/tests/deno/",
         "unit-tests-coverage-analysis": "deno coverage cov_profile",
-        "generate-html-coverage": "deno coverage cov_profile --lcov --output=cov_profile.lcov && perl C:\\ProgramData\\chocolatey\\lib\\lcov\\tools\\bin\\genhtml -o cov_profile/html cov_profile.lcov",
+        "generate-html-coverage": "deno coverage cov_profile --lcov --output=cov_profile.lcov && perl .bin/genhtml -o cov_profile/html cov_profile.lcov",
         "dev-start-postman-stubbed-server": "deno run --allow-net --allow-read --watch ./src/tests/deno/server.stubbed.ts",
         "dev-start-postman-integration-server": "deno run --allow-net --allow-read --watch ./src/tests/deno/server.integration.ts",
         "full-coverage": "rm -fr cov_profile && rm -f cov_profile.lcov && deno task unit-tests && deno task generate-html-coverage"
@@ -20,7 +20,8 @@
                 "src/tests/postman/Advanced Playlist - Unit tests.postman_environment.json",
                 "src/tests/postman/Advanced Playlist - Integration tests.postman_collection.json",
                 "src/tests/postman/Advanced Playlist - Integration tests.postman_environment.json",
-                "cov_profile"
+                "cov_profile",
+                "./bin/genhtml"
             ]
         },
         "options": {

@@ -2,4 +2,3 @@
 
 - remonter le pourcentage de couverture dans github
 - vérifier s'il y a des nouvelles versions des composants Deno (à automatiser ?)
-- deno task "generate-html-coverage" est spécifique à ma machine
