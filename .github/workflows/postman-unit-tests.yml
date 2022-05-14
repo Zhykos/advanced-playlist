@@ -39,7 +39,7 @@ jobs:
     - name: Build Docker image for the server
       run: |
         cd ./server
-        docker build . -t unit-tests-server:latest
+        docker build -f ./server.stubbed.dockerfile . -t unit-tests-server:latest
     - name: Launch Deno server
       run: docker run -d -p 3666:3666 --name unit-tests-server unit-tests-server:latest
     - name: Sleep for 30 seconds waiting for the server to start
