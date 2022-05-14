@@ -14,6 +14,10 @@ export class VideosDatabaseMongo implements IVideosDatabase {
     }
 
     async saveVideos(videos: Video[]): Promise<Video[]> {
+        if (videos.length == 0) {
+            return Promise.resolve([]);
+        }
+
         const results: { insertedIds: string[] } = await this.mongo
             .videosCollection.insertMany(videos);
         for (let index = 0; index < videos.length; index++) {

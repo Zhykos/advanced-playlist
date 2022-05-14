@@ -23,7 +23,11 @@ export class ProvidersServiceAPI implements OpenApiProvidersService {
             this.videosProvider.getVideosFromChannel(channel)
         );
         const fetchVideos: Video[][] = await Promise.all(promises);
-        return Promise.resolve(fetchVideos[0]);
+        const result: Video[] = fetchVideos[0];
+        if (result === undefined) {
+            return Promise.resolve([]);
+        }
+        return Promise.resolve(result);
     }
 
     async searchChannelFromProviders(channelName: string): Promise<Channel[]> {
