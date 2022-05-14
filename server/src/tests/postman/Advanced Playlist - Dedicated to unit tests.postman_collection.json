@@ -53,12 +53,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3666/database/videos",
+									"raw": "http://localhost:{{port}}/database/videos",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3666",
+									"port": "{{port}}",
 									"path": [
 										"database",
 										"videos"
@@ -119,12 +119,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3666/database/videos",
+									"raw": "http://localhost:{{port}}/database/videos",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3666",
+									"port": "{{port}}",
 									"path": [
 										"database",
 										"videos"
@@ -178,12 +178,12 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3666/database/channel",
+									"raw": "http://localhost:{{port}}/database/channel",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3666",
+									"port": "{{port}}",
 									"path": [
 										"database",
 										"channel"
@@ -240,12 +240,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3666/providers/videos",
+									"raw": "http://localhost:{{port}}/providers/videos",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3666",
+									"port": "{{port}}",
 									"path": [
 										"providers",
 										"videos"
@@ -291,12 +291,12 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3666/providers/channel/zhykos",
+									"raw": "http://localhost:{{port}}/providers/channel/zhykos",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
-									"port": "3666",
+									"port": "{{port}}",
 									"path": [
 										"providers",
 										"channel",

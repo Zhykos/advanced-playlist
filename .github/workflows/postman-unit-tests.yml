@@ -1,4 +1,4 @@
-name: Postman tests
+name: Postman unit tests
 
 on:
   push:
@@ -47,6 +47,6 @@ jobs:
       shell: bash
     - name: Launch Postman with newman
       working-directory: ./server/src/tests/postman
-      run: newman run "./Advanced Playlist - Dedicated to unit tests.postman_collection.json"
+      run: newman run "./Advanced Playlist - Dedicated to unit tests.postman_collection.json" -e "./Advanced Playlist - Unit tests.postman_environment.json"
     - name: Stop Deno server
       run: docker stop unit-tests-server
