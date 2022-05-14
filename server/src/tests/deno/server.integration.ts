@@ -41,11 +41,11 @@ const providersService: ProvidersServiceAPI = new ProvidersServiceAPI(
 
 const server = new DenoOakServer(3555, databaseService, providersService);
 server.execOnMiddleware((_middleware, router: Router) => {
-    router.post("/dev/database/reset", (context) => resetDatabase(context));
+    router.post("/dev/database/clear", (context) => clearDatabase(context));
 });
 server.start();
 
-async function resetDatabase(context: any): Promise<void> {
+async function clearDatabase(context: any): Promise<void> {
     try {
         const deletedChannels: { deletedCount: number } = await mongo
             .channelsCollection.deleteMany({});

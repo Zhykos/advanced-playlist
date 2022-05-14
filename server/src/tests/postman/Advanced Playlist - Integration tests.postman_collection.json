@@ -314,7 +314,7 @@
 			"name": "_dev_",
 			"item": [
 				{
-					"name": "Reset database",
+					"name": "Clear database",
 					"event": [
 						{
 							"listen": "test",
@@ -345,7 +345,7 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/dev/database/reset",
+							"raw": "http://localhost:{{port}}/dev/database/clear",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -354,7 +354,7 @@
 							"path": [
 								"dev",
 								"database",
-								"reset"
+								"clear"
 							]
 						}
 					},
