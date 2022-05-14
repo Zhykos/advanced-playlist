@@ -16,9 +16,10 @@
         "files": {
             "include": ["."],
             "exclude": [
-                "src/tests/postman/Advanced Playlist - Dedicated to unit tests.postman_collection.json",
-                "src/tests/postman/Advanced Playlist - Integration tests.postman_environment.json",
+                "src/tests/postman/Advanced Playlist - Unit tests.postman_collection.json",
                 "src/tests/postman/Advanced Playlist - Unit tests.postman_environment.json",
+                "src/tests/postman/Advanced Playlist - Integration tests.postman_collection.json",
+                "src/tests/postman/Advanced Playlist - Integration tests.postman_environment.json",
                 "cov_profile"
             ]
         },
