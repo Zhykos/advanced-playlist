@@ -8,10 +8,7 @@ import { ProvidersServiceAPI } from "../../main/deno/services-api/ProvidersServi
 import { YouTube } from "../../main/deno/videos-provider/impl/deps.ts";
 import { VideosProviderYoutube } from "../../main/deno/videos-provider/impl/VideosProviderYoutube.ts";
 import { DenoOakServer } from "../../main/generated/deno-oak-server/DenoOakServer.ts";
-import type {
-    Router,
-    RouterContext,
-} from "../../main/generated/deno-oak-server/deps-oak.ts";
+import { Video } from "../../main/generated/deno-oak-server/models/Video.ts";
 
 // Specific implementations
 
@@ -40,8 +37,9 @@ const providersService: ProvidersServiceAPI = new ProvidersServiceAPI(
 // Server
 
 const server = new DenoOakServer(3555, databaseService, providersService);
-server.execOnMiddleware((_middleware, router: Router) => {
+server.execOnMiddleware((_middleware, router) => {
     router.post("/dev/database/clear", (context) => clearDatabase(context));
+    router.put("/dev/database/videos", (context) => insertVideos(context));
 });
 server.start();
 
@@ -62,6 +60,28 @@ async function clearDatabase(context: any): Promise<void> {
             deletedVideos: deletedVideos.deletedCount,
             remainingChannels: remainingChannels,
             remainingVideos: remainingVideos,
+        };
+    } catch (e) {
+        context.response.status = 500;
+        context.response.body = { error: e.message };
+    }
+}
+
+async function insertVideos(context: any): Promise<void> {
+    try {
+        const videosJSON: Array<Video> = await context.request.body({
+            type: "json",
+        }).value;
+        const insertedVideos: { insertedIds: string[] } = await mongo
+            .videosCollection.insertMany(videosJSON);
+
+        const countVideos: number = await mongo.videosCollection
+            .countDocuments();
+
+        context.response.status = 200;
+        context.response.body = {
+            insertedIds: insertedVideos.insertedIds,
+            countVideos: countVideos,
         };
     } catch (e) {
         context.response.status = 500;
