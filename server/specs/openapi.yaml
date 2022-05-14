@@ -42,22 +42,24 @@ paths:
                 value: "[{ id: 'video-AAA', title: 'Top 10 best animes' }, { id: 'video-BBB', title: 'Top 10 best movies' }]"
       responses:
         '200':
-          description: "Success: acknowledge saved videos."
+          description: "Success: acknowledge saved videos. Only returns videos which have been saved into the database: if ID is already in the database, the video is not saved."
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Video'
-              example:
+              examples:
                 saved videos:
                   value: "[{ id: 'video-AAA', title: 'Top 10 best animes', _databaseId: 'xxxxxxxxxx01' }, { id: 'video-BBB', title: 'Top 10 best movies', _databaseId: 'xxxxxxxxxx02' }]"
+                no video saved:
+                  value: "[]"
       tags:
         - database
   /database/channel:
     post:
       summary: Subscribe to a channel
-      description: "Subscribe to a channel: save it into the database to fetch all videos from it."
+      description: "Subscribe to a channel: save it into the database to fetch all videos from it. Save only if the channel does not already exist in the database."
       operationId: 'subscribeToChannel'
       requestBody:
         description: Channel to subscribe to.
@@ -79,6 +81,15 @@ paths:
               example:
                 subscribed channel:
                   value: "{ id: 'channel-AAA', title: 'My best channel', _databaseId: 'xxxxxxxxxx' }"
+        '409':
+          description: "The channel already exists in the database (based on the ID)."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                subscribed channel:
+                  value: "{ message: \"Channel with ID 'channel-AAA' already exists in the database.\" }"
       tags:
         - database
   /providers/videos:
@@ -220,3 +231,12 @@ components:
       description: Origin of the media.
       enum:
         - youtube
+    Error:
+      type: object
+      description: An error occurred into the server.
+      properties:
+        message:
+          type: string
+          description: Error message.
+      required:
+        - message
