@@ -5,4 +5,4 @@ ADD ./ /server/
 
 EXPOSE 3555
 
-CMD /bin/deno run --allow-net --allow-read /server/src/tests/deno/server.integration.ts
+CMD cd /server && /bin/deno run --allow-net --allow-read ./src/tests/deno/server.integration.ts
