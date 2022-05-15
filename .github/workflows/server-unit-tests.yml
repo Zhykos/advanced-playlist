@@ -1,4 +1,4 @@
-name: Unit tests - Server side
+name: Server - Unit tests
 
 on:
   push:
