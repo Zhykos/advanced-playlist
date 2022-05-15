@@ -65,7 +65,7 @@ export class TestsHelpers {
         this.createStubToResolvesNext(
             this.mongo.channelsCollection,
             "findOne",
-            undefined,
+            null,
         );
 
         this.createStubToResolvesNext(

@@ -68,6 +68,90 @@
 							"response": []
 						},
 						{
+							"name": "Get videos from database",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{port}}/database/videos",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"database",
+										"videos"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get channels from database",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{port}}/database/channel",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"database",
+										"channel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Insert videos into database",
 							"event": [
 								{
@@ -170,6 +254,62 @@
 										"dev",
 										"database",
 										"channels"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Clear database before tests",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"\r",
+											"    pm.expect(jsonData.deletedChannels).to.be.not.undefined;\r",
+											"    pm.expect(jsonData.deletedVideos).to.be.not.undefined;\r",
+											"    pm.expect(jsonData.remainingChannels).to.eql(0);\r",
+											"    pm.expect(jsonData.remainingVideos).to.eql(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{port}}/dev/database/clear",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"dev",
+										"database",
+										"clear"
 									]
 								}
 							},

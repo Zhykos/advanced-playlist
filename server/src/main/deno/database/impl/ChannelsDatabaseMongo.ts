@@ -17,7 +17,7 @@ export class ChannelsDatabaseMongo implements IChannelsDatabase {
         const channel: Channel = await this.mongo.channelsCollection.findOne({
             id: id,
         });
-        return channel !== undefined;
+        return channel !== null;
     }
 
     async subscribeToChannel(channel: Channel): Promise<Channel> {
