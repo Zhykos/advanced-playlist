@@ -3,11 +3,11 @@ info:
   title: Advanced playlist API
   version: '2.0'
 paths:
-  /database/videos:
+  /database/video:
     get:
       summary: Get all videos to display
       description: Get all videos to display from internal database.
-      operationId: 'getVideosFromDatabase'
+      operationId: 'getVideos'
       responses:
         '200':
           description: "Success: all videos within the body response."
@@ -114,9 +114,9 @@ paths:
         - database
   /providers/videos:
     get:
-      summary: Get all new videos from subscribed providers
+      summary: Get all new videos from subscribed channels
       description: Get all new videos from providers like YouTube, based on subscribed channels (saved in the database).
-      operationId: 'getVideosFromSubscribedProviders'
+      operationId: 'getVideosFromSubscribedChannels'
       responses:
         '200':
           description: "Success: all videos within the body response."

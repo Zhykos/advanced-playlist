@@ -16,7 +16,7 @@ export class DatabaseServiceAPI implements OpenApiDatabaseService {
         this.channelsDatabase = channelsDatabase;
     }
 
-    async getVideosFromDatabase(): Promise<Video[]> {
+    async getVideos(): Promise<Video[]> {
         return await this.videosDatabase.getAllVideos();
     }
 

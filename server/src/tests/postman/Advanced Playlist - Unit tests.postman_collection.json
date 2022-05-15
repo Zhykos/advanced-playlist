@@ -53,7 +53,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:{{port}}/database/videos",
+									"raw": "http://localhost:{{port}}/database/video",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -61,7 +61,7 @@
 									"port": "{{port}}",
 									"path": [
 										"database",
-										"videos"
+										"video"
 									]
 								}
 							},
@@ -119,7 +119,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:{{port}}/database/videos",
+									"raw": "http://localhost:{{port}}/database/video",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -127,7 +127,7 @@
 									"port": "{{port}}",
 									"path": [
 										"database",
-										"videos"
+										"video"
 									]
 								}
 							},
@@ -200,10 +200,10 @@
 			"name": "Providers",
 			"item": [
 				{
-					"name": "Get all new videos from subscribed providers",
+					"name": "Get all new videos from subscribed channels",
 					"item": [
 						{
-							"name": "getVideosFromSubscribedProviders",
+							"name": "getVideosFromSubscribedChannels",
 							"event": [
 								{
 									"listen": "test",

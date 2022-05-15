@@ -95,7 +95,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:{{port}}/database/videos",
+									"raw": "http://localhost:{{port}}/database/video",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -103,7 +103,7 @@
 									"port": "{{port}}",
 									"path": [
 										"database",
-										"videos"
+										"video"
 									]
 								}
 							},
@@ -150,170 +150,6 @@
 								}
 							},
 							"response": []
-						},
-						{
-							"name": "Insert videos into database",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Check status code\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Check JSON\", function () {\r",
-											"    const jsonData = pm.response.json();\r",
-											"\r",
-											"    pm.expect(jsonData.insertedIds.length).to.gte(2);\r",
-											"    pm.expect(jsonData.countVideos).to.gte(2);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\r\n    {\r\n        \"id\": \"video-01\",\r\n        \"title\": \"Video 01\"\r\n    },\r\n    {\r\n        \"id\": \"video-02\",\r\n        \"title\": \"Video 02\"\r\n    }\r\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:{{port}}/dev/database/videos",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{port}}",
-									"path": [
-										"dev",
-										"database",
-										"videos"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Insert channels into database",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Check status code\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Check JSON\", function () {\r",
-											"    const jsonData = pm.response.json();\r",
-											"\r",
-											"    pm.expect(jsonData.insertedIds.length).to.gte(2);\r",
-											"    pm.expect(jsonData.countChannels).to.gte(2);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "[\r\n    {\r\n        \"id\": \"channel-01\",\r\n        \"title\": \"Channel 01\"\r\n    },\r\n    {\r\n        \"id\": \"channel-02\",\r\n        \"title\": \"Channel 02\"\r\n    }\r\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:{{port}}/dev/database/channels",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{port}}",
-									"path": [
-										"dev",
-										"database",
-										"channels"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Clear database before tests",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Check status code\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											"pm.test(\"Check JSON\", function () {\r",
-											"    const jsonData = pm.response.json();\r",
-											"\r",
-											"    pm.expect(jsonData.deletedChannels).to.be.not.undefined;\r",
-											"    pm.expect(jsonData.deletedVideos).to.be.not.undefined;\r",
-											"    pm.expect(jsonData.remainingChannels).to.eql(0);\r",
-											"    pm.expect(jsonData.remainingVideos).to.eql(0);\r",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:{{port}}/dev/database/clear",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "{{port}}",
-									"path": [
-										"dev",
-										"database",
-										"clear"
-									]
-								}
-							},
-							"response": []
 						}
 					]
 				},
@@ -321,7 +157,7 @@
 					"name": "Get all videos to display",
 					"item": [
 						{
-							"name": "getVideosFromDatabase",
+							"name": "getVideos",
 							"event": [
 								{
 									"listen": "test",
@@ -363,8 +199,12 @@
 											"    method: 'POST'\r",
 											"}, () => {\r",
 											"    pm.sendRequest({\r",
-											"        url: `http://localhost:${port}/dev/database/videos`,\r",
-											"        method: 'PUT',\r",
+											"        url: `http://localhost:${port}/database/video`,\r",
+											"        method: 'POST',\r",
+											"        header: {\r",
+											"            'Accept': 'application/json',\r",
+											"            'Content-Type': 'application/json'\r",
+											"        },\r",
 											"        body: {\r",
 											"            mode: 'raw',\r",
 											"            raw: JSON.stringify([\r",
@@ -389,7 +229,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:{{port}}/database/videos",
+									"raw": "http://localhost:{{port}}/database/video",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -397,14 +237,14 @@
 									"port": "{{port}}",
 									"path": [
 										"database",
-										"videos"
+										"video"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "getVideosFromDatabase - No video",
+							"name": "getVideos - No video",
 							"event": [
 								{
 									"listen": "test",
@@ -444,7 +284,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:{{port}}/database/videos",
+									"raw": "http://localhost:{{port}}/database/video",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -452,7 +292,143 @@
 									"port": "{{port}}",
 									"path": [
 										"database",
-										"videos"
+										"video"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all channels to display",
+					"item": [
+						{
+							"name": "getChannels",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(1);\r",
+											"\r",
+											"    const data01 = jsonData[0];\r",
+											"    pm.expect(data01.id).to.eql(\"channel-01\");\r",
+											"    pm.expect(data01.title).to.eql(\"Channel 01\");\r",
+											"    pm.expect(data01._id).to.not.undefined;\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const port = pm.environment.get(\"port\");\r",
+											"pm.sendRequest({\r",
+											"    url: `http://localhost:${port}/dev/database/clear`,\r",
+											"    method: 'POST'\r",
+											"}, () => {\r",
+											"    pm.sendRequest({\r",
+											"        url: `http://localhost:${port}/database/channel`,\r",
+											"        method: 'POST',\r",
+											"        header: {\r",
+											"            'Accept': 'application/json',\r",
+											"            'Content-Type': 'application/json'\r",
+											"        },\r",
+											"        body: {\r",
+											"            mode: 'raw',\r",
+											"            raw: JSON.stringify({\r",
+											"                \"id\": \"channel-01\",\r",
+											"                \"title\": \"Channel 01\"\r",
+											"            })\r",
+											"        }\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{port}}/database/channel",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"database",
+										"channel"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getChannels - No channel",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Check response time\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check status code\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Check JSON\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.eql(0);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const port = pm.environment.get(\"port\");\r",
+											"pm.sendRequest({\r",
+											"    url: `http://localhost:${port}/dev/database/clear`,\r",
+											"    method: 'POST'\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:{{port}}/database/channel",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "{{port}}",
+									"path": [
+										"database",
+										"channel"
 									]
 								}
 							},
@@ -523,7 +499,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:{{port}}/database/videos",
+									"raw": "http://localhost:{{port}}/database/video",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -531,7 +507,7 @@
 									"port": "{{port}}",
 									"path": [
 										"database",
-										"videos"
+										"video"
 									]
 								}
 							},
@@ -587,7 +563,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:{{port}}/database/videos",
+									"raw": "http://localhost:{{port}}/database/video",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -595,7 +571,7 @@
 									"port": "{{port}}",
 									"path": [
 										"database",
-										"videos"
+										"video"
 									]
 								}
 							},
@@ -639,8 +615,12 @@
 											"    method: 'POST'\r",
 											"}, () => {\r",
 											"    pm.sendRequest({\r",
-											"        url: `http://localhost:${port}/dev/database/videos`,\r",
-											"        method: 'PUT',\r",
+											"        url: `http://localhost:${port}/database/video`,\r",
+											"        method: 'POST',\r",
+											"        header: {\r",
+											"            'Accept': 'application/json',\r",
+											"            'Content-Type': 'application/json'\r",
+											"        },\r",
 											"        body: {\r",
 											"            mode: 'raw',\r",
 											"            raw: JSON.stringify([\r",
@@ -674,7 +654,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:{{port}}/database/videos",
+									"raw": "http://localhost:{{port}}/database/video",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -682,7 +662,7 @@
 									"port": "{{port}}",
 									"path": [
 										"database",
-										"videos"
+										"video"
 									]
 								}
 							},
@@ -793,16 +773,18 @@
 											"    method: 'POST'\r",
 											"}, () => {\r",
 											"    pm.sendRequest({\r",
-											"        url: `http://localhost:${port}/dev/database/channels`,\r",
-											"        method: 'PUT',\r",
+											"        url: `http://localhost:${port}/database/channel`,\r",
+											"        method: 'POST',\r",
+											"        header: {\r",
+											"            'Accept': 'application/json',\r",
+											"            'Content-Type': 'application/json'\r",
+											"        },\r",
 											"        body: {\r",
 											"            mode: 'raw',\r",
-											"            raw: JSON.stringify([\r",
-											"                {\r",
-											"                    \"id\": \"channel-01\",\r",
-											"                    \"title\": \"Channel 01\"\r",
-											"                }\r",
-											"            ])\r",
+											"            raw: JSON.stringify({\r",
+											"                \"id\": \"channel-01\",\r",
+											"                \"title\": \"Channel 01\"\r",
+											"            })\r",
 											"        }\r",
 											"    });\r",
 											"});"
@@ -846,10 +828,10 @@
 			"name": "Providers",
 			"item": [
 				{
-					"name": "Get all new videos from subscribed providers",
+					"name": "Get all new videos from subscribed channels",
 					"item": [
 						{
-							"name": "getVideosFromSubscribedProviders",
+							"name": "getVideosFromSubscribedChannels",
 							"event": [
 								{
 									"listen": "test",
@@ -886,16 +868,18 @@
 											"    method: 'POST'\r",
 											"}, () => {\r",
 											"    pm.sendRequest({\r",
-											"        url: `http://localhost:${port}/dev/database/channels`,\r",
-											"        method: 'PUT',\r",
+											"        url: `http://localhost:${port}/database/channel`,\r",
+											"        method: 'POST',\r",
+											"        header: {\r",
+											"            'Accept': 'application/json',\r",
+											"            'Content-Type': 'application/json'\r",
+											"        },\r",
 											"        body: {\r",
 											"            mode: 'raw',\r",
-											"            raw: JSON.stringify([\r",
-											"                {\r",
-											"                    \"id\": \"UCWJHqzXc7rKO7h5TzYYBNFw\",\r",
-											"                    \"title\": \"Zhykos\"\r",
-											"                }\r",
-											"            ])\r",
+											"            raw: JSON.stringify({\r",
+											"                \"id\": \"UCWJHqzXc7rKO7h5TzYYBNFw\",\r",
+											"                \"title\": \"Zhykos\"\r",
+											"            })\r",
 											"        }\r",
 											"    });\r",
 											"});"
@@ -923,7 +907,7 @@
 							"response": []
 						},
 						{
-							"name": "getVideosFromSubscribedProviders - No subscription",
+							"name": "getVideosFromSubscribedChannels - No subscription",
 							"event": [
 								{
 									"listen": "test",

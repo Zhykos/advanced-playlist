@@ -16,7 +16,7 @@ export class ProvidersServiceAPI implements OpenApiProvidersService {
         this.videosProvider = videosProvider;
     }
 
-    async getVideosFromSubscribedProviders(): Promise<Video[]> {
+    async getVideosFromSubscribedChannels(): Promise<Video[]> {
         const subChannels: Channel[] = await this.channelsDatabase
             .getSubscribedChannels();
         const promises: Promise<Video[]>[] = subChannels.map((channel) =>

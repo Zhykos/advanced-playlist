@@ -16,7 +16,7 @@ Deno.test("Get all videos", async () => {
 
     try {
         const allVideos: Video[] = await databaseService
-            .getVideosFromDatabase();
+            .getVideos();
         assertEquals(allVideos.length, 2);
         assertEquals(allVideos[0].id, "database-video-01");
         assertEquals(allVideos[0].title, "Video 01");
