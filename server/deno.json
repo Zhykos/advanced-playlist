@@ -5,11 +5,14 @@
         "format-project": "deno fmt",
         "start-server": "deno run --allow-net --allow-read ./src/main/deno/server.ts",
         "dev-start-server": "deno run --allow-net --allow-read --watch ./src/main/deno/server.ts",
-        "unit-tests": "deno test --allow-net --allow-read --allow-write --coverage=cov_profile src/tests/deno/",
+        "unit-tests": "[ -f .env ] && mv .env .env.bak ; deno test --allow-net --allow-read --allow-write --coverage=cov_profile src/tests/deno/",
         "generate-html-coverage": "deno coverage cov_profile --lcov --output=cov_profile.lcov && perl .bin/genhtml -o cov_profile/html cov_profile.lcov",
         "dev-start-postman-stubbed-server": "deno run --allow-net --allow-read --watch ./src/tests/deno/server.stubbed.ts",
         "dev-start-postman-integration-server": "deno run --allow-net --allow-read --watch ./src/tests/deno/server.integration.ts",
-        "full-coverage": "rm -fr cov_profile && rm -f cov_profile.lcov && deno task unit-tests && deno task generate-html-coverage"
+        "full-coverage": "rm -fr cov_profile && rm -f cov_profile.lcov && deno task unit-tests && deno task generate-html-coverage",
+        "udd:install": "deno install -A -f -n udd https://deno.land/x/udd@0.7.3/main.ts",
+        "udd:upgrade": "udd --upgrade",
+        "udd:exec": "udd $(find ./ -name \"*.ts\" -print) && deno task unit-tests"
     },
     "fmt": {
         "files": {
