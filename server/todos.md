@@ -1,5 +1,3 @@
-- ne pas retourner de 500 lors de la sauvegarde d'un channel qui existe déjà +
-  améliorer génération @param
 - remplacer les 'array<>' par des '[]'
 - remonter le pourcentage de couverture dans github
 - vérifier s'il y a des nouvelles versions des composants Deno (à automatiser ?)
