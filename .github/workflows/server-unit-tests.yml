@@ -30,7 +30,7 @@ jobs:
     - name: Analyze coverage then save it into a Gist
       working-directory: ./server
       run: |
-        COVERAGE=$(deno coverage cov_profile --lcov --output=cov_profile.lcov && perl .bin/genhtml -o cov_profile/html cov_profile.lcov)
+        COVERAGE=$(/home/runner/.deno/bin/deno coverage cov_profile --lcov --output=cov_profile.lcov && perl .bin/genhtml -o cov_profile/html cov_profile.lcov)
         echo "COVERAGE_LINES=$(echo $COVERAGE | sed -E 's|.+lines.*?: (.+?)%.+functions.*: (.+?)%.+|\1|')" >> $GITHUB_ENV
         echo "COVERAGE_FUNCTIONS=$(echo $COVERAGE | sed -E 's|.+lines.*?: (.+?)%.+functions.*: (.+?)%.+|\2|')" >> $GITHUB_ENV
     - name: Create coverage badge for lines
