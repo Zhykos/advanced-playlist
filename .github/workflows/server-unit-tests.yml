@@ -24,6 +24,34 @@ jobs:
       run: |
         mkdir -p ./src/main/generated/deno-oak-server/
         java -jar ./openapi-generator/openapi-generator-cli.jar generate -i ./specs/openapi.yaml -g deno-oak -o ./src/main/generated/deno-oak-server/
-    - name: Launch tests
+    - name: Launch tests and generate coverage
       working-directory: ./server
-      run: /home/runner/.deno/bin/deno test --allow-net --allow-read ./src/tests/deno/
+      run: /home/runner/.deno/bin/deno test --allow-net --allow-read --allow-write --coverage=cov_profile ./src/tests/deno/
+    - name: Analyze coverage then save it into a Gist
+      working-directory: ./server
+      run: |
+        COVERAGE=$(deno coverage cov_profile --lcov --output=cov_profile.lcov && perl .bin/genhtml -o cov_profile/html cov_profile.lcov)
+        echo "COVERAGE_LINES=$(echo $COVERAGE | sed -E 's|.+lines.*?: (.+?)%.+functions.*: (.+?)%.+|\1|')" >> $GITHUB_ENV
+        echo "COVERAGE_FUNCTIONS=$(echo $COVERAGE | sed -E 's|.+lines.*?: (.+?)%.+functions.*: (.+?)%.+|\2|')" >> $GITHUB_ENV
+    - name: Create coverage badge for lines
+      uses: schneegans/dynamic-badges-action@v1.0.0
+      with:
+        auth: ${{ secrets.GIST }}
+        gistID: fa1b6302cf9c42e6ef36d4cb051daeac
+        filename: advanced-playlist-coverage-lines.json
+        label: Coverage (lines)
+        message: ${{ env.COVERAGE_LINES }}%
+        color: green
+        namedLogo: deno
+        style: for-the-badge
+    - name: Create coverage badge for functions
+      uses: schneegans/dynamic-badges-action@v1.0.0
+      with:
+        auth: ${{ secrets.GIST }}
+        gistID: fa1b6302cf9c42e6ef36d4cb051daeac
+        filename: advanced-playlist-coverage-functions.json
+        label: Coverage (functions)
+        message: ${{ env.COVERAGE_FUNCTIONS }}%
+        color: green
+        namedLogo: deno
+        style: for-the-badge
