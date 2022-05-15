@@ -57,6 +57,26 @@ paths:
       tags:
         - database
   /database/channel:
+    get:
+      summary: Get all subscribed channels
+      description: Get all subscribed channels from internal database.
+      operationId: 'getSubscribedChannels'
+      responses:
+        '200':
+          description: "Success: all subscribed channels within the body response."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Channel'
+              examples:
+                several channels:
+                  value: "[{ id: 'channel-AAA', title: 'My best channel' }, { id: 'channel-BBB', title: 'My even better channel' }]"
+                no channel:
+                  value: "[]"
+      tags:
+        - database
     post:
       summary: Subscribe to a channel
       description: "Subscribe to a channel: save it into the database to fetch all videos from it. Save only if the channel does not already exist in the database."

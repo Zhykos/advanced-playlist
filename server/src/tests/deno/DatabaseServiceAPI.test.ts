@@ -27,6 +27,20 @@ Deno.test("Get all videos", async () => {
     }
 });
 
+Deno.test("Get all channels", async () => {
+    testsHelpers.createStubs();
+
+    try {
+        const allChannels: Array<Channel> = await databaseService
+            .getSubscribedChannels();
+        assertEquals(allChannels.length, 1);
+        assertEquals(allChannels[0].id, "database-channel-01");
+        assertEquals(allChannels[0].title, "Channel 01");
+    } finally {
+        testsHelpers.resetStubs();
+    }
+});
+
 Deno.test("Subscribe to a channel", async () => {
     testsHelpers.createStubs();
 

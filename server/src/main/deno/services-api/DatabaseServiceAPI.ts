@@ -20,6 +20,10 @@ export class DatabaseServiceAPI implements OpenApiDatabaseService {
         return await this.videosDatabase.getAllVideos();
     }
 
+    async getSubscribedChannels(): Promise<Channel[]> {
+        return await this.channelsDatabase.getSubscribedChannels();
+    }
+
     async subscribeToChannel(channel: Channel): Promise<Channel> {
         if (await this.channelsDatabase.hasSubscribedChannel(channel.id)) {
             return Promise.reject(
