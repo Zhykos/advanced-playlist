@@ -71,7 +71,7 @@ async function clearDatabase(context: any): Promise<void> {
 
 async function insertVideos(context: any): Promise<void> {
     try {
-        const videosJSON: Array<Video> = await context.request.body({
+        const videosJSON: Video[] = await context.request.body({
             type: "json",
         }).value;
         const insertedVideos: { insertedIds: string[] } = await mongo
@@ -93,7 +93,7 @@ async function insertVideos(context: any): Promise<void> {
 
 async function insertChannels(context: any): Promise<void> {
     try {
-        const channelsJSON: Array<Channel> = await context.request.body({
+        const channelsJSON: Channel[] = await context.request.body({
             type: "json",
         }).value;
         const insertedChannels: { insertedIds: string[] } = await mongo

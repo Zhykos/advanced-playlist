@@ -14,7 +14,7 @@ Deno.test("Get videos from a channel", async () => {
     try {
         const channel = new Channel();
         channel.id = "channel-01";
-        const allVideos: Array<Video> = await videosProvider
+        const allVideos: Video[] = await videosProvider
             .getVideosFromChannel(channel);
         assertEquals(allVideos.length, 2);
         assertEquals(allVideos[0].id, "youtube-video-01");
@@ -30,7 +30,7 @@ Deno.test("Search a channel", async () => {
     testsHelpers.createStubs();
 
     try {
-        const channels: Array<Channel> = await videosProvider
+        const channels: Channel[] = await videosProvider
             .getChannels("");
         assertEquals(channels.length, 1);
         assertEquals(channels[0].id, "youtube-channel-01");
@@ -70,7 +70,7 @@ Deno.test("Search a channel which does not exist", async () => {
     );
 
     try {
-        const channels: Array<Channel> = await videosProvider
+        const channels: Channel[] = await videosProvider
             .getChannels("");
         assertEquals(channels.length, 0);
     } finally {

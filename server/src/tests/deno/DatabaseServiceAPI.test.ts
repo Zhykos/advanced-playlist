@@ -15,7 +15,7 @@ Deno.test("Get all videos", async () => {
     testsHelpers.createStubs();
 
     try {
-        const allVideos: Array<Video> = await databaseService
+        const allVideos: Video[] = await databaseService
             .getVideosFromDatabase();
         assertEquals(allVideos.length, 2);
         assertEquals(allVideos[0].id, "database-video-01");
@@ -31,7 +31,7 @@ Deno.test("Get all channels", async () => {
     testsHelpers.createStubs();
 
     try {
-        const allChannels: Array<Channel> = await databaseService
+        const allChannels: Channel[] = await databaseService
             .getSubscribedChannels();
         assertEquals(allChannels.length, 1);
         assertEquals(allChannels[0].id, "database-channel-01");
@@ -75,7 +75,7 @@ Deno.test("Save videos", async () => {
     testsHelpers.createStubs();
 
     try {
-        const videos = new Array<Video>();
+        const videos: Video[] = [];
         const video01 = new Video();
         video01.id = "video-001";
         video01.title = "Video 001";
@@ -87,7 +87,7 @@ Deno.test("Save videos", async () => {
         videos.push(video02);
         assertEquals(video02._databaseId, undefined);
 
-        const savedVideos: Array<Video> = await databaseService
+        const savedVideos: Video[] = await databaseService
             .saveVideos(videos);
 
         assertEquals(savedVideos, videos);
@@ -100,7 +100,7 @@ Deno.test("Save videos which already exist", async () => {
     testsHelpers.createStubs();
 
     try {
-        const videos = new Array<Video>();
+        const videos: Video[] = [];
         const video01 = new Video();
         video01.id = "database-video-01";
         video01.title = "Video 001";
@@ -112,7 +112,7 @@ Deno.test("Save videos which already exist", async () => {
         videos.push(video02);
         assertEquals(video02._databaseId, undefined);
 
-        const savedVideos: Array<Video> = await databaseService
+        const savedVideos: Video[] = await databaseService
             .saveVideos(videos);
 
         assertEquals(savedVideos.length, 1);

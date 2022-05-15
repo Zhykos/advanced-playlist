@@ -12,7 +12,7 @@ Deno.test("Fetch videos from youtube", async () => {
     testsHelpers.createStubs();
 
     try {
-        const fetchVideos: Array<Video> = await providersService
+        const fetchVideos: Video[] = await providersService
             .getVideosFromSubscribedProviders();
         assertEquals(fetchVideos.length, 2);
         assertEquals(fetchVideos[0].id, "youtube-video-01");
@@ -28,7 +28,7 @@ Deno.test("Search channel on youtube", async () => {
     testsHelpers.createStubs();
 
     try {
-        const channels: Array<Channel> = await providersService
+        const channels: Channel[] = await providersService
             .searchChannelFromProviders("");
         assertEquals(channels.length, 1);
         assertEquals(channels[0].id, "youtube-channel-01");
@@ -46,7 +46,7 @@ Deno.test("Fetch videos from youtube without any subscribed channel", async () =
     );
 
     try {
-        const fetchVideos: Array<Video> = await providersService
+        const fetchVideos: Video[] = await providersService
             .getVideosFromSubscribedProviders();
         assertEquals(fetchVideos.length, 0);
     } finally {

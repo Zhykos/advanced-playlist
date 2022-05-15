@@ -10,7 +10,7 @@ Deno.test("Save zero video", async () => {
     testsHelpers.createStubs();
 
     try {
-        const videos: Array<Video> = await videosDatabase.saveVideos([]);
+        const videos: Video[] = await videosDatabase.saveVideos([]);
         assertEquals(videos.length, 0);
     } finally {
         testsHelpers.resetStubs();
@@ -21,7 +21,7 @@ Deno.test("Get videos with ID", async () => {
     testsHelpers.createStubs();
 
     try {
-        const videos: Array<Video> = await videosDatabase.getVideos([
+        const videos: Video[] = await videosDatabase.getVideos([
             "video-01",
         ]);
         assertEquals(videos.length, 2);

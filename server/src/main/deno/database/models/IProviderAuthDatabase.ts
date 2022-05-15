@@ -1,4 +1,4 @@
 export interface IProviderAuthDatabase {
-    data: Array<string>;
+    data: string[];
     provider: string;
 }

@@ -1,9 +1,9 @@
 import { IYoutubeChannel } from "../../../main/deno/videos-provider/models/IYoutubeChannel.ts";
 import { IYoutubeVideo } from "../../../main/deno/videos-provider/models/IYoutubeVideo.ts";
 
-export const videosCollection = new Array<IYoutubeVideo>();
+export const videosCollection: IYoutubeVideo[] = [];
 
-export const channelsCollection = new Array<IYoutubeChannel>();
+export const channelsCollection: IYoutubeChannel[] = [];
 
 initDatabase();
 

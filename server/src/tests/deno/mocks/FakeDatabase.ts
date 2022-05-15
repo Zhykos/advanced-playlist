@@ -1,8 +1,8 @@
 import { Channel } from "../../../main/generated/deno-oak-server/models/Channel.ts";
 import { Video } from "../../../main/generated/deno-oak-server/models/Video.ts";
 
-export const videosCollection = new Array<Video>();
-export const channelsCollection = new Array<Channel>();
+export const videosCollection: Video[] = [];
+export const channelsCollection: Channel[] = [];
 
 initDatabase();
 
