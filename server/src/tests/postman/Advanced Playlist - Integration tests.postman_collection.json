@@ -19,7 +19,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -75,7 +75,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -117,7 +117,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -159,7 +159,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -213,7 +213,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -267,7 +267,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -328,7 +328,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -411,7 +411,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -471,7 +471,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -545,7 +545,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -609,7 +609,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -701,7 +701,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -768,7 +768,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -856,7 +856,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -930,7 +930,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(10_000);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -990,7 +990,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
@@ -1046,7 +1046,7 @@
 									"script": {
 										"exec": [
 											"pm.test(\"Check response time\", function () {\r",
-											"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(30_000);\r",
 											"});\r",
 											"\r",
 											"pm.test(\"Check status code\", function () {\r",
