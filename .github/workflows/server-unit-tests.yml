@@ -38,8 +38,8 @@ jobs:
       with:
         auth: ${{ secrets.GIST }}
         gistID: fa1b6302cf9c42e6ef36d4cb051daeac
-        filename: advanced-playlist-coverage-lines.json
-        label: Coverage (lines)
+        filename: advanced-playlist-server-coverage-lines.json
+        label: Server coverage (lines)
         message: ${{ env.COVERAGE_LINES }}%
         color: green
         namedLogo: deno
@@ -49,8 +49,8 @@ jobs:
       with:
         auth: ${{ secrets.GIST }}
         gistID: fa1b6302cf9c42e6ef36d4cb051daeac
-        filename: advanced-playlist-coverage-functions.json
-        label: Coverage (functions)
+        filename: advanced-playlist-server-coverage-functions.json
+        label: Server coverage (functions)
         message: ${{ env.COVERAGE_FUNCTIONS }}%
         color: green
         namedLogo: deno
